@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
+import { LandingComponent } from './demo/components/landing/landing.component';
+import { LoginComponent } from './demo/components/auth/login/login.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',
@@ -8,12 +10,22 @@ const routerOptions: ExtraOptions = {
 };
 
 const routes: Routes = [
+    { path: '', redirectTo: '/landing', pathMatch: 'full' },
+    {
+        path: 'landing',
+        component: LandingComponent,
+
+    },
+    {
+        path: 'login',
+        component: LoginComponent,
+    },
     {
         path: '',
         component: AppLayoutComponent,
         children: [
             {
-                path: '',
+                path: 'dashboard',
                 loadChildren: () =>
                     import('./demo/components/dashboard/dashboard.module').then(
                         (m) => m.DashboardModule
@@ -114,4 +126,4 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes, routerOptions)],
     exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

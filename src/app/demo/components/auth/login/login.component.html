@@ -1,17 +1,8 @@
-<div
-    class="h-screen text-bluegray-200"
-    style="background: linear-gradient(180deg, #525d72 0%, #69768d 100%)"
->
+<div class="h-screen text-bluegray-200" style="background: linear-gradient(180deg, #525d72 0%, #69768d 100%)">
     <div class="flex justify-content-center align-items-center h-full ">
-        <div
-            class="h-full text-center py-6 px-4 flex justify-content-between flex-column max-w-30rem"
-        >
+        <div class="h-full text-center py-6 px-4 flex justify-content-between flex-column max-w-30rem">
             <a [routerLink]="['/']">
-                <img
-                    src="assets/layout/images/logo-poseidon-dark.svg"
-                    alt="poseidon-layout"
-                    height="45px"
-                />
+                <img src="assets/layout/images/logo-poseidon-dark.svg" alt="poseidon-layout" height="45px" />
             </a>
             <div>
                 <h2 class="text-bluegray-200">Login To Your Premium Account</h2>
@@ -19,27 +10,13 @@
                     You don't have an account?
                     <a href="#" class="cursor-pointer text-white"> Sign up</a>
                 </p>
-                <input
-                    type="text"
-                    autocomplete="off"
-                    pInputText
-                    placeholder="Email"
-                    class="w-11 mb-4 text-bluegray-600 surface-ground "
-                />
-                <input
-                    type="password"
-                    autocomplete="off"
-                    pInputText
-                    placeholder="Password"
-                    class="w-11 mb-4 text-bluegray-600 surface-ground "
-                />
-                <button
-                    pButton
-                    pRipple
-                    label="LOGIN"
-                    type="button"
-                    class="w-11 "
-                ></button>
+                <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                    <input type="text" autocomplete="off" pInputText placeholder="Email"
+                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="username"/>
+                    <input type="password" autocomplete="off" pInputText placeholder="Password"
+                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password"/>
+                    <button pButton pRipple label="LOGIN" type="button" class="w-11 " type="submit"></button>
+                </form>
             </div>
 
             <p class="font-semibold m-0 text-bluegray-200">

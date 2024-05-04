@@ -104,6 +104,19 @@
                             <span>Contact</span>
                         </a>
                     </li>
+                    <li>
+                        <a
+                            (click)="
+                                router.navigate(['/login'], {
+                                  
+                                })
+                            "
+                            pRipple
+                            class="flex m-0 md:ml-5 px-0 py-3 text-white font-medium line-height-3 cursor-pointer"
+                        >
+                            <span>Sign In</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <p-sidebar
@@ -184,6 +197,20 @@
                             <span>Contact</span>
                         </a>
                     </li>
+                    <li>
+                        <a
+                            (click)="
+                                router.navigate(['/login'], {
+                                });
+                                sidebarVisible = false
+                            "
+                            pRipple
+                            class="flex m-0 px-5 py-3 text-white font-medium line-height-3 cursor-pointer"
+                        >
+                            <span>Sign In</span>
+                        </a>
+                    </li>
+                   
                 </ul>
             </p-sidebar>
         </div>

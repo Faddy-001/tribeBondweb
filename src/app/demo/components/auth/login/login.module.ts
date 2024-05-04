@@ -5,7 +5,7 @@ import { LoginComponent } from './login.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppConfigModule } from 'src/app/layout/config/app.config.module';
 import { RippleModule } from 'primeng/ripple';
 
@@ -16,9 +16,10 @@ import { RippleModule } from 'primeng/ripple';
         ButtonModule,
         InputTextModule,
         CheckboxModule,
-        FormsModule,
         AppConfigModule,
-        RippleModule
+        RippleModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     declarations: [LoginComponent]
 })
