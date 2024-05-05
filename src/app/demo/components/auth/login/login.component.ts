@@ -11,10 +11,10 @@ export class LoginComponent {
     loginForm: FormGroup;
 
     constructor(private layoutService: LayoutService, private fb: FormBuilder,
-        private router: Router
+        public router: Router,
     ) {
         this.loginForm = this.fb.group({
-            username: [null, [Validators.required]],
+            email: [null, [Validators.required,Validators.email]],
             password: [null, Validators.required],
         });
     }
@@ -26,7 +26,11 @@ export class LoginComponent {
     // login
     login(value: any) {
      console.log("jbdsbdmbsdm");
+     console.log(value);
      
-        this.router.navigateByUrl('/dashboard');
+     if(value.email != null && value.password != null  ){
+
+         this.router.navigateByUrl('/dashboard');
+     }
     }
 }

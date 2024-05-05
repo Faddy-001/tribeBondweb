@@ -8,13 +8,15 @@
                 <h2 class="text-bluegray-200">Login To Your Premium Account</h2>
                 <p class="font-semibold m-0 text-bluegray-100 mb-5">
                     You don't have an account?
-                    <a href="#" class="cursor-pointer text-white"> Sign up</a>
+                    
+                    <a (click)="
+                    router.navigate(['/signup'])" class="cursor-pointer text-white"> Sign up</a>
                 </p>
                 <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-                    <input type="text" autocomplete="off" pInputText placeholder="Email"
-                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="username"/>
+                    <input type="email" autocomplete="off" pInputText placeholder="Email"
+                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="email" />
                     <input type="password" autocomplete="off" pInputText placeholder="Password"
-                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password"/>
+                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password" />
                     <button pButton pRipple label="LOGIN" type="button" class="w-11 " type="submit"></button>
                 </form>
             </div>

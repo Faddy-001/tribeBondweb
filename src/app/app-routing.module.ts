@@ -3,6 +3,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LandingComponent } from './demo/components/landing/landing.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
+import { RegisterComponent } from './demo/components/auth/login/register/register.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',
@@ -19,7 +20,13 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+        // loadChildren: () =>
+        //     import('./demo/components/auth/login/login.module').then(
+        //         (m) => m.LoginModule
+        //     ),
     },
+    { path: 'signup', component: RegisterComponent  },
+
     {
         path: '',
         component: AppLayoutComponent,
