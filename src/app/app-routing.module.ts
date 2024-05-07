@@ -3,7 +3,7 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LandingComponent } from './demo/components/landing/landing.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
-import { RegisterComponent } from './demo/components/auth/login/register/register.component';
+import { RegisterComponent } from './demo/components/auth/register/register.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',

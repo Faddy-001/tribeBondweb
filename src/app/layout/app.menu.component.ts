@@ -11,7 +11,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Favorites',
+                label: 'Home',
                 icon: 'pi pi-home',
                 items: [
                     {
@@ -22,76 +22,234 @@ export class AppMenuComponent implements OnInit {
                 ],
             },
             {
-                label: 'Apps',
+                label: 'Find',
                 icon: 'pi pi-th-large',
                 items: [
+                    // Event
                     {
-                        label: 'Blog List',
+                        label: 'Event',
+                        icon: 'pi pi-fw pi-image',
+                        routerLink: ['/apps/blog/list'],
+                    },
+                    // mosque information
+                    {
+                        label: 'Mosque Information',
+                        icon: 'pi pi-fw pi-image',
+                        routerLink: ['/apps/blog/detail'],
+                    },
+                    // localbussiness
+                    {
+                        label: 'Local Bussiness',
                         icon: 'pi pi-fw pi-comment',
                         items: [
                             {
-                                label: 'Blog List',
+                                label: 'Halal Reataurant',
                                 icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/blog/list'],
+                                routerLink: ['/apps/blog/detail'],
                             },
                             {
-                                label: 'Detail',
+                                label: 'Halal Meat',
                                 icon: 'pi pi-fw pi-list',
                                 routerLink: ['/apps/blog/detail'],
                             },
                             {
-                                label: 'Edit',
+                                label: 'Grocery',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Household',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Food & Catering',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Rental Or Room Sharing',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Sweets',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Wedding & Birthday',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Computer & Mobile',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Automobile',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Legal & Fianance',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Doctor',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Health & Wellness',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Qurbani Services ',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Beauty',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Real Estate',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Henna Services',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps/blog/edit'],
+                            },
+                            {
+                                label: 'Party/Banquet Hall',
                                 icon: 'pi pi-fw pi-pencil',
                                 routerLink: ['/apps/blog/edit'],
                             },
                         ],
                     },
+                    // eduction
                     {
-                        label: 'Calendar',
-                        icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/apps/calendar'],
-                    },
-                    {
-                        label: 'Chat',
-                        icon: 'pi pi-fw pi-comments',
-                        routerLink: ['/apps/chat'],
-                    },
-                    {
-                        label: 'Files',
-                        icon: 'pi pi-fw pi-folder',
-                        routerLink: ['/apps/files'],
-                    },
-                    {
-                        label: 'Kanban',
-                        icon: 'pi pi-fw pi-sliders-v',
-                        routerLink: ['/apps/kanban'],
-                    },
-                    {
-                        label: 'Mail',
+                        label: 'Education & Training',
                         icon: 'pi pi-fw pi-envelope',
                         items: [
                             {
-                                label: 'Inbox',
+                                label: 'Isalmic School',
                                 icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/apps/mail/inbox'],
+                                routerLink: ['/apps//blog/edit'],
                             },
                             {
-                                label: 'Compose',
+                                label: 'Online Quran Tutor',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/mail/compose'],
+                                routerLink: ['/apps//blog/edit'],
                             },
                             {
-                                label: 'Detail',
+                                label: 'Face To Face Quran Tutor',
                                 icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/apps/mail/detail/1000'],
+                                routerLink: ['/apps//blog/edit'],
                             },
                         ],
                     },
+                //    buy and sell
                     {
-                        label: 'Task List',
-                        icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['/apps/tasklist'],
+                        label: 'Buy & Sell',
+                        icon: 'pi pi-fw pi-home',
+                        routerLink: ['/apps/blog/detail'],
                     },
+                //   community
+                {
+                    label: 'Community',
+                    icon: 'pi pi-fw pi-envelope',
+                    items: [
+                        {
+                            label: 'Free Giveaway',
+                            icon: 'pi pi-fw pi-inbox',
+                            routerLink: ['/apps//blog/edit'],
+                        },
+                        {
+                            label: 'Ask For Help',
+                            icon: 'pi pi-fw pi-pencil',
+                            routerLink: ['/apps//blog/edit'],
+                        },
+                        {
+                            label: 'Volunteer Needed',
+                            icon: 'pi pi-fw pi-comment',
+                            routerLink: ['/apps//blog/edit'],
+                        },
+                    ],
+                },
+                // job
+                {
+                    label: 'Job',
+                    icon: 'pi pi-fw pi-comments',
+                    routerLink: ['/apps//blog/edit'],
+                },
+                // fund raiser
+                {
+                    label: 'Fund Raiser',
+                    icon: 'pi pi-fw pi-comments',
+                    routerLink: ['/apps//blog/edit'],
+                },
+                  // feedback
+                  {
+                    label: 'Feedback',
+                    icon: 'pi pi-fw pi-comments',
+                    routerLink: ['/apps//blog/edit'],
+                },
+
+
+                    // {
+                    //     label: 'Calendar',
+                    //     icon: 'pi pi-fw pi-calendar',
+                    //     routerLink: ['/apps/calendar'],
+                    // },
+                    // {
+                    //     label: 'Chat',
+                    //     icon: 'pi pi-fw pi-comments',
+                    //     routerLink: ['/apps/chat'],
+                    // },
+                    // {
+                    //     label: 'Files',
+                    //     icon: 'pi pi-fw pi-folder',
+                    //     routerLink: ['/apps/files'],
+                    // },
+                    // {
+                    //     label: 'Kanban',
+                    //     icon: 'pi pi-fw pi-sliders-v',
+                    //     routerLink: ['/apps/kanban'],
+                    // },
+                    // {
+                    //     label: 'Mail',
+                    //     icon: 'pi pi-fw pi-envelope',
+                    //     items: [
+                    //         {
+                    //             label: 'Inbox',
+                    //             icon: 'pi pi-fw pi-inbox',
+                    //             routerLink: ['/apps/mail/inbox'],
+                    //         },
+                    //         {
+                    //             label: 'Compose',
+                    //             icon: 'pi pi-fw pi-pencil',
+                    //             routerLink: ['/apps/mail/compose'],
+                    //         },
+                    //         {
+                    //             label: 'Detail',
+                    //             icon: 'pi pi-fw pi-comment',
+                    //             routerLink: ['/apps/mail/detail/1000'],
+                    //         },
+                    //     ],
+                    // },
+                    // {
+                    //     label: 'Task List',
+                    //     icon: 'pi pi-fw pi-check-square',
+                    //     routerLink: ['/apps/tasklist'],
+                    // },
                 ],
             },
             {
@@ -223,7 +381,7 @@ export class AppMenuComponent implements OnInit {
                         url: ['https://www.primefaces.org/primeflex/'],
                         target: '_blank',
                     },
-             
+
                 ],
             },
             {
