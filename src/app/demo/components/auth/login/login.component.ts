@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
+// import { SocialAuthService } from "@abacritt/angularx-social-login";
 // import { SocialUser } from "@abacritt/angularx-social-login";
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,12 +14,12 @@ export class LoginComponent {
     // SocialAuthService = inject(SocialAuthService)
     rememberMe: boolean = false;
     loginForm: FormGroup;
-    user: SocialUser | any;
+    // user: SocialUser | any;
     loggedIn: boolean | any;
     constructor(private layoutService: LayoutService, private fb: FormBuilder,
         public router: Router,
         private auth: AuthenticationService,
-        private authService: SocialAuthService
+        // private authService: SocialAuthService
     ) {
         this.loginForm = this.fb.group({
             email: [null, [Validators.required, Validators.email]],
@@ -28,10 +28,10 @@ export class LoginComponent {
     }
     ngOnInit() {
        
-            this.authService.authState.subscribe((user) => {
-              this.user = user;
-              this.loggedIn = (user != null);
-            });
+            // this.authService.authState.subscribe((user) => {
+            //   this.user = user;
+            //   this.loggedIn = (user != null);
+            // });
     }
     // signInWithGoogle(): void {
     //     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
