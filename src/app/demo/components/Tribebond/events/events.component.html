@@ -1,1 +1,56 @@
-<p>events works!</p>
+<div>
+    <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
+        <button pButton type="button" label="Add Event" icon="pi pi-plus" class="mr-2 mb-4"></button>
+
+    </div>
+</div>
+<div class="card">
+    <p-dataView [value]="totalBlogs" [paginator]="true" [rows]="6" filterBy="title" [sortField]="sortField"
+        [sortOrder]="-1" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                <span class="text-xl text-900 font-semibold">Events</span>
+                <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+                    styleClass="w-full md:w-15rem"></p-dropdown> -->
+                <span class="layout-topbar-search hidden lg:flex">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template let-blogs pTemplate="gridItem">
+            <div class="grid grid-nogutter">
+                <div class="col-10" *ngFor="let blog of blogs">
+                    <div class="card cardborder">
+                        <div class="p-3" *ngIf="blog">
+                            <div class="cursor-pointer surface-card  border-round" (click)="navigateToDetail()">
+                                <!-- <div class="relative">
+                                    <img [src]="blog.coverImage" class="w-50" />
+                                   
+                                </div> -->
+                                <div class="card-content">
+                                    <div class="image-container">
+                                        <img [src]="blog.coverImage" alt="Blog Cover Image" class="w-100" />
+                                        <div class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
+                                            <button pButton type="button" label="Event Details" icon="pi pi-plus" class="mr-2 mt-2"></button>
+                                    
+                                        </div>
+                                    </div>
+                                    <div class="text-container">
+                                        <h2>Dinner</h2>
+                                        <p>Date: 04/01/2018</p>
+                                        <p>Time: 09:00 PM</p>
+                                        <p>Address: 3300 S Federal St</p>
+                                        <p>Phone: 9165155554</p>
+                                        <!-- Additional text or content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

@@ -4,6 +4,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
 import { LandingComponent } from './demo/components/landing/landing.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
 import { RegisterComponent } from './demo/components/auth/register/register.component';
+import { EventsComponent } from './demo/components/Tribebond/events/events.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',
@@ -38,6 +39,7 @@ const routes: Routes = [
                         (m) => m.DashboardModule
                     ),
             },
+            { path: 'event', component: EventsComponent  },
             {
                 path: 'uikit',
                 data: { breadcrumb: 'UI Kit' },

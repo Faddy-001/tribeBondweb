@@ -29,13 +29,13 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Event',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['/apps/blog/list'],
+                        routerLink: ['/event'],
                     },
                     // mosque information
                     {
                         label: 'Mosque Information',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['/apps/blog/detail'],
+                        routerLink: ['/apps/blog/list'],
                     },
                     // localbussiness
                     {

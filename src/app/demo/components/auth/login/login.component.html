@@ -21,9 +21,12 @@
                         class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password" />
                     <button pButton pRipple label="LOGIN" type="button" class="w-11 " type="submit"></button>
                 </form>
-                <!-- <button *ngIf="!user">Sign in with Google</button> -->
-                <!-- <asl-google-signin-button type='standard' size='medium'>
-                </asl-google-signin-button> -->
+                <button (click)="signIn()">Sign in with Google</button>
+                <!-- <div class="google-signin-button">
+                    <img src="google-logo.png" alt="Google Logo" class="google-logo">
+                    <span class="button-text">Sign Up with Google</span>
+                </div> -->
+                
             </div>
 
             <p class="font-semibold m-0 text-bluegray-200">
