@@ -44,8 +44,9 @@
     box-shadow: 0 8px 16px #1769aa;
 }
 .image-container {
-    flex: 1; /* Let the image take up remaining space */
+    flex: 1 !important; /* Let the image take up remaining space */
     margin-right: 20px; /* Add margin for spacing between image and text */
+    // margin-bottom: 13%;
 }
 .card-content {
     display: flex; /* Use flexbox to arrange image and text side by side */
@@ -53,16 +54,20 @@
 }
 
 .text-container {
-    flex: 2; /* Let the text container take twice as much space as image */
+    flex: 2 !important; /* Let the text container take twice as much space as image */
+    // margin-bottom: 17%;
+    margin-left: 10%;
+    padding-bottom: 5%;
 }
 
 /* Optional: Adjust styles for text */
 .text-container h2 {
     font-size: 1.5rem;
-    margin-bottom: 10px;
+    // margin-bottom: 32%;
 }
 
 .text-container p {
     font-size: 1rem;
     color: #555;
+    
 }
