@@ -24,7 +24,7 @@
                 <div class="col-10" *ngFor="let blog of blogs">
                     <div class="card cardborder">
                         <div class="p-3" *ngIf="blog">
-                            <div class="cursor-pointer surface-card  border-round" (click)="navigateToDetail()">
+                            <div class="cursor-pointer surface-card  border-round" >
                                 <!-- <div class="relative">
                                     <img [src]="blog.coverImage" class="w-50" />
                                    
@@ -40,6 +40,7 @@
                                             type="button"
                                             label="Event Details"
                                             class="p-button-rounded p-button-secondary mt-2"
+                                            (click)="navigateToDetail()"
                                         ></button>
                                         </div>
                                     </div>

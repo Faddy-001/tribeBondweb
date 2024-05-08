@@ -39,7 +39,12 @@ const routes: Routes = [
                         (m) => m.DashboardModule
                     ),
             },
-            { path: 'event', component: EventsComponent  },
+            { path: 'event', component: EventsComponent ,
+            loadChildren: () =>
+                import('./demo/components/dashboard/dashboard.module').then(
+                    (m) => m.DashboardModule
+                ),
+             },
             {
                 path: 'uikit',
                 data: { breadcrumb: 'UI Kit' },
