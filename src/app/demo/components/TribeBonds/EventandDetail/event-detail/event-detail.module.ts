@@ -7,7 +7,7 @@ import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'primeng/carousel';
 import { EventDetailComponent } from './event-detail.component';
-import { NewCommentComponent } from '../../apps/blog/blog-detail/new-comment/new-comment.component';
+import { NewCommentComponent } from '../../../apps/blog/blog-detail/new-comment/new-comment.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { RippleModule } from 'primeng/ripple';

@@ -142,17 +142,17 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Isalmic School',
                                 icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/iSchool'],
                             },
                             {
                                 label: 'Online Quran Tutor',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/onlinetutor'],
                             },
                             {
                                 label: 'Face To Face Quran Tutor',
                                 icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/facetutor'],
                             },
                         ],
                     },

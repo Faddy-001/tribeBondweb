@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TribeBondRoutingModule } from './tribe-bond-routing.module';
-import { EventsComponent } from './events/events.component';
+import { EventsComponent } from './EventandDetail/events/events.component';
 
 
 @NgModule({

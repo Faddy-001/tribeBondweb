@@ -1,6 +1,15 @@
 <div class="col-12">
-    <h2 style="color:#1769aa ;display: flex;justify-content: start;">Event Detail</h2>
+    <!-- <h2 style="color:#1769aa ;display: flex;justify-content: start;">Event Detail</h2> -->
     <div class="card cardborder">
+       
+        <div class="header">
+            <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                <span class="text-xl text-900 font-semibold" style="color:#1769aa ">Event Detail</span>
+                <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+                    styleClass="w-full md:w-15rem"></p-dropdown> -->
+                
+            </div>
+        </div>
         <!-- corousel image -->
         <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions" id="pgall"
             [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="6" [circular]="true">
