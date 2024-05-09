@@ -29,7 +29,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Event',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['/event'],
+                        routerLink: ['/tribe/event'],
                     },
                     // mosque information
                     {

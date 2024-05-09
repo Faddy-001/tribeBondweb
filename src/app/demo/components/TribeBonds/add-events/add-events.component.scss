@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-top: 4%;
+    // height: 100vh; /* Adjust as needed */
+  }
+  .cardborder{
+    box-shadow: 0px 4px 8px #1769aa; /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+    transition: box-shadow 0.3s ease;
+  }

@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 import { Blog } from 'src/app/demo/api/blog';
 
 @Component({
-  selector: 'app-events',
-  // standalone: true,
-  // imports: [], 
+    selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
+
   constructor(private router: Router){}
   sortOptions: SelectItem[] = [
     { label: 'Most Shared', value: 'share' },
@@ -87,6 +86,11 @@ sortField: string = '';
     },
 ];
 navigateToDetail(): void {
-  this.router.navigateByUrl('/apps/blog/detail');
+  this.router.navigateByUrl('/tribe/event/event-detail');
+}
+routing(){
+    console.log('dfsf');
+    
+    this.router.navigateByUrl('add-events')
 }
 }

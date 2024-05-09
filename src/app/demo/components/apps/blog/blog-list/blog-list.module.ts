@@ -7,9 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BlogListCardComponent } from "./blog-list-card/blog-list-card.component";
 import { BlogListComponent } from "./blog-list.component";
 import { BlogListRoutingModule } from "./blog-list-routing.module";
-import { EventsComponent } from "../../../Tribebond/events/events.component";
 import { ButtonModule } from 'primeng/button';
-import { AppLayoutModule } from "src/app/layout/app.layout.module";
 import { InputTextModule } from "primeng/inputtext";
 @NgModule({
     imports: [
@@ -22,6 +20,6 @@ import { InputTextModule } from "primeng/inputtext";
         ButtonModule,
         InputTextModule,
     ],
-    declarations: [BlogListComponent, BlogListCardComponent,EventsComponent]
+    declarations: [BlogListComponent, BlogListCardComponent]
   })
   export class BlogListModule { }
