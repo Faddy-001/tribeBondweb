@@ -8,8 +8,12 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppConfigModule } from 'src/app/layout/config/app.config.module';
 import { RippleModule } from 'primeng/ripple';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
+    declarations: [LoginComponent],
+
     imports: [
         CommonModule,
         LoginRoutingModule,
@@ -20,7 +24,8 @@ import { RippleModule } from 'primeng/ripple';
         RippleModule,
         FormsModule,
         ReactiveFormsModule,
+        MatFormFieldModule,
     ],
-    declarations: [LoginComponent]
-})
+  
+    })
 export class LoginModule { }

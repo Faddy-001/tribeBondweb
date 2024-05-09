@@ -1,0 +1,31 @@
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+  margin-top:7px;
+    .avatar {
+      width: 150px; /* Adjust as needed */
+      height: 150px; /* Adjust as needed */
+      border-radius: 50%;
+      border: 2px solid #ccc; /* Optional: Add a border */
+      object-fit: cover; /* Ensure the image covers the entire circle */
+    }
+  }
+  
+  .icon-container {
+    position: absolute;
+    // bottom: -10px; /* Adjust as needed */
+    right: 44%; /* Adjust as needed */
+    top: 27%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%; /* Creates a circular background for the icon */
+    padding: 8px; /* Adjust the padding around the icon */
+  }
+  
+  .pi {
+    color: white; /* Icon color */
+    font-size: 20px; /* Adjust the icon size */
+  }
+  
+

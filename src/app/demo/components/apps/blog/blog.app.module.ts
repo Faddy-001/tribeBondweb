@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 import { BlogAppRoutingModule } from "./blog.app-routing.module";
 
 @NgModule({
+    declarations:[
+    ],
     imports: [
         CommonModule,
         BlogAppRoutingModule
