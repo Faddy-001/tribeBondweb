@@ -1,0 +1,86 @@
+.layout-topbar-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    input {
+        padding: 0.5rem 2rem;
+        color: var(--topbar-item-text-color);
+        background-color: var(--topbar-menu-button-bg);
+        border-radius: 1.5rem;
+        width: 15rem;
+        font-size: 1rem;
+        transition: var(--transition-duration);
+        border: 0 none;
+        &:enabled:focus {
+            box-shadow: 0 0 0 1px #4d9fdc;
+        }
+        &::placeholder {
+            color: var(--topbar-item-secondary-text-color);
+        }
+
+        &::selection {
+            background-color: var(--blue-200);
+        }
+    }
+
+    > i {
+        color: var(--topbar-item-text-color);
+        position: absolute;
+        left: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+.cardborder {
+    margin: 2% 0 2% 0;
+    border-radius: 10px; /* Optional: Add border radius for rounded corners */
+    box-shadow: 0px 4px 8px #1769aa; /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+    transition: box-shadow 0.3s ease; /* Optional: Add transition for smooth shadow change */
+}
+
+/* Optional: Add hover effect to increase shadow on hover */
+.cardborder:hover {
+    box-shadow: 0 8px 16px #1769aa;
+}
+.image-container {
+    flex: 1 !important; /* Let the image take up remaining space */
+    margin-right: 20px; /* Add margin for spacing between image and text */
+    // margin-bottom: 13%;
+}
+.card-content {
+    display: flex; /* Use flexbox to arrange image and text side by side */
+    align-items: center; /* Center align items vertically */
+}
+
+.text-container {
+    flex: 2 !important; /* Let the text container take twice as much space as image */
+    // margin-bottom: 17%;
+    margin-left: 10%;
+    padding-bottom: 5%;
+}
+
+/* Optional: Adjust styles for text */
+.text-container h2 {
+    font-size: 1.5rem;
+    // margin-bottom: 32%;
+}
+
+.text-container p {
+    font-size: 1rem;
+    color: #555;
+    
+}
+
+
+.cardborder{
+    box-shadow: 0px 4px 8px #1769aa; /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+    transition: box-shadow 0.3s ease;
+  }
+  .header{
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #e9ecef;
+  border-width: 1px 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 600;}
