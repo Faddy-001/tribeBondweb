@@ -1,1 +1,80 @@
-<p>islamic-school works!</p>
+<div>
+    <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
+        <button pButton type="button" label="Add School" icon="pi pi-plus" class="mr-2 mb-4"  [routerLink]="['/tribe/iSchool/add-school']" ></button>
+
+    </div>
+</div>
+<div class="card">
+    <p-dataView [value]="totalBlogs" [paginator]="true" [rows]="6" filterBy="title" [sortField]="sortField"
+    [sortOrder]="-1" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                <span class="text-xl text-900 font-semibold">Islamic School</span>
+                <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+                    styleClass="w-full md:w-15rem"></p-dropdown> -->
+                <span class="layout-topbar-search hidden lg:flex">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template let-blogs pTemplate="gridItem">
+            <div class="grid grid-nogutter">
+                <div class="col-10" *ngFor="let blog of blogs">
+                    <div class="card cardborder">
+                        <div class="p-3" *ngIf="blog">
+                            <div class="cursor-pointer surface-card  border-round" >
+                                <!-- <div class="relative">
+                                    <img [src]="blog.coverImage" class="w-50" />
+                                   
+                                </div> -->
+                                <div class="card-content">
+                                    <div class="image-container">
+                                        <img [src]="blog.coverImage" alt="Blog Cover Image" class="w-100" />
+                                        <div class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
+                                            <!-- <button pButton type="button" label="Event Details" icon="pi pi-plus" class="mr-2 mt-2"></button> -->
+                                            <button
+                                            pButton
+                                            pRipple
+                                            type="button"
+                                            label="Website"
+                                            class="p-button-rounded p-button-primary mt-2 mr-2"
+                                            (click)="navigateToDetail()"
+                                        ></button>
+
+                                        <button
+                                        pButton
+                                        pRipple
+                                        type="button"
+                                        label="Details"
+                                        class="p-button-rounded p-button-secondary mt-2"
+                                        (click)="navigateToDetail()"
+                                    ></button>
+                                        </div>
+                                    </div>
+                                    <div class="text-container">
+                                        <h2>Dar Ul Arqam Islamic School</h2>
+                                        <div class="google-rating">
+                                            <img src="/assets/layout/images/googleicon.png" alt="Google Icon" height="15px">
+                                            <!-- <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span> Adjust the number of stars and rating as needed -->
+                                            <!-- <div class="star-rating" data-rating="4.5"></div> -->
+                                            <!-- <span class="star-rating" [style.--rating]="'4.5'"></span>  -->
+                                            <span class="star" *ngFor="let filledStar of filledStars" [ngClass]="{'filled': filledStar !== 0, 'half-filled': filledStar === 0.5}">
+                                                &#9733;
+                                              </span>
+                                        </div>
+                                        <p>Offers: PK-12</p>
+                                        <p>Address: 3300 S Federal St</p>
+                                        <p>Phone: 9165155554</p>
+                                        <!-- Additional text or content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>
