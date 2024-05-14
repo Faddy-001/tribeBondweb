@@ -15,6 +15,8 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import {FileUploadModule} from 'primeng/fileupload';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -32,7 +34,10 @@ import {FileUploadModule} from 'primeng/fileupload';
 		MultiSelectModule,
 		InputTextareaModule,
 		InputTextModule,
-		FileUploadModule
+		FileUploadModule,
+		FormsModule,
+        ReactiveFormsModule,
+		
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 

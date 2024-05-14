@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AddSchoolRoutingModule } from './add-school-routing.module';
-import { AddSchoolComponent } from './add-school.component';
+import { EditEventRoutingModule } from './edit-event-routing.module';
+import { EditEventComponent } from './edit-event.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
@@ -14,14 +14,15 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-	declarations: [AddSchoolComponent],
-	imports: [
-		CommonModule,
-		AddSchoolRoutingModule,
-		AutoCompleteModule,
+  declarations: [EditEventComponent],
+  imports: [
+    CommonModule,
+    EditEventRoutingModule,
+    AutoCompleteModule,
 		CalendarModule,
 		ChipsModule,
 		DropdownModule,
@@ -31,8 +32,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 		MultiSelectModule,
 		InputTextareaModule,
 		InputTextModule,
-		FileUploadModule
-	],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA]
+		FileUploadModule,
+		FormsModule,
+        ReactiveFormsModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })
-export class AddSchoolModule { }
+export class EditEventModule { }

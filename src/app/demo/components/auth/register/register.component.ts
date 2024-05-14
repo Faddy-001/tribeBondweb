@@ -44,7 +44,8 @@ export class RegisterComponent {
       confirmPwd: [],
       gender: [],
       city: [],
-      religion: []
+      religion: [],
+      state:[]
 
     });
     this.UserPreviousImage =  this.defaultImge;
@@ -52,6 +53,12 @@ export class RegisterComponent {
   get dark(): boolean {
     return this.layoutService.config().colorScheme !== 'light';
   }
+  ngOnInit(): void {
+    console.log("f s bdn");
+    
+    this.getCityData();
+    
+}
   userImage(event: Event) {
     const input = event.target as HTMLInputElement;
      this.selectedFile = input.files?.[0];
@@ -66,6 +73,13 @@ export class RegisterComponent {
       };
       reader.readAsDataURL( this.selectedFile);
     }
+  }
+  getCityData(){
+    this.auth.getCity().subscribe(
+      (res: any) => { 
+          console.log(res);
+          
+      })
   }
   SignUp(userdata: any) {
     console.log(userdata);
@@ -89,7 +103,9 @@ export class RegisterComponent {
     formData.append('profilePicture', this.selectedFile);
     console.log(formData);
 
-    this.auth.SignUp(formData).subscribe()
+    // this.auth.SignUp(formData).subscribe(){}
+    this.auth.SignUp(formData).subscribe(
+      (res: any) => {})
   }
 
   // upload image

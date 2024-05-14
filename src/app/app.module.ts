@@ -3,6 +3,7 @@ import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -10,7 +11,10 @@ import { AppLayoutModule } from './layout/app.layout.module';
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+        ToastrModule.forRoot({
+			timeOut: 2500,
+		  }),
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

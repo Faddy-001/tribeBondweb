@@ -76,6 +76,7 @@
 
                         </div>
                         <div class="p-fluid grid ">
+                         
                             <div class="field col-12 md:col-6">
                                 <label htmlFor="lastname">City</label>
 
@@ -83,6 +84,14 @@
                                     formControlName="city"></p-dropdown>
 
                             </div>
+                            <div class="field col-12 md:col-6">
+                                <label htmlFor="lastname">State</label>
+
+                                <p-dropdown [options]="cityItems" optionLabel="name" placeholder="Select"
+                                    formControlName="state"></p-dropdown>
+
+                            </div>
+                           
                             <div class="field col-12 md:col-6">
                                 <label htmlFor="lastname">Religion</label>
                                 <input pInputText id="lastname2" type="text" placeholder="Religion"
