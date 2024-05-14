@@ -26,3 +26,27 @@
 //   .button-text {
 //     margin-left: 8px;
 //   }
+.sign-in-button {
+    background-color: white; /* Blue color */
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .sign-in-button:hover {
+    background-color: white; /* Darker Blue color */
+  }
+  
+  .gmail-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+    vertical-align: middle;
+    margin-right: 10px; /* Adjust spacing between icon and text */
+  }

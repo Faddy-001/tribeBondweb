@@ -27,7 +27,10 @@
                         class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password" />
                     <button pButton pRipple label="LOGIN" type="button" class="w-11 " type="submit"></button>
                 </form>
-                <button (click)="signIn()">Sign in with Google</button>
+                <!-- <button (click)="signIn()" class="sign-in-button">Sign in with Google</button> -->
+                <button class="sign-in-button" style="margin-top: 20px;" (click)="signIn()">
+                    <img src="/assets/layout/images/googleicon.png" alt="Gmail Icon" class="gmail-icon" > Sign In with Gmail
+                  </button>
                 <!-- <div class="google-signin-button">
                     <img src="google-logo.png" alt="Google Logo" class="google-logo">
                     <span class="button-text">Sign Up with Google</span>

@@ -1,35 +1,16 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
-  selector: 'app-add-events',
-  templateUrl: './add-events.component.html',
-  styleUrl: './add-events.component.scss'
+  selector: 'app-edit-event',
+  
+  templateUrl: './edit-event.component.html',
+  styleUrl: './edit-event.component.scss'
 })
-export class AddEventsComponent {
-  selectedState: any = null;
-  calendarVal: Date | null = null;
-  UserPreviousImage: any;
-  selectedFile: any = [];
-  uploadedFiles: any[] = [];
-  @ViewChild('fileUpload', { static: true }) fileUpload!: ElementRef<HTMLInputElement>;
-  states: any[] = [
-    { name: 'Arizona', code: 'Arizona' },
-    { name: 'California', value: 'California' },
-    { name: 'Florida', code: 'Florida' },
-    { name: 'Ohio', code: 'Ohio' },
-    { name: 'Washington', code: 'Washington' }
-  ];
-
-  dropdownItems = [
-    { name: 'Option 1', code: 'Option 1' },
-    { name: 'Option 2', code: 'Option 2' },
-    { name: 'Option 3', code: 'Option 3' }
-  ];
+export class EditEventComponent {
   addEvent: FormGroup;
   constructor(private fb: FormBuilder, private auth: AuthenticationService,private toastr: ToastrService,public router: Router,) {
     this.addEvent = this.fb.group({
@@ -48,7 +29,6 @@ export class AddEventsComponent {
   ngOnInit() {
 
   }
-
   images: string[] = [];
   onFileSelected(event: any) {
     const files = event.target.files;
@@ -60,10 +40,8 @@ export class AddEventsComponent {
         };
         reader.readAsDataURL(files[i]);
       }
-    }
-  }
-
-  eventResult: any;
+    }}
+    eventResult: any;
   errorShow:any;
   errorMsg:any;
   // form submit
@@ -104,4 +82,5 @@ export class AddEventsComponent {
         this.toastr.error(this.errorMsg);
       })
   }
+
 }

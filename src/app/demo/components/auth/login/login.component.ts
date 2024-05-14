@@ -59,6 +59,7 @@ export class LoginComponent {
                     if (res.success == true) {
                         this.router.navigateByUrl('/dashboard');
                     }
+                    this.auth.setToken(res.data.token);
                 }
             )
         }
