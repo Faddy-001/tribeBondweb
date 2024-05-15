@@ -11,6 +11,7 @@ import { NewCommentComponent } from '../../../apps/blog/blog-detail/new-comment/
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RippleModule } from 'primeng/ripple';
     ButtonModule,
     InputTextModule,
     InputTextareaModule,
-    RippleModule
+    RippleModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

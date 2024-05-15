@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/demo/api/product';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 import { PhotoService } from 'src/app/demo/service/photo.service';
@@ -14,6 +14,14 @@ import { ProductService } from 'src/app/demo/service/product.service';
 export class EventDetailComponent {
     images!: any[];
     products!: Product[];
+    id = this.activatedRoute.snapshot.params['id'];
+    eventDate:any;
+    desiredWidth = 150; // Example width in pixels
+    desiredHeight = 70;
+    name:any;
+    address:any;
+    phone:any;
+    description:any
     comments = [
         {
             image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
@@ -60,17 +68,30 @@ export class EventDetailComponent {
             numVisible: 1
         }
     ];
-    constructor( private router:Router, private productService: ProductService, private photoService: PhotoService, private auth: AuthenticationService) { }
-
+    constructor(private activatedRoute: ActivatedRoute, private router:Router, private productService: ProductService, private photoService: PhotoService, private auth: AuthenticationService) { }
     ngOnInit() {
+        console.log(this.id);
+        
         this.productService.getProductsSmall().then(products => {
             this.products = products;
         });
 
-        this.photoService.getImages().then(images => {
-            this.images = images;
-        });
-        this.getAllEventsDisplay();
+        // this.photoService.getImages().then(images => {
+        //     this.images = images;
+        // });
+        console.log("Sdsdsd");
+        
+        this.auth.getEventById(this.id).subscribe(
+            (res: any) => {
+                this.eventDate = res;
+                this.name =   this.eventDate.data.name ;
+                this.address = this.eventDate.data.address;
+                this.phone = this.eventDate.data.phone;
+                this.description = this.eventDate.data.description;
+                console.log(this.eventDate.data.thumbnail);
+                this.images = this.eventDate.data.images
+                
+            })
 
     }
 
@@ -102,7 +123,5 @@ export class EventDetailComponent {
                 })
             })
     }
-    editLead(){
-        this.router.navigateByUrl('/tribe/event/event-edit/6643a7a09c2fafe214340334');
-    }
+   
 }

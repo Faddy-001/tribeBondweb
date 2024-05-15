@@ -78,6 +78,7 @@ export class RegisterComponent {
     this.auth.getCity().subscribe(
       (res: any) => { 
           console.log(res);
+        
           
       })
   }

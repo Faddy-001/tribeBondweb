@@ -31,7 +31,7 @@ export class AddEventsComponent {
     { name: 'Option 3', code: 'Option 3' }
   ];
   addEvent: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthenticationService,private toastr: ToastrService,public router: Router,) {
+  constructor(private fb: FormBuilder, private auth: AuthenticationService, private toastr: ToastrService, public router: Router,) {
     this.addEvent = this.fb.group({
       name: [],
       date: [],
@@ -41,7 +41,8 @@ export class AddEventsComponent {
       gender: [],
       phone: [],
       website: [],
-      thumbnail: []
+      thumbnail: [],
+      description: []
 
     });
   }
@@ -50,49 +51,78 @@ export class AddEventsComponent {
   }
 
   images: string[] = [];
+  thumbnailBinary:string[]=[];
+  private formData = new FormData();
   onFileSelected(event: any) {
-    const files = event.target.files;
-    if (files) {
+    const input = event.target as HTMLInputElement;
+    const files = input.files;
+    this.images = [];
+    if (files && files.length > 0) {
+      // Append the first file as 'thumbnail'
+      this.formData.append('thumbnail', files[0]);
+      this.images.push();
+      // Append the rest of the files to the 'images' array in FormData
+      for (let i = 1; i < files.length; i++) {
+        
+        this.formData.append('images', files[i]);
+      }
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.images.push(e.target.result);
+        reader.onload = (e:any) => {
+          // Push the URL of the loaded image to the images array
+          this.images.push(e.target.result as string);
         };
         reader.readAsDataURL(files[i]);
       }
     }
+
+  //  const input = event.target as HTMLInputElement;
+  //   const files = input.files;
+  //    console.log(files);
+  //   if (files) {
+  //     for (let i = 0; i < files.length; i++) {
+  //       const reader = new FileReader();
+  //       reader.onload = (e: any) => {
+  //         this.images.push(e.target.result);
+  //   const formData = new FormData();
+
+  //         formData.append('images[]', e.target.result);
+  //       };
+  //       reader.readAsDataURL(files[i]);
+  //     }
+  //   }
   }
 
   eventResult: any;
-  errorShow:any;
-  errorMsg:any;
+  errorShow: any;
+  errorMsg: any;
   // form submit
   Submit(value: any) {
-    console.log(value);
+    console.log(this.images);
 
-    const formData = new FormData();
-    formData.append('name', value.name); 
+    this.formData.append('name', value.name);
     // for (let i = 0; i < this.images.length; i++) {
-    //   formData.append('thumbnails[]', this.images[i]);
+    //   this.formData.append('thumbnails[]', this.images[i]);
     // }
-    formData.append('date', value.date);
-    formData.append('time', value.time);
-    formData.append('address', value.address);
-    formData.append('phone', value.phone);
-    formData.append('website', value.website);
-    formData.append('city', value.city);
-
+    this.formData.append('date', value.date);
+    this.formData.append('time', value.time);
+    this.formData.append('address', value.address);
+    this.formData.append('phone', value.phone);
+    this.formData.append('website', value.website);
+    this.formData.append('city', value.city);
+    this.formData.append('description', value.description);
+    // this.formData.append('images', this.images);
     for (let i = 0; i < this.images.length; i++) {
-      formData.append('thumbnails', this.images[i]);
+      this.formData.append('thumbnails', this.images[i]);
     }
-    console.log(formData.append);
-   
-      
-    this.auth.addEvent(formData).subscribe(
+    console.log(this.formData.append);
+
+
+    this.auth.addEvent(this.formData).subscribe(
       (result) => {
         this.eventResult = result;
         console.log(this.eventResult.message);
-        
+
         this.toastr.success(this.eventResult.message);
 
         this.router.navigate(['/tribe/event']);
@@ -103,5 +133,7 @@ export class AddEventsComponent {
         this.errorMsg = this.errorShow;
         this.toastr.error(this.errorMsg);
       })
+    const formData = new FormData();
+
   }
 }

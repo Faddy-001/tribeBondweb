@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="card">
-    <p-dataView [value]="totalBlogs" [paginator]="true" [rows]="6" filterBy="title" [sortField]="sortField"
+    <p-dataView [value]="totalBlogs" [paginator]="true" [rows]="1" filterBy="title" [sortField]="sortField"
         [sortOrder]="-1" layout="grid">
         <ng-template pTemplate="header">
             <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
@@ -39,8 +39,8 @@
                                             class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
                                             <!-- <button pButton type="button" label="Event Details" icon="pi pi-plus" class="mr-2 mt-2"></button> -->
                                             <button pButton pRipple type="button" label="Event Details"
-                                                class="p-button-rounded p-button-secondary mt-2"
-                                                (click)="navigateToDetail()"></button>
+                                                class="p-button-rounded p-button-secondary mt-2"  routerLink="/tribe/event/event-detail/{{ ppt.id }}" 
+                                                ></button>
                                         </div>
                                     </div>
                                     <div class="text-container">
