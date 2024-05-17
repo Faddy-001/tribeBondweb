@@ -1,0 +1,144 @@
+<div class="row">
+
+    <div class="col-12 alignment">
+        <div class="card cardborder">
+            <div class="col-12 ">
+                <textarea inputId="textarea" rows="3" cols="70" pInputTextarea placeholder="Type Your Status"
+                    formControlName="description" style="border-radius: 10px;"></textarea>
+                <div class="button-container mt-2">
+                    <div class="image-container">
+                        <img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+                    </div>
+                    <button pButton pRipple type="button" label="Upload"
+                        class="p-button-rounded p-button-help"></button>
+                </div>
+                <div class="button-container mt-2">
+                    <button pButton pRipple type="button" label="Post" class="p-button-rounded"></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- theme container card -->
+    <div class="col-12 alignments">
+        <div class="card ">
+            <div class="bottom-border">
+                <img src="assets/demo/images/avatar/check.jpg" width="32" class="avatar-circle mb-2"
+                    style="vertical-align: middle" />
+                <span class="ml-2 font-semibold text-blue-500" style="font-size: 18px; color:#1769aa;">Ayesha
+                    Khan</span>
+            </div>
+
+
+            <div class="image-container">
+                <img src="assets/themeImages/theme5.jpg" class="imageswithtext mb-2" />
+                <div class="overlay-text">For Demo Text</div>
+            </div>
+            <div class="icon-container mt-2">
+                <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
+                <i class="pi pi-comments" pBadge value="6" style="font-size: 18px; color: #1769aa;"></i>
+            </div>
+            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+                <div>
+                    <span class="font-semibold text-blue-500">Dusana Semenov</span>
+                    <h6 class="m-0 text-sm ">
+                        Hey! This is for demo
+                    </h6>
+                </div>
+            </a>
+            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+                <div>
+                    <span class="font-semibold text-blue-500">Dusana Semenov</span>
+                    <h6 class="m-0 text-sm ">
+                        Hey! This is for demo
+                    </h6>
+                </div>
+            </a>
+            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+                <div>
+                    <span class="font-semibold text-blue-500">Dusana Semenov</span>
+                    <h6 class="m-0 text-sm ">
+                        Hey! This is for demo
+                    </h6>
+                </div>
+            </a>
+            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
+                    formControlName="description" style="border-radius: 10px;"></textarea>
+                <div>
+                    <button pButton pRipple type="button" label="Comment" class="p-button-rounded"></button>
+                </div>
+            </a>
+
+            <div>
+
+            </div>
+
+        </div>
+    </div>
+<!-- image container card -->
+<div class="col-12 alignments">
+    <div class="card ">
+        <div class="bottom-border">
+            <img src="assets/demo/images/avatar/check.jpg" width="32" class="avatar-circle mb-2"
+                style="vertical-align: middle" />
+            <span class="ml-2 font-semibold text-blue-500" style="font-size: 18px; color:#1769aa;">Ayesha
+                Khan</span>
+        </div>
+
+         <div>Status is show</div>
+        <div class="image-container">
+            <img src="assets/layout/images/demo.jpg" class="imageswithouttext mb-2" />
+            <!-- <div class="overlay-text">For Demo Text</div> -->
+        </div>
+        <div class="icon-container mt-2">
+            <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
+            <i class="pi pi-comments" pBadge value="6" style="font-size: 18px; color: #1769aa;"></i>
+        </div>
+        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+            <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+            <div>
+                <span class="font-semibold text-blue-500">Fardeen Khan</span>
+                <h6 class="m-0 text-sm ">
+                    Hey! This is for demo
+                </h6>
+            </div>
+        </a>
+        <!-- <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+            <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+            <div>
+                <span class="font-semibold text-blue-500">Dusana Semenov</span>
+                <h6 class="m-0 text-sm ">
+                    Hey! This is for demo
+                </h6>
+            </div>
+        </a>
+        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+            <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
+            <div>
+                <span class="font-semibold text-blue-500">Dusana Semenov</span>
+                <h6 class="m-0 text-sm ">
+                    Hey! This is for demo
+                </h6>
+            </div> -->
+        <!-- </a> -->
+        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+            <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
+                formControlName="description" style="border-radius: 10px;"></textarea>
+            <div>
+                <button pButton pRipple type="button" label="Comment" class="p-button-rounded"></button>
+            </div>
+        </a>
+
+        <div>
+
+        </div>
+
+    </div>
+</div>
+
+    <!-- </div> -->
+</div>

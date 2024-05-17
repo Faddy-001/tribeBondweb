@@ -70,6 +70,27 @@ export class AuthenticationService {
     return this.http.get(this.all_event, httpOptions).pipe(map((res) => res));
 
   }
-  edit_event = this.url + 'events/display';
+  getById_event = this.url + 'events/display/';
+  getEventById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
 
-}
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_event + id,httpOptions);
+  }
+  edit_event = this.url + 'events/edit/';
+  editEventId(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_event  + id, data, httpOptions);
+}}

@@ -1,0 +1,114 @@
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  /* Distribute items to each end of the container */
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  margin: 5px;
+  /* Adjust this margin as per your preference */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin-top: 4%;
+  // height: 100vh; /* Adjust as needed */
+}
+
+.cardborder {
+  box-shadow: 0px 4px 8px #1769aa;
+  /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+  transition: box-shadow 0.3s ease;
+}
+
+.card {
+  width: 50%;
+}
+
+.alignment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -32px;
+}
+.alignments {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-circle {
+  border-radius: 50%;
+  width: 50px;
+  /* Ensure the width and height are the same for a perfect circle */
+  height: 50px;
+}
+
+.bottom-border {
+  border-bottom: 2px solid gray;
+  /* Adjust the width and color as needed */
+  // width: 32px; /* Ensure the width matches the image width */
+  height: auto;
+  /* Maintain the aspect ratio */
+  padding-top: 10px;
+}
+
+// .imageswithtext {
+//   width: 80%;
+//   height: 200px;
+//   padding-top: 10px;
+  
+// }
+// .showcenter{
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+// .content {
+//   display: flex;
+//   align-items: center; /* Align items vertically */
+// }
+.image-container {
+  position: relative;
+  // display: inline-block;
+  text-align: center; /* Optional: Center the text horizontally */
+}
+
+.imageswithtext {
+  // display: block; /* Ensure the image is a block element */
+  width: 100%; /* Optional: Adjust based on your layout */
+  height: 200px;
+    padding-top: 10px;
+}
+.imageswithouttext{
+  width: 100%; /* Optional: Adjust based on your layout */
+  height: 300px;
+    padding-top: 10px;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the text */
+  color: white; /* Text color */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Background color with transparency */
+  padding: 10px; /* Optional: Padding around the text */
+  font-size: 18px; /* Adjust as needed */
+}
+.comment-circle {
+  border-radius: 50%;
+  width: 25px;
+  /* Ensure the width and height are the same for a perfect circle */
+  height: 25px;
+}

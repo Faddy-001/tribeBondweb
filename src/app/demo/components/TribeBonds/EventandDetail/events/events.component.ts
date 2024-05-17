@@ -121,7 +121,7 @@ export class EventsComponent {
         },
     ];
     navigateToDetail(): void {
-        this.router.navigateByUrl('/tribe/event/event-detail');
+        this.router.navigateByUrl('/tribe/event/event-detail/');
     }
     routing() {
         console.log('dfsf');

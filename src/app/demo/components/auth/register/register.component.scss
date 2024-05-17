@@ -12,12 +12,19 @@
       object-fit: cover; /* Ensure the image covers the entire circle */
     }
   }
-  
+  .cardborder{
+    box-shadow: 0px 4px 8px #1769aa; /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+    transition: box-shadow 0.3s ease;
+  }
+  .card{
+background-color: whitesmoke;
+border-radius: 8px;
+  }
   .icon-container {
     position: absolute;
     // bottom: -10px; /* Adjust as needed */
-    right: 44%; /* Adjust as needed */
-    top: 27%;
+    right: 45%; /* Adjust as needed */
+    top: 22%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     border-radius: 50%; /* Creates a circular background for the icon */
     padding: 8px; /* Adjust the padding around the icon */
