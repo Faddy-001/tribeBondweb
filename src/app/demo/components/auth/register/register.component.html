@@ -1,127 +1,90 @@
 <div class="h-screen text-bluegray-200" style="background: linear-gradient(180deg, #525d72 0%, #69768d 100%)">
-    <div class="flex justify-content-center align-items-center h-full ">
+    <!-- <div class="flex justify-content-center align-items-center h-full ">
         <div class="h-full  py-6 px-8 flex justify-content-between flex-column max-w-40rem">
+        </div>
+    </div> -->
+    <h2 class="text-bluegray-200 text-center pt-4">Get Started With Your Account</h2>
+    <div style="display: flex;justify-content: center;align-items: center;">
+        <form [formGroup]="signUpForm" (ngSubmit)="SignUp(signUpForm.value)">
+            <div class="avatar-container">
+                <!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
+                <img class="avatar" alt="" src="{{ UserPreviousImage }}" />
+                <div class="icon-container">
+                    <!-- Place your icon here -->
+                    <input type="file" style="display: none" (change)="userImage($event)" #file />
+                    <i class="pi pi-plus" (click)="file.click()"></i>
+                </div>
+            </div>
+            <div class="card cardborder">
+                <div class="p-fluid grid ">
+                    <div class=" col-12 md:col-6">
+                        <label style="justify-self: start;text-align: start;color:#1769aa">Firstname</label>
+                        <input pInputText id="firstname2" type="text" placeholder="First Name"
+                            formControlName="firstName" />
+                    </div>
+                    <div class=" col-12 md:col-6">
+                        <label htmlFor="lastname"style="color:#1769aa">Last Name</label>
+                        <input pInputText id="lastname2" type="text" placeholder="Last Name"
+                            formControlName="lastName" />
+                    </div>
+                    </div>
+                    <div class="p-fluid grid ">
+                    <div class=" col-12 md:col-6">
+                        <label htmlFor="lastname" style="color:#1769aa">Gender</label>
 
-            <!-- <div> -->
-                <h2 class="text-bluegray-200 text-center">Get Started With Your Account</h2>
+                        <p-dropdown [options]="genderItems" optionLabel="name" placeholder="Select"
+                            formControlName="gender"></p-dropdown>
 
-                <div class="login-form  h-full  flex justify-content-between flex-column max-w-40rem">
-                    <form style="padding-left: 3%;" [formGroup]="signUpForm" (ngSubmit)="SignUp(signUpForm.value)">
-                        <div class="avatar-container">
-                            <!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
-                            <img class="avatar"alt="" src="{{ UserPreviousImage }}" />
-                            <div class="icon-container">
-                                <!-- Place your icon here -->
-                                <input type="file" style="display: none" (change)="userImage($event)" #file />
-                                <i class="pi pi-plus" (click)="file.click()"></i>
+                    </div>
+                    <div class=" col-12 md:col-6">
+                        <label htmlFor="lastname" style="color:#1769aa">Religion</label>
+                        <input pInputText id="lastname2" type="text" placeholder="Religion"
+                            formControlName="religion" />
+                    </div>
+                </div>
+                <div class="p-fluid grid ">
+                    <div class=" col-12 md:col-4">
+                        <label style="justify-self: start;text-align: start;color:#1769aa">Email</label>
+                        <input pInputText id="firstname2" type="email" placeholder="Email" formControlName="email" />
+                    </div>
+                    <div class=" col-12 md:col-4">
+                        <label htmlFor="lastname"style="color:#1769aa">Password</label>
+                        <input pInputText id="lastname2" type="text" placeholder="Password"
+                            formControlName="password" />
+                    </div>
+                    <div class=" col-12 md:col-4">
+                        <label style="justify-self: start;text-align: start;color:#1769aa">Confirm Password</label>
+                        <input pInputText id="firstname2" type="text" placeholder="Confirm password"
+                            formControlName="confirmPwd" />
+                            <div *ngIf=" (signUpForm.get('password')?.value !== signUpForm.get('confirmPwd')?.value)" class="text-danger" style="color: red;">
+                                Passwords do not match.
                               </div>
-                        </div>
-                 
-                        <div class="p-fluid grid ">
-                            <div class="field col-12 md:col-6">
-                                <label style="justify-self: start;text-align: start;">Firstname</label>
-                                <input pInputText id="firstname2" type="text" placeholder="First Name"
-                                    formControlName="firstName" />
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">Last Name</label>
-                                <input pInputText id="lastname2" type="text" placeholder="Last Name"
-                                    formControlName="lastName" />
-                            </div>
-                        </div>
-                        <!-- <input type="password" autocomplete="off" pInputText placeholder="First Name"
-                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="firstName" />
-                        <input type="password" autocomplete="off" pInputText placeholder="Last Name"
-                        class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="lastName" /> -->
-                        <div class="p-fluid grid ">
-                            <div class="field col-12 md:col-6">
-                                <label style="justify-self: start;text-align: start;">Email</label>
-                                <input pInputText id="firstname2" type="email" placeholder="Email"
-                                    formControlName="email" />
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">Password</label>
-                                <input pInputText id="lastname2" type="text" placeholder="Password"
-                                    formControlName="password" />
-                            </div>
-                            <!-- <label htmlFor="lastname2">Lastname</label>
+                    </div>
+                    </div>
+               
+                <div class="p-fluid grid ">
+                    <div class=" col-12 md:col-6">
+                        <label htmlFor="lastname" style="color:#1769aa">State</label>
 
-                            <input type="email" autocomplete="off" pInputText placeholder="Email"
-                                class="w-12 mb-4 mt-2 text-bluegray-600 surface-ground " formControlName="email" /> -->
-                        </div>
-                        <div class="p-fluid grid ">
-                            <div class="field col-12 md:col-6">
-                                <label style="justify-self: start;text-align: start;">Confirm Password</label>
-                                <input pInputText id="firstname2" type="text" placeholder="Confirm password"
-                                    formControlName="confirmPwd" />
-                            </div>
+                        <!-- <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select State" [(ngModel)]="selectedState"></p-dropdown> -->
+                        <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select State"
+                            formControlName="state"></p-dropdown>
+                    </div>
+                    <div class=" col-12 md:col-6">
+                        <label htmlFor="lastname" style="color:#1769aa">City</label>
 
-                            <!-- <div class="field col-12 md:col-3">
-                                <label htmlFor="state">State</label>
-                                <p-dropdown [options]="dropdownItems" optionLabel="name" ></p-dropdown>
-                            </div> -->
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">Gender</label>
+                        <p-dropdown [options]="cities" placeholder="Select City" formControlName="city"></p-dropdown>
 
-                                <p-dropdown [options]="genderItems" optionLabel="name" placeholder="Select"
-                                    formControlName="gender"></p-dropdown>
-
-                            </div>
-
-                            <!-- <div class="field col-12 md:col-6">
-                                <label style="justify-self: start;text-align: start;">City</label>
-                                <input pInputText id="firstname2" type="text" placeholder="City"
-                                    formControlName="city" />
-                            </div> -->
-
-                        </div>
-                        <div class="p-fluid grid ">
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">State</label>
-
-                                <p-dropdown [options]="cityItems" optionLabel="name" placeholder="Select"
-                                    formControlName="state"></p-dropdown>
-
-                            </div>
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">City</label>
-
-                                <p-dropdown [options]="cityItems" optionLabel="name" placeholder="Select"
-                                    formControlName="city"></p-dropdown>
-
-                            </div>
-                           
-                           
-                            <div class="field col-12 md:col-6">
-                                <label htmlFor="lastname">Religion</label>
-                                <input pInputText id="lastname2" type="text" placeholder="Religion"
-                                    formControlName="religion" />
-                            </div>
-                        </div>
+                    </div>
 
 
-                        <!-- <input type="password" autocomplete="off" pInputText placeholder="Password"
-                            class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="password" />
-                        <input type="password" autocomplete="off" pInputText placeholder="Confirm password"
-                            class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="confirmPwd" />
-                        <input type="password" autocomplete="off" pInputText placeholder="Gender"
-                            class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="gender" />
-                        <input type="password" autocomplete="off" pInputText placeholder="City"
-                            class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="city" />
-                        <input type="password" autocomplete="off" pInputText placeholder="Religion"
-                            class="w-11 mb-4 text-bluegray-600 surface-ground " formControlName="religion" /> -->
-                        <button pButton pRipple label="SIGN UP" type="button" class="w-12 " type="submit"></button>
-                    </form>
+                    
 
                 </div>
+                <div style="display: flex;justify-content: center;align-items: center;">
+                <button pButton pRipple label="SIGN UP" type="button" class="w-6 "  type="submit"></button></div>
 
-            <!-- </div> -->
-
-        </div>
-
-
+            </div>
+        </form>
     </div>
-
 </div>
-<!-- </div> -->
-<app-config [minimal]="true"></app-config>

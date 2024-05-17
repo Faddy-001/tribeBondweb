@@ -5,6 +5,8 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forChild([
+    { path: 'home', data: { breadcrumb: 'home' }, loadChildren: () => import('./HomeBlog/home-blog/home-blog.module').then(m => m.HomeBlogModule) },
+
     { path: 'event', data: { breadcrumb: 'Calendar' }, loadChildren: () => import('./EventandDetail/events/events.module').then(m => m.EventsModule) },
     { path: 'iSchool', data: { breadcrumb: 'Islamic School' }, loadChildren: () => import('./Education/islamic-school/islamic-school.module').then(m => m.IslamicSchoolModule) },
     { path: 'onlinetutor', data: { breadcrumb: 'Online Tutor' }, loadChildren: () => import('./Education/online-tutor/online-tutor.module').then(m => m.OnlineTutorModule) },

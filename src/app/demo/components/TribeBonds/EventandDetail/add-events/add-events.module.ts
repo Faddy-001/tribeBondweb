@@ -14,17 +14,17 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import {FileUploadModule} from 'primeng/fileupload';
+import { FileUploadModule } from 'primeng/fileupload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
-  declarations: [AddEventsComponent],
-  imports: [
-    CommonModule,
-    AddEventsRouting,
-    AutoCompleteModule,
+	declarations: [AddEventsComponent],
+	imports: [
+		CommonModule,
+		AddEventsRouting,
+		AutoCompleteModule,
 		CalendarModule,
 		ChipsModule,
 		DropdownModule,
@@ -36,10 +36,10 @@ import { ToastrModule } from 'ngx-toastr';
 		InputTextModule,
 		FileUploadModule,
 		FormsModule,
-        ReactiveFormsModule,
-		
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] 
+		ReactiveFormsModule,
+
+	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class AddEventsModule { }

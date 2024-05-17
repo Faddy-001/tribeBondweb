@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
@@ -27,11 +27,11 @@ export class RegisterComponent {
     { name: 'Other', code: 'Option 3' }
   ];
   cityItems = [
-    { name: 'Male', code: 'Option 1' },
-    { name: 'Female', code: 'Option 2' },
-    { name: 'Other', code: 'Option 3' }
+    // { name: 'Male', code: 'Option 1' },
+    // { name: 'Female', code: 'Option 2' },
+    // { name: 'Other', code: 'Option 3' }
   ];
-  selectedState: any = null;
+  // selectedState: any = null;
 
   constructor(private layoutService: LayoutService, private fb: FormBuilder,
     public router: Router, private auth: AuthenticationService,
@@ -40,47 +40,73 @@ export class RegisterComponent {
       firstName: [],
       lastName: [],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required],
-      confirmPwd: [],
+      password: ['', [Validators.required]],
+      confirmPwd: ['', [Validators.required]],
       gender: [],
       city: [],
       religion: [],
-      state:[]
+      state: []
 
-    });
-    this.UserPreviousImage =  this.defaultImge;
+    },
+
+
+    );
+   
+    this.UserPreviousImage = this.defaultImge;
   }
+  
   get dark(): boolean {
     return this.layoutService.config().colorScheme !== 'light';
   }
   ngOnInit(): void {
     console.log("f s bdn");
-    
+
     this.getCityData();
-    
-}
+
+  }
   userImage(event: Event) {
     const input = event.target as HTMLInputElement;
-     this.selectedFile = input.files?.[0];
-     console.log(this.selectedFile);
-     
-    if ( this.selectedFile) {
+    this.selectedFile = input.files?.[0];
+    console.log(this.selectedFile);
+
+    if (this.selectedFile) {
       // Read the selected file as a data URL
       const reader = new FileReader();
       reader.onload = () => {
         // Update the UserPreviousImage variable with the selected image data
         this.UserPreviousImage = reader.result;
       };
-      reader.readAsDataURL( this.selectedFile);
+      reader.readAsDataURL(this.selectedFile);
     }
   }
-  getCityData(){
+  statesCities: any[] = [];
+  selectedState: string | undefined;
+
+  getCityData() {
     this.auth.getCity().subscribe(
-      (res: any) => { 
-          console.log(res);
-        
-          
+      (res: any) => {
+        console.log(res.message);
+        const data = res.message;
+        this.statesCities = Object.entries(data).map(([state, cities]) => ({ state, cities }));
+        console.log(this.statesCities);
+
+
+
       })
+    if (this.signUpForm?.get('state')) {
+      this.signUpForm.get('state')?.valueChanges.subscribe(selectedState => {
+        this.onStateChange(selectedState);
+      });
+    }
+  }
+  cities: string[] = [];
+  onStateChange(selectedState: any) {
+    console.log(selectedState);
+
+    const selectedStateObj = this.statesCities.find(stateObj => stateObj.state === selectedState.state);
+    console.log(selectedStateObj.cities);
+
+    this.cities = selectedStateObj ? selectedStateObj.cities : [];
   }
   SignUp(userdata: any) {
     console.log(userdata);
@@ -91,7 +117,7 @@ export class RegisterComponent {
       userdata.gender = userdata.gender.name
     }
     console.log(this.selectedFile);
-    
+
     const formData = new FormData();
     formData.append('firstName', userdata.firstName);
     formData.append('lastName', userdata.lastName);
@@ -106,7 +132,7 @@ export class RegisterComponent {
 
     // this.auth.SignUp(formData).subscribe(){}
     this.auth.SignUp(formData).subscribe(
-      (res: any) => {})
+      (res: any) => { })
   }
 
   // upload image

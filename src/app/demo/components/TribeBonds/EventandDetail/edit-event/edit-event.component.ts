@@ -37,18 +37,18 @@ export class EditEventComponent {
       (res: any) => {
         this.editEvent = res.data;
         this.description = this.editEvent.description;
-        // this.images = this.editEvent.images
+        this.images = this.editEvent.images
 
-        const timeParts = this.editEvent.time.split(':');
-        const hours = parseInt(timeParts[0], 10);
-        const minutes = parseInt(timeParts[1], 10);
-        const seconds = parseInt(timeParts[2], 10);
-        const time = new Date();
-        time.setHours(hours, minutes);
+        // const timeParts = this.editEvent.time.split(':');
+        // const hours = parseInt(timeParts[0], 10);
+        // const minutes = parseInt(timeParts[1], 10);
+        // const seconds = parseInt(timeParts[2], 10);
+        // const time = new Date();
+        // time.setHours(hours, minutes);
         this.EditEventForm = this.formbuilder.group({
           name: [this.editEvent.name],
           date: [new Date(this.editEvent.date)],
-          time: [time],
+          time: [],
           address: [this.editEvent.address],
           city: [this.editEvent.city],
           // gender: [],
@@ -57,6 +57,11 @@ export class EditEventComponent {
           website: [this.editEvent.website],
           thumbnail: [],
         })
+        const payloadDate = this.editEvent.time
+        const dateObject = new Date(payloadDate);
+
+        // Set the parsed date object to the time FormControl
+        this.EditEventForm.get('time')?.setValue(dateObject);
 
       })
   }
@@ -69,7 +74,7 @@ export class EditEventComponent {
       this.formData.append('thumbnail', files[0]);
 
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
         this.formData.append('images', files[i]);
       }
       for (let i = 0; i < files.length; i++) {

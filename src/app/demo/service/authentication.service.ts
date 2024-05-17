@@ -83,7 +83,7 @@ export class AuthenticationService {
     };
     return this.http.get(this.getById_event + id,httpOptions);
   }
-  edit_event = this.url + 'events/display/';
+  edit_event = this.url + 'events/edit/';
   editEventId(id: number, data: any) {
     let bearerToken = localStorage.getItem('token');
     let httpOptions = {
@@ -92,5 +92,5 @@ export class AuthenticationService {
         
       }),
     };
-    return this.http.put(this.edit_event + '/' + id, data, httpOptions);
+    return this.http.put(this.edit_event  + id, data, httpOptions);
 }}
