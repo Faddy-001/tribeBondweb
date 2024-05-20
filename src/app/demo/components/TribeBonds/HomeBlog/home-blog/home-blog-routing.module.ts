@@ -4,6 +4,8 @@ import { HomeBlogComponent } from './home-blog.component';
 
 const routes: Routes = [
   { path: '', component: HomeBlogComponent }
+  
+
 ];
 
 @NgModule({

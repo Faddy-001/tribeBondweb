@@ -123,5 +123,20 @@ export class EventDetailComponent {
                 })
             })
     }
-   
+    reviewText: string = ''; // Variable to hold the value of the textarea
+    reviewResult:any;
+    AddReview() {
+        // Access the value of the textarea using this.reviewText
+        console.log('Review Text:', this.reviewText);
+        // You can then perform any logic you need with the review text
+        this.auth.addEventReview(this.reviewText).subscribe(
+            (result) => {
+              this.reviewResult = result;
+              console.log(this.reviewResult.message);
+      
+            //   this.toastr.success(this.eventResult.message);
+      
+            //   this.router.navigate(['/tribe/event']);
+            },)
+    }
 }

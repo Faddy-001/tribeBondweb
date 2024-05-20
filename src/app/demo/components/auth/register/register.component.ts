@@ -111,12 +111,16 @@ export class RegisterComponent {
   SignUp(userdata: any) {
     console.log(userdata);
     if (userdata.city) {
-      userdata.city = userdata.city.name
+      userdata.city = this.signUpForm.get('city')?.value
     }
     if (userdata.gender) {
-      userdata.gender = userdata.gender.name
+      userdata.gender = this.signUpForm.get('gender')?.value
     }
-    console.log(this.selectedFile);
+    if (userdata.state) {
+      userdata.state = this.signUpForm.get('state')?.value.state
+    }
+
+    console.log(this.signUpForm.get('city')?.value);
 
     const formData = new FormData();
     formData.append('firstName', userdata.firstName);
@@ -124,15 +128,22 @@ export class RegisterComponent {
     formData.append('password', userdata.password);
     formData.append('confirmPwd', userdata.confirmPwd);
     formData.append('email', userdata.email);
-    formData.append('gender', userdata.gender);
+    formData.append('gender', userdata.gender.name);
     formData.append('city', userdata.city);
+    formData.append('state', userdata.state);
+
     formData.append('religion', userdata.religion);
     formData.append('profilePicture', this.selectedFile);
     console.log(formData);
 
     // this.auth.SignUp(formData).subscribe(){}
     this.auth.SignUp(formData).subscribe(
-      (res: any) => { })
+      (res: any) => {
+        if(res.success == true){
+    this.router.navigate(['/login']);
+
+        }
+       })
   }
 
   // upload image

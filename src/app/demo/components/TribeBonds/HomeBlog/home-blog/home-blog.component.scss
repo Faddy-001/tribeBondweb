@@ -112,3 +112,27 @@
   /* Ensure the width and height are the same for a perfect circle */
   height: 25px;
 }
+.file-upload-button {
+  display: inline-block;
+  padding: 8px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.file-upload-button input[type="file"] {
+  display: none;
+}
+
+/* Style button when hovering over */
+.file-upload-button:hover {
+  background-color: #0056b3;
+}
+.image.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

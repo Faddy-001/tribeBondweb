@@ -93,4 +93,147 @@ export class AuthenticationService {
       }),
     };
     return this.http.put(this.edit_event  + id, data, httpOptions);
-}}
+
+}
+add_eventreview = this.url + 'events/add-review';
+addEventReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_eventreview, value,httpOptions).pipe(map((res) => res));
+
+}
+  // Eduction
+  getall_eduction = this.url + 'education-types/display';
+  getAllEducation() {
+    let bearerToken = localStorage.getItem('token');
+    // console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getall_eduction, httpOptions).pipe(map((res) => res));
+
+  }
+  // add Education entity
+  add_eductionentiti = this.url + 'education-types/add-entity';
+  addEdEntity(value:any) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.post(this.add_eductionentiti, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_edentity = this.url + 'education-types/edit-entity/';
+  editEductionEntity(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_edentity  + id, data, httpOptions);
+
+}
+getById_eductionenti = this.url + 'education-types/display/';
+  getEductionEntitiyById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_eductionenti + id,httpOptions);
+}
+add_review = this.url + 'education-types/add-review';
+addEducationReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_review, value,httpOptions).pipe(map((res) => res));
+
+}
+
+// home Blog Api 
+add_blogs = this.url + 'blogs/add';
+addBlog(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_blogs, value,httpOptions).pipe(map((res) => res));
+
+}
+add_blogComment = this.url + 'blogs/add-comment';
+addBlogComment(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_blogComment, value,httpOptions).pipe(map((res) => res));
+
+}
+reply_blogComment = this.url + 'blogs/comment-reply';
+replyBlogComment(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.reply_blogComment, value,httpOptions).pipe(map((res) => res));
+
+}
+getall_blog = this.url + 'blogs/display';
+getAllBlog() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_blog, httpOptions).pipe(map((res) => res));
+
+}
+}

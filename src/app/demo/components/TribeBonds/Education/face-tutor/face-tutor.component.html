@@ -1,6 +1,6 @@
 <div>
     <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
-        <button pButton type="button" label="Add Face2Face Tutor" icon="pi pi-plus" class="mr-2 mb-4"  [routerLink]="['/tribe/facetutor/add-tutor']" ></button>
+        <button pButton type="button" label="Add Face2Face Tutor" icon="pi pi-plus" class="mr-2 mb-4"   (click)="navigateToAdd()"></button>
 
     </div>
 </div>
@@ -21,9 +21,9 @@
 
         <ng-template let-blogs pTemplate="gridItem">
             <div class="grid grid-nogutter">
-                <div class="col-10" *ngFor="let blog of blogs">
+                <div class="col-10" *ngFor="let dataShow of entityShow;let i= index">
                     <div class="card cardborder">
-                        <div class="p-3" *ngIf="blog">
+                        <div class="p-3" *ngIf="entityShow">
                             <div class="cursor-pointer surface-card  border-round" >
                                 <!-- <div class="relative">
                                     <img [src]="blog.coverImage" class="w-50" />
@@ -31,7 +31,8 @@
                                 </div> -->
                                 <div class="card-content">
                                     <div class="image-container">
-                                        <img [src]="blog.coverImage" alt="Blog Cover Image" class="w-100" />
+                                        <img [src]="dataShow.image" alt="Blog Cover Image" class="w-100" [style.width.px]="desiredWidth" [style.height.px]="desiredHeight" />
+
                                         <div class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
                                             <!-- <button pButton type="button" label="Event Details" icon="pi pi-plus" class="mr-2 mt-2"></button> -->
                                         
@@ -42,7 +43,7 @@
                                         type="button"
                                         label="Details"
                                         class="p-button-rounded p-button-secondary mt-2 mr-2"
-                                        (click)="navigateToDetail()"
+                                        (click)="navigateToDetail(dataShow.id)"
                                     ></button>
                                     <button
                                     pButton
@@ -50,7 +51,7 @@
                                     type="button"
                                     label="Message"
                                     class="p-button-rounded p-button-primary mt-2 mr-2"
-                                    (click)="navigateToDetail()"
+                                    (click)="navigateToDetail(dataShow.id)"
                                 ></button>
                                     <button
                                     pButton
@@ -58,17 +59,17 @@
                                     type="button"
                                     label="Delete"
                                     class="p-button-rounded p-button-danger mt-2"
-                                    (click)="navigateToDetail()"
+                                    (click)="navigateToDetail(dataShow.id)"
                                 ></button>
                                         </div>
                                     </div>
                                     <div class="text-container">
                                         <!-- <h2>Dar Ul Arqam Islamic School</h2> -->
-                                        <p>Phone: 9165155554</p>
-                                        <p>Email: darularqamnorth&#64;hotmail.com</p>
+                                        <p>Phone: {{dataShow.phone}}</p>
+                                        <p>Email: {{dataShow.email}}</p>
 
-                                        <p>Offers: PK-12</p>
-                                        <p>Website: <a style="color: blue;" [href]="websiteUrl" target="_blank">http://www.north.darularqamschools.org/</a></p>
+                                        <p>Offers: {{dataShow.offers}}</p>
+                                        <p>Website: <a style="color: blue;" [href]="dataShow.website" target="_blank">{{dataShow.website}}</a></p>
                                         <!-- Additional text or content -->
                                     </div>
                                 </div>

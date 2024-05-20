@@ -26,7 +26,7 @@
             </ng-template>
         </p-galleria> -->
         <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions" id="pgall"
-            [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="images.length" [circular]="true">
+            [containerStyle]="{'max-width': '800px', 'margin':'auto'}"  [circular]="true">
             <ng-template pTemplate="item" let-item>
                 <img [src]="item" style="width: 100%; max-height: 300px; display: flex;" />
             </ng-template>
@@ -94,10 +94,10 @@
 
         <!-- type review -->
         <div class="mb-3 p-fluid">
-            <textarea rows="6" pInputTextarea placeholder="Type your review"></textarea>
+            <textarea rows="6" pInputTextarea placeholder="Type your review" [(ngModel)]="reviewText" ></textarea>
         </div>
         <div class="flex justify-content-end">
-            <button pButton pRipple label="Review"></button>
+            <button pButton pRipple label="Review" (click)="AddReview()"></button>
         </div>
         <div>
 

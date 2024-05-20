@@ -10,6 +10,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'primeng/carousel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { RippleModule } from 'primeng/ripple';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RippleModule } from 'primeng/ripple';
     ButtonModule,
     InputTextModule,
     InputTextareaModule,
-    RippleModule
+    RippleModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

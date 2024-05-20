@@ -11,14 +11,16 @@
                         
                     </div>
                 </div>
+				<form style="padding-left: 3%;" [formGroup]="addEducationOnline" (ngSubmit)="Submit(addEducationOnline.value)">
+
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
 						<label htmlFor="firstname2">Name</label>
-						<input pInputText id="firstname2" type="text" placeholder="Enter Name" />
+						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" />
+						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="contactNumber"/>
 					</div>
 					<div class="col-12 md:col-6">
                         <label style="justify-self: start;text-align: start;">Email</label>
@@ -28,47 +30,52 @@
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="Offers">Offers</label>
-						<input pInputText id="Offers" type="text" placeholder="Offers" />
+						<input pInputText id="Offers" type="text" placeholder="Offers" formControlName="offers"/>
 						<!-- <label htmlFor="address">Address</label>
 						<input pInputTextarea id="address" rows="4" /> -->
 					</div>
 
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Website URL</label>
-						<input pInputText id="website" type="text" placeholder="Enter your website url" />
+						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Address</label>
-						<input pInputText id="website" type="text" placeholder="Enter Address" />
+						<input pInputText id="website" type="text" placeholder="Enter Address" formControlName="address" />
 					</div>
 
 					<div class="col-12">
 						<div class="card">
-							<label htmlFor="website">Upload an Image</label>
-							<p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
-								[multiple]="true" accept="image/*" [maxFileSize]="1000000">
-								<ng-template pTemplate="content">
-									<ul *ngIf="uploadedFiles.length">
-										<li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-									</ul>
-								</ng-template>
-							</p-fileUpload>
+							<label class="file-upload-button">
+								Upload an Image
+								<input type="file"  (change)="onFileSelected($event)" multiple>
+							</label>
 
+							<div class="image-container">
+								<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+							</div>
 
+							<div class="col-12 " style="display: flex;justify-content: flex-end;">
+								<div class="flex flex-wrap gap-2">
+									<button pButton pRipple label="Submit"></button>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="avatar-container" id="imagePreviewContainer">
+							<!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
+							<img class="avatar" alt="" />
 						</div>
 						<!-- <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
 							<button pButton type="button" label="Add Event" icon="pi pi-plus" class="mr-2 mb-4"  [routerLink]="['/tribe/event/add']" ></button>
 					
 						</div> -->
-						<div class="col-12 " style="display: flex;justify-content: flex-end;">
-							<div class="flex flex-wrap gap-2">
-								<button pButton pRipple label="Submit"></button>
-								
-							</div>
-						</div>
+						
 						
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

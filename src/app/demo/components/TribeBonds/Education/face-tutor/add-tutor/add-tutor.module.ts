@@ -14,6 +14,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule,  } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 		CascadeSelectModule,
 		MultiSelectModule,
 		InputTextareaModule,
-		FileUploadModule
+		FileUploadModule,
+		FormsModule,ReactiveFormsModule
   ]
 })
 export class AddTutorModule { }

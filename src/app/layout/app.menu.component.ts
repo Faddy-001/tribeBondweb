@@ -1,14 +1,99 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../demo/service/authentication.service';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html',
 })
 export class AppMenuComponent implements OnInit {
+    allData: any
+    newPPT: any = [];
+    demoData: any;
+    menuItems: any[] | undefined;
+    constructor(private auth: AuthenticationService) { }
     model: any[] = [];
+    items: any
+    getAllEductionDisplay() {
+        this.auth.getAllEducation().subscribe(
+            (res: any) => {
+                if (res.success) {
+                    this.allData = res.data;
+                    this.allData.forEach((data: any) => {
+                        this.newPPT.push({
+                            name: data.typeName,
+                            id: data._id
+                        });
+                    });
+                    console.log(this.newPPT.id);
+
+                    // Generate menu items from newPPT
+                    this.items = this.generateMenuItems(this.newPPT);
+                    // const educationMenu = this.model.find(menu => menu.label === 'Education & Training');
+                    const findMenuItem = this.model.find(item => item.label === 'Find');
+
+                    if (findMenuItem) {
+                        // Assuming generatedItems contains the Education & Training menu items
+                        const indexToInsert = 3; // 4th position (0-based index)
+                        findMenuItem.items.splice(indexToInsert, 0, {
+                            label: 'Education & Training',
+                            icon: 'pi pi-fw pi-envelope',
+                            items: this.items // Replace generatedItems with the array of Education & Training menu items
+                        });
+                    }
+
+                } else {
+                }
+            });
+
+    }
+
+    generateMenuItems(data: any) {
+        const items = [];
+        for (let item of data) {
+            const menuItem = {
+                label: item.name,
+                icon: this.getIconForItem(item.name), // Dynamically assign an icon if necessary
+                routerLink: [this.getRouteForItem(item.name,item.id)]
+            };
+            items.push(menuItem);
+        }
+        return items;
+    }
+
+
+
+    // Helper function to determine the route based on item name
+    getRouteForItem(name: string, id: string): string {
+        console.log(`Generating route for: ${name} with id: ${id}`);
+        switch (name) {
+            case 'Islamic Schools':
+                return `/tribe/iSchool/${id}`;
+            case 'Online Quran Tutor':
+                return `/tribe/onlinetutor/${id}`;
+            case 'Face To Face Quran Tutor':
+                return `/tribe/facetutor/${id}`;
+            default:
+                return `/tribe/default/${id}`; // Fallback route
+        }
+    }
+    // Helper function to determine the icon based on item name (optional)
+    getIconForItem(name: string): string {
+        switch (name) {
+            case 'Islamic Schools':
+                return 'pi pi-fw pi-inbox';
+            case 'Online Quran Tutor':
+                return 'pi pi-fw pi-pencil';
+            case 'Face To Face Quran Tutor':
+                return 'pi pi-fw pi-comment';
+            default:
+                return 'pi pi-fw pi-question'; // Default icon
+        }
+    }
+
 
     ngOnInit() {
+        this.getAllEductionDisplay()
         this.model = [
             {
                 label: 'Home',
@@ -140,73 +225,53 @@ export class AppMenuComponent implements OnInit {
                         ],
                     },
                     // eduction
-                    {
-                        label: 'Education & Training',
-                        icon: 'pi pi-fw pi-envelope',
-                        items: [
-                            {
-                                label: 'Isalmic School',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/tribe/iSchool'],
-                            },
-                            {
-                                label: 'Online Quran Tutor',
-                                icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/tribe/onlinetutor'],
-                            },
-                            {
-                                label: 'Face To Face Quran Tutor',
-                                icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/tribe/facetutor'],
-                            },
-                        ],
-                    },
-                //    buy and sell
+                    // show dynamic by api
+                    //    buy and sell
                     {
                         label: 'Buy & Sell',
                         icon: 'pi pi-fw pi-home',
                         routerLink: ['/apps/blog/detail'],
                     },
-                //   community
-                {
-                    label: 'Community',
-                    icon: 'pi pi-fw pi-envelope',
-                    items: [
-                        {
-                            label: 'Free Giveaway',
-                            icon: 'pi pi-fw pi-inbox',
-                            routerLink: ['/apps//blog/edit'],
-                        },
-                        {
-                            label: 'Ask For Help',
-                            icon: 'pi pi-fw pi-pencil',
-                            routerLink: ['/apps//blog/edit'],
-                        },
-                        {
-                            label: 'Volunteer Needed',
-                            icon: 'pi pi-fw pi-comment',
-                            routerLink: ['/apps//blog/edit'],
-                        },
-                    ],
-                },
-                // job
-                {
-                    label: 'Job',
-                    icon: 'pi pi-fw pi-comments',
-                    routerLink: ['/apps//blog/edit'],
-                },
-                // fund raiser
-                {
-                    label: 'Fund Raiser',
-                    icon: 'pi pi-fw pi-comments',
-                    routerLink: ['/apps//blog/edit'],
-                },
-                  // feedback
-                  {
-                    label: 'Feedback',
-                    icon: 'pi pi-fw pi-comments',
-                    routerLink: ['/apps//blog/edit'],
-                },
+                    //   community
+                    {
+                        label: 'Community',
+                        icon: 'pi pi-fw pi-envelope',
+                        items: [
+                            {
+                                label: 'Free Giveaway',
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/apps//blog/edit'],
+                            },
+                            {
+                                label: 'Ask For Help',
+                                icon: 'pi pi-fw pi-pencil',
+                                routerLink: ['/apps//blog/edit'],
+                            },
+                            {
+                                label: 'Volunteer Needed',
+                                icon: 'pi pi-fw pi-comment',
+                                routerLink: ['/apps//blog/edit'],
+                            },
+                        ],
+                    },
+                    // job
+                    {
+                        label: 'Job',
+                        icon: 'pi pi-fw pi-comments',
+                        routerLink: ['/apps//blog/edit'],
+                    },
+                    // fund raiser
+                    {
+                        label: 'Fund Raiser',
+                        icon: 'pi pi-fw pi-comments',
+                        routerLink: ['/apps//blog/edit'],
+                    },
+                    // feedback
+                    {
+                        label: 'Feedback',
+                        icon: 'pi pi-fw pi-comments',
+                        routerLink: ['/apps//blog/edit'],
+                    },
 
 
                     // {
@@ -257,353 +322,353 @@ export class AppMenuComponent implements OnInit {
                     // },
                 ],
             },
-            {
-                label: 'UI Kit',
-                icon: 'pi pi-fw pi-star-fill',
-                items: [
-                    {
-                        label: 'Form Layout',
-                        icon: 'pi pi-fw pi-id-card',
-                        routerLink: ['/uikit/formlayout'],
-                    },
-                    {
-                        label: 'Input',
-                        icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['/uikit/input'],
-                    },
-                    {
-                        label: 'Float Label',
-                        icon: 'pi pi-fw pi-bookmark',
-                        routerLink: ['/uikit/floatlabel'],
-                    },
-                    {
-                        label: 'Invalid State',
-                        icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/uikit/invalidstate'],
-                    },
-                    {
-                        label: 'Button',
-                        icon: 'pi pi-fw pi-box',
-                        routerLink: ['/uikit/button'],
-                    },
-                    {
-                        label: 'Table',
-                        icon: 'pi pi-fw pi-table',
-                        routerLink: ['/uikit/table'],
-                    },
-                    {
-                        label: 'List',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['/uikit/list'],
-                    },
-                    {
-                        label: 'Tree',
-                        icon: 'pi pi-fw pi-share-alt',
-                        routerLink: ['/uikit/tree'],
-                    },
-                    {
-                        label: 'Panel',
-                        icon: 'pi pi-fw pi-tablet',
-                        routerLink: ['/uikit/panel'],
-                    },
-                    {
-                        label: 'Overlay',
-                        icon: 'pi pi-fw pi-clone',
-                        routerLink: ['/uikit/overlay'],
-                    },
-                    {
-                        label: 'Media',
-                        icon: 'pi pi-fw pi-image',
-                        routerLink: ['/uikit/media'],
-                    },
-                    {
-                        label: 'Menu',
-                        icon: 'pi pi-fw pi-bars',
-                        routerLink: ['/uikit/menu'],
-                        routerLinkActiveOptions: {
-                            paths: 'subset',
-                            queryParams: 'ignored',
-                            matrixParams: 'ignored',
-                            fragment: 'ignored',
-                        },
-                    },
-                    {
-                        label: 'Message',
-                        icon: 'pi pi-fw pi-comment',
-                        routerLink: ['/uikit/message'],
-                    },
-                    {
-                        label: 'File',
-                        icon: 'pi pi-fw pi-file',
-                        routerLink: ['/uikit/file'],
-                    },
-                    {
-                        label: 'Chart',
-                        icon: 'pi pi-fw pi-chart-bar',
-                        routerLink: ['/uikit/charts'],
-                    },
-                    {
-                        label: 'Misc',
-                        icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/uikit/misc'],
-                    },
-                ],
-            },
-            {
-                label: 'Prime Blocks',
-                icon: 'pi pi-fw pi-prime',
-                items: [
-                    {
-                        label: 'Free Blocks',
-                        icon: 'pi pi-fw pi-eye',
-                        routerLink: ['/blocks'],
-                    },
-                    {
-                        label: 'All Blocks',
-                        icon: 'pi pi-fw pi-globe',
-                        url: ['https://www.primefaces.org/primeblocks-ng'],
-                        target: '_blank',
-                    },
-                ],
-            },
-            {
-                label: 'Utilities',
-                icon: 'pi pi-fw pi-compass',
-                items: [
-                    {
-                        label: 'PrimeIcons',
-                        icon: 'pi pi-fw pi-prime',
-                        routerLink: ['utilities/icons'],
-                    },
-                    {
-                        label: 'Colors',
-                        icon: 'pi pi-fw pi-palette',
-                        routerLink: ['utilities/colors'],
-                    },
-                    {
-                        label: 'PrimeFlex',
-                        icon: 'pi pi-fw pi-desktop',
-                        url: ['https://www.primefaces.org/primeflex/'],
-                        target: '_blank',
-                    },
+            // {
+            //     label: 'UI Kit',
+            //     icon: 'pi pi-fw pi-star-fill',
+            //     items: [
+            //         {
+            //             label: 'Form Layout',
+            //             icon: 'pi pi-fw pi-id-card',
+            //             routerLink: ['/uikit/formlayout'],
+            //         },
+            //         {
+            //             label: 'Input',
+            //             icon: 'pi pi-fw pi-check-square',
+            //             routerLink: ['/uikit/input'],
+            //         },
+            //         {
+            //             label: 'Float Label',
+            //             icon: 'pi pi-fw pi-bookmark',
+            //             routerLink: ['/uikit/floatlabel'],
+            //         },
+            //         {
+            //             label: 'Invalid State',
+            //             icon: 'pi pi-fw pi-exclamation-circle',
+            //             routerLink: ['/uikit/invalidstate'],
+            //         },
+            //         {
+            //             label: 'Button',
+            //             icon: 'pi pi-fw pi-box',
+            //             routerLink: ['/uikit/button'],
+            //         },
+            //         {
+            //             label: 'Table',
+            //             icon: 'pi pi-fw pi-table',
+            //             routerLink: ['/uikit/table'],
+            //         },
+            //         {
+            //             label: 'List',
+            //             icon: 'pi pi-fw pi-list',
+            //             routerLink: ['/uikit/list'],
+            //         },
+            //         {
+            //             label: 'Tree',
+            //             icon: 'pi pi-fw pi-share-alt',
+            //             routerLink: ['/uikit/tree'],
+            //         },
+            //         {
+            //             label: 'Panel',
+            //             icon: 'pi pi-fw pi-tablet',
+            //             routerLink: ['/uikit/panel'],
+            //         },
+            //         {
+            //             label: 'Overlay',
+            //             icon: 'pi pi-fw pi-clone',
+            //             routerLink: ['/uikit/overlay'],
+            //         },
+            //         {
+            //             label: 'Media',
+            //             icon: 'pi pi-fw pi-image',
+            //             routerLink: ['/uikit/media'],
+            //         },
+            //         {
+            //             label: 'Menu',
+            //             icon: 'pi pi-fw pi-bars',
+            //             routerLink: ['/uikit/menu'],
+            //             routerLinkActiveOptions: {
+            //                 paths: 'subset',
+            //                 queryParams: 'ignored',
+            //                 matrixParams: 'ignored',
+            //                 fragment: 'ignored',
+            //             },
+            //         },
+            //         {
+            //             label: 'Message',
+            //             icon: 'pi pi-fw pi-comment',
+            //             routerLink: ['/uikit/message'],
+            //         },
+            //         {
+            //             label: 'File',
+            //             icon: 'pi pi-fw pi-file',
+            //             routerLink: ['/uikit/file'],
+            //         },
+            //         {
+            //             label: 'Chart',
+            //             icon: 'pi pi-fw pi-chart-bar',
+            //             routerLink: ['/uikit/charts'],
+            //         },
+            //         {
+            //             label: 'Misc',
+            //             icon: 'pi pi-fw pi-circle-off',
+            //             routerLink: ['/uikit/misc'],
+            //         },
+            //     ],
+            // },
+            // {
+            //     label: 'Prime Blocks',
+            //     icon: 'pi pi-fw pi-prime',
+            //     items: [
+            //         {
+            //             label: 'Free Blocks',
+            //             icon: 'pi pi-fw pi-eye',
+            //             routerLink: ['/blocks'],
+            //         },
+            //         {
+            //             label: 'All Blocks',
+            //             icon: 'pi pi-fw pi-globe',
+            //             url: ['https://www.primefaces.org/primeblocks-ng'],
+            //             target: '_blank',
+            //         },
+            //     ],
+            // },
+            // {
+            //     label: 'Utilities',
+            //     icon: 'pi pi-fw pi-compass',
+            //     items: [
+            //         {
+            //             label: 'PrimeIcons',
+            //             icon: 'pi pi-fw pi-prime',
+            //             routerLink: ['utilities/icons'],
+            //         },
+            //         {
+            //             label: 'Colors',
+            //             icon: 'pi pi-fw pi-palette',
+            //             routerLink: ['utilities/colors'],
+            //         },
+            //         {
+            //             label: 'PrimeFlex',
+            //             icon: 'pi pi-fw pi-desktop',
+            //             url: ['https://www.primefaces.org/primeflex/'],
+            //             target: '_blank',
+            //         },
 
-                ],
-            },
-            {
-                label: 'Pages',
-                icon: 'pi pi-fw pi-briefcase',
-                items: [
-                    {
-                        label: 'Landing',
-                        icon: 'pi pi-fw pi-globe',
-                        routerLink: ['/landing'],
-                    },
-                    {
-                        label: 'Auth',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Login',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login'],
-                            },
-                            {
-                                label: 'Error',
-                                icon: 'pi pi-fw pi-times-circle',
-                                routerLink: ['/auth/error'],
-                            },
-                            {
-                                label: 'Access Denied',
-                                icon: 'pi pi-fw pi-lock',
-                                routerLink: ['/auth/access'],
-                            },
-                        ],
-                    },
-                    {
-                        label: 'Crud',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud'],
-                    },
-                    {
-                        label: 'Timeline',
-                        icon: 'pi pi-fw pi-calendar',
-                        routerLink: ['/pages/timeline'],
-                    },
-                    {
-                        label: 'Invoice',
-                        icon: 'pi pi-fw pi-dollar',
-                        routerLink: ['/pages/invoice'],
-                    },
-                    {
-                        label: 'Help',
-                        icon: 'pi pi-fw pi-question-circle',
-                        routerLink: ['/pages/help'],
-                    },
-                    {
-                        label: 'Not Found',
-                        icon: 'pi pi-fw pi-exclamation-circle',
-                        routerLink: ['/notfound'],
-                    },
-                    {
-                        label: 'Empty',
-                        icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/pages/empty'],
-                    },
-                    {
-                        label: 'FAQ',
-                        icon: 'pi pi-fw pi-question',
-                        routerLink: ['/pages/faq']
-                    },
-                    {
-                        label: 'Contact Us',
-                        icon: 'pi pi-fw pi-phone',
-                        routerLink: ['/pages/contact']
-                    }
-                ],
-            },
-            {
-                label: 'E-Commerce',
-                icon: 'pi pi-fw pi-wallet',
-                items: [
-                    {
-                        label: 'Product Overview',
-                        icon: 'pi pi-fw pi-image',
-                        routerLink: ['ecommerce/product-overview'],
-                    },
-                    {
-                        label: 'Product List',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['ecommerce/product-list'],
-                    },
-                    {
-                        label: 'New Product',
-                        icon: 'pi pi-fw pi-plus',
-                        routerLink: ['ecommerce/new-product'],
-                    },
-                    {
-                        label: 'Shopping Cart',
-                        icon: 'pi pi-fw pi-shopping-cart',
-                        routerLink: ['ecommerce/shopping-cart'],
-                    },
-                    {
-                        label: 'Checkout Form',
-                        icon: 'pi pi-fw pi-check-square',
-                        routerLink: ['ecommerce/checkout-form'],
-                    },
-                    {
-                        label: 'Order History',
-                        icon: 'pi pi-fw pi-history',
-                        routerLink: ['ecommerce/order-history'],
-                    },
-                    {
-                        label: 'Order Summary',
-                        icon: 'pi pi-fw pi-file',
-                        routerLink: ['ecommerce/order-summary'],
-                    },
-                ],
-            },
-            {
-                label: 'User Management',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'List',
-                        icon: 'pi pi-fw pi-list',
-                        routerLink: ['profile/list'],
-                    },
-                    {
-                        label: 'Create',
-                        icon: 'pi pi-fw pi-plus',
-                        routerLink: ['profile/create'],
-                    },
-                ],
-            },
-            {
-                label: 'Hierarchy',
-                icon: 'pi pi-fw pi-align-left',
-                items: [
-                    {
-                        label: 'Submenu 1',
-                        icon: 'pi pi-fw pi-align-left',
-                        items: [
-                            {
-                                label: 'Submenu 1.1',
-                                icon: 'pi pi-fw pi-align-left',
-                                items: [
-                                    {
-                                        label: 'Submenu 1.1.1',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                    {
-                                        label: 'Submenu 1.1.2',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                    {
-                                        label: 'Submenu 1.1.3',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                ],
-                            },
-                            {
-                                label: 'Submenu 1.2',
-                                icon: 'pi pi-fw pi-align-left',
-                                items: [
-                                    {
-                                        label: 'Submenu 1.2.1',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        label: 'Submenu 2',
-                        icon: 'pi pi-fw pi-align-left',
-                        items: [
-                            {
-                                label: 'Submenu 2.1',
-                                icon: 'pi pi-fw pi-align-left',
-                                items: [
-                                    {
-                                        label: 'Submenu 2.1.1',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                    {
-                                        label: 'Submenu 2.1.2',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                ],
-                            },
-                            {
-                                label: 'Submenu 2.2',
-                                icon: 'pi pi-fw pi-align-left',
-                                items: [
-                                    {
-                                        label: 'Submenu 2.2.1',
-                                        icon: 'pi pi-fw pi-align-left',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                label: 'Start',
-                icon: 'pi pi-fw pi-download',
-                items: [
-                    {
-                        label: 'Buy Now',
-                        icon: 'pi pi-fw pi-shopping-cart',
-                        url: ['https://www.primefaces.org/store'],
-                    },
-                    {
-                        label: 'Documentation',
-                        icon: 'pi pi-fw pi-info-circle',
-                        routerLink: ['/documentation'],
-                    },
-                ],
-            },
+            //     ],
+            // },
+            // {
+            //     label: 'Pages',
+            //     icon: 'pi pi-fw pi-briefcase',
+            //     items: [
+            //         {
+            //             label: 'Landing',
+            //             icon: 'pi pi-fw pi-globe',
+            //             routerLink: ['/landing'],
+            //         },
+            //         {
+            //             label: 'Auth',
+            //             icon: 'pi pi-fw pi-user',
+            //             items: [
+            //                 {
+            //                     label: 'Login',
+            //                     icon: 'pi pi-fw pi-sign-in',
+            //                     routerLink: ['/auth/login'],
+            //                 },
+            //                 {
+            //                     label: 'Error',
+            //                     icon: 'pi pi-fw pi-times-circle',
+            //                     routerLink: ['/auth/error'],
+            //                 },
+            //                 {
+            //                     label: 'Access Denied',
+            //                     icon: 'pi pi-fw pi-lock',
+            //                     routerLink: ['/auth/access'],
+            //                 },
+            //             ],
+            //         },
+            //         {
+            //             label: 'Crud',
+            //             icon: 'pi pi-fw pi-pencil',
+            //             routerLink: ['/pages/crud'],
+            //         },
+            //         {
+            //             label: 'Timeline',
+            //             icon: 'pi pi-fw pi-calendar',
+            //             routerLink: ['/pages/timeline'],
+            //         },
+            //         {
+            //             label: 'Invoice',
+            //             icon: 'pi pi-fw pi-dollar',
+            //             routerLink: ['/pages/invoice'],
+            //         },
+            //         {
+            //             label: 'Help',
+            //             icon: 'pi pi-fw pi-question-circle',
+            //             routerLink: ['/pages/help'],
+            //         },
+            //         {
+            //             label: 'Not Found',
+            //             icon: 'pi pi-fw pi-exclamation-circle',
+            //             routerLink: ['/notfound'],
+            //         },
+            //         {
+            //             label: 'Empty',
+            //             icon: 'pi pi-fw pi-circle-off',
+            //             routerLink: ['/pages/empty'],
+            //         },
+            //         {
+            //             label: 'FAQ',
+            //             icon: 'pi pi-fw pi-question',
+            //             routerLink: ['/pages/faq']
+            //         },
+            //         {
+            //             label: 'Contact Us',
+            //             icon: 'pi pi-fw pi-phone',
+            //             routerLink: ['/pages/contact']
+            //         }
+            //     ],
+            // },
+            // {
+            //     label: 'E-Commerce',
+            //     icon: 'pi pi-fw pi-wallet',
+            //     items: [
+            //         {
+            //             label: 'Product Overview',
+            //             icon: 'pi pi-fw pi-image',
+            //             routerLink: ['ecommerce/product-overview'],
+            //         },
+            //         {
+            //             label: 'Product List',
+            //             icon: 'pi pi-fw pi-list',
+            //             routerLink: ['ecommerce/product-list'],
+            //         },
+            //         {
+            //             label: 'New Product',
+            //             icon: 'pi pi-fw pi-plus',
+            //             routerLink: ['ecommerce/new-product'],
+            //         },
+            //         {
+            //             label: 'Shopping Cart',
+            //             icon: 'pi pi-fw pi-shopping-cart',
+            //             routerLink: ['ecommerce/shopping-cart'],
+            //         },
+            //         {
+            //             label: 'Checkout Form',
+            //             icon: 'pi pi-fw pi-check-square',
+            //             routerLink: ['ecommerce/checkout-form'],
+            //         },
+            //         {
+            //             label: 'Order History',
+            //             icon: 'pi pi-fw pi-history',
+            //             routerLink: ['ecommerce/order-history'],
+            //         },
+            //         {
+            //             label: 'Order Summary',
+            //             icon: 'pi pi-fw pi-file',
+            //             routerLink: ['ecommerce/order-summary'],
+            //         },
+            //     ],
+            // },
+            // {
+            //     label: 'User Management',
+            //     icon: 'pi pi-fw pi-user',
+            //     items: [
+            //         {
+            //             label: 'List',
+            //             icon: 'pi pi-fw pi-list',
+            //             routerLink: ['profile/list'],
+            //         },
+            //         {
+            //             label: 'Create',
+            //             icon: 'pi pi-fw pi-plus',
+            //             routerLink: ['profile/create'],
+            //         },
+            //     ],
+            // },
+            // {
+            //     label: 'Hierarchy',
+            //     icon: 'pi pi-fw pi-align-left',
+            //     items: [
+            //         {
+            //             label: 'Submenu 1',
+            //             icon: 'pi pi-fw pi-align-left',
+            //             items: [
+            //                 {
+            //                     label: 'Submenu 1.1',
+            //                     icon: 'pi pi-fw pi-align-left',
+            //                     items: [
+            //                         {
+            //                             label: 'Submenu 1.1.1',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                         {
+            //                             label: 'Submenu 1.1.2',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                         {
+            //                             label: 'Submenu 1.1.3',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                     ],
+            //                 },
+            //                 {
+            //                     label: 'Submenu 1.2',
+            //                     icon: 'pi pi-fw pi-align-left',
+            //                     items: [
+            //                         {
+            //                             label: 'Submenu 1.2.1',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                     ],
+            //                 },
+            //             ],
+            //         },
+            //         {
+            //             label: 'Submenu 2',
+            //             icon: 'pi pi-fw pi-align-left',
+            //             items: [
+            //                 {
+            //                     label: 'Submenu 2.1',
+            //                     icon: 'pi pi-fw pi-align-left',
+            //                     items: [
+            //                         {
+            //                             label: 'Submenu 2.1.1',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                         {
+            //                             label: 'Submenu 2.1.2',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                     ],
+            //                 },
+            //                 {
+            //                     label: 'Submenu 2.2',
+            //                     icon: 'pi pi-fw pi-align-left',
+            //                     items: [
+            //                         {
+            //                             label: 'Submenu 2.2.1',
+            //                             icon: 'pi pi-fw pi-align-left',
+            //                         },
+            //                     ],
+            //                 },
+            //             ],
+            //         },
+            //     ],
+            // },
+            // {
+            //     label: 'Start',
+            //     icon: 'pi pi-fw pi-download',
+            //     items: [
+            //         {
+            //             label: 'Buy Now',
+            //             icon: 'pi pi-fw pi-shopping-cart',
+            //             url: ['https://www.primefaces.org/store'],
+            //         },
+            //         {
+            //             label: 'Documentation',
+            //             icon: 'pi pi-fw pi-info-circle',
+            //             routerLink: ['/documentation'],
+            //         },
+            //     ],
+            // },
         ];
     }
 }

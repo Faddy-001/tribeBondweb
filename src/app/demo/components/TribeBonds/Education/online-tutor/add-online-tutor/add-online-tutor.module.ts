@@ -14,6 +14,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 		MultiSelectModule,
 		InputTextareaModule,
 		InputTextModule,
-		FileUploadModule
+		FileUploadModule,
+		FormsModule,
+		ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 
   

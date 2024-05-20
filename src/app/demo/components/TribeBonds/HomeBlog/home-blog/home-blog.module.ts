@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeBlogRoutingModule } from './home-blog-routing.module';
@@ -10,20 +10,26 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
-  declarations: [HomeBlogComponent],
+  declarations: [HomeBlogComponent,],
   imports: [
     CommonModule,
     HomeBlogRoutingModule,
     AutoCompleteModule,
 		InputMaskModule,
-		CascadeSelectModule,
-		InputTextareaModule,
+		// InputTextModule,
+		FileUploadModule,
+    BadgeModule,
+    InputTextareaModule,
 		InputTextModule,
 		FileUploadModule,
-    BadgeModule
-  ]
+		// FormsModule,
+    ReactiveFormsModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeBlogModule { }

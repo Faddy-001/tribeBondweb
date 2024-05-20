@@ -61,7 +61,10 @@ export class LoginComponent {
                     }
                     this.auth.setToken(res.data.token);
                 }
+                
             )
         }
     }
+
+   
 }

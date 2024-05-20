@@ -9,3 +9,34 @@
   border-width: 1px 0 1px 0;
   padding: 1rem 1rem;
   font-weight: 600;}
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 5px; /* Adjust this margin as per your preference */
+  }
+  .file-upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .file-upload-button input[type="file"] {
+    display: none;
+  }
+  
+  /* Style button when hovering over */
+  .file-upload-button:hover {
+    background-color: #0056b3;
+  }

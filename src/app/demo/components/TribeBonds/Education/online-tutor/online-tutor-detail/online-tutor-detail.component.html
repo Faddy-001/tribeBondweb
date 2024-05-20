@@ -9,29 +9,32 @@
             </div>
         </div>
         <!-- corousel image -->
-        <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions" id="pgall"
-            [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="6" [circular]="true">
-            <ng-template pTemplate="item" let-item>
-                <img [src]="item.itemImageSrc" style="width: 100%; max-height: 300px; display: flex;" />
-            </ng-template>
-            <ng-template pTemplate="thumbnail" let-item>
-                <div class="grid nogutter justify-center">
-                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
-                </div>
-            </ng-template>
-        </p-galleria>
+
+        <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions"
+        [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="6" [circular]="true">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item" style="width: 100%; max-height: 300px; display: flex;" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+            <div class="grid nogutter justify-center">
+                <img [src]="item" style="display: block;" [style.width.px]="desiredWidth"
+                [style.height.px]="desiredHeight"/>
+            </div>
+        </ng-template>
+        
+    </p-galleria>
         <!-- corousel image -->
         <!-- content -->
         <div class="p-3">
             <div class=" font-semibold  mb-3"
                 style="font-size: 40px;display: flex;align-items: center;justify-content: center;">
-                Darul Al Aqram
+                {{name}}
             </div>
             <div class="text-container">
                 <p style="font-size: 20px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                    Address: 3300 S Federal St</p>
+                    Address:  {{address}}</p>
                 <p style="font-size: 20px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                    Phone: 9165155554</p>
+                    Phone:  {{phone}}</p>
             </div>
         </div>
         <!-- content -->
@@ -56,16 +59,15 @@
         <div class="flex align-items-center mb-4 font-bold">
             <span class="text-xl text-900 mr-4">Comments</span>
             <span
-                class="inline-flex align-items-center justify-content-center w-2rem h-2rem border-1 surface-border border-round">{{
-                comments.length }}</span>
+                class="inline-flex align-items-center justify-content-center w-2rem h-2rem border-1 surface-border border-round">{{reviewRespShow.length}}</span>
         </div>
         <ul class="list-none p-0 m-0">
-            <li *ngFor="let comment of comments" class="flex p-3 mb-3 border-1 surface-border border-round">
-                <img [src]="comment.image" class="w-3rem h-3rem flex-shrink-0 mr-3" />
+            <li *ngFor="let comment of reviewRespShow" class="flex p-3 mb-3 border-1 surface-border border-round">
+                <img [src]="comment.image" class="w-3rem h-3rem flex-shrink-0 mr-3 circular-image" />
                 <div>
-                    <span class="font-semibold text-900">{{ comment.name }}</span>
-                    <p class="font-semibold text-600 m-0 text-sm">{{ comment.date }}</p>
-                    <p class="line-height-3 mb-0 my-3">{{ comment.description }}</p>
+                    <span class="font-semibold text-900">{{ comment.firstname }} {{ comment.lastname }}</span>
+                    <p class="font-semibold  m-0 text-sm" style="color: transparent;" >09/May/2024</p>
+                    <p class="line-height-3 mb-0 my-3">{{comment.reviewText }}</p>
                 </div>
             </li>
         </ul>
@@ -74,10 +76,10 @@
 
         <!-- type review -->
         <div class="mb-3 p-fluid">
-            <textarea rows="6" pInputTextarea placeholder="Type your review"></textarea>
+            <textarea rows="6" pInputTextarea placeholder="Type your review" [(ngModel)]="reviewText" ></textarea>
         </div>
         <div class="flex justify-content-end">
-            <button pButton pRipple label="Review"></button>
+            <button pButton pRipple label="Review" (click)="AddReview()"></button>
         </div>
         <div>
 
