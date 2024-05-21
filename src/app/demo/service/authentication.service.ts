@@ -236,4 +236,18 @@ getAllBlog() {
   return this.http.get(this.getall_blog, httpOptions).pipe(map((res) => res));
 
 }
+fetch_allcomment = this.url + 'blogs/comments/display';
+fetchAllComment(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.fetch_allcomment, value,httpOptions).pipe(map((res) => res));
+
+}
 }

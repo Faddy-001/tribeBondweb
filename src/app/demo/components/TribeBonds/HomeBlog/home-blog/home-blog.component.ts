@@ -12,28 +12,10 @@ import { AuthenticationService } from 'src/app/demo/service/authentication.servi
 export class HomeBlogComponent {
   reviewForm!: FormGroup;
   CommentForm!: FormGroup;
+  replyCommentForm!: FormGroup;
   isUploadButtonDisabled: boolean = false;
   areImagesDisabled: boolean = false;
   constructor(private auth: AuthenticationService, private fb: FormBuilder) {
-
-    // this.addBlog = this.fb.group({
-    //   statusText:[],
-    //   // backgroundImage:[],
-    //   // blogImages:[]
-    // });
-    // this.addBlog = this.fb.group({
-    //   name: [],
-    //   date: [],
-    //   time: [,],
-    //   address: [],
-    //   city: [],
-    //   gender: [],
-    //   phone: [],
-    //   website: [],
-    //   thumbnail: [],
-    //   description: []
-
-    // });
   }
   ngOnInit() {
     this.reviewForm = this.fb.group({
@@ -46,43 +28,190 @@ export class HomeBlogComponent {
       blogId: [],
       text: []
     });
+    this.replyCommentForm = this.fb.group({
+      commentId: [],
+      text: []
+    });
+
     this.getAllBlog();
   }
   getAllBlogData: any;
   blogdata: any = [];
+  commentData: any[] = [];
+  replyData: any[] = [];
+
+  commentLength: any = []
   getAllBlog() {
     this.auth.getAllBlog().subscribe(
       (res: any) => {
         console.log(res);
         this.getAllBlogData = res
-        this.blogdata= []
+        this.blogdata = []
+        console.log(this.getAllBlogData.len);
+        
         this.getAllBlogData.data.forEach((data: any) => {
+          console.log(data.comments.length);
+          console.log(data.comments.length);
+          this.commentLength = data.comments.length
+
+          // this.blogdata = []
+         this.commentData = []
+         this.replyData = []
+          // this.commentData = data;
           this.blogdata.push({
             id: data._id,
             blogImage: data.blogImage,
             statusText: data.statusText,
             backgroundImage: data.backgroundImage,
-            firstname:data.createdBy.firstName,
-            lastname:data.createdBy.lastName,
-            profilePic:data.createdBy.profilePicture
+            firstname: data.createdBy.firstName,
+            lastname: data.createdBy.lastName,
+            profilePic: data.createdBy.profilePicture,
+            commentArray: data.comments
 
           })
+
+          data.comments.forEach((dataComment: any) => {
+            console.log(dataComment.replyIds);
+            this.commentData.push({
+              commentText: dataComment.text,
+              createdAt: dataComment.createdAt,
+              isReply: dataComment.isReply,
+              replyIds: dataComment.replyIds,
+              status: dataComment.status,
+              updatedAt: dataComment.updatedAt,
+              userId: dataComment.userId,
+              commentId: dataComment._id,
+              commentFirst: dataComment.userId.firstName,
+              commentLast: dataComment.userId.lastName,
+              commentProfile: dataComment.userId.profilePicture,
+
+
+            });
+            dataComment.replyIds.forEach((datareply: any) => {
+              console.log(dataComment.replyIds);
+              this.replyData.push({
+                replytText: datareply.text,
+                // createdAt: datareply.createdAt,
+                isReply: datareply.isReply,
+                replyIds: datareply._id,
+                status: datareply.status,
+                updatedAt: datareply.updatedAt,
+                userId: datareply.userId,
+              
+                replyFirst: datareply.userId.firstName,
+                replyLast: datareply.userId.lastName,
+                replyProfile: datareply.userId.profilePicture,
+  
+  
+              });
+  
+            })
+          })
+
         })
 
       })
   }
-  onSubmitComment(value: any,id:number) {
-console.log(value,id);
- 
-const dataValue = {
-  "blogId": id,
-  "text": value.text
-}
-  this.auth.addBlogComment(dataValue).subscribe(
-    (result) => {
-      this.ngOnInit()
-    })
-  const formData = new FormData();
+  getRepliesForComment(commentId: string): any[] {
+    // this.reply.commentId
+    return this.replyData.filter(reply => '664ca44f1ca2d1bda9d6074d' === commentId);
+  }
+  commentsVisible: boolean = false; //
+  allcommentFetch:any
+  clickCommentIcon(id:number) {
+    this.commentsVisible = !this.commentsVisible; // Toggle the visibility
+    const dataValue = {
+      "blogId": id,
+    
+    }
+    this.auth.fetchAllComment(dataValue).subscribe(
+      (result) => {
+        this.allcommentFetch = result
+        this.commentData = []
+        this.commentLength = this.allcommentFetch.data.length
+        console.log(this.allcommentFetch.data.length);
+        this.allcommentFetch.data.forEach((dataComment: any) => {
+          console.log(dataComment);
+          
+          this.commentData.push({
+            commentText: dataComment.text,
+            createdAt: dataComment.createdAt,
+            isReply: dataComment.isReply,
+            replyIds: dataComment.replyIds,
+            status: dataComment.status,
+            updatedAt: dataComment.updatedAt,
+            userId: dataComment.userId,
+            commentId: dataComment._id,
+            commentFirst: dataComment.userId.firstName,
+            commentLast: dataComment.userId.lastName,
+            commentProfile: dataComment.userId.profilePicture,
+
+
+          });
+          dataComment.replyIds.forEach((datareply: any) => {
+            console.log(dataComment.replyIds);
+            this.replyData.push({
+              replytText: datareply.text,
+              // createdAt: datareply.createdAt,
+              isReply: datareply.isReply,
+              replyIds: datareply._id,
+              status: datareply.status,
+              updatedAt: datareply.updatedAt,
+              userId: datareply.userId,
+            
+              replyFirst: datareply.userId.firstName,
+              replyLast: datareply.userId.lastName,
+              replyProfile: datareply.userId.profilePicture,
+
+
+            });
+
+          })
+
+
+        })
+      })
+  }
+  replycomment: boolean = false
+  viewReplay: boolean = false
+  currentCommentId: string | null = null;
+  viewReplyCommentId: string | null = null;
+  viewReply(commentId: string) {
+    // this.viewReplyCommentId = this.viewReplyCommentId === commentId ? null : commentId; // Toggle the visibility of replies
+    if (this.viewReplyCommentId === commentId) {
+      this.viewReplyCommentId = null;
+    } else {
+      this.viewReplyCommentId = commentId;
+    }
+  }
+  reply(commentId: string) {
+    this.replycomment = !this.replycomment
+    // this.replycomment = true;
+    this.currentCommentId = commentId;
+  }
+  onSubmitReply(value: any, id: number) {
+    console.log('Comment ID:', this.currentCommentId);
+    const dataValue = {
+      "commentId": this.currentCommentId,
+      "text": value.text
+    }
+    this.auth.replyBlogComment(dataValue).subscribe(
+      (result) => {
+        this.ngOnInit()
+      })
+  }
+  onSubmitComment(value: any, id: number) {
+    console.log(value, id);
+
+    const dataValue = {
+      "blogId": id,
+      "text": value.text
+    }
+    this.auth.addBlogComment(dataValue).subscribe(
+      (result) => {
+        this.ngOnInit()
+      })
+    const formData = new FormData();
   }
 
   imagestheme = [
@@ -170,5 +299,8 @@ const dataValue = {
       })
     const formData = new FormData();
 
+  }
+  fetchAllComment(){
+    
   }
 }

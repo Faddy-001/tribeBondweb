@@ -36,137 +36,111 @@
     </form>
 
 
-<!-- theme container -->
-    <div class="row" >
+    <!-- theme container -->
+    <div class="row">
         <!-- theme container card -->
-        <div class="col-12 alignments"  *ngFor="let blog of blogdata;let i= index">
-            <div class="card " *ngIf="blog.backgroundImage">
-                <div class="bottom-border" >
-                    <img [src]="blog.profilePic" width="32" class="avatar-circle mb-2"
-                        style="vertical-align: middle" />
-                    <span class="ml-2 font-semibold text-blue-500" style="font-size: 18px; color:#1769aa;">{{blog.firstname}} {{blog.lastname}}</span>
+        <div class="col-12 alignments" *ngFor="let blog of blogdata;let i= index">
+            <div class="card ">
+                <div class="bottom-border">
+                    <img [src]="blog.profilePic" width="32" class="avatar-circle mb-2" style="vertical-align: middle" />
+                    <span class="ml-2 font-semibold text-blue-500"
+                        style="font-size: 18px; color:#1769aa;">{{blog.firstname}} {{blog.lastname}}</span>
                 </div>
 
+                <div *ngIf="blog.backgroundImage">
 
-                <div class="image-container">
-                    <img [src]="blog.backgroundImage"   class="imageswithtext mb-2" />
-                    <div class="overlay-text">{{blog.statusText}}</div>
+                    <div class="image-container">
+                        <img [src]="blog.backgroundImage" class="imageswithtext mb-2" />
+                        <div class="overlay-text">{{blog.statusText}}</div>
+                    </div>
+                </div>
+                
+                <div *ngIf="blog.blogImage.length">
+                    <div style="font-weight: 600;font-size: 20px;">{{blog.statusText}}</div>
+                    <div class="image-container">
+                        <img [src]="blog.blogImage" class="imageswithouttext mb-2" />
+                        <!-- <div class="overlay-text">For Demo Text</div> -->
+                    </div>
                 </div>
                 <div class="icon-container mt-2">
                     <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
-                    <i class="pi pi-comments" pBadge value="6" style="font-size: 18px; color: #1769aa;"></i>
+                    <i class="pi pi-comments" pBadge [value]="commentLength" style="font-size: 18px; color: #1769aa;"
+                        (click)="clickCommentIcon(blog.id)"></i>
                 </div>
-                <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                    <img  [src]="blog.backgroundImage"  class="w-2rem h-2rem" />
-                    <div>
-                        <span class="font-semibold text-blue-500">Dusana Semenov</span>
-                        <h6 class="m-0 text-sm ">
-                            Hey! This is for demo
-                        </h6>
-                    </div>
-                </a>
-                <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                    <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
-                    <div>
-                        <span class="font-semibold text-blue-500">Dusana Semenov</span>
-                        <h6 class="m-0 text-sm ">
-                            Hey! This is for demo
-                        </h6>
-                    </div>
-                </a>
-                <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                    <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
-                    <div>
-                        <span class="font-semibold text-blue-500">Dusana Semenov</span>
-                        <h6 class="m-0 text-sm ">
-                            Hey! This is for demo
-                        </h6>
-                    </div>
-                </a>
-                <form [formGroup]="CommentForm" (ngSubmit)="onSubmitComment(CommentForm.value,blog.id)">
+                <!-- <div *ngIf="commentsVisible"> -->
+                <div *ngFor="let comment of commentData; let i = index">
                     <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                        <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
-                            style="border-radius: 10px;" formControlName="text"></textarea>
+                        <img [src]="comment.commentProfile" class="w-2rem h-2rem  circular-image" />
                         <div>
-                            <button pButton pRipple type="button" label="Comment" class="p-button-rounded"></button>
+                            <span class="font-semibold text-blue-500">{{comment.commentFirst}}
+                                {{comment.commentlast}}</span>
+                            <h6 class="m-0 text-sm ">
+                                {{comment.commentText}}
+                            </h6>
+                            <span style="font-size: 10px;" (click)="reply(comment.commentId)">Reply</span>
+                            <div style="font-size: 10px;" (click)="viewReply(comment.commentId)"
+                                *ngIf="comment.replyIds && comment.replyIds.length > 0 ">View reply</div>
                         </div>
                     </a>
-                </form>
+                    <!-- <div *ngIf="comment.replyIds && comment.replyIds.length > 0">
+                        <div *ngIf="viewReplyCommentId === comment.commentId"> -->
+                    <!-- <div *ngIf="comment.replyIds && comment.replyIds.length > 0 && viewReplyCommentId === comment.commentId">
+                            <div *ngFor="let reply of replyData; let j = index"> -->
+                    <div *ngIf=" viewReplyCommentId === comment.commentId">
+                        <div *ngFor="let reply of comment.replyIds">
 
-                <div>
+                            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2"
+                                style="padding-left: 30px;">
+                                <img [src]="reply.userId.profilePicture" class="w-2rem h-2rem  circular-image" />
+                                <div>
+                                    <span
+                                        class="font-semibold text-blue-500">{{reply.userId.firstName}}{{reply.userId.lastName}}
+                                    </span>
+                                    <h6 class="m-0 text-sm ">
+                                        {{reply.text}}
+                                    </h6>
 
-                </div>
-
-            </div>
-        </div>
-      
-
-
-    </div>
-
-    
-    <!-- image container card -->
-    
-    <div class="col-12 alignments" *ngFor="let blog of blogdata;let i= index">
-        <div class="card " *ngIf="blog.blogImage">
-            <div class="bottom-border">
-                <img [src]="blog.profilePic" width="32" class="avatar-circle mb-2"
-                    style="vertical-align: middle" />
-                <span class="ml-2 font-semibold text-blue-500" style="font-size: 18px; color:#1769aa;">{{blog.firstname}} {{blog.lastname}}
-                    </span>
-            </div>
-
-            <div style="font-weight: 600;font-size: 20px;">{{blog.statusText}}</div>
-            <div class="image-container">
-                <img [src]="blog.blogImage" class="imageswithouttext mb-2" />
-                <!-- <div class="overlay-text">For Demo Text</div> -->
-            </div>
-            <div class="icon-container mt-2">
-                <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
-                <i class="pi pi-comments" pBadge value="6" style="font-size: 18px; color: #1769aa;"></i>
-            </div>
-            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
-                <div>
-                    <span class="font-semibold text-blue-500">Fardeen Khan</span>
-                    <h6 class="m-0 text-sm ">
-                        Hey! This is for demo
-                    </h6>
-                </div>
-            </a>
-            <!-- <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-            <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
-            <div>
-                <span class="font-semibold text-blue-500">Dusana Semenov</span>
-                <h6 class="m-0 text-sm ">
-                    Hey! This is for demo
-                </h6>
-            </div>
-        </a>
-        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-            <img src="assets/layout/images/dashboard/leader-1.png" class="w-2rem h-2rem" />
-            <div>
-                <span class="font-semibold text-blue-500">Dusana Semenov</span>
-                <h6 class="m-0 text-sm ">
-                    Hey! This is for demo
-                </h6>
-            </div> -->
-            <!-- </a> -->
-            <form [formGroup]="CommentForm" (ngSubmit)="onSubmitComment(CommentForm.value,blog.id)">
-                <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                    <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
-                        style="border-radius: 10px;" formControlName="text"></textarea>
-                    <div>
-                        <button pButton pRipple type="button" label="Comment" type="submit" class="p-button-rounded"></button>
+                                </div>
+                            </a>
+                            <!-- </div> -->
+                            <!-- </div> -->
+                        </div>
                     </div>
-                </a>
-            </form>
-
-            <div>
+                </div>
+                <!-- </div> -->
+                <div *ngIf="replycomment">
+                    <form [formGroup]="replyCommentForm" (ngSubmit)="onSubmitReply(replyCommentForm.value,blog.id)">
+                        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                            <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a reply"
+                                style="border-radius: 10px;" formControlName="text"></textarea>
+                            <div>
+                                <button pButton pRipple type="button" label="Reply" type="submit"
+                                    class="p-button-rounded"></button>
+                            </div>
+                        </a>
+                    </form>
+                </div>
+                <div *ngIf="!replycomment">
+                    <form [formGroup]="CommentForm" (ngSubmit)="onSubmitComment(CommentForm.value,blog.id)">
+                        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+                            <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
+                                style="border-radius: 10px;" formControlName="text"></textarea>
+                            <div>
+                                <button pButton pRipple type="button" label="Comment" type="submit"
+                                    class="p-button-rounded"></button>
+                            </div>
+                        </a>
+                    </form>
+                </div>
 
             </div>
 
+
+
         </div>
+
+
+        <!-- image container card -->
+
+
     </div>
-</div>
-<!-- </div> -->
