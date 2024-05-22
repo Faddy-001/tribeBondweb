@@ -14,7 +14,8 @@ import { ProductService } from 'src/app/demo/service/product.service';
 export class EventDetailComponent {
     images!: any[];
     products!: Product[];
-    id = this.activatedRoute.snapshot.params['id'];
+    idParam = this.activatedRoute.snapshot.params['id'];
+    
     eventDate:any;
     desiredWidth = 150; // Example width in pixels
     desiredHeight = 70;
@@ -22,6 +23,9 @@ export class EventDetailComponent {
     address:any;
     phone:any;
     description:any
+    newPPT: any = [];
+    allData: any;
+    reviewRespShow: any = [];
     comments = [
         {
             image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
@@ -70,7 +74,7 @@ export class EventDetailComponent {
     ];
     constructor(private activatedRoute: ActivatedRoute, private router:Router, private productService: ProductService, private photoService: PhotoService, private auth: AuthenticationService) { }
     ngOnInit() {
-        console.log(this.id);
+        console.log(this.idParam);
         
         this.productService.getProductsSmall().then(products => {
             this.products = products;
@@ -81,7 +85,7 @@ export class EventDetailComponent {
         // });
         console.log("Sdsdsd");
         
-        this.auth.getEventById(this.id).subscribe(
+        this.auth.getEventById(this.idParam).subscribe(
             (res: any) => {
                 this.eventDate = res;
                 this.name =   this.eventDate.data.name ;
@@ -90,13 +94,29 @@ export class EventDetailComponent {
                 this.description = this.eventDate.data.description;
                 console.log(this.eventDate.data.thumbnail);
                 this.images = this.eventDate.data.images
-                
+                this.reviewRespShow = []
+                this.eventDate.data.reviews.forEach((reviewResp: any) => {
+                    console.log(reviewResp);
+                    
+                    this.reviewRespShow.push({
+                        id: reviewResp._id,
+                        reviewText: reviewResp.reviewText                        ,
+                        firstname: reviewResp.user.firstName,
+                       
+                        lastname: reviewResp.user.lastName,
+                        
+                        image: reviewResp.user.profilePicture,
+                        
+                        
+                    })
+                    console.log(reviewResp);
+    
+                })
             })
 
     }
 
-    newPPT: any = [];
-    allData: any;
+  
     getAllEventsDisplay() {
         this.auth.getAllEvent().subscribe(
             (res: any) => {
@@ -126,14 +146,20 @@ export class EventDetailComponent {
     reviewText: string = ''; // Variable to hold the value of the textarea
     reviewResult:any;
     AddReview() {
+        
+        const dataValue = {
+            "eventId": this.idParam,
+            "review": this.reviewText
+        }
         // Access the value of the textarea using this.reviewText
         console.log('Review Text:', this.reviewText);
         // You can then perform any logic you need with the review text
-        this.auth.addEventReview(this.reviewText).subscribe(
+        this.auth.addEventReview(dataValue).subscribe(
             (result) => {
               this.reviewResult = result;
               console.log(this.reviewResult.message);
-      
+              this.reviewText = ""
+              this.ngOnInit()
             //   this.toastr.success(this.eventResult.message);
       
             //   this.router.navigate(['/tribe/event']);

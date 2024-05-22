@@ -250,4 +250,18 @@ fetchAllComment(value:any) {
   return this.http.post(this.fetch_allcomment, value,httpOptions).pipe(map((res) => res));
 
 }
+
+event_delete_image = this.url + 'events/delete-images';
+eventRemoveImage(value:any){
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.event_delete_image, value,httpOptions).pipe(map((res) => res));
+}
 }

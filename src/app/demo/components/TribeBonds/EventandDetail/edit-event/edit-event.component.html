@@ -57,7 +57,7 @@
                             <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
                             <span class="p-float-label">
                                 <textarea formControlName="description" inputId="textarea" rows="5" cols="120"
-                                    pInputTextarea [(ngModel)]="description"></textarea>
+                                    pInputTextarea ></textarea>
                                 <!-- <label for="textarea">Deatail</label> -->
                             </span>
                         </div>
@@ -65,7 +65,7 @@
 
 
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="card">
                             <label class="file-upload-button">
                                 Upload an Image
@@ -85,12 +85,33 @@
 
                         </div>
                         <div class="avatar-container" id="imagePreviewContainer">
-                            <!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
                             <img class="avatar" alt="" />
                         </div>
 
-                    </div>
+                    </div> -->
 
+
+                    <div class="col-12">
+                        <div class="card">
+                          <label class="file-upload-button">
+                            Upload an Image
+                            <input type="file" (change)="onFileSelected($event)" multiple>
+                          </label>
+                      
+                          <div class="image-container">
+                            <div *ngFor="let image of images; let i = index" class="image-wrapper">
+                              <img [src]="image" alt="Uploaded Image" class="image">
+                              <!-- <span class="cancel-icon" (click)="removeImage(image,i)">x</span> -->
+                            </div>
+                          </div>
+                      
+                          <div class="col-12 " style="display: flex;justify-content: flex-end;">
+                            <div class="flex flex-wrap gap-2">
+                              <button pButton pRipple label="Submit"></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     <!-- </div> -->
                     <!-- </div> -->
                 </form>
