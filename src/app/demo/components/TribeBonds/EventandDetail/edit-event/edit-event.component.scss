@@ -49,3 +49,14 @@ margin-bottom: 20px;
   .file-upload-button:hover {
     background-color: #0056b3;
   }
+  .cancel-icon {
+    // position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    padding: 2px 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: red;
+  }

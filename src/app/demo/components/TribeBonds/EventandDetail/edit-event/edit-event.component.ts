@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,12 +16,13 @@ export class EditEventComponent {
   EditEventForm!: FormGroup;
   formData = new FormData();
 
-  constructor(private formbuilder: FormBuilder, private activatedRoute: ActivatedRoute, private auth: AuthenticationService, private toastr: ToastrService, public router: Router,) {
+  constructor(private formbuilder: FormBuilder, private activatedRoute: ActivatedRoute, private auth: AuthenticationService, private cdr: ChangeDetectorRef,private toastr: ToastrService, public router: Router,) {
     this.EditEventForm = this.formbuilder.group({
       name: [],
       date: [],
       time: [,],
       address: [],
+      description:[],
       city: [],
       gender: [],
       phone: [],
@@ -36,7 +37,7 @@ export class EditEventComponent {
     this.auth.getEventById(this.id).subscribe(
       (res: any) => {
         this.editEvent = res.data;
-        this.description = this.editEvent.description;
+        // this.description = this.editEvent.description;
         this.images = this.editEvent.images
 
         // const timeParts = this.editEvent.time.split(':');
@@ -45,24 +46,26 @@ export class EditEventComponent {
         // const seconds = parseInt(timeParts[2], 10);
         // const time = new Date();
         // time.setHours(hours, minutes);
-        this.EditEventForm = this.formbuilder.group({
-          name: [this.editEvent.name],
-          date: [new Date(this.editEvent.date)],
-          time: [],
-          address: [this.editEvent.address],
-          city: [this.editEvent.city],
-          // gender: [],
-          description: [this.editEvent.phone],
-          phone: [this.editEvent.phone],
-          website: [this.editEvent.website],
-          thumbnail: [],
-        })
+          this.EditEventForm = this.formbuilder.group({
+            name: [this.editEvent.name],
+            date: [new Date(this.editEvent.date)],
+            time: [],
+            address: [this.editEvent.address],
+            city: [this.editEvent.city],
+            // gender: [],
+            description: [this.editEvent.description],
+            phone: [this.editEvent.phone],
+            website: [this.editEvent.website],
+            thumbnail: [],
+          })
+          console.log('Form controls:', this.EditEventForm.controls);
         const payloadDate = this.editEvent.time
         const dateObject = new Date(payloadDate);
 
         // Set the parsed date object to the time FormControl
         this.EditEventForm.get('time')?.setValue(dateObject);
-
+        this.EditEventForm.get('description')?.setValue(this.editEvent.description);
+        this.cdr.detectChanges();
       })
   }
   images: string[] = [];
@@ -123,5 +126,26 @@ export class EditEventComponent {
         this.toastr.error(this.errorMsg);
       })
   }
-
+  removeImage(imageUrl: string, index: number) {
+    // Prepare the payload with the image URL and event ID
+    const payload = {
+      imageUrl: imageUrl,
+      eventId: this.id,
+    };
+  
+    // Send the payload to the server
+    this.auth.eventRemoveImage(payload).subscribe(
+      (response:any) => {
+        console.log('Image removed successfully:', response);
+        this.toastr.success('Image removed successfully');
+  
+        // Remove the image from the list
+        this.images.splice(index, 1);
+      },
+      (err) => {
+        console.error('Error removing image:', err);
+        this.toastr.error('Error removing image');
+      }
+    );
+  }
 }

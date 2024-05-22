@@ -64,18 +64,18 @@
                 </div>
                 <div class="icon-container mt-2">
                     <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
-                    <i class="pi pi-comments" pBadge [value]="commentLength" style="font-size: 18px; color: #1769aa;"
+                    <i class="pi pi-comments" pBadge [value]="blog.commentLength" style="font-size: 18px; color: #1769aa;"
                         (click)="clickCommentIcon(blog.id)"></i>
                 </div>
                 <!-- <div *ngIf="commentsVisible"> -->
-                <div *ngFor="let comment of commentData; let i = index">
+                <div *ngFor="let comment of blog.comment;let i = index">
                     <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                        <img [src]="comment.commentProfile" class="w-2rem h-2rem  circular-image" />
+                        <img [src]="comment.userId.profilePicture" class="w-2rem h-2rem  circular-image" />
                         <div>
-                            <span class="font-semibold text-blue-500">{{comment.commentFirst}}
-                                {{comment.commentlast}}</span>
+                            <span class="font-semibold text-blue-500">{{comment.userId.firstName}}
+                                {{comment.userId.lastName}}</span>
                             <h6 class="m-0 text-sm ">
-                                {{comment.commentText}}
+                                {{comment.text}}
                             </h6>
                             <span style="font-size: 10px;" (click)="reply(comment.commentId)">Reply</span>
                             <div style="font-size: 10px;" (click)="viewReply(comment.commentId)"
@@ -94,7 +94,7 @@
                                 <img [src]="reply.userId.profilePicture" class="w-2rem h-2rem  circular-image" />
                                 <div>
                                     <span
-                                        class="font-semibold text-blue-500">{{reply.userId.firstName}}{{reply.userId.lastName}}
+                                        class="font-semibold text-blue-500">{{reply.userId.firstName}} {{reply.userId.lastName}}
                                     </span>
                                     <h6 class="m-0 text-sm ">
                                         {{reply.text}}

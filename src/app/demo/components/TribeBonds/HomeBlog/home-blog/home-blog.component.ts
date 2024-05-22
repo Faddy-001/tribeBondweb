@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-home-blog',
   // standalone: true,
@@ -15,7 +15,7 @@ export class HomeBlogComponent {
   replyCommentForm!: FormGroup;
   isUploadButtonDisabled: boolean = false;
   areImagesDisabled: boolean = false;
-  constructor(private auth: AuthenticationService, private fb: FormBuilder) {
+  constructor(private auth: AuthenticationService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
   }
   ngOnInit() {
     this.reviewForm = this.fb.group({
@@ -40,19 +40,18 @@ export class HomeBlogComponent {
   commentData: any[] = [];
   replyData: any[] = [];
 
-  commentLength: any = []
+  // commentLength: any = []
   getAllBlog() {
     this.auth.getAllBlog().subscribe(
       (res: any) => {
         console.log(res);
         this.getAllBlogData = res
         this.blogdata = []
-        console.log(this.getAllBlogData.len);
         
         this.getAllBlogData.data.forEach((data: any) => {
           console.log(data.comments.length);
           console.log(data.comments.length);
-          this.commentLength = data.comments.length
+          // this.commentLength = data.comments.length
 
           // this.blogdata = []
          this.commentData = []
@@ -66,12 +65,14 @@ export class HomeBlogComponent {
             firstname: data.createdBy.firstName,
             lastname: data.createdBy.lastName,
             profilePic: data.createdBy.profilePicture,
-            commentArray: data.comments
-
+            commentLength: data.comments.length,
+            comment:data.comments
+            
           })
-
+          console.log(this.blogdata);
+          console.log(data.comments);
+          
           data.comments.forEach((dataComment: any) => {
-            console.log(dataComment.replyIds);
             this.commentData.push({
               commentText: dataComment.text,
               createdAt: dataComment.createdAt,
@@ -84,7 +85,6 @@ export class HomeBlogComponent {
               commentFirst: dataComment.userId.firstName,
               commentLast: dataComment.userId.lastName,
               commentProfile: dataComment.userId.profilePicture,
-
 
             });
             dataComment.replyIds.forEach((datareply: any) => {
@@ -127,51 +127,99 @@ export class HomeBlogComponent {
     this.auth.fetchAllComment(dataValue).subscribe(
       (result) => {
         this.allcommentFetch = result
-        this.commentData = []
-        this.commentLength = this.allcommentFetch.data.length
-        console.log(this.allcommentFetch.data.length);
-        this.allcommentFetch.data.forEach((dataComment: any) => {
-          console.log(dataComment);
+        // this.commentData = []
+        // // this.commentLength = this.allcommentFetch.data.length
+        // console.log(this.allcommentFetch.data.length);
+        // this.allcommentFetch.data.forEach((dataComment: any) => {
+        //   console.log(dataComment);
           
-          this.commentData.push({
-            commentText: dataComment.text,
-            createdAt: dataComment.createdAt,
-            isReply: dataComment.isReply,
-            replyIds: dataComment.replyIds,
-            status: dataComment.status,
-            updatedAt: dataComment.updatedAt,
-            userId: dataComment.userId,
-            commentId: dataComment._id,
-            commentFirst: dataComment.userId.firstName,
-            commentLast: dataComment.userId.lastName,
-            commentProfile: dataComment.userId.profilePicture,
+        //   this.commentData.push({
+        //     commentText: dataComment.text,
+        //     createdAt: dataComment.createdAt,
+        //     isReply: dataComment.isReply,
+        //     replyIds: dataComment.replyIds,
+        //     status: dataComment.status,
+        //     updatedAt: dataComment.updatedAt,
+        //     userId: dataComment.userId,
+        //     commentId: dataComment._id,
+        //     commentFirst: dataComment.userId.firstName,
+        //     commentLast: dataComment.userId.lastName,
+        //     commentProfile: dataComment.userId.profilePicture,
 
 
-          });
-          dataComment.replyIds.forEach((datareply: any) => {
-            console.log(dataComment.replyIds);
-            this.replyData.push({
-              replytText: datareply.text,
-              // createdAt: datareply.createdAt,
-              isReply: datareply.isReply,
-              replyIds: datareply._id,
-              status: datareply.status,
-              updatedAt: datareply.updatedAt,
-              userId: datareply.userId,
+        //   });
+        //   dataComment.replyIds.forEach((datareply: any) => {
+        //     console.log(dataComment.replyIds);
+        //     this.replyData.push({
+        //       replytText: datareply.text,
+        //       // createdAt: datareply.createdAt,
+        //       isReply: datareply.isReply,
+        //       replyIds: datareply._id,
+        //       status: datareply.status,
+        //       updatedAt: datareply.updatedAt,
+        //       userId: datareply.userId,
             
-              replyFirst: datareply.userId.firstName,
-              replyLast: datareply.userId.lastName,
-              replyProfile: datareply.userId.profilePicture,
+        //       replyFirst: datareply.userId.firstName,
+        //       replyLast: datareply.userId.lastName,
+        //       replyProfile: datareply.userId.profilePicture,
 
 
-            });
+        //     });
 
-          })
+        //   })
 
 
-        })
-      })
-  }
+      //   })
+      //   this.blogdata = this.blogdata.map((blog:any) => {
+      //     if (blog.id === id) {
+      //       return { ...blog, comment: this.commentData };
+      //     }
+      //     return blog;
+      //   });
+      // })
+  // }
+  const updatedComments = this.allcommentFetch.data.map((dataComment: any) => ({
+    text: dataComment.text,
+    createdAt: dataComment.createdAt,
+    isReply: dataComment.isReply,
+    replyIds: dataComment.replyIds,
+    status: dataComment.status,
+    updatedAt: dataComment.updatedAt,
+    userId: dataComment.userId,
+    commentId: dataComment._id,
+    commentFirst: dataComment.userId.firstName,
+    commentLast: dataComment.userId.lastName,
+    commentProfile: dataComment.userId.profilePicture,
+  }));
+
+  this.replyData = [];
+  this.allcommentFetch.data.forEach((dataComment: any) => {
+    dataComment.replyIds.forEach((dataReply: any) => {
+      this.replyData.push({
+        replytText: dataReply.text,
+        isReply: dataReply.isReply,
+        replyIds: dataReply._id,
+        status: dataReply.status,
+        updatedAt: dataReply.updatedAt,
+        userId: dataReply.userId,
+        replyFirst: dataReply.userId.firstName,
+        replyLast: dataReply.userId.lastName,
+        replyProfile: dataReply.userId.profilePicture,
+        commentId: dataComment._id, // Link the reply to its parent comment
+      });
+    });
+  });
+
+  // Update the comments for the specific blog in blogdata
+  this.blogdata = this.blogdata.map((blog:any) => {
+    if (blog.id === id) {
+      return { ...blog, comment: updatedComments, commentLength: updatedComments.length };
+    }
+    return blog;
+  });
+  this.cdr.detectChanges();
+});
+}
   replycomment: boolean = false
   viewReplay: boolean = false
   currentCommentId: string | null = null;
