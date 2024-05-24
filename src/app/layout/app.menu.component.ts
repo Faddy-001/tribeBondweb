@@ -133,29 +133,29 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-comment',
                         items: [
                             {
-                                label: 'Halal Reataurant',
+                                label: 'Halal Restaurant',
                                 icon: 'pi pi-fw pi-image',
-                                routerLink: ['/apps/blog/detail'],
+                                routerLink: ['/tribe/restaurantList'],
                             },
                             {
                                 label: 'Halal Meat',
                                 icon: 'pi pi-fw pi-list',
-                                routerLink: ['/apps/blog/detail'],
+                                routerLink: ['/tribe/halalMList'],
                             },
                             {
                                 label: 'Grocery',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/gList'],
                             },
                             {
                                 label: 'Household',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/houseHoldList'],
                             },
                             {
                                 label: 'Food & Catering',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/foodList'],
                             },
                             {
                                 label: 'Rental Or Room Sharing',
@@ -230,7 +230,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Buy & Sell',
                         icon: 'pi pi-fw pi-home',
-                        routerLink: ['/apps/blog/detail'],
+                        routerLink: ['/tribe/BuyList'],
                     },
                     //   community
                     {
