@@ -125,7 +125,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Mosque Information',
                         icon: 'pi pi-fw pi-image',
-                        routerLink: ['/apps/blog/list'],
+                        routerLink: ['/tribe/mosqueList'],
                     },
                     // localbussiness
                     {
@@ -160,67 +160,67 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Rental Or Room Sharing',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/rentalList'],
                             },
                             {
                                 label: 'Sweets',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/sweetList'],
                             },
                             {
                                 label: 'Wedding & Birthday',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/weddingList'],
                             },
                             {
                                 label: 'Computer & Mobile',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/cList'],
                             },
                             {
                                 label: 'Automobile',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/automobileList'],
                             },
                             {
                                 label: 'Legal & Fianance',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/legalList'],
                             },
                             {
                                 label: 'Doctor',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/doctorList'],
                             },
                             {
                                 label: 'Health & Wellness',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/healthList'],
                             },
                             {
                                 label: 'Qurbani Services ',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/qServiceList'],
                             },
                             {
                                 label: 'Beauty',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/beautyList'],
                             },
                             {
                                 label: 'Real Estate',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/realEstateList'],
                             },
                             {
                                 label: 'Henna Services',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/hennaList'],
                             },
                             {
                                 label: 'Party/Banquet Hall',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps/blog/edit'],
+                                routerLink: ['/tribe/partyList'],
                             },
                         ],
                     },
@@ -240,17 +240,17 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Free Giveaway',
                                 icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/giveawayList'],
                             },
                             {
                                 label: 'Ask For Help',
                                 icon: 'pi pi-fw pi-pencil',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/askhelp'],
                             },
                             {
                                 label: 'Volunteer Needed',
                                 icon: 'pi pi-fw pi-comment',
-                                routerLink: ['/apps//blog/edit'],
+                                routerLink: ['/tribe/volunter'],
                             },
                         ],
                     },
