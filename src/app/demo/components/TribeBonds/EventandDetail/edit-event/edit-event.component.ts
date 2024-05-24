@@ -129,7 +129,7 @@ export class EditEventComponent {
   removeImage(imageUrl: string, index: number) {
     // Prepare the payload with the image URL and event ID
     const payload = {
-      imageUrl: imageUrl,
+      imageUrls: [imageUrl],
       eventId: this.id,
     };
   
