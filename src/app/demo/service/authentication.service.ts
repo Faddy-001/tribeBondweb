@@ -264,4 +264,74 @@ eventRemoveImage(value:any){
   };
   return this.http.post(this.event_delete_image, value,httpOptions).pipe(map((res) => res));
 }
+
+// halal restaurant
+add_restaurant = this.url + 'halal-restaurants/add';
+
+addRestaurant(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_restaurant, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_restaurant = this.url + 'halal-restaurants/edit/';
+  editRestaurant(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_restaurant  + id, data, httpOptions);
+
+}
+getall_restaurant= this.url + 'halal-restaurants/display';
+getAllRestaurant() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_restaurant, httpOptions).pipe(map((res) => res));
+
+}
+getById_restaurant = this.url + 'halal-restaurants/display/';
+  getReataurantById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_restaurant + id,httpOptions);
+}
+add_restaurantReview = this.url + 'halal-restaurants/add-review';
+addRestaurantReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_restaurantReview, value,httpOptions).pipe(map((res) => res));
+
+}
 }

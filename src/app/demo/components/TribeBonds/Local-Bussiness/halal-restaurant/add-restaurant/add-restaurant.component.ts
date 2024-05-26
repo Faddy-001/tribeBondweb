@@ -20,12 +20,13 @@ export class AddRestaurantComponent {
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addRestaurant = this.fb.group({
       name: [],
+      description:[],
       address: [],
-      contactNumber: [],
+      city:[],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-      description:[]
 
 
 
@@ -61,30 +62,28 @@ export class AddRestaurantComponent {
 
   Submit(value: any) {
     
-
+   
 
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
 
-    // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
     
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
+    this.auth.addRestaurant(this.formData).subscribe(
       (result: any) => {
         this.restaurantResult = result;
-        console.log(this.restaurantResult.message);
+        console.log(this.restaurantResult);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate([`/tribe/restaurantList`]);
       },
       (err: any) => {
         console.log(err);

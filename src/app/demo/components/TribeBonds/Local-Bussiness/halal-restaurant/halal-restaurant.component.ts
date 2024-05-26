@@ -29,9 +29,11 @@ navigateToAdd(){
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/restaurantList/detail-restaurant`);
+  this.router.navigateByUrl(`/tribe/restaurantList/detail-restaurant/${id}`);
 }
-
+navigateToWebsite(website:any){
+  window.open(website, '_blank');
+}
 routing(){
     console.log('dfsf');
     
@@ -48,13 +50,13 @@ entities: any;
 desiredWidth = 400; // Example width in pixels
 desiredHeight = 250;
 getAllEductionDisplay() {
-    this.auth.getAllEducation().subscribe(
+    this.auth.getAllRestaurant().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
-            console.log(this.allData.data[1].entities);
+            console.log(this.allData.data);
             
-            this.allData.data[1].entities.forEach((data: any) => {
+            this.allData.data.forEach((data: any) => {
                 console.log(data);
                 this.entities = data;
                     this.entityShow.push({
@@ -62,11 +64,11 @@ getAllEductionDisplay() {
                         name: data.name,
                         date: data.date,
                         address: data.address,
-                        phone: data.contactNumber,
-                        offers:data.offers,
+                        phone: data.phone,
                         image: data.thumbnail,
                         email:data.email,
-                        website:data.website
+                        website:data.website,
+
                     })
                 // })
 

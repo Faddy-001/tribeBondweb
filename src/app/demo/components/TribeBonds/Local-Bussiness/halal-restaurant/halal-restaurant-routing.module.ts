@@ -8,8 +8,8 @@ import { DetailRestaurantComponent } from './detail-restaurant/detail-restaurant
 const routes: Routes = [
   {path:"",component:HalalRestaurantComponent},
   {path:"add-restaurant",component:AddRestaurantComponent},
-  {path:"edit-restaurant",component:EditRestaurantComponent},
-  {path:"detail-restaurant",component:DetailRestaurantComponent},
+  {path:"edit-restaurant/:id",component:EditRestaurantComponent},
+  {path:"detail-restaurant/:id",component:DetailRestaurantComponent},
 
 
 

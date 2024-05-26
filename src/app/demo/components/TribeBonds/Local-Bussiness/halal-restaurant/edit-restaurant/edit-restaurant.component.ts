@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
   selector: 'app-edit-restaurant',
- 
+
   templateUrl: './edit-restaurant.component.html',
   styleUrl: './edit-restaurant.component.scss'
 })
@@ -17,23 +17,52 @@ export class EditRestaurantComponent {
   editRestaurant: FormGroup;
   restaurantResult: any
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editRestaurant = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-       decription:[]
+      city:[],
+      description: []
 
 
     });
   }
+  editResta: any
 
   ngOnInit(): void {
+    this.auth.getReataurantById(this.idParam).subscribe(
+      (res: any) => {
+        this.editResta = res.data;
+        this.images = this.editResta.images
+
+console.log(this.editResta);
+
+        this.editRestaurant = this.fb.group({
+          name: [this.editResta.name],
+          date: [new Date(this.editResta.date)],
+          time: [],
+          address: [this.editResta.address],
+          city: [this.editResta.city],
+          description: [this.editResta.description],
+          phone: [this.editResta.phone],
+          website: [this.editResta.website],
+          thumbnail: [],
+        })
+        console.log('Form controls:', this.editRestaurant.controls);
+        const payloadDate = this.editResta.time
+        const dateObject = new Date(payloadDate);
+
+        // Set the parsed date object to the time FormControl
+        this.editRestaurant.get('time')?.setValue(dateObject);
+        this.editRestaurant.get('description')?.setValue('bdnsbdfmsb');
+        this.cdr.detectChanges();
+      })
   }
- 
+
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
     const files = input.files;
@@ -61,14 +90,10 @@ export class EditRestaurantComponent {
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
-
-    // this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
-
 
     console.log(this.formData.append);
 

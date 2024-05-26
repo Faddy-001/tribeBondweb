@@ -51,7 +51,7 @@ ngOnInit() {
 }
 
 getbyIDEductionDisplay() {
-    this.auth.getEductionEntitiyById(this.idParam).subscribe(
+    this.auth.getReataurantById(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -61,8 +61,9 @@ getbyIDEductionDisplay() {
             this.allData = res;
             this.name = this.allData.data.name;
             this.address = this.allData.data.address;
-            this.phone = this.allData.data.contactNumber;
-            this.images = this.allData.data.images
+            this.phone = this.allData.data.phone;
+            this.images = this.allData.data.images;
+            this.description = this.allData.data.description
             console.log(this.allData.data.reviews);
 
 
@@ -84,21 +85,21 @@ getbyIDEductionDisplay() {
             })
         })
 }
-navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/restaurantList/edit-restaurant`);
+    navigateEdit(id:number): void {
+    this.router.navigateByUrl(`/tribe/restaurantList/edit-restaurant/${id}`);
   }
 
 AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "eduId": this.idParam,
+        "restaurantId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addEducationReview(dataValue).subscribe(
+    this.auth.addRestaurantReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);
