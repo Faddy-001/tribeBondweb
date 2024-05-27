@@ -47,11 +47,11 @@ export class DetailGroceryComponent {
 
   ngOnInit() {
 
-    this.getbyIDEductionDisplay();
+    this.getbyIDGroceryDisplay();
   }
 
-  getbyIDEductionDisplay() {
-    this.auth.getEductionEntitiyById(this.idParam).subscribe(
+  getbyIDGroceryDisplay() {
+    this.auth.getGroceryById(this.idParam).subscribe(
       (res: any) => {
         console.log(res.data);
         this.allData = res.data
@@ -62,7 +62,8 @@ export class DetailGroceryComponent {
         this.name = this.allData.data.name;
         this.address = this.allData.data.address;
         this.phone = this.allData.data.contactNumber;
-        this.images = this.allData.data.images
+        this.images = this.allData.data.images,
+        this.description = this.allData.data.description
         console.log(this.allData.data.reviews);
 
 
@@ -85,20 +86,20 @@ export class DetailGroceryComponent {
       })
   }
   navigateEdit(id: number): void {
-    this.router.navigateByUrl(`/tribe/gList/edit-G`);
+    this.router.navigateByUrl(`/tribe/gList/edit-G/${this.idParam}`);
   }
 
   AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-      "eduId": this.idParam,
+      "groceryId": this.idParam,
       "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addEducationReview(dataValue).subscribe(
+    this.auth.addGroceryReview(dataValue).subscribe(
       (result) => {
         this.reviewResult = result;
         console.log(this.reviewResult.success);

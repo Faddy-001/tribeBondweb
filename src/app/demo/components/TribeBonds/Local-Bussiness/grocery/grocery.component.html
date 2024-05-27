@@ -34,22 +34,26 @@
                                                 class="p-button-rounded p-button-secondary mt-2 mr-2"
                                                 (click)="navigateToDetail(dataShow.id)"></button>
                                             <button pButton pRipple type="button" label="Website"
-                                                class="p-button-rounded p-button-primary mt-2 mr-2"></button>
+                                                class="p-button-rounded p-button-primary mt-2 mr-2" (click)="navigateToWebsite(dataShow.website)"></button>
                                             <button pButton pRipple type="button" label="Direction"
-                                                class="p-button-rounded p-button-primary mt-2"></button>
+                                                class="p-button-rounded p-button-primary mt-2"  ></button>
                                         </div>
                                     </div>
                                     <div class="text-container">
-                                        <!-- <p>Offers: {{dataShow.offers}}</p>
-                                        <p>Address:{{dataShow.address}}</p>
-                                        <p>Phone: {{dataShow.phone}}</p> -->
-                                        <!-- <h2>Dar Ul Arqam Islamic School</h2> -->
-                                        <p>Phone: {{dataShow.phone}}</p>
-                                        <p>Email:{{dataShow.email}}</p>
-                                        <!-- darularqamnorth&#64;hotmail.com -->
-                                        <p>Offers: {{dataShow.offers}}</p>
-                                        <p>Website: <a style="color: blue;" [href]="dataShow.website"
-                                                target="_blank">{{dataShow.website}}</a></p>
+                                       
+                                        <h2>{{dataShow.name}}</h2>
+                                        <div class="google-rating">
+                                            <img src="/assets/layout/images/googleicon.png" alt="Google Icon" height="15px">
+                                            <!-- <span class="star-rating">&#9733;&#9733;&#9733;&#9733;&#9734;</span> Adjust the number of stars and rating as needed -->
+                                            <!-- <div class="star-rating" data-rating="4.5"></div> -->
+                                            <!-- <span class="star-rating" [style.--rating]="'4.5'"></span>  -->
+                                            <span class="star" *ngFor="let filledStar of filledStars" [ngClass]="{'filled': filledStar !== 0, 'half-filled': filledStar === 0.5}">
+                                                &#9733;
+                                              </span>
+                                        </div>
+                                        <p class="mt-4">Phone: {{dataShow.phone}}</p>
+                                        
+                                        <p>address:{{dataShow.address}}</p>
                                         <!-- Additional text or content -->
                                     </div>
                                 </div>

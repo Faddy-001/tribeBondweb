@@ -60,6 +60,8 @@ export class LoginComponent {
                         this.router.navigateByUrl('/dashboard');
                     }
                     this.auth.setToken(res.data.token);
+                    console.log(res.data);
+                    
                 }
                 
             )

@@ -8,8 +8,8 @@ import { DetailGroceryComponent } from './detail-grocery/detail-grocery.componen
 const routes: Routes = [
   {path:"",component:GroceryComponent},
   {path:"add-G",component:AddGroceryComponent},
-  {path:"edit-G",component:EditGroceryComponent},
-  {path:"detail-G",component:DetailGroceryComponent},
+  {path:"edit-G/:id",component:EditGroceryComponent},
+  {path:"detail-G/:id",component:DetailGroceryComponent},
 ];
 
 @NgModule({

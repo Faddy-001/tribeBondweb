@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -16,21 +16,43 @@ export class EditGroceryComponent {
   thumbnailBinary: string[] = [];
   editGrocery: FormGroup;
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private router: Router, private cdr :ChangeDetectorRef,private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editGrocery = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-       decription:[]
+       description:[]
 
 
     });
   }
-
+  editGroceryResult:any
   ngOnInit(): void {
+    this.auth.getGroceryById(this.idParam).subscribe(
+      (res: any) => {
+        this.editGroceryResult = res.data;
+        this.images = this.editGroceryResult.images
+
+console.log(this.editGroceryResult);
+
+        this.editGrocery = this.fb.group({
+          name: [this.editGroceryResult.name],
+          address: [this.editGroceryResult.address],
+          city: [this.editGroceryResult.city],
+          description: [this.editGroceryResult.description],
+          phone: [this.editGroceryResult.phone],
+          website: [this.editGroceryResult.website],
+          thumbnail: [],
+        })
+        console.log('Form controls:', this.editGrocery.controls);
+
+        // Set the parsed date object to the time FormControl
+        // this.editGrocery.get('description')?.setValue(this.editGrocery.description);
+        this.cdr.detectChanges();
+      })
   }
  
   onFileSelected(event: any) {
@@ -61,7 +83,7 @@ export class EditGroceryComponent {
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
     // this.formData.append('typeId', this.idParam);
 
     // this.formData.append('contactNumber', value.contactNumber);
@@ -73,24 +95,26 @@ export class EditGroceryComponent {
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
-      (result: any) => {
+    this.auth.editgrocery(this.idParam, this.formData).subscribe(
+      (result) => {
         this.groceryResult = result;
         console.log(this.groceryResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate(['/tribe/gList']);
       },
-      (err: any) => {
+      (err) => {
         console.log(err);
         // this.errorShow = err;
         // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
-      })
+        // // this.toas
+    
     const formData = new FormData();
 
   }
+  )}
+  
 }
 
 

@@ -8,8 +8,8 @@ import { DetailHalalMeatComponent } from './detail-halal-meat/detail-halal-meat.
 const routes: Routes = [
   {path:"",component:HalalMeatComponent},
   {path:"add-M",component:AddHalalMeatComponent},
-  {path:"edit-M",component:EditHalalMeatComponent},
-  {path:"detail-M",component:DetailHalalMeatComponent},
+  {path:"edit-M/:id",component:EditHalalMeatComponent},
+  {path:"detail-M/:id",component:DetailHalalMeatComponent},
 ];
 
 @NgModule({

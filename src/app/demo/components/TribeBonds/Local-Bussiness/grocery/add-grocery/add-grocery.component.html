@@ -4,7 +4,7 @@
 			<div class="card cardborder">
                 <div class="header">
                     <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add Restaurant</span>
+                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add Grocery</span>
                     </div>
                 </div>
 				<form style="padding-left: 3%;" [formGroup]="addGrocery" (ngSubmit)="Submit(addGrocery.value)">
@@ -25,11 +25,15 @@
 						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
 					</div>
 					<div class="col-12 md:col-6">
-						<label htmlFor="website">Address</label>
-						<input pInputText id="website" type="text" placeholder="Enter Address" formControlName="address" />
+						<label htmlFor="address">Address</label>
+						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="city">City</label>
+						<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" />
 					</div>
 					<div class="field col-12 ">
-						<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
+						<label htmlFor="description" style="color:#1769aa;font-weight: bold;">Description</label>
 						<span class="p-float-label">
 							<textarea formControlName="description" inputId="textarea" rows="5" cols="120"
 								pInputTextarea ></textarea>

@@ -97,25 +97,24 @@ console.log(this.editResta);
 
     console.log(this.formData.append);
 
-
-    this.auth.addEdEntity(this.formData).subscribe(
-      (result: any) => {
+    this.auth.editRestaurant(this.idParam, this.formData).subscribe(
+      (result) => {
         this.restaurantResult = result;
         console.log(this.restaurantResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate(['/tribe/gList']);
       },
-      (err: any) => {
+      (err) => {
         console.log(err);
         // this.errorShow = err;
         // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
-      })
+        // // this.toas
+    
     const formData = new FormData();
 
   }
+  )}
+
 }
-
-

@@ -11,7 +11,7 @@
                         
                     </div>
                 </div>
-				<form style="padding-left: 3%;" [formGroup]="editHalal" (ngSubmit)="Submit(editHalal.value)">
+				<form style="padding-left: 3%;" [formGroup]="editmeatResturant" (ngSubmit)="Submit(editmeatResturant.value)">
 
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
@@ -20,7 +20,7 @@
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="contactNumber"/>
+						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
 					</div>
 					
 
@@ -31,6 +31,10 @@
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Address</label>
 						<input pInputText id="website" type="text" placeholder="Enter Address" formControlName="address" />
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="city">City</label>
+						<input pInputText id="city" type="text" placeholder="Enter city" formControlName="city" />
 					</div>
 					<div class="field col-12 ">
 						<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>

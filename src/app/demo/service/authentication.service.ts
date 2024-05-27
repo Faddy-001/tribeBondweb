@@ -334,4 +334,213 @@ addRestaurantReview(value:any) {
   return this.http.post(this.add_restaurantReview, value,httpOptions).pipe(map((res) => res));
 
 }
+// halal meat
+add_meat = this.url + 'halal-meat/add';
+
+addMeat(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_meat, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_meat = this.url + 'halal-meat/edit/';
+  editMeat(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_meat  + id, data, httpOptions);
+
+}
+getall_meat= this.url + 'halal-meat/display';
+getAllMeat() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_meat, httpOptions).pipe(map((res) => res));
+
+}
+getById_meat = this.url + 'halal-meat/display/';
+  getMeatById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_meat + id,httpOptions);
+}
+add_meatReview = this.url + 'halal-meat/add-review';
+addMeatReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_meatReview, value,httpOptions).pipe(map((res) => res));
+
+}
+
+// grocery 
+add_grocery = this.url + 'groceries/add';
+
+addGrocery(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_grocery, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_grocery = this.url + 'groceries/edit/';
+  editgrocery(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_grocery  + id, data, httpOptions);
+
+}
+getall_grocery  = this.url + 'groceries/display';
+getAllGrocery() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_grocery, httpOptions).pipe(map((res) => res));
+
+}
+getById_grocery = this.url + 'groceries/display/';
+  getGroceryById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_grocery + id,httpOptions);
+}
+add_groceryReview = this.url + 'groceries/add-review';
+addGroceryReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_groceryReview, value,httpOptions).pipe(map((res) => res));
+
+}
+
+// household 
+add_hold = this.url + 'household-items/add';
+
+addHold(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_hold, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_hold = this.url + 'household-items/edit/';
+  editHold(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_hold  + id, data, httpOptions);
+
+}
+getall_hold  = this.url + 'household-items/display';
+getAllHold() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_hold, httpOptions).pipe(map((res) => res));
+
+}
+getById_hold = this.url + 'household-items/display/';
+  getHoldById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_hold + id,httpOptions);
+}
+add_holdReview = this.url + 'household-items/add-review';
+addHoldReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_holdReview, value,httpOptions).pipe(map((res) => res));
+
+}
 }

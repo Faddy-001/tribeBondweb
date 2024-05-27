@@ -13,7 +13,11 @@ export class HalalMeatComponent {
   constructor(private router: Router,private activatedRoute:ActivatedRoute,private auth :AuthenticationService){}
   idParam = this.activatedRoute.snapshot.params['id'];
  @Input() starRating: any;
-
+ entityShow: any = [];
+ allData: any;
+ entities: any;
+ desiredWidth = 400; // Example width in pixels
+ desiredHeight = 250;
 
 websiteUrl: string = "http://www.houstonpeace.org/";
 
@@ -89,7 +93,7 @@ sortField: string = '';
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllEductionDisplay();
+    this.getAllhalalMeatDisplay();
 
 }
 navigateToAdd(){
@@ -97,43 +101,30 @@ navigateToAdd(){
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/halalMList/detail-M`);
+  this.router.navigateByUrl(`/tribe/halalMList/detail-M/${id}`);
 }
 
-routing(){
-    console.log('dfsf');
-    
-    this.router.navigateByUrl('add-events')
-}
-get filledStars(): number[] {
-  const roundedRating = Math.round(this.starRating * 2) / 2; // Round rating to nearest half
-  return Array.from({ length: 5 }, (_, index) => index + 0.5 <= roundedRating ? index + 0.5 : 0);
-}
+navigateToWebsite(website:any){
+    window.open(website, '_blank');
+  }
 
-entityShow: any = [];
-allData: any;
-entities: any;
-desiredWidth = 400; // Example width in pixels
-desiredHeight = 250;
-getAllEductionDisplay() {
-    this.auth.getAllEducation().subscribe(
+
+getAllhalalMeatDisplay() {
+    this.auth.getAllMeat().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
-            console.log(this.allData.data[1].entities);
+            console.log(this.allData);
             
-            this.allData.data[1].entities.forEach((data: any) => {
+            this.allData.data.forEach((data: any) => {
                 console.log(data);
                 this.entities = data;
                     this.entityShow.push({
                         id: data._id,
                         name: data.name,
-                        date: data.date,
                         address: data.address,
-                        phone: data.contactNumber,
-                        offers:data.offers,
+                        phone: data.phone,
                         image: data.thumbnail,
-                        email:data.email,
                         website:data.website
                     })
                 // })

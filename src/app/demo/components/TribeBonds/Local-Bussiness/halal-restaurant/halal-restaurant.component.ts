@@ -34,11 +34,7 @@ navigateToDetail(id:number): void {
 navigateToWebsite(website:any){
   window.open(website, '_blank');
 }
-routing(){
-    console.log('dfsf');
-    
-    this.router.navigateByUrl('add-events')
-}
+
 get filledStars(): number[] {
   const roundedRating = Math.round(this.starRating * 2) / 2; // Round rating to nearest half
   return Array.from({ length: 5 }, (_, index) => index + 0.5 <= roundedRating ? index + 0.5 : 0);

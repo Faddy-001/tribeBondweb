@@ -24,8 +24,7 @@ export class GroceryComponent {
   sortField: string = '';
 
   ngOnInit(): void {
-    console.log(this.idParam);
-    this.getAllEductionDisplay();
+    this.getAllGroceryDisplay();
 
   }
   navigateToAdd() {
@@ -33,7 +32,7 @@ export class GroceryComponent {
 
   }
   navigateToDetail(id: number): void {
-    this.router.navigateByUrl(`/tribe/gList/detail-G`);
+    this.router.navigateByUrl(`/tribe/gList/detail-G/${id}`);
   }
 
   routing() {
@@ -45,24 +44,25 @@ export class GroceryComponent {
     const roundedRating = Math.round(this.starRating * 2) / 2; // Round rating to nearest half
     return Array.from({ length: 5 }, (_, index) => index + 0.5 <= roundedRating ? index + 0.5 : 0);
   }
+  navigateToWebsite(website:any){
+    window.open(website, '_blank');
+  }
 
-
-  getAllEductionDisplay() {
-    this.auth.getAllEducation().subscribe(
+  getAllGroceryDisplay() {
+    this.auth.getAllGrocery().subscribe(
       (res: any) => {
         console.log(res.data);
         this.allData = res
-        console.log(this.allData.data[1].entities);
+        console.log(this.allData);
 
-        this.allData.data[1].entities.forEach((data: any) => {
-          console.log(data);
-          this.entities = data;
+        this.allData.data.forEach((data: any) => {
+         
           this.entityShow.push({
             id: data._id,
             name: data.name,
             date: data.date,
             address: data.address,
-            phone: data.contactNumber,
+            phone: data.phone,
             offers: data.offers,
             image: data.thumbnail,
             email: data.email,

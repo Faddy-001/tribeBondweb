@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -14,24 +14,44 @@ export class EditHalalMeatComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editHalal: FormGroup;
+  editmeatResturant: FormGroup;
   halalResult: any
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editHalal = this.fb.group({
+  constructor(private router: Router, private cdr: ChangeDetectorRef,  private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+    this.editmeatResturant = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-       decription:[]
+       description:[],
+       city:[]
 
 
     });
   }
-
+  editmeatResult:any
   ngOnInit(): void {
+    this.auth.getMeatById(this.idParam).subscribe(
+      (res: any) => {
+        this.editmeatResult = res.data;
+        this.images = this.editmeatResult.images
+        this.editmeatResturant = this.fb.group({
+          name: [this.editmeatResult.name],
+          address: [this.editmeatResult.address],
+          city: [this.editmeatResult.city],
+          description: [this.editmeatResult.description],
+          phone: [this.editmeatResult.phone],
+          website: [this.editmeatResult.website],
+          thumbnail: [],
+        })
+        console.log('Form controls:', this.editmeatResturant.controls);
+
+        // Set the parsed date object to the time FormControl
+        this.editmeatResturant.get('description')?.setValue('bdnsbdfmsb');
+        this.cdr.detectChanges();
+      })
   }
  
   onFileSelected(event: any) {
@@ -57,35 +77,33 @@ export class EditHalalMeatComponent {
       }
     }
   }
-
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
-
-    // this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
 
     console.log(this.formData.append);
 
-
-    this.auth.addEdEntity(this.formData).subscribe(
-      (result: any) => {
+    this.auth.editMeat(this.idParam, this.formData).subscribe(
+      (result) => {
         this.halalResult = result;
         console.log(this.halalResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate(['/tribe/halalMList']);
       },
-      (err: any) => {
+      (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
+        this.errorShow = err;
+        this.errorMsg = this.errorShow;
         // this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();

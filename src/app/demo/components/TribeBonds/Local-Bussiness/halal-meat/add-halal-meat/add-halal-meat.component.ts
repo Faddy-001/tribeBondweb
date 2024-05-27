@@ -21,11 +21,12 @@ export class AddHalalMeatComponent {
     this.addHalal = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-      description: []
+      description: [],
+      city:[]
 
 
 
@@ -65,26 +66,23 @@ export class AddHalalMeatComponent {
 
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
-
-    // this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
 
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
+    this.auth.addMeat(this.formData).subscribe(
       (result: any) => {
         this.halalResult = result;
         console.log(this.halalResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate([`/tribe/halalMList`]);
       },
       (err: any) => {
         console.log(err);
