@@ -14,23 +14,48 @@ export class EditFoodComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editFood: FormGroup;
+  editFoodForm: FormGroup;
 
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editFood = this.fb.group({
+    this.editFoodForm = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-       decription:[]
+       description:[],
+       foodType:[],
+       city:[]
 
 
     });
   }
+  editFood:any
 
   ngOnInit(): void {
+    this.auth.getFoodById(this.idParam).subscribe(
+      (res: any) => {
+        this.editFood = res.data;
+        this.images = this.editFood.images
+
+        console.log(this.editFood);
+
+        this.editFoodForm = this.fb.group({
+          name: [this.editFood.name],
+          address: [this.editFood.address],
+          city: [this.editFood.city],
+          description: [this.editFood.description],
+          phone: [this.editFood.phone],
+          website: [this.editFood.website],
+          foodType:[this.editFood.foodType]
+        })
+        console.log('Form controls:', this.editFoodForm.controls);
+
+        // Set the parsed date object to the time FormControl
+        // this.editHoldForm.get('description')?.setValue();
+        // this.cdr.detectChanges();
+      })
   }
  
   onFileSelected(event: any) {
@@ -61,35 +86,39 @@ export class EditFoodComponent {
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
     // this.formData.append('typeId', this.idParam);
 
     // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
+    this.formData.append('city', value.city);
+    this.formData.append('foodType', value.foodType);
+    this.formData.append('email', value.email);
+
     this.formData.append('description', value.description);
 
 
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
-      (result: any) => {
+    this.auth.editFood(this.idParam, this.formData).subscribe(
+      (result) => {
         this.foodResult = result;
         console.log(this.foodResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate(['/tribe/foodList']);
       },
-      (err: any) => {
+      (err) => {
         console.log(err);
         // this.errorShow = err;
         // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
-      })
+        // // this.toas
+    
     const formData = new FormData();
 
+  })
   }
 }
 

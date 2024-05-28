@@ -8,8 +8,8 @@ import { DetailHouseholdComponent } from './detail-household/detail-household.co
 const routes: Routes = [
   {path:"",component:HouseHoldComponent},
   {path:"add-hold",component:AddHouseholdComponent},
-  {path:"edit-hold",component:EditHouseholdComponent},
-  {path:"detail-hold",component:DetailHouseholdComponent},
+  {path:"edit-hold/:id",component:EditHouseholdComponent},
+  {path:"detail-hold/:id",component:DetailHouseholdComponent},
 ];
 
 @NgModule({

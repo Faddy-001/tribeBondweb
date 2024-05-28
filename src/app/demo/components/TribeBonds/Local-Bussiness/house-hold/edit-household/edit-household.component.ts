@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
   selector: 'app-edit-household',
- 
+
   templateUrl: './edit-household.component.html',
   styleUrl: './edit-household.component.scss'
 })
@@ -14,26 +14,48 @@ export class EditHouseholdComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editRestaurant: FormGroup;
+  editHoldForm!: FormGroup;
   restaurantResult: any
-
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editRestaurant = this.fb.group({
+  editHold: any
+  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+    this.editHoldForm = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
+      city: [],
       website: [],
       thumbnail: [],
       images: [],
-       decription:[]
+      description: []
 
 
     });
   }
 
   ngOnInit(): void {
+    this.auth.getHoldById(this.idParam).subscribe(
+      (res: any) => {
+        this.editHold = res.data;
+        this.images = this.editHold.images
+
+        console.log(this.editHold);
+
+        this.editHoldForm = this.fb.group({
+          name: [this.editHold.name],
+          address: [this.editHold.address],
+          city: [this.editHold.city],
+          description: [this.editHold.description],
+          phone: [this.editHold.phone],
+          website: [this.editHold.website],
+        })
+        console.log('Form controls:', this.editHoldForm.controls);
+
+        // Set the parsed date object to the time FormControl
+        // this.editHoldForm.get('description')?.setValue();
+        this.cdr.detectChanges();
+      })
   }
- 
+
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
     const files = input.files;
@@ -61,36 +83,34 @@ export class EditHouseholdComponent {
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
-
-    // this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
 
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
-      (result: any) => {
+    
+    this.auth.editHold(this.idParam, this.formData).subscribe(
+      (result) => {
         this.restaurantResult = result;
         console.log(this.restaurantResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate(['/tribe/houseHoldList']);
       },
-      (err: any) => {
+      (err) => {
         console.log(err);
         // this.errorShow = err;
         // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
-      })
+        // // this.toas
+    
     const formData = new FormData();
 
-  }
+  })}
 }
 
 

@@ -14,17 +14,20 @@ export class AddHouseholdComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addRestaurant: FormGroup;
-
+  addHold: FormGroup;
+user:any
+cityData:any
+userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addRestaurant = this.fb.group({
+    this.addHold = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
       website: [],
       thumbnail: [],
       images: [],
-      description:[]
+      description:[],
+      city:[]
 
 
 
@@ -32,6 +35,22 @@ export class AddHouseholdComponent {
   }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('user'));
+     this.userDataString = localStorage.getItem('user');
+    this.user = JSON.parse(this.userDataString);
+    this.cityData = this.user.city
+    console.log(this.cityData);
+    this.addHold = this.fb.group({
+      city:[this.cityData],
+      name: [],
+      address: [],
+      phone: [],
+      website: [],
+      thumbnail: [],
+      images: [],
+      description:[],
+
+    })
   }
  
   onFileSelected(event: any) {
@@ -58,15 +77,15 @@ export class AddHouseholdComponent {
     }
   }
 
-  restaurantResult: any
+  holdResult: any
   Submit(value: any) {
     
 
 
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
-    // this.formData.append('typeId', this.idParam);
+    this.formData.append('phone', value.phone);
+    this.formData.append('city', value.city);
 
     // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
@@ -77,14 +96,14 @@ export class AddHouseholdComponent {
     console.log(this.formData.append);
 
 
-    this.auth.addEdEntity(this.formData).subscribe(
+    this.auth.addHold(this.formData).subscribe(
       (result: any) => {
-        this.restaurantResult = result;
-        console.log(this.restaurantResult.message);
+        this.holdResult = result;
+        console.log(this.holdResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate([`/tribe/houseHoldList`]);
       },
       (err: any) => {
         console.log(err);

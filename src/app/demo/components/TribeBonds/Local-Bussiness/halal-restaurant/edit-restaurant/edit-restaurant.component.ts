@@ -43,8 +43,7 @@ console.log(this.editResta);
 
         this.editRestaurant = this.fb.group({
           name: [this.editResta.name],
-          date: [new Date(this.editResta.date)],
-          time: [],
+         
           address: [this.editResta.address],
           city: [this.editResta.city],
           description: [this.editResta.description],
@@ -52,12 +51,10 @@ console.log(this.editResta);
           website: [this.editResta.website],
           thumbnail: [],
         })
-        console.log('Form controls:', this.editRestaurant.controls);
-        const payloadDate = this.editResta.time
-        const dateObject = new Date(payloadDate);
+       
 
         // Set the parsed date object to the time FormControl
-        this.editRestaurant.get('time')?.setValue(dateObject);
+        
         this.editRestaurant.get('description')?.setValue('bdnsbdfmsb');
         this.cdr.detectChanges();
       })

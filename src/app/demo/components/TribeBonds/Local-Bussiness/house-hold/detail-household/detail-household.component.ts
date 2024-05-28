@@ -10,34 +10,7 @@ import { AuthenticationService } from 'src/app/demo/service/authentication.servi
 })
 export class DetailHouseholdComponent {
   images!: any[];
-  // products!: Product[];
-   comments= [
-     {
-      image:'assets/demo/images/avatar/circle/avatar-m-3.png',
-      name:"Ayesha",
-      date:"09/May/2024",
-      description:"fbsdnfsmnbssfbfsfbdfbdfbbff s"
-     },
-     {
-      image:'assets/demo/images/avatar/circle/avatar-m-3.png',
-      name:"Fardeen",
-      date:"09/May/2024",
-      description:"fbsdnfsmnbssfbfsfbdfbdfbbff s"
-     },
-     {
-      image:'assets/demo/images/avatar/circle/avatar-m-3.png',
-      name:"Mahira",
-      date:"09/May/2024",
-      description:"fbsdnfsmnbssfbfsfbdfbdfbbff s"
-     },
-     {
-      image:'assets/demo/images/avatar/circle/avatar-m-3.png',
-      name:"Shifa",
-      date:"09/May/2024",
-      description:"fbsdnfsmnbssfbfsfbdfbdfbbff s"
-     }
-   ];
-
+  
   rowCount = 3;
   galleriaResponsiveOptions: any[] = [
     {
@@ -62,15 +35,8 @@ idParam = this.activatedRoute.snapshot.params['id'];
 constructor( private auth: AuthenticationService, private activatedRoute: ActivatedRoute,private router:Router) { }
 
 ngOnInit() {
-    // this.productService.getProductsSmall().then(products => {
-    //     this.products = products;
-    // });
-    // console.log(this.idParam);
 
-    // this.photoService.getImages().then(images => {
-    //     this.images = images;
-    // });
-    this.getbyIDEductionDisplay();
+    this.getbyIDHoldDisplay();
 }
 allData: any
 reviewRespShow: any = [];
@@ -82,8 +48,8 @@ phone: any;
 description: any
 desiredWidth = 150; // Example width in pixels
 desiredHeight = 70;
-getbyIDEductionDisplay() {
-    this.auth.getEductionEntitiyById(this.idParam).subscribe(
+getbyIDHoldDisplay() {
+    this.auth.getHoldById(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -93,8 +59,9 @@ getbyIDEductionDisplay() {
             this.allData = res;
             this.name = this.allData.data.name;
             this.address = this.allData.data.address;
-            this.phone = this.allData.data.contactNumber;
+            this.phone = this.allData.data.phone;
             this.images = this.allData.data.images
+            this.description = this.allData.data.description
             console.log(this.allData.data.reviews);
 
 
@@ -117,7 +84,7 @@ getbyIDEductionDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/houseHoldList/detail-hold`);
+    this.router.navigateByUrl(`/tribe/houseHoldList/edit-hold/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -125,13 +92,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "eduId": this.idParam,
+        "householdId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addEducationReview(dataValue).subscribe(
+    this.auth.addHoldReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);

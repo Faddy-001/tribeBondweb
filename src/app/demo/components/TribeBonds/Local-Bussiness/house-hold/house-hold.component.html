@@ -42,20 +42,16 @@
                                                 class="p-button-rounded p-button-secondary mt-2 mr-2"
                                                 (click)="navigateToDetail(dataShow.id)"></button>
                                             <button pButton pRipple type="button" label="Website"
-                                                class="p-button-rounded p-button-primary mt-2 mr-2"></button>
+                                                class="p-button-rounded p-button-primary mt-2 mr-2"   (click)="navigateToWebsite(dataShow.website)"></button>
                                         </div>
                                     </div>
                                     <div class="text-container">
                                         <!-- <p>Offers: {{dataShow.offers}}</p>
                                         <p>Address:{{dataShow.address}}</p>
                                         <p>Phone: {{dataShow.phone}}</p> -->
-                                        <!-- <h2>Dar Ul Arqam Islamic School</h2> -->
+                                        <h2>{{dataShow.name}}</h2>
                                         <p>Phone: {{dataShow.phone}}</p>
-                                        <p>Email:{{dataShow.email}}</p>
-                                        <!-- darularqamnorth&#64;hotmail.com -->
-                                        <p>Offers: {{dataShow.offers}}</p>
-                                        <p>Website: <a style="color: blue;" [href]="dataShow.website"
-                                                target="_blank">{{dataShow.website}}</a></p>
+                                        <p>Address: {{dataShow.address}}</p>
                                         <!-- Additional text or content -->
                                     </div>
                                 </div>

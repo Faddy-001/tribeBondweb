@@ -10,7 +10,6 @@ import { AuthenticationService } from 'src/app/demo/service/authentication.servi
   styleUrl: './food-catering.component.scss'
 })
 export class FoodCateringComponent {
-  idParam = this.activatedRoute.snapshot.params['id'];
   websiteUrl: string = "http://www.houstonpeace.org/";
   sortField: string = '';
   entityShow: any = [];
@@ -24,8 +23,7 @@ export class FoodCateringComponent {
 
  
    ngOnInit(): void {
-    console.log(this.idParam);
-    this.getAllEductionDisplay();
+    this.getAllFoodDisplay();
 
   }
   navigateToAdd() {
@@ -33,30 +31,29 @@ export class FoodCateringComponent {
 
   }
   navigateToDetail(id: number): void {
-    this.router.navigateByUrl(`/tribe/foodList/detail-F`);
+    this.router.navigateByUrl(`/tribe/foodList/detail-F/${id}`);
   }
 
   
 
  
-  getAllEductionDisplay() {
-    this.auth.getAllEducation().subscribe(
+  getAllFoodDisplay() {
+    this.auth.getAllFood().subscribe(
       (res: any) => {
         console.log(res.data);
         this.allData = res
-        console.log(this.allData.data[1].entities);
+        console.log(this.allData);
 
-        this.allData.data[1].entities.forEach((data: any) => {
+        this.allData.data.forEach((data: any) => {
           console.log(data);
           this.entities = data;
           this.entityShow.push({
             id: data._id,
             name: data.name,
-            date: data.date,
             address: data.address,
-            phone: data.contactNumber,
-            offers: data.offers,
-            image: data.thumbnail,
+            phone: data.phone,
+            typeFood: data.foodType,
+            image: data.images[0],
             email: data.email,
             website: data.website
           })

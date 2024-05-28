@@ -57,10 +57,16 @@ export class LoginComponent {
             this.auth.LoginUser(userdata).subscribe(
                 (res: any) => {
                     if (res.success == true) {
+                      this.auth.setToken(res.data.token);
+
+                      // Store user data in local storage
+                      localStorage.setItem('user', JSON.stringify(res.data.user));
                         this.router.navigateByUrl('/dashboard');
                     }
-                    this.auth.setToken(res.data.token);
-                    console.log(res.data);
+                    // this.auth.setToken(res.data.token);
+                    // this.auth.setToken(res.data.user);
+
+                    console.log(res.data.user);
                     
                 }
                 

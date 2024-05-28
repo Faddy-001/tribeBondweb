@@ -14,7 +14,11 @@ export class HouseHoldComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
  @Input() starRating: any;
 
-
+ entityShow: any = [];
+ allData: any;
+ entities: any;
+ desiredWidth = 400; // Example width in pixels
+ desiredHeight = 250;
 websiteUrl: string = "http://www.houstonpeace.org/";
 
 sortField: string = '';
@@ -22,7 +26,7 @@ sortField: string = '';
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllEductionDisplay();
+    this.getAllHoldDisplay();
 
 }
 navigateToAdd(){
@@ -30,32 +34,22 @@ navigateToAdd(){
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/houseHoldList/detail-hold`);
+  this.router.navigateByUrl(`/tribe/houseHoldList/detail-hold/${id}`);
+}
+navigateToWebsite(website:any){
+  window.open(website, '_blank');
 }
 
-routing(){
-    console.log('dfsf');
-    
-    this.router.navigateByUrl('add-events')
-}
-get filledStars(): number[] {
-  const roundedRating = Math.round(this.starRating * 2) / 2; // Round rating to nearest half
-  return Array.from({ length: 5 }, (_, index) => index + 0.5 <= roundedRating ? index + 0.5 : 0);
-}
 
-entityShow: any = [];
-allData: any;
-entities: any;
-desiredWidth = 400; // Example width in pixels
-desiredHeight = 250;
-getAllEductionDisplay() {
-    this.auth.getAllEducation().subscribe(
+
+getAllHoldDisplay() {
+    this.auth.getAllHold().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
-            console.log(this.allData.data[1].entities);
+            console.log(this.allData);
             
-            this.allData.data[1].entities.forEach((data: any) => {
+            this.allData.data.forEach((data: any) => {
                 console.log(data);
                 this.entities = data;
                     this.entityShow.push({
@@ -63,7 +57,7 @@ getAllEductionDisplay() {
                         name: data.name,
                         date: data.date,
                         address: data.address,
-                        phone: data.contactNumber,
+                        phone: data.phone,
                         offers:data.offers,
                         image: data.thumbnail,
                         email:data.email,

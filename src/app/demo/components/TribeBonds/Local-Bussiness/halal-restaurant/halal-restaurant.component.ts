@@ -13,7 +13,11 @@ export class HalalRestaurantComponent {
   constructor(private router: Router,private activatedRoute:ActivatedRoute,private auth :AuthenticationService){}
   idParam = this.activatedRoute.snapshot.params['id'];
  @Input() starRating: any;
-
+ entityShow: any = [];
+ allData: any;
+ entities: any;
+ desiredWidth = 400; // Example width in pixels
+ desiredHeight = 250;
 
 websiteUrl: string = "http://www.houstonpeace.org/";
 
@@ -40,11 +44,7 @@ get filledStars(): number[] {
   return Array.from({ length: 5 }, (_, index) => index + 0.5 <= roundedRating ? index + 0.5 : 0);
 }
 
-entityShow: any = [];
-allData: any;
-entities: any;
-desiredWidth = 400; // Example width in pixels
-desiredHeight = 250;
+
 getAllEductionDisplay() {
     this.auth.getAllRestaurant().subscribe(
         (res: any) => {

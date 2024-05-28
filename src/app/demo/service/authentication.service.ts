@@ -543,4 +543,143 @@ addHoldReview(value:any) {
   return this.http.post(this.add_holdReview, value,httpOptions).pipe(map((res) => res));
 
 }
+// food & catering
+add_food = this.url + 'food-catering/add';
+
+addFood(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_food, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_food = this.url + 'food-catering/edit/';
+  editFood(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_food  + id, data, httpOptions);
+
+}
+getall_food  = this.url + 'food-catering/display';
+getAllFood() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_food, httpOptions).pipe(map((res) => res));
+
+}
+getById_food = this.url + 'food-catering/display/';
+  getFoodById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_food + id,httpOptions);
+}
+add_foodReview = this.url + 'food-catering/add-review';
+addFoodReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_foodReview, value,httpOptions).pipe(map((res) => res));
+
+}
+
+// Rental
+add_rental = this.url + 'rental/add';
+
+addRenatl(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_rental, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_rental = this.url + 'rental/edit/';
+  editRental(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_rental  + id, data, httpOptions);
+
+}
+getall_rental  = this.url + 'rental/display';
+getAllRental() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_rental, httpOptions).pipe(map((res) => res));
+
+}
+getById_rental= this.url + 'rental/display/';
+  getRenatlById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_rental + id,httpOptions);
+}
+add_rentalReview = this.url + 'rental/add-review';
+addRenatlReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_rentalReview, value,httpOptions).pipe(map((res) => res));
+
+}
 }

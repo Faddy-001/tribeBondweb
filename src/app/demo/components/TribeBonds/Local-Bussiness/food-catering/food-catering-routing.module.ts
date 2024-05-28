@@ -8,8 +8,8 @@ import { DetailFoodComponent } from './detail-food/detail-food.component';
 const routes: Routes = [
   {path:"",component:FoodCateringComponent},
   {path:"add-F",component:AddFoodComponent},
-  {path:"edit-F",component:EditFoodComponent},
-  {path:"detail-F",component:DetailFoodComponent},
+  {path:"edit-F/:id",component:EditFoodComponent},
+  {path:"detail-F/:id",component:DetailFoodComponent},
 ];
 
 @NgModule({

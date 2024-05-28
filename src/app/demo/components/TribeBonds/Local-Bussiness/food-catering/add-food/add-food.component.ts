@@ -20,15 +20,36 @@ export class AddFoodComponent {
     this.addFood = this.fb.group({
       name: [],
       address: [],
-      contactNumber: [],
+      phone: [],
+      city:[],
       website: [],
-      thumbnail: [],
       images: [],
-      description: []
+      email:[],
+      description: [],
+      foodType:[]
     });
   }
-
+  userDataString:any
+  user:any
+  cityData:any
   ngOnInit(): void {
+    console.log(localStorage.getItem('user'));
+    this.userDataString = localStorage.getItem('user');
+   this.user = JSON.parse(this.userDataString);
+   this.cityData = this.user.city
+   console.log(this.cityData);
+   this.addFood = this.fb.group({
+     city:[this.cityData],
+     name: [],
+      address: [],
+      phone: [],
+      website: [],
+      images: [],
+      email:[],
+      description: [],
+      foodType:[]
+
+   })
   }
 
   onFileSelected(event: any) {
@@ -37,10 +58,9 @@ export class AddFoodComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+    
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
 
         this.formData.append('images', files[i]);
       }
@@ -58,19 +78,24 @@ export class AddFoodComponent {
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
-    this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('phone', value.phone);
     this.formData.append('website', value.website);
+    this.formData.append('city', value.city);
+    this.formData.append('email', value.email);
+
     this.formData.append('description', value.description);
+    this.formData.append('foodType', value.foodType);
 
+    
 
-    this.auth.addEdEntity(this.formData).subscribe(
+    this.auth.addFood(this.formData).subscribe(
       (result: any) => {
         this.foodResult = result;
         console.log(this.foodResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.router.navigate([`/tribe/foodList`]);
       },
       (err: any) => {
         console.log(err);
