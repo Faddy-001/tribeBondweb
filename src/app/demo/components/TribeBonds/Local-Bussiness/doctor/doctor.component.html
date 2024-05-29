@@ -1,1 +1,71 @@
-<p>doctor works!</p>
+<div>
+    <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
+        <button pButton type="button" label="Add" icon="pi pi-plus" class="mr-2 mb-4"
+            (click)="navigateToAdd()"></button>
+
+    </div>
+</div>
+<div class="card">
+    <p-dataView [paginator]="true" [rows]="6" filterBy="title" [sortOrder]="-1" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                <span class="text-xl text-900 font-semibold">Electronic List</span>
+                <span class="layout-topbar-search hidden lg:flex">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template let-blogs pTemplate="gridItem">
+            <div class="grid grid-nogutter">
+                <div class="col-10" *ngFor="let dataShow of entityShow;let i= index">
+                    <div class="card cardborder">
+                        <div class="p-3" *ngIf="entityShow">
+                            <div class="cursor-pointer surface-card  border-round">
+                                <!-- <div class="relative">
+                                    <img [src]="blog.coverImage" class="w-50" />
+                                   
+                                </div> -->
+                                <div class="card-content">
+                                    <div class="image-container">
+                                        <img [src]="dataShow.image" alt="Blog Cover Image" class="w-100"
+                                            [style.width.px]="desiredWidth" [style.height.px]="desiredHeight" />
+
+                                        <!-- <img [src]="blog.coverImage" alt="Blog Cover Image" class="w-100" /> -->
+                                        <div
+                                            class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
+                                            <!-- <button pButton type="button" label="Event Details" icon="pi pi-plus" class="mr-2 mt-2"></button> -->
+
+
+                                            <button pButton pRipple type="button" label="Details"
+                                                class="p-button-rounded p-button-secondary mt-2 mr-2"
+                                                (click)="navigateToDetail(dataShow.id)"></button>
+                                            <button pButton pRipple type="button" label="Message"
+                                                class="p-button-rounded p-button-primary mt-2 mr-2"   ></button>
+                                                <button pButton pRipple type="button" label="Delete"
+                                                class="p-button-rounded p-button-danger mt-2 mr-2"   ></button>
+                                        </div>
+                                    </div>
+                                    <div class="text-container">
+                                        <!-- <p>Offers: {{dataShow.offers}}</p>
+                                        <p>Address:{{dataShow.address}}</p>-->
+                                        <h2>{{dataShow.name}}</h2> 
+                                        <p>Phone: {{dataShow.phone}}</p>
+                                        <p>Email: {{dataShow.email}}</p>
+                                        <p>Address: {{dataShow.address}}</p>
+                                        <p>services: {{dataShow.services}}</p>
+                                        <p>website: {{dataShow.website}}</p>
+
+
+                                        <!-- Additional text or content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

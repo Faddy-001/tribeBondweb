@@ -1,1 +1,90 @@
-<p>edit-automobile works!</p>
+<div class="grid">
+	<div class="col-12">
+		<div class="container">
+			<div class="card cardborder">
+				<!-- <h2 style="color:#1769aa ;display: flex;justify-content: center;">Add School</h2> -->
+                <div class="header">
+                    <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Automobile</span>
+                        <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+                            styleClass="w-full md:w-15rem"></p-dropdown> -->
+                        
+                    </div>
+                </div>
+				<form style="padding-left: 3%;" [formGroup]="editElectronicForm" (ngSubmit)="Submit(editElectronicForm.value)">
+
+				<div class="p-fluid p-formgrid grid mt-4">
+					<div class="col-12 md:col-6">
+						<label htmlFor="firstname2">Name</label>
+						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="phone">Phone</label>
+						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
+					</div>
+					
+
+					<div class="col-12 md:col-6">
+						<label htmlFor="website">Website URL</label>
+						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="service">Services Offered</label>
+						<input pInputText id="service" type="text" placeholder="Enter type of service offered" formControlName="services" />
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="address">Address</label>
+						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="city">City</label>
+						<input pInputText id="city" type="text" placeholder="Enter city" formControlName="city" readonly/>
+					</div>
+                    <div class="col-12 md:col-6">
+						<label htmlFor="email">Email</label>
+						<input pInputText id="email" type="text" placeholder="Enter City" formControlName="email"  />
+					</div>
+					<div class="field col-12 ">
+						<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
+						<span class="p-float-label">
+							<textarea formControlName="description" inputId="textarea" rows="5" cols="120"
+								pInputTextarea ></textarea>
+							<!-- <label for="textarea">Deatail</label> -->
+						</span>
+					</div>
+
+					<div class="col-12">
+						<div class="card">
+							<label class="file-upload-button">
+								Upload an Image
+								<input type="file"  (change)="onFileSelected($event)" multiple>
+							</label>
+
+							<div class="image-container">
+								<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+							</div>
+
+							<div class="col-12 " style="display: flex;justify-content: flex-end;">
+								<div class="flex flex-wrap gap-2">
+									<button pButton pRipple label="Submit"></button>
+
+								</div>
+							</div>
+
+						</div>
+						<div class="avatar-container" id="imagePreviewContainer">
+							<!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
+							<img class="avatar" alt="" />
+						</div>
+						<!-- <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
+							<button pButton type="button" label="Add Event" icon="pi pi-plus" class="mr-2 mb-4"  [routerLink]="['/tribe/event/add']" ></button>
+					
+						</div> -->
+						
+						
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>

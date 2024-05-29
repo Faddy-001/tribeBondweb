@@ -16,7 +16,7 @@ export class EditRentalComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   editRenatlForm!: FormGroup;
   rentalResult: any
-  editHold: any
+  editrental: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editRenatlForm = this.fb.group({
       name: [],
@@ -34,18 +34,18 @@ export class EditRentalComponent {
   ngOnInit(): void {
     this.auth.getRenatlById(this.idParam).subscribe(
       (res: any) => {
-        this.editHold = res.data;
-        this.images = this.editHold.images
+        this.editrental = res.data;
+        this.images = this.editrental.images
 
-        console.log(this.editHold);
+        console.log(this.editrental);
 
         this.editRenatlForm = this.fb.group({
-          name: [this.editHold.name],
-          address: [this.editHold.address],
-          city: [this.editHold.city],
-          description: [this.editHold.description],
-          phone: [this.editHold.phone],
-          website: [this.editHold.website],
+          name: [this.editrental.name],
+          address: [this.editrental.address],
+          city: [this.editrental.city],
+          description: [this.editrental.description],
+          phone: [this.editrental.phone],
+          website: [this.editrental.website],
         })
         console.log('Form controls:', this.editRenatlForm.controls);
 

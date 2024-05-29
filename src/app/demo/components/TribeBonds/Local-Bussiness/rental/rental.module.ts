@@ -32,8 +32,7 @@ import { DetailRentalComponent } from './detail-rental/detail-rental.component';
   imports: [
     CommonModule,
     RentalRoutingModule,
-    CommonModule,
-    AvatarModule,
+      AvatarModule,
     DataViewModule,
     DropdownModule,
     ButtonModule,

@@ -682,4 +682,143 @@ addRenatlReview(value:any) {
   return this.http.post(this.add_rentalReview, value,httpOptions).pipe(map((res) => res));
 
 }
+
+// Sweet
+add_sweet = this.url + 'sweets/add';
+
+addSweet(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_sweet, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_sweet = this.url + 'sweets/edit/';
+  editSweet(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_sweet  + id, data, httpOptions);
+
+}
+getall_sweet  = this.url + 'sweets/display';
+getAllSweet() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_sweet, httpOptions).pipe(map((res) => res));
+
+}
+getById_sweet= this.url + 'sweets/display/';
+  getSweetById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_sweet + id,httpOptions);
+}
+add_sweetsReview = this.url + 'sweets/add-review';
+addSweetReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_sweetsReview, value,httpOptions).pipe(map((res) => res));
+
+}
+// Electronic
+add_electronic = this.url + 'electronics/add';
+
+addElectronic(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_electronic, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_electronic = this.url + 'electronics/edit/';
+  editElectronic(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_electronic  + id, data, httpOptions);
+
+}
+getall_electronic  = this.url + 'electronics/display';
+getAllElectronic() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_electronic, httpOptions).pipe(map((res) => res));
+
+}
+getById_electronic= this.url + 'electronics/display/';
+  getElectronicById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_electronic + id,httpOptions);
+}
+add_electronicReview = this.url + 'electronics/add-review';
+addElectronicReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_electronicReview, value,httpOptions).pipe(map((res) => res));
+
+}
 }

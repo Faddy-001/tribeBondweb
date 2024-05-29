@@ -84,7 +84,7 @@ getbyIDRenatlDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/houseHoldList/edit-hold/${this.idParam}`);
+    this.router.navigateByUrl(`/tribe/rentalList/edit-rental/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -92,13 +92,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "householdId": this.idParam,
+        "rentalId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addHoldReview(dataValue).subscribe(
+    this.auth.addRenatlReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);
