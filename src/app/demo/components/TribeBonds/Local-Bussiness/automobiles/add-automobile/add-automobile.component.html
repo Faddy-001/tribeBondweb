@@ -11,7 +11,7 @@
                         
                     </div>
                 </div>
-				<form style="padding-left: 3%;" [formGroup]="addElectronicForm" (ngSubmit)="Submit(addElectronicForm.value)">
+				<form style="padding-left: 3%;" [formGroup]="addAutomobileForm" (ngSubmit)="Submit(addAutomobileForm.value)">
 
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
@@ -29,10 +29,7 @@
 						<label htmlFor="website">Website URL</label>
 						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
 					</div>
-					<div class="col-12 md:col-6">
-						<label htmlFor="service">Services Offered</label>
-						<input pInputText id="service" type="text" placeholder="Enter type of service offered" formControlName="services" />
-					</div>
+					
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>
 						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
@@ -41,10 +38,7 @@
 						<label htmlFor="city">City</label>
 						<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly />
 					</div>
-					<div class="col-12 md:col-6">
-						<label htmlFor="email">Email</label>
-						<input pInputText id="email" type="text" placeholder="Enter City" formControlName="email"  />
-					</div>
+					
 					<div class="field col-12 ">
 						<label htmlFor="description" style="color:#1769aa;font-weight: bold;">Description</label>
 						<span class="p-float-label">

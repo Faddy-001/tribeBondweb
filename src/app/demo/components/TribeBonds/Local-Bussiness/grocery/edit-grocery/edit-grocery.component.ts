@@ -22,9 +22,9 @@ export class EditGroceryComponent {
       address: [],
       phone: [],
       website: [],
-      thumbnail: [],
       images: [],
-       description:[]
+       description:[],
+       city:[]
 
 
     });
@@ -45,7 +45,7 @@ console.log(this.editGroceryResult);
           description: [this.editGroceryResult.description],
           phone: [this.editGroceryResult.phone],
           website: [this.editGroceryResult.website],
-          thumbnail: [],
+
         })
         console.log('Form controls:', this.editGrocery.controls);
 
@@ -84,11 +84,8 @@ console.log(this.editGroceryResult);
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
-    // this.formData.append('typeId', this.idParam);
-
-    // this.formData.append('contactNumber', value.contactNumber);
+    this.formData.append('city', value.city);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
 

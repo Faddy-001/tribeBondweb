@@ -35,7 +35,7 @@ constructor( private auth: AuthenticationService, private activatedRoute: Activa
 
 ngOnInit() {
 
-    this.getbyIDRenatlDisplay();
+    this.getbyIDPartyDisplay();
 }
 allData: any
 reviewRespShow: any = [];
@@ -47,8 +47,8 @@ phone: any;
 description: any
 desiredWidth = 150; // Example width in pixels
 desiredHeight = 70;
-getbyIDRenatlDisplay() {
-    this.auth.getRenatlById(this.idParam).subscribe(
+getbyIDPartyDisplay() {
+    this.auth.getpartyById(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -83,7 +83,7 @@ getbyIDRenatlDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/rentalList/edit-rental/${this.idParam}`);
+    this.router.navigateByUrl(`/tribe/weddingList/edit-wedding/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -91,13 +91,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "rentalId": this.idParam,
+        "partyId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addRenatlReview(dataValue).subscribe(
+    this.auth.addPartyReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);

@@ -19,7 +19,6 @@ export class GroceryComponent {
   desiredWidth = 400; // Example width in pixels
   desiredHeight = 250;
 
-  websiteUrl: string = "http://www.houstonpeace.org/";
 
   sortField: string = '';
 
@@ -36,7 +35,6 @@ export class GroceryComponent {
   }
 
   routing() {
-    console.log('dfsf');
 
     this.router.navigateByUrl('add-events')
   }
@@ -64,7 +62,7 @@ export class GroceryComponent {
             address: data.address,
             phone: data.phone,
             offers: data.offers,
-            image: data.thumbnail,
+            image: data.images[0],
             email: data.email,
             website: data.website
           })

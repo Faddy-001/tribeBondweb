@@ -13,11 +13,11 @@ export class EditHealthComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editElectronicForm!: FormGroup;
-  rentalResult: any
+  editHealthForm!: FormGroup;
+  healthResult: any
   editelectronic: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editElectronicForm = this.fb.group({
+    this.editHealthForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -33,14 +33,14 @@ export class EditHealthComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getElectronicById(this.idParam).subscribe(
+    this.auth.gethealthId(this.idParam).subscribe(
       (res: any) => {
         this.editelectronic = res.data;
         this.images = this.editelectronic.images
 
         console.log(this.editelectronic);
 
-        this.editElectronicForm = this.fb.group({
+        this.editHealthForm = this.fb.group({
           name: [this.editelectronic.name],
           address: [this.editelectronic.address],
           city: [this.editelectronic.city],
@@ -50,7 +50,7 @@ export class EditHealthComponent {
           services:[this.editelectronic.services],
           email:[this.editelectronic.email]
         })
-        console.log('Form controls:', this.editElectronicForm.controls);
+        console.log('Form controls:', this.editHealthForm.controls);
 
      
         this.cdr.detectChanges();
@@ -63,8 +63,7 @@ export class EditHealthComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+    
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -98,14 +97,14 @@ export class EditHealthComponent {
 
 
     
-    this.auth.editElectronic(this.idParam, this.formData).subscribe(
+    this.auth.editHealth(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.healthResult = result;
+        console.log(this.healthResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/healthList`]);
       },
       (err) => {
         console.log(err);

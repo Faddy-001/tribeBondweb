@@ -13,12 +13,12 @@ export class AddWeddingComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addRentalForm: FormGroup;
+  addWeddingForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addRentalForm = this.fb.group({
+    this.addWeddingForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -38,7 +38,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addRentalForm = this.fb.group({
+    this.addWeddingForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -73,7 +73,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  partyResult: any
   Submit(value: any) {
     
 
@@ -82,24 +82,21 @@ userDataString:any
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
     this.formData.append('city', value.city);
-
-    // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
 
     
     console.log(this.formData.append);
 
 
-    this.auth.addRenatl(this.formData).subscribe(
+    this.auth.addParty(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.partyResult = result;
+        console.log(this.partyResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/rentalList`]);
+        this.router.navigate([`/tribe/weddingList`]);
       },
       (err: any) => {
         console.log(err);

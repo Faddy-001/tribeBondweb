@@ -13,12 +13,12 @@ export class AddPartyComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addRentalForm: FormGroup;
+  addPartyForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addRentalForm = this.fb.group({
+    this.addPartyForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -38,7 +38,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addRentalForm = this.fb.group({
+    this.addPartyForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -55,8 +55,7 @@ userDataString:any
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      // Append the first file as 'thumbnail'
-      
+     
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -73,7 +72,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  partyResult: any
   Submit(value: any) {
     
 
@@ -92,14 +91,14 @@ userDataString:any
     console.log(this.formData.append);
 
 
-    this.auth.addRenatl(this.formData).subscribe(
+    this.auth.addBanq(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.partyResult = result;
+        console.log(this.partyResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/rentalList`]);
+        this.router.navigate([`/tribe/partyList`]);
       },
       (err: any) => {
         console.log(err);

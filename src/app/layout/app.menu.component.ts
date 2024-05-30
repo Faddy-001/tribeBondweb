@@ -183,7 +183,7 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/tribe/automobileList'],
                             },
                             {
-                                label: 'Legal & Fianance',
+                                label: 'Legal & Finance',
                                 icon: 'pi pi-fw pi-pencil',
                                 routerLink: ['/tribe/legalList'],
                             },

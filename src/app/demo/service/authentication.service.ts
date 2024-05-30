@@ -821,4 +821,710 @@ addElectronicReview(value:any) {
   return this.http.post(this.add_electronicReview, value,httpOptions).pipe(map((res) => res));
 
 }
+//  Automobile
+add_automobile = this.url + 'automobile/add';
+
+addAutomobile(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_automobile, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_automobile = this.url + 'automobile/edit/';
+  editAutomobile(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_automobile  + id, data, httpOptions);
+
+}
+getall_automobile  = this.url + 'automobile/display';
+getAllAutomobile() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_automobile, httpOptions).pipe(map((res) => res));
+
+}
+getById_automobile= this.url + 'automobile/display/';
+  getAutomobileById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_automobile + id,httpOptions);
+}
+add_automobileReview = this.url + 'automobile/add-review';
+addAutomobileReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_automobileReview, value,httpOptions).pipe(map((res) => res));
+
+}
+//  Party
+add_party = this.url + 'party/add';
+
+addParty(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_party, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_party= this.url + 'party/edit/';
+  editParty(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_party  + id, data, httpOptions);
+
+}
+getall_party  = this.url + 'party/display';
+getAllParty() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_party, httpOptions).pipe(map((res) => res));
+
+}
+getById_party= this.url + 'party/display/';
+  getpartyById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_party + id,httpOptions);
+}
+add_partyReview = this.url + 'party/add-review';
+addPartyReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_partyReview, value,httpOptions).pipe(map((res) => res));
+
+}
+// legal
+add_legal= this.url + 'legal/add';
+
+addLegal(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_legal, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_legal= this.url + 'legal/edit/';
+  editLegal(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_legal  + id, data, httpOptions);
+
+}
+getall_legal  = this.url + 'legal/display';
+getAllLegal() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_legal, httpOptions).pipe(map((res) => res));
+
+}
+getById_legal= this.url + 'legal/display/';
+  getlegalById(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_legal + id,httpOptions);
+}
+add_legalReview = this.url + 'legal/add-review';
+addlegalReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_legalReview, value,httpOptions).pipe(map((res) => res));
+
+}
+// doctor
+add_doctor= this.url + 'doctor/add';
+
+addDoctor(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_doctor, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_doctor= this.url + 'doctor/edit/';
+  editDoctor(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_doctor  + id, data, httpOptions);
+
+}
+getall_doctor  = this.url + 'doctor/display';
+getAllDoctor() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_doctor, httpOptions).pipe(map((res) => res));
+
+}
+getById_doctor= this.url + 'doctor/display/';
+  getdoctoryId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_doctor + id,httpOptions);
+}
+add_doctorReview = this.url + 'doctor/add-review';
+adddoctorReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_doctorReview, value,httpOptions).pipe(map((res) => res));
+
+}
+
+
+// health
+add_health= this.url + 'health/add';
+
+addHealth(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_health, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_health= this.url + 'health/edit/';
+  editHealth(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_health  + id, data, httpOptions);
+
+}
+getall_health  = this.url + 'health/display';
+getAllHealth() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_health, httpOptions).pipe(map((res) => res));
+
+}
+getById_health= this.url + 'health/display/';
+  gethealthId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_health + id,httpOptions);
+}
+add_healthReview = this.url + 'health/add-review';
+addhealthReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_healthReview, value,httpOptions).pipe(map((res) => res));
+
+}
+
+
+// Qurbani
+add_q= this.url + 'qurbani/add';
+
+addQur(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_q, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_q= this.url + 'qurbani/edit/';
+  editQur(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_q  + id, data, httpOptions);
+
+}
+getall_q  = this.url + 'qurbani/display';
+getAllQur() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_q, httpOptions).pipe(map((res) => res));
+
+}
+getById_q= this.url + 'qurbani/display/';
+  getQurId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_q + id,httpOptions);
+}
+add_qReview = this.url + 'qurbani/add-review';
+addQurReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_qReview, value,httpOptions).pipe(map((res) => res));
+
+
+}
+// Beauty
+add_beauty= this.url + 'beauty/add';
+
+addBeauty(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_beauty, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_beauty= this.url + 'beauty/edit/';
+  editBeauty(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_beauty  + id, data, httpOptions);
+
+}
+getall_beauty  = this.url + 'beauty/display';
+getAllBeauty() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_beauty, httpOptions).pipe(map((res) => res));
+
+}
+getById_beauty= this.url + 'beauty/display/';
+  getBeautyId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_beauty + id,httpOptions);
+}
+add_beautyReview = this.url + 'beauty/add-review';
+addBeautyReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_beautyReview, value,httpOptions).pipe(map((res) => res));
+
+
+}
+// Real Estate
+add_real= this.url + 'real-estate/add';
+
+addReal(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_real, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_real= this.url + 'real-estate/edit/';
+  editReal(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_real  + id, data, httpOptions);
+
+}
+getall_real  = this.url + 'real-estate/display';
+getAllReal() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_real, httpOptions).pipe(map((res) => res));
+
+}
+getById_real= this.url + 'real-estate/display/';
+  getRealId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_real + id,httpOptions);
+}
+add_realReview = this.url + 'real-estate/add-review';
+addRealReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_realReview, value,httpOptions).pipe(map((res) => res));
+
+
+  
+}
+
+// party/banquet
+add_banq= this.url + 'banquet/add';
+
+addBanq(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_banq, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_banq= this.url + 'banquet/edit/';
+  editBanq(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_banq  + id, data, httpOptions);
+
+}
+getall_banq  = this.url + 'banquet/display';
+getAllBanq() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_banq, httpOptions).pipe(map((res) => res));
+
+}
+getById_banq= this.url + 'banquet/display/';
+  getBanqId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_banq + id,httpOptions);
+}
+add_banqReview = this.url + 'banquet/add-review';
+addBanqReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_banqReview, value,httpOptions).pipe(map((res) => res));
+
+
+  
+}
+
+
+
+// Henna
+add_henna= this.url + 'henna/add';
+
+addHenna(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_henna, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_henna= this.url + 'henna/edit/';
+  editHenna(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_henna  + id, data, httpOptions);
+
+}
+getall_henna = this.url + 'henna/display';
+getAllHenna() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_henna, httpOptions).pipe(map((res) => res));
+
+}
+getById_henna= this.url + 'henna/display/';
+  getHennaId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_henna + id,httpOptions);
+}
+add_hennaReview = this.url + 'henna/add-review';
+addHennaReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_hennaReview, value,httpOptions).pipe(map((res) => res));
+
+
+  
+}
 }

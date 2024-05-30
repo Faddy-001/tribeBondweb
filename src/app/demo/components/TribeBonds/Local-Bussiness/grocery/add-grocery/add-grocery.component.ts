@@ -29,8 +29,27 @@ export class AddGroceryComponent {
 
     });
   }
-
+  userDataString:any
+  user:any
+  cityData:any
   ngOnInit(): void {
+    console.log(localStorage.getItem('user'));
+    this.userDataString = localStorage.getItem('user');
+   this.user = JSON.parse(this.userDataString);
+   this.cityData = this.user.city
+   console.log(this.cityData);
+   this.addGrocery = this.fb.group({
+     city:[this.cityData],
+     name: [],
+      address: [],
+      phone: [],
+      website: [],
+      images: [],
+      email:[],
+      description: [],
+      foodType:[]
+
+   })
   }
  
   onFileSelected(event: any) {

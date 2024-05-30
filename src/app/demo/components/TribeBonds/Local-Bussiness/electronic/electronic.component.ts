@@ -61,7 +61,10 @@ getAllRenatlDisplay() {
                         image: data.images[0],
                         email:data.email,
                         website:data.website,
-                        services:data.services
+                        services:data.services,
+                        createdFirstName:data.createdBy.firstName,
+                        createdLastName:data.createdBy.lastName,
+                        createdpic:data.createdBy.profilePicture,
                     })
                 // })
 

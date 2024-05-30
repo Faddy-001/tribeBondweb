@@ -21,8 +21,8 @@ export class FoodCateringComponent {
 
 
 
- 
-   ngOnInit(): void {
+
+  ngOnInit(): void {
     this.getAllFoodDisplay();
 
   }
@@ -34,9 +34,9 @@ export class FoodCateringComponent {
     this.router.navigateByUrl(`/tribe/foodList/detail-F/${id}`);
   }
 
-  
 
- 
+
+
   getAllFoodDisplay() {
     this.auth.getAllFood().subscribe(
       (res: any) => {
@@ -55,7 +55,10 @@ export class FoodCateringComponent {
             typeFood: data.foodType,
             image: data.images[0],
             email: data.email,
-            website: data.website
+            website: data.website,
+            createdFirstName: data.createdBy.firstName,
+            createdLastName: data.createdBy.lastName,
+            createdpic: data.createdBy.profilePicture,
           })
 
           console.log(this.entityShow.image);

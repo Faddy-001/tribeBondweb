@@ -28,11 +28,11 @@ ngOnInit(): void {
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/rentalList/add-rental`);
+  this.router.navigateByUrl(`/tribe/weddingList/add-wedding`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/rentalList/detail-rental/${id}`);
+  this.router.navigateByUrl(`/tribe/weddingList/detail-wedding/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -41,7 +41,7 @@ navigateToWebsite(website:any){
 
 
 getAllRenatlDisplay() {
-    this.auth.getAllRental().subscribe(
+    this.auth.getAllParty().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res

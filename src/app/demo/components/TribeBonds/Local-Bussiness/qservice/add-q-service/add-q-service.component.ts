@@ -13,12 +13,12 @@ export class AddQServiceComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addSForm: FormGroup;
+  addQForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addSForm = this.fb.group({
+    this.addQForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -38,7 +38,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addSForm = this.fb.group({
+    this.addQForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -73,7 +73,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  qurResult: any
   Submit(value: any) {
     
 
@@ -92,14 +92,14 @@ userDataString:any
     console.log(this.formData.append);
 
 
-    this.auth.addSweet(this.formData).subscribe(
+    this.auth.addQur(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.qurResult = result;
+        console.log(this.qurResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/qServiceList`]);
       },
       (err: any) => {
         console.log(err);

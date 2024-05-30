@@ -13,11 +13,11 @@ export class EditPartyComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editRenatlForm!: FormGroup;
-  rentalResult: any
-  editrental: any
+  editBanquetForm!: FormGroup;
+  banqReault: any
+  editBanq: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editRenatlForm = this.fb.group({
+    this.editBanquetForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -31,22 +31,22 @@ export class EditPartyComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getRenatlById(this.idParam).subscribe(
+    this.auth.getBanqId(this.idParam).subscribe(
       (res: any) => {
-        this.editrental = res.data;
-        this.images = this.editrental.images
+        this.editBanq = res.data;
+        this.images = this.editBanq.images
 
-        console.log(this.editrental);
+        console.log(this.editBanq);
 
-        this.editRenatlForm = this.fb.group({
-          name: [this.editrental.name],
-          address: [this.editrental.address],
-          city: [this.editrental.city],
-          description: [this.editrental.description],
-          phone: [this.editrental.phone],
-          website: [this.editrental.website],
+        this.editBanquetForm = this.fb.group({
+          name: [this.editBanq.name],
+          address: [this.editBanq.address],
+          city: [this.editBanq.city],
+          description: [this.editBanq.description],
+          phone: [this.editBanq.phone],
+          website: [this.editBanq.website],
         })
-        console.log('Form controls:', this.editRenatlForm.controls);
+        console.log('Form controls:', this.editBanquetForm.controls);
 
      
         this.cdr.detectChanges();
@@ -90,14 +90,14 @@ export class EditPartyComponent {
 
 
     
-    this.auth.editRental(this.idParam, this.formData).subscribe(
+    this.auth.editBanq(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.banqReault = result;
+        console.log(this.banqReault.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate(['/tribe/rentalList']);
+        this.router.navigate(['/tribe/partyList']);
       },
       (err) => {
         console.log(err);

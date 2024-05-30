@@ -14,12 +14,12 @@ export class AddDoctorComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addElectronicForm: FormGroup;
+  addDoctorForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addElectronicForm = this.fb.group({
+    this.addDoctorForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -41,7 +41,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addElectronicForm = this.fb.group({
+    this.addDoctorForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -60,7 +60,6 @@ userDataString:any
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      // Append the first file as 'thumbnail'
       
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
@@ -78,7 +77,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  doctorResult: any
   Submit(value: any) {
     
 
@@ -99,14 +98,14 @@ userDataString:any
     console.log(this.formData.append);
 
 
-    this.auth.addElectronic(this.formData).subscribe(
+    this.auth.addDoctor(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.doctorResult = result;
+        console.log(this.doctorResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/doctorList`]);
       },
       (err: any) => {
         console.log(err);

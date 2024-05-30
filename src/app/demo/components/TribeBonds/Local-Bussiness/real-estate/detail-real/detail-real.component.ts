@@ -35,7 +35,7 @@ constructor( private auth: AuthenticationService, private activatedRoute: Activa
 
 ngOnInit() {
 
-    this.getbyIDSweeetDisplay();
+    this.getbyIDRealDisplay();
 }
 allData: any
 reviewRespShow: any = [];
@@ -47,8 +47,8 @@ phone: any;
 description: any
 desiredWidth = 150; // Example width in pixels
 desiredHeight = 70;
-getbyIDSweeetDisplay() {
-    this.auth.getSweetById(this.idParam).subscribe(
+getbyIDRealDisplay() {
+    this.auth.getRealId(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -83,7 +83,7 @@ getbyIDSweeetDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/sweetList/edit-s/${this.idParam}`);
+    this.router.navigateByUrl(`/tribe/realEstateList/edit-real/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -91,13 +91,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "shopId": this.idParam,
+        "realEstateRecordId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addSweetReview(dataValue).subscribe(
+    this.auth.addRealReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);

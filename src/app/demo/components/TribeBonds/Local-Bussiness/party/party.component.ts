@@ -18,7 +18,6 @@ export class PartyComponent {
  entities: any;
  desiredWidth = 400; // Example width in pixels
  desiredHeight = 250;
-websiteUrl: string = "http://www.houstonpeace.org/";
 
 sortField: string = '';
 
@@ -29,11 +28,11 @@ ngOnInit(): void {
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/rentalList/add-rental`);
+  this.router.navigateByUrl(`/tribe/partyList/add-party`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/rentalList/detail-rental/${id}`);
+  this.router.navigateByUrl(`/tribe/partyList/detail-party/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -42,7 +41,7 @@ navigateToWebsite(website:any){
 
 
 getAllRenatlDisplay() {
-    this.auth.getAllRental().subscribe(
+    this.auth.getAllBanq().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res

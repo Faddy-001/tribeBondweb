@@ -23,7 +23,7 @@ export class EditHalalMeatComponent {
       address: [],
       phone: [],
       website: [],
-      thumbnail: [],
+      // thumbnail: [],
       images: [],
        description:[],
        city:[]
@@ -44,7 +44,7 @@ export class EditHalalMeatComponent {
           description: [this.editmeatResult.description],
           phone: [this.editmeatResult.phone],
           website: [this.editmeatResult.website],
-          thumbnail: [],
+          // thumbnail: [],
         })
         console.log('Form controls:', this.editmeatResturant.controls);
 
@@ -60,10 +60,10 @@ export class EditHalalMeatComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      // this.formData.append('thumbnail', files[0]);
+      // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
 
         this.formData.append('images', files[i]);
       }

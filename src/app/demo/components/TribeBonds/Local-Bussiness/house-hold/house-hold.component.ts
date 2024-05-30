@@ -59,7 +59,7 @@ getAllHoldDisplay() {
                         address: data.address,
                         phone: data.phone,
                         offers:data.offers,
-                        image: data.thumbnail,
+                        image: data.images[0],
                         email:data.email,
                         website:data.website
                     })

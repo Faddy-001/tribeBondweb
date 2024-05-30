@@ -13,11 +13,11 @@ export class EditBeautyComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editElectronicForm!: FormGroup;
-  rentalResult: any
-  editelectronic: any
+  editBeautyForm!: FormGroup;
+  editBeauty: any
+  beautyResult:any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editElectronicForm = this.fb.group({
+    this.editBeautyForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -33,24 +33,24 @@ export class EditBeautyComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getElectronicById(this.idParam).subscribe(
+    this.auth.getBeautyId(this.idParam).subscribe(
       (res: any) => {
-        this.editelectronic = res.data;
-        this.images = this.editelectronic.images
+        this.editBeauty = res.data;
+        this.images = this.editBeauty.images
 
-        console.log(this.editelectronic);
+        console.log(this.editBeauty);
 
-        this.editElectronicForm = this.fb.group({
-          name: [this.editelectronic.name],
-          address: [this.editelectronic.address],
-          city: [this.editelectronic.city],
-          description: [this.editelectronic.description],
-          phone: [this.editelectronic.phone],
-          website: [this.editelectronic.website],
-          services:[this.editelectronic.services],
-          email:[this.editelectronic.email]
+        this.editBeautyForm = this.fb.group({
+          name: [this.editBeauty.name],
+          address: [this.editBeauty.address],
+          city: [this.editBeauty.city],
+          description: [this.editBeauty.description],
+          phone: [this.editBeauty.phone],
+          website: [this.editBeauty.website],
+          services:[this.editBeauty.services],
+          email:[this.editBeauty.email]
         })
-        console.log('Form controls:', this.editElectronicForm.controls);
+        console.log('Form controls:', this.editBeautyForm.controls);
 
      
         this.cdr.detectChanges();
@@ -62,9 +62,7 @@ export class EditBeautyComponent {
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+    
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -98,14 +96,14 @@ export class EditBeautyComponent {
 
 
     
-    this.auth.editElectronic(this.idParam, this.formData).subscribe(
+    this.auth.editBeauty(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.beautyResult = result;
+        console.log(this.beautyResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/beautyList`]);
       },
       (err) => {
         console.log(err);

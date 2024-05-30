@@ -13,19 +13,21 @@ export class AddHennaComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addSForm: FormGroup;
+  addHennaForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addSForm = this.fb.group({
+    this.addHennaForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
       website: [],
       images: [],
       description:[],
-      city:[]
+      city:[],
+      servingCities:[],
+      email:[]
 
 
 
@@ -38,7 +40,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addSForm = this.fb.group({
+    this.addHennaForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -46,6 +48,8 @@ userDataString:any
       website: [],
       images: [],
       description:[],
+      servingCities:[],
+      email:[]
 
     })
   }
@@ -73,7 +77,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  hennaResult: any
   Submit(value: any) {
     
 
@@ -82,24 +86,22 @@ userDataString:any
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
     this.formData.append('city', value.city);
-
-    // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
-
+    this.formData.append('servingCities', value.servingCities);
+    this.formData.append('email', value.email);
     
     console.log(this.formData.append);
 
 
-    this.auth.addSweet(this.formData).subscribe(
+    this.auth.addHenna(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.hennaResult = result;
+        console.log(this.hennaResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/hennaList`]);
       },
       (err: any) => {
         console.log(err);

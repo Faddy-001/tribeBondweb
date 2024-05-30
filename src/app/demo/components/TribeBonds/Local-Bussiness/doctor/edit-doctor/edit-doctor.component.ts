@@ -13,11 +13,11 @@ export class EditDoctorComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editElectronicForm!: FormGroup;
-  rentalResult: any
+  editDoctorForm!: FormGroup;
+  doctorResult: any
   editelectronic: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editElectronicForm = this.fb.group({
+    this.editDoctorForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -33,14 +33,14 @@ export class EditDoctorComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getElectronicById(this.idParam).subscribe(
+    this.auth.getdoctoryId(this.idParam).subscribe(
       (res: any) => {
         this.editelectronic = res.data;
         this.images = this.editelectronic.images
 
         console.log(this.editelectronic);
 
-        this.editElectronicForm = this.fb.group({
+        this.editDoctorForm = this.fb.group({
           name: [this.editelectronic.name],
           address: [this.editelectronic.address],
           city: [this.editelectronic.city],
@@ -50,7 +50,7 @@ export class EditDoctorComponent {
           services:[this.editelectronic.services],
           email:[this.editelectronic.email]
         })
-        console.log('Form controls:', this.editElectronicForm.controls);
+        console.log('Form controls:', this.editDoctorForm.controls);
 
      
         this.cdr.detectChanges();
@@ -98,14 +98,14 @@ export class EditDoctorComponent {
 
 
     
-    this.auth.editElectronic(this.idParam, this.formData).subscribe(
+    this.auth.editDoctor(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.doctorResult = result;
+        console.log(this.doctorResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/doctorList`]);
       },
       (err) => {
         console.log(err);

@@ -18,22 +18,21 @@ export class QserviceComponent {
  entities: any;
  desiredWidth = 400; // Example width in pixels
  desiredHeight = 250;
-websiteUrl: string = "http://www.houstonpeace.org/";
 
 sortField: string = '';
 
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllSweetDisplay();
+    this.getAllQDisplay();
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/sweetList/add-s`);
+  this.router.navigateByUrl(`/tribe/qServiceList/add-qservice`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/sweetList/detail-s/${id}`);
+  this.router.navigateByUrl(`/tribe/qServiceList/detail-qservice/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -41,8 +40,8 @@ navigateToWebsite(website:any){
 
 
 
-getAllSweetDisplay() {
-    this.auth.getAllSweet().subscribe(
+getAllQDisplay() {
+    this.auth.getAllQur().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res

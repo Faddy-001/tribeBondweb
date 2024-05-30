@@ -24,15 +24,15 @@ sortField: string = '';
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllRenatlDisplay();
+    this.getAllHealthDisplay();
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/cList/add-c`);
+  this.router.navigateByUrl(`/tribe/healthList/add-health`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/cList/detail-c/${id}`);
+  this.router.navigateByUrl(`/tribe/healthList/detail-health/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -40,8 +40,8 @@ navigateToWebsite(website:any){
 
 
 
-getAllRenatlDisplay() {
-    this.auth.getAllElectronic().subscribe(
+getAllHealthDisplay() {
+    this.auth.getAllHealth().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
@@ -60,7 +60,11 @@ getAllRenatlDisplay() {
                         image: data.images[0],
                         email:data.email,
                         website:data.website,
-                        services:data.services
+                        services:data.services,
+                        createdFirstName:data.createdBy.firstName,
+                        createdLastName:data.createdBy.lastName,
+                        createdpic:data.createdBy.profilePicture,
+                        
                     })
                 // })
 

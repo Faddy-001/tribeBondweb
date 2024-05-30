@@ -13,40 +13,47 @@ export class EditHennaComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editSweetForm!: FormGroup;
-  rentalResult: any
-  editsweet: any
+  editHennaForm!: FormGroup;
+  hennaResult: any
+  editHennaItem: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editSweetForm = this.fb.group({
+    this.editHennaForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
       city: [],
       website: [],
       images: [],
-      description: []
+      description: [],
+      servingCities:[],
+      email:[]
 
 
     });
   }
 
   ngOnInit(): void {
-    this.auth.getSweetById(this.idParam).subscribe(
+    this.auth.getHennaId(this.idParam).subscribe(
       (res: any) => {
-        this.editsweet = res.data;
-        this.images = this.editsweet.images
+        this.editHennaItem = res.data;
+        this.images = this.editHennaItem.images
 
-        console.log(this.editsweet);
+        console.log(this.editHennaItem);
 
-        this.editSweetForm = this.fb.group({
-          name: [this.editsweet.name],
-          address: [this.editsweet.address],
-          city: [this.editsweet.city],
-          description: [this.editsweet.description],
-          phone: [this.editsweet.phone],
-          website: [this.editsweet.website],
+        this.editHennaForm = this.fb.group({
+          name: [this.editHennaItem.name],
+          address: [this.editHennaItem.address],
+          city: [this.editHennaItem.city],
+          description: [this.editHennaItem.description],
+          phone: [this.editHennaItem.phone],
+          website: [this.editHennaItem.website],
+          servingCities: [this.editHennaItem.servingCities],
+          email: [this.editHennaItem.email],
+
+
+          
         })
-        console.log('Form controls:', this.editSweetForm.controls);
+        console.log('Form controls:', this.editHennaForm.controls);
 
      
         this.cdr.detectChanges();
@@ -90,14 +97,14 @@ export class EditHennaComponent {
 
 
     
-    this.auth.editSweet(this.idParam, this.formData).subscribe(
+    this.auth.editHenna(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.hennaResult = result;
+        console.log(this.hennaResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate(['/tribe/sweetList']);
+        this.router.navigate(['/tribe/hennaList']);
       },
       (err) => {
         console.log(err);

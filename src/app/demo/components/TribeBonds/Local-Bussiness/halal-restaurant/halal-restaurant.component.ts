@@ -25,7 +25,7 @@ sortField: string = '';
 
 ngOnInit(): void {
     console.log(this.idParam);
-    this.getAllEductionDisplay();
+    this.getAllRestaurantDisplay();
 
 }
 navigateToAdd(){
@@ -45,7 +45,7 @@ get filledStars(): number[] {
 }
 
 
-getAllEductionDisplay() {
+getAllRestaurantDisplay() {
     this.auth.getAllRestaurant().subscribe(
         (res: any) => {
             console.log(res.data);
@@ -61,7 +61,7 @@ getAllEductionDisplay() {
                         date: data.date,
                         address: data.address,
                         phone: data.phone,
-                        image: data.thumbnail,
+                        image: data.images[0],
                         email:data.email,
                         website:data.website,
 

@@ -124,7 +124,7 @@ getAllhalalMeatDisplay() {
                         name: data.name,
                         address: data.address,
                         phone: data.phone,
-                        image: data.thumbnail,
+                        image: data.images[0],
                         website:data.website
                     })
                 // })

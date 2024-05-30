@@ -33,7 +33,7 @@ export class EditLegalComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getElectronicById(this.idParam).subscribe(
+    this.auth.getlegalById(this.idParam).subscribe(
       (res: any) => {
         this.editelectronic = res.data;
         this.images = this.editelectronic.images
@@ -63,8 +63,7 @@ export class EditLegalComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+     
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -98,14 +97,14 @@ export class EditLegalComponent {
 
 
     
-    this.auth.editElectronic(this.idParam, this.formData).subscribe(
+    this.auth.editLegal(this.idParam, this.formData).subscribe(
       (result) => {
         this.rentalResult = result;
         console.log(this.rentalResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/legalList`]);
       },
       (err) => {
         console.log(err);

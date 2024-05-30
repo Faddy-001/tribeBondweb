@@ -35,7 +35,7 @@ constructor( private auth: AuthenticationService, private activatedRoute: Activa
 
 ngOnInit() {
 
-    this.getbyIDelectronicDisplay();
+    this.getbyIDbeautyDisplay();
 }
 allData: any
 reviewRespShow: any = [];
@@ -47,8 +47,8 @@ phone: any;
 description: any
 desiredWidth = 150; // Example width in pixels
 desiredHeight = 70;
-getbyIDelectronicDisplay() {
-    this.auth.getElectronicById(this.idParam).subscribe(
+getbyIDbeautyDisplay() {
+    this.auth.getBeautyId(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -83,7 +83,7 @@ getbyIDelectronicDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/cList/edit-c/${this.idParam}`);
+    this.router.navigateByUrl(`/tribe/beautyList/edit-beauty/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -91,13 +91,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "electronicId": this.idParam,
+        "beautyRecordId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addElectronicReview(dataValue).subscribe(
+    this.auth.addBeautyReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);

@@ -5,13 +5,13 @@
 				<!-- <h2 style="color:#1769aa ;display: flex;justify-content: center;">Add School</h2> -->
                 <div class="header">
                     <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Rental</span>
+                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Henna</span>
                         <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
                             styleClass="w-full md:w-15rem"></p-dropdown> -->
                         
                     </div>
                 </div>
-				<form style="padding-left: 3%;" [formGroup]="editSweetForm" (ngSubmit)="Submit(editSweetForm.value)">
+				<form style="padding-left: 3%;" [formGroup]="editHennaForm" (ngSubmit)="Submit(editHennaForm.value)">
 
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
@@ -22,11 +22,18 @@
 						<label htmlFor="phone">Phone</label>
 						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
 					</div>
-					
+					<div class="col-12 md:col-6">
+						<label htmlFor="email">Email</label>
+						<input pInputText id="email" type="text" placeholder="Enter email" formControlName="email" />
+					</div>
 
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Website URL</label>
 						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
+					</div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="servingCity">Serving Cities</label>
+						<input pInputText id="servingCity" type="text" placeholder="Enter Serving City" formControlName="servingCities" />
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>

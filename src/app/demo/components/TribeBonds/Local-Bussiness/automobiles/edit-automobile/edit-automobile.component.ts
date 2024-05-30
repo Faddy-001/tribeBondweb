@@ -13,11 +13,10 @@ export class EditAutomobileComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editElectronicForm!: FormGroup;
-  rentalResult: any
-  editelectronic: any
+  editAutomobileForm!: FormGroup;
+  autoResult:any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editElectronicForm = this.fb.group({
+    this.editAutomobileForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -25,29 +24,29 @@ export class EditAutomobileComponent {
       website: [],
       images: [],
       description: [],
-email:[]
+
 
     });
   }
 
   ngOnInit(): void {
-    this.auth.getElectronicById(this.idParam).subscribe(
+    this.auth.getAutomobileById(this.idParam).subscribe(
       (res: any) => {
-        this.editelectronic = res.data;
-        this.images = this.editelectronic.images
+        this.autoResult = res.data;
+        this.images = this.autoResult.images
 
-        console.log(this.editelectronic);
+        console.log(this.autoResult);
 
-        this.editElectronicForm = this.fb.group({
-          name: [this.editelectronic.name],
-          address: [this.editelectronic.address],
-          city: [this.editelectronic.city],
-          description: [this.editelectronic.description],
-          phone: [this.editelectronic.phone],
-          website: [this.editelectronic.website],
-          email:[this.editelectronic.email]
+        this.editAutomobileForm = this.fb.group({
+          name: [this.autoResult.name],
+          address: [this.autoResult.address],
+          city: [this.autoResult.city],
+          description: [this.autoResult.description],
+          phone: [this.autoResult.phone],
+          website: [this.autoResult.website],
+    
         })
-        console.log('Form controls:', this.editElectronicForm.controls);
+        console.log('Form controls:', this.editAutomobileForm.controls);
 
      
         this.cdr.detectChanges();
@@ -77,7 +76,7 @@ email:[]
       }
     }
   }
-
+editresult:any
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -85,8 +84,7 @@ email:[]
     this.formData.append('city', value.city);
     this.formData.append('website', value.website);
     this.formData.append('description', value.description);
-    this.formData.append('services', value.services);
-    this.formData.append('email', value.email);
+   
 
 
 
@@ -95,14 +93,14 @@ email:[]
 
 
     
-    this.auth.editElectronic(this.idParam, this.formData).subscribe(
+    this.auth.editAutomobile(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.editresult = result;
+        console.log(this.editresult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/automobileList`]);
       },
       (err) => {
         console.log(err);

@@ -13,40 +13,42 @@ export class EditRealComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editSweetForm!: FormGroup;
+  editRealForm!: FormGroup;
   rentalResult: any
-  editsweet: any
+  editReal: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editSweetForm = this.fb.group({
+    this.editRealForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
       city: [],
-      website: [],
+      email: [],
       images: [],
-      description: []
+      description: [],
+      price:[]
 
 
     });
   }
 
   ngOnInit(): void {
-    this.auth.getSweetById(this.idParam).subscribe(
+    this.auth.getRealId(this.idParam).subscribe(
       (res: any) => {
-        this.editsweet = res.data;
-        this.images = this.editsweet.images
+        this.editReal = res.data;
+        this.images = this.editReal.images
 
-        console.log(this.editsweet);
+        console.log(this.editReal);
 
-        this.editSweetForm = this.fb.group({
-          name: [this.editsweet.name],
-          address: [this.editsweet.address],
-          city: [this.editsweet.city],
-          description: [this.editsweet.description],
-          phone: [this.editsweet.phone],
-          website: [this.editsweet.website],
+        this.editRealForm = this.fb.group({
+          name: [this.editReal.name],
+          address: [this.editReal.address],
+          city: [this.editReal.city],
+          description: [this.editReal.description],
+          phone: [this.editReal.phone],
+          email: [this.editReal.email],
+          price:[this.editReal.price]
         })
-        console.log('Form controls:', this.editSweetForm.controls);
+        console.log('Form controls:', this.editRealForm.controls);
 
      
         this.cdr.detectChanges();
@@ -58,9 +60,7 @@ export class EditRealComponent {
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -82,22 +82,24 @@ export class EditRealComponent {
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
     this.formData.append('city', value.city);
-    this.formData.append('website', value.website);
+    this.formData.append('email', value.email);
+    this.formData.append('price', value.price);
     this.formData.append('description', value.description);
+
 
 
     console.log(this.formData.append);
 
 
     
-    this.auth.editSweet(this.idParam, this.formData).subscribe(
+    this.auth.editReal(this.idParam, this.formData).subscribe(
       (result) => {
         this.rentalResult = result;
         console.log(this.rentalResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate(['/tribe/sweetList']);
+        this.router.navigate(['/tribe/realEstateList']);
       },
       (err) => {
         console.log(err);

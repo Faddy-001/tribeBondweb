@@ -41,7 +41,7 @@ export class EventsComponent {
                         address: data.address,
                         phone: data.phone,
                         time: data.time,
-                        image: data.thumbnail
+                        image: data.images[0]
 
 
                     })

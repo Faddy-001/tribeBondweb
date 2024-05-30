@@ -13,11 +13,11 @@ export class EditWeddingComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editRenatlForm!: FormGroup;
-  rentalResult: any
-  editrental: any
+  editPartyForm!: FormGroup;
+  weddingResult: any
+  editwedding: any
   constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editRenatlForm = this.fb.group({
+    this.editPartyForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -31,22 +31,22 @@ export class EditWeddingComponent {
   }
 
   ngOnInit(): void {
-    this.auth.getRenatlById(this.idParam).subscribe(
+    this.auth.getpartyById(this.idParam).subscribe(
       (res: any) => {
-        this.editrental = res.data;
-        this.images = this.editrental.images
+        this.editwedding = res.data;
+        this.images = this.editwedding.images
 
-        console.log(this.editrental);
+        console.log(this.editwedding);
 
-        this.editRenatlForm = this.fb.group({
-          name: [this.editrental.name],
-          address: [this.editrental.address],
-          city: [this.editrental.city],
-          description: [this.editrental.description],
-          phone: [this.editrental.phone],
-          website: [this.editrental.website],
+        this.editPartyForm = this.fb.group({
+          name: [this.editwedding.name],
+          address: [this.editwedding.address],
+          city: [this.editwedding.city],
+          description: [this.editwedding.description],
+          phone: [this.editwedding.phone],
+          website: [this.editwedding.website],
         })
-        console.log('Form controls:', this.editRenatlForm.controls);
+        console.log('Form controls:', this.editPartyForm.controls);
 
      
         this.cdr.detectChanges();
@@ -58,9 +58,7 @@ export class EditWeddingComponent {
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -89,15 +87,15 @@ export class EditWeddingComponent {
     console.log(this.formData.append);
 
 
-    
-    this.auth.editRental(this.idParam, this.formData).subscribe(
+
+    this.auth.editParty(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.weddingResult = result;
+        console.log(this.weddingResult.message);
 
         // this.toastr.success(this.halalResult.message);
 
-        this.router.navigate(['/tribe/rentalList']);
+        this.router.navigate(['/tribe/weddingList']);
       },
       (err) => {
         console.log(err);

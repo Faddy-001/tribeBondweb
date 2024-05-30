@@ -13,12 +13,12 @@ export class AddHealthComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addElectronicForm: FormGroup;
+  addHealthForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addElectronicForm = this.fb.group({
+    this.addHealthForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -40,7 +40,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addElectronicForm = this.fb.group({
+    this.addHealthForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -77,7 +77,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  healthResult: any
   Submit(value: any) {
     
 
@@ -87,10 +87,7 @@ userDataString:any
     this.formData.append('phone', value.phone);
     this.formData.append('city', value.city);
     this.formData.append('email', value.email);
-
-    // this.formData.append('contactNumber', value.contactNumber);
     this.formData.append('website', value.website);
-    // this.formData.append('offers', value.offers);
     this.formData.append('description', value.description);
     this.formData.append('services', value.services);
 
@@ -98,14 +95,14 @@ userDataString:any
     console.log(this.formData.append);
 
 
-    this.auth.addElectronic(this.formData).subscribe(
+    this.auth.addHealth(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.healthResult = result;
+        console.log(this.healthResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/healthList`]);
       },
       (err: any) => {
         console.log(err);

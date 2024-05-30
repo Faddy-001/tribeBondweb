@@ -40,7 +40,7 @@ navigateToWebsite(website:any){
 
 
 getAllRenatlDisplay() {
-    this.auth.getAllElectronic().subscribe(
+    this.auth.getAllAutomobile().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
@@ -52,14 +52,10 @@ getAllRenatlDisplay() {
                     this.entityShow.push({
                         id: data._id,
                         name: data.name,
-                        date: data.date,
                         address: data.address,
                         phone: data.phone,
-                        offers:data.offers,
                         image: data.images[0],
-                        email:data.email,
                         website:data.website,
-                        services:data.services
                     })
                 // })
 

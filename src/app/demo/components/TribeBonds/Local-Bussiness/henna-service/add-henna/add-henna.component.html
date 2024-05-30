@@ -11,7 +11,7 @@
                         
                     </div>
                 </div>
-				<form style="padding-left: 3%;" [formGroup]="addSForm" (ngSubmit)="Submit(addSForm.value)">
+				<form style="padding-left: 3%;" [formGroup]="addHennaForm" (ngSubmit)="Submit(addHennaForm.value)">
 
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
@@ -24,10 +24,18 @@
 					</div>
 					
                    
-					
+					<div class="col-12 md:col-6">
+						<label htmlFor="email">Email</label>
+						<input pInputText id="email" type="text" placeholder="Enter email" formControlName="email" />
+					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Website URL</label>
 						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
+					</div>
+					
+					<div class="col-12 md:col-6">
+						<label htmlFor="servingCity">Serving Cities</label>
+						<input pInputText id="servingCity" type="text" placeholder="Enter Serving City" formControlName="servingCities" />
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>

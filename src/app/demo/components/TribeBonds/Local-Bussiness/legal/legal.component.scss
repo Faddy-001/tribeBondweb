@@ -71,5 +71,16 @@
     color: #555;
     
 }
-
+.circular-image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    /* Optional: add border */
+    border: 2px solid #fff; /* Add white border around the image */
+  }
+  .user-image {
+    margin-top: -4%;
+    // margin-bottom: 2%;
+  }
 

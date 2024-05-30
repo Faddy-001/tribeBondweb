@@ -23,7 +23,7 @@ export class AddHalalMeatComponent {
       address: [],
       phone: [],
       website: [],
-      thumbnail: [],
+      // thumbnail: [],
       images: [],
       description: [],
       city:[]
@@ -32,8 +32,25 @@ export class AddHalalMeatComponent {
 
     });
   }
-
+  user:any
+  cityData:any
+  userDataString:any
   ngOnInit(): void {
+    console.log(localStorage.getItem('user'));
+    this.userDataString = localStorage.getItem('user');
+   this.user = JSON.parse(this.userDataString);
+   this.cityData = this.user.city
+   console.log(this.cityData);
+   this.addHalal = this.fb.group({
+     city:[this.cityData],
+     name: [],
+     address: [],
+     phone: [],
+     website: [],
+     images: [],
+     description:[],
+
+   })
   }
 
   onFileSelected(event: any) {
@@ -42,10 +59,10 @@ export class AddHalalMeatComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      // this.formData.append('thumbnail', files[0]);
+      // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
 
         this.formData.append('images', files[i]);
       }

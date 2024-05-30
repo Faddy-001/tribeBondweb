@@ -13,12 +13,12 @@ export class AddBeautyComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addElectronicForm: FormGroup;
+  addBeautyForm: FormGroup;
 user:any
 cityData:any
 userDataString:any
   constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addElectronicForm = this.fb.group({
+    this.addBeautyForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -40,7 +40,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addElectronicForm = this.fb.group({
+    this.addBeautyForm = this.fb.group({
       city:[this.cityData],
       name: [],
       address: [],
@@ -98,14 +98,14 @@ userDataString:any
     console.log(this.formData.append);
 
 
-    this.auth.addElectronic(this.formData).subscribe(
+    this.auth.addBeauty(this.formData).subscribe(
       (result: any) => {
         this.rentalResult = result;
         console.log(this.rentalResult.message);
 
         // this.toastr.success(this.eventResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/beautyList`]);
       },
       (err: any) => {
         console.log(err);

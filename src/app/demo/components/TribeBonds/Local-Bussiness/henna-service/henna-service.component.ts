@@ -24,15 +24,15 @@ sortField: string = '';
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllSweetDisplay();
+    this.getAllHennaDisplay();
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/sweetList/add-s`);
+  this.router.navigateByUrl(`/tribe/hennaList/add-henna`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/sweetList/detail-s/${id}`);
+  this.router.navigateByUrl(`/tribe/hennaList/detail-henna/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -40,8 +40,8 @@ navigateToWebsite(website:any){
 
 
 
-getAllSweetDisplay() {
-    this.auth.getAllSweet().subscribe(
+getAllHennaDisplay() {
+    this.auth.getAllHenna().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
@@ -53,13 +53,13 @@ getAllSweetDisplay() {
                     this.entityShow.push({
                         id: data._id,
                         name: data.name,
-                        date: data.date,
                         address: data.address,
                         phone: data.phone,
-                        offers:data.offers,
                         image: data.images[0],
                         email:data.email,
-                        website:data.website
+                        website:data.website,
+
+                        servingCities:data.servingCities
                     })
                 // })
 
