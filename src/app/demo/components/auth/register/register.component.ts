@@ -128,7 +128,7 @@ export class RegisterComponent {
     formData.append('password', userdata.password);
     formData.append('confirmPwd', userdata.confirmPwd);
     formData.append('email', userdata.email);
-    formData.append('gender', userdata.gender.name);
+    // formData.append('gender', userdata.gender.name);
     formData.append('city', userdata.city);
     formData.append('state', userdata.state);
 
@@ -140,10 +140,10 @@ export class RegisterComponent {
     this.auth.SignUp(formData).subscribe(
       (res: any) => {
         if(res.success == true){
-    this.router.navigate(['/login']);
-
+          
+          this.router.navigate(['/login']);
         }
-       })
+      })
   }
 
   // upload image
