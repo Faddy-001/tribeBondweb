@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MosqueInformationRoutingModule } from './mosque-information-routing.module';
-import { MosqueInformationComponent } from './mosque-information.component';
+import { JobRoutingModule } from './job-routing.module';
+import { AddJobComponent } from './add-job/add-job.component';
+import { DetailJobComponent } from './detail-job/detail-job.component';
 import { AvatarModule } from 'primeng/avatar';
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
@@ -22,16 +22,13 @@ import { ImageModule } from 'primeng/image';
 import { GalleriaModule } from 'primeng/galleria';
 import { CarouselModule } from 'primeng/carousel';
 import { RippleModule } from 'primeng/ripple';
-import { AddMosqueComponent } from './add-mosque/add-mosque.component';
-import { EditMosqueComponent } from './edit-mosque/edit-mosque.component';
-import { DetailMosqueComponent } from './detail-mosque/detail-mosque.component';
-
+import { JobComponent } from './job.component';
 
 @NgModule({
-  declarations: [MosqueInformationComponent,AddMosqueComponent,EditMosqueComponent,DetailMosqueComponent],
+  declarations: [JobComponent,AddJobComponent,DetailJobComponent],
   imports: [
     CommonModule,
-    MosqueInformationRoutingModule,
+    JobRoutingModule,
     AvatarModule,
 		DataViewModule,
 		DropdownModule,
@@ -52,8 +49,6 @@ import { DetailMosqueComponent } from './detail-mosque/detail-mosque.component';
 		GalleriaModule,
 		CarouselModule,
 		RippleModule,
-		
-
   ]
 })
-export class MosqueInformationModule { }
+export class JobModule { }

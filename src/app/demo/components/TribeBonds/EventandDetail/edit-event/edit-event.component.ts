@@ -40,12 +40,7 @@ export class EditEventComponent {
         // this.description = this.editEvent.description;
         this.images = this.editEvent.images
 
-        // const timeParts = this.editEvent.time.split(':');
-        // const hours = parseInt(timeParts[0], 10);
-        // const minutes = parseInt(timeParts[1], 10);
-        // const seconds = parseInt(timeParts[2], 10);
-        // const time = new Date();
-        // time.setHours(hours, minutes);
+        
           this.EditEventForm = this.formbuilder.group({
             name: [this.editEvent.name],
             date: [new Date(this.editEvent.date)],

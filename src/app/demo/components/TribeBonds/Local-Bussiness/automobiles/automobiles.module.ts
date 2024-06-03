@@ -28,16 +28,16 @@ import { DetailAutomobileComponent } from './detail-automobile/detail-automobile
 
 
 @NgModule({
-  declarations: [AutomobilesComponent,AddAutomobileComponent,EditAutomobileComponent,DetailAutomobileComponent],
-  imports: [
-    CommonModule,
-    AutomobilesRoutingModule,
-    AvatarModule,
-    DataViewModule,
-    DropdownModule,
-    ButtonModule,
-    InputTextModule,
-    AutoCompleteModule,
+	declarations: [AutomobilesComponent, AddAutomobileComponent, EditAutomobileComponent, DetailAutomobileComponent],
+	imports: [
+		CommonModule,
+		AutomobilesRoutingModule,
+		AvatarModule,
+		DataViewModule,
+		DropdownModule,
+		ButtonModule,
+		InputTextModule,
+		AutoCompleteModule,
 		CalendarModule,
 		ChipsModule,
 		InputMaskModule,
@@ -51,7 +51,7 @@ import { DetailAutomobileComponent } from './detail-automobile/detail-automobile
 		ImageModule,
 		GalleriaModule,
 		CarouselModule,
-    RippleModule,
-  ]
+		RippleModule,
+	]
 })
 export class AutomobilesModule { }

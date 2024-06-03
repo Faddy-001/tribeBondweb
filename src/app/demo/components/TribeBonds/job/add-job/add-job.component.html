@@ -1,0 +1,81 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="container">
+            <div class="card cardborder">
+                <!-- <h2 style="color:#1769aa ;display: flex;justify-content: center;">Add School</h2> -->
+                <div class="header">
+                    <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add
+                            Job</span>
+                        <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+                            styleClass="w-full md:w-15rem"></p-dropdown> -->
+
+                    </div>
+                </div>
+                <form style="padding-left: 3%;" [formGroup]="addjobForm"
+                    (ngSubmit)="Submit(addjobForm.value)">
+
+                    <div class="p-fluid p-formgrid grid mt-4">
+                        <div class="col-12 md:col-6">
+                            <label htmlFor="jobTitle" style="color:#1769aa;font-weight: bold;">Job Title</label>
+                            <input pInputText id="jobTitle" type="text" placeholder="Enter job title"
+                                formControlName="jobTitle" />
+                        </div>
+
+                        <!-- <div class="col-12 md:col-6">
+                            <label htmlFor="jobdetail">Job Detail</label>
+                            <input pInputText id="jobdetail" type="text" placeholder="Enter your job detail"
+                                formControlName="jobDetails" />
+                        </div> -->
+
+                        <div class="col-12 md:col-6">
+                            <label htmlFor="location" style="color:#1769aa;font-weight: bold;">Job location</label>
+                            <input pInputText id="location" type="text" placeholder="Enter Job location"
+                                formControlName="location" readonly/>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <label htmlFor="contactEmail" style="color:#1769aa;font-weight: bold;">Email</label>
+                            <input pInputText id="contactEmail" type="text" placeholder="Enter Email" formControlName="contactEmail"
+                                 />
+                        </div>
+
+                        <div class="field col-12 ">
+                            <label htmlFor="jobDetails" style="color:#1769aa;font-weight: bold;">Job Description</label>
+                            <span class="p-float-label">
+                                <textarea formControlName="jobDetails" inputId="textarea" rows="5" cols="120"
+                                    pInputTextarea></textarea>
+                                <!-- <label for="textarea">Deatail</label> -->
+                            </span>
+                        </div>
+
+                        <!-- <div class="col-12">
+                            <div class="card">
+                                <label class="file-upload-button">
+                                    Upload an Image
+                                    <input type="file" (change)="onFileSelected($event)" multiple>
+                                </label>
+
+                                <div class="image-container">
+                                    <img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+                                </div>
+
+                              
+
+                            </div>
+                            <div class="avatar-container" id="imagePreviewContainer">
+                                <img class="avatar" alt="" />
+                            </div>
+
+
+                        </div> -->
+                        <div class="col-12 " style="display: flex;justify-content: flex-end;">
+                            <div class="flex flex-wrap gap-2">
+                                <button pButton pRipple label="Submit"></button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

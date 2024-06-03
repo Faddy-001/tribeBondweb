@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-top: 4%;
+    // height: 100vh; /* Adjust as needed */
+  }
+  .cardborder{
+    box-shadow: 0px 4px 8px #1769aa; /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
+    transition: box-shadow 0.3s ease;
+  }
+  .header{
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #e9ecef;
+  border-width: 1px 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 600;
+margin-bottom: 20px;
+}
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 5px; /* Adjust this margin as per your preference */
+  }
+  .file-upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .file-upload-button input[type="file"] {
+    display: none;
+  }
+  
+  /* Style button when hovering over */
+  .file-upload-button:hover {
+    background-color: #0056b3;
+  }

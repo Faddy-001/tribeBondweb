@@ -1527,4 +1527,178 @@ addHennaReview(value:any) {
 
   
 }
+
+// Job
+add_job= this.url + 'jobs/add';
+
+addJob(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_job, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_job= this.url + 'jobs/edit/';
+  editJob(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_job  + id, data, httpOptions);
+
+}
+getall_job = this.url + 'jobs/display';
+getAllJob() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_job, httpOptions).pipe(map((res) => res));
+
+}
+getById_job= this.url + 'jobs/display/';
+  getjobId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_job + id,httpOptions);
+}
+add_jobReview = this.url + 'jobs/add-review';
+addJobReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_jobReview, value,httpOptions).pipe(map((res) => res));
+
+
+  
+}
+delete_job = this.url + 'jobs/delete';
+
+deletejob( id: any, ) {
+  // delete by id data
+  console.log(localStorage.getItem('token'));
+  
+  let bearerToken = localStorage.getItem('token');
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+    
+    }),
+  };
+  return this.http.patch(this.delete_job + '/' + id,  {},httpOptions);
+}
+
+// mosque
+add_mosque= this.url + 'mosque/add';
+
+addMosque(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_mosque, value,httpOptions).pipe(map((res) => res));
+
+}
+edit_mosque= this.url + 'mosque/edit/';
+  editMosque(id: number, data: any) {
+    let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+        
+      }),
+    };
+    return this.http.put(this.edit_mosque  + id, data, httpOptions);
+
+}
+getall_mosque = this.url + 'mosque/display';
+getAllMosque() {
+  let bearerToken = localStorage.getItem('token');
+  // console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.get(this.getall_mosque, httpOptions).pipe(map((res) => res));
+
+}
+getById_mosque= this.url + 'mosque/display/';
+  getMosqueId(id: number) {
+    let bearerToken = localStorage.getItem('token');
+    console.log(bearerToken);
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+
+      }),
+    };
+    return this.http.get(this.getById_mosque + id,httpOptions);
+}
+add_mosqueReview = this.url + 'mosque/add-review';
+addmosqueReview(value:any) {
+  let bearerToken = localStorage.getItem('token');
+  console.log(bearerToken);
+
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+
+    }),
+  };
+  return this.http.post(this.add_mosqueReview, value,httpOptions).pipe(map((res) => res));
+
+
+  
+}
+delete_mosque = this.url + 'mosque/delete';
+
+deletemosque( id: any, ) {
+  // delete by id data
+  console.log(localStorage.getItem('token'));
+  
+  let bearerToken = localStorage.getItem('token');
+  let httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + bearerToken,
+    
+    }),
+  };
+  return this.http.patch(this.delete_mosque + '/' + id,  {},httpOptions);
+}
 }

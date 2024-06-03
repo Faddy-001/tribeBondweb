@@ -258,7 +258,7 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Job',
                         icon: 'pi pi-fw pi-comments',
-                        routerLink: ['/apps//blog/edit'],
+                        routerLink: ['/tribe/job'],
                     },
                     // fund raiser
                     {

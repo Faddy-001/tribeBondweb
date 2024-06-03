@@ -36,6 +36,7 @@ const routes: Routes = [];
     { path: 'giveawayList', data: { breadcrumb: 'Giveaway ' }, loadChildren: () => import('./Community/free-giveaway/free-giveaway.module').then(m => m.FreeGiveawayModule) },
     { path: 'askhelp', data: { breadcrumb: 'Ask Help ' }, loadChildren: () => import('./Community/ask-help/ask-help.module').then(m => m.AskHelpModule) },
     { path: 'volunter', data: { breadcrumb: 'Volunter Need' }, loadChildren: () => import('./Community/volunters/volunters.module').then(m => m.VoluntersModule) },
+    { path: 'job', data: { breadcrumb: 'Job' }, loadChildren: () => import('./job/job.module').then(m => m.JobModule) },
     
     // BuyModuleComponent
     // { path: 'tasklist', data: { breadcrumb: 'Task List' }, loadChildren: () => import('./tasklist/tasklist.app.module').then(m => m.TaskListAppModule) },
