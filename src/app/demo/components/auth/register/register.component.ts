@@ -146,35 +146,5 @@ export class RegisterComponent {
       })
   }
 
-  // upload image
-  // userImage(event: any) {
-  //   console.log(this.selectedFile);
-
-  //   this.selectedFile = event.target.files[0];
-  //   console.log(this.selectedFile);
-
-  //   this.filesToUpload.push(this.selectedFile);
-  //   var fileName = this.selectedFile.name;
-  //   this.extension = fileName.split('.').pop();
-  //   var reader = new FileReader();
-
-  //   if (
-  //     this.extension == 'png' ||
-  //     this.extension == 'jpg' ||
-  //     this.extension == 'jpeg' ||
-  //     this.extension == 'gif' ||
-  //     this.extension == 'webp'
-  //   ) {
-  //     reader.onload = (e: any) => {
-  //       // $('#blah').attr('src', e.target.result);
-  //     };
-  //     reader.readAsDataURL(this.selectedFile); // convert to base64 string
-
-  //     this.extensionErr = false;
-  //   } else {
-  //     this.showExtError = "Couldn't set profile photo.";
-  //     this.extensionErr = true;
-  //   }
-  // }
 
 }

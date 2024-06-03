@@ -42,7 +42,7 @@ export class EditMosqueComponent implements OnInit {
       this.editMosqueResult = res.data;
       this.images = this.editMosqueResult.images;
 
-      console.log(this.editMosqueResult);
+      console.log(this.editMosqueResult.khutbah);
 
       this.editMosque = this.fb.group({
         name: [this.editMosqueResult.name],
@@ -54,10 +54,10 @@ export class EditMosqueComponent implements OnInit {
         khutbah: this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
         // khutbah: this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
       });
-      this.editMosqueResult.khutbah.map((time: string) =>{
-        console.log(time);
-        
-      })
+      this.editMosque.setControl(
+        'khutbah',
+        this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
+      );
       console.log('Form controls:', this.editMosque.controls);
       this.cdr.detectChanges();
     });

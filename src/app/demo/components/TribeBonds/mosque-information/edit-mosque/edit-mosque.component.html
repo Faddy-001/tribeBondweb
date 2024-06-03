@@ -4,7 +4,7 @@
         <div class="card cardborder">
           <div class="header">
             <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-              <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add Mosque</span>
+              <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Mosque</span>
             </div>
           </div>
           <form style="padding-left: 3%;" [formGroup]="editMosque" (ngSubmit)="Submit(editMosque.value)">
@@ -30,6 +30,16 @@
                 <input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website" />
               </div>
               <div class="col-12 md:col-6">
+                <label for="khutbah" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
+                <div formArrayName="khutbah">
+                  <div *ngFor="let time of khutbah.controls; let i = index">
+                    <p-calendar formControlName="{{i}}" [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter khutbah time"></p-calendar>
+                    <button type="button" (click)="removeKhutbahTime(i)" class="mb-2">Remove</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addKhutbahTime()">Add Time</button>
+              </div>
+              <!-- <div class="col-12 md:col-6">
                 <label for="time" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
                 <div formArrayName="khutbah">
                   <div *ngFor="let time of khutbah.controls; let i = index" [formGroupName]="i">
@@ -38,7 +48,7 @@
                   </div>
                 </div>
                 <button type="button" (click)="addKhutbahTime()">Add Time</button>
-              </div>
+              </div> -->
               <div class="field col-12 ">
                 <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
                 <span class="p-float-label">

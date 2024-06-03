@@ -30,7 +30,7 @@
                 <input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website" />
               </div>
               <div class="col-12 md:col-6">
-                <label for="time" style="color:#1769aa;font-weight: bold;">Time</label>
+                <label for="time" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
                 <div formArrayName="khutbah">
                   <div *ngFor="let time of khutbahTimes.controls; let i = index" class="khutbah-time" [formGroupName]="i">
                     <p-calendar [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter khutbah time" formControlName="time"></p-calendar>
