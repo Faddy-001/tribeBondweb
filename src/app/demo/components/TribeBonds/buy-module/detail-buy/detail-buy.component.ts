@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
-@Component({
-  selector: 'app-detail-ahelp',
 
-  templateUrl: './detail-ahelp.component.html',
-  styleUrl: './detail-ahelp.component.scss'
+@Component({
+  selector: 'app-detail-buy',
+
+  templateUrl: './detail-buy.component.html',
+  styleUrl: './detail-buy.component.scss'
 })
-export class DetailAhelpComponent {
+export class DetailBuyComponent {
   images!: any[];
   
   rowCount = 3;
@@ -35,7 +36,7 @@ constructor( private auth: AuthenticationService, private activatedRoute: Activa
 
 ngOnInit() {
 
-    this.getbyIDAskDisplay();
+    this.getbyIDBuyDisplay();
 }
 allData: any
 reviewRespShow: any = [];
@@ -47,8 +48,8 @@ phone: any;
 description: any
 desiredWidth = 150; // Example width in pixels
 desiredHeight = 70;
-getbyIDAskDisplay() {
-    this.auth.getBuyIdask(this.idParam).subscribe(
+getbyIDBuyDisplay() {
+    this.auth.getBuyId(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res.data
@@ -83,7 +84,7 @@ getbyIDAskDisplay() {
         })
 }
 navigateEdit(id:number): void {
-    this.router.navigateByUrl(`/tribe/askhelp/edit-ask/${this.idParam}`);
+    this.router.navigateByUrl(`/tribe/BuyList/edit-buy/${this.idParam}`);
   }
 reviewText: string = ''; // Variable to hold the value of the textarea
 reviewResult: any;
@@ -91,13 +92,13 @@ AddReview() {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-        "giveawayId": this.idParam,
+        "buynsellId": this.idParam,
         "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addAskReview(dataValue).subscribe(
+    this.auth.addBuyReview(dataValue).subscribe(
         (result) => {
             this.reviewResult = result;
             console.log(this.reviewResult.success);
@@ -114,7 +115,6 @@ AddReview() {
 }
 
 }
-
 
 
 

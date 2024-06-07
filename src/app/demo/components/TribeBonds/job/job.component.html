@@ -1,12 +1,10 @@
 <div>
     <div class="p-toolbar-group-left flex flex-wrap justify-content-end align-items-end">
-        <button pButton type="button" label="Add" icon="pi pi-plus" class="mr-2 mb-4"
-            (click)="navigateToAdd()"></button>
-
+        <button pButton type="button" label="Add" icon="pi pi-plus" class="mr-2 mb-4" (click)="navigateToAdd()"></button>
     </div>
 </div>
 <div class="card">
-    <p-dataView [paginator]="true" [rows]="6" filterBy="title" [sortOrder]="-1" layout="grid">
+    <p-dataView [rows]="6"  [rows]="6"  layout="grid">
         <ng-template pTemplate="header">
             <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
                 <span class="text-xl text-900 font-semibold">Job List</span>
@@ -19,10 +17,10 @@
 
         <ng-template let-blogs pTemplate="gridItem">
             <div class="grid grid-nogutter">
-                <div class="col-10" *ngFor="let dataShow of entityShow;let i= index">
+                <div class="col-10" *ngFor="let dataShow of entityShow; let i = index">
                     <div class="card cardborder">
                         <div class="p-3" *ngIf="entityShow">
-                            <div class="cursor-pointer surface-card  border-round">
+                            <div class="cursor-pointer surface-card border-round">
                                 <div class="text-container">
                                     <h2>{{dataShow.jobTitle}}</h2> 
                                     <p>Contact Email: {{dataShow.contactEmail}}</p>
@@ -31,17 +29,11 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="image-container">
-                                        <div
-                                            class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
-                                            <button pButton pRipple type="button" label="Details"
-                                                class="p-button-rounded p-button-secondary mt-2 mr-2"
-                                                (click)="navigateToDetail(dataShow.id)"></button>
-                                            <button pButton pRipple type="button" label="Delete"
-                                                class="p-button-rounded p-button-danger mt-2 mr-2"  (click)="deletecard(dataShow.id)" ></button>
-                                                
+                                        <div class="p-toolbar-group-left flex flex-wrap justify-content-start align-items-start">
+                                            <button pButton pRipple type="button" label="Details" class="p-button-rounded p-button-secondary mt-2 mr-2" (click)="navigateToDetail(dataShow.id)"></button>
+                                            <button pButton pRipple type="button" label="Delete" class="p-button-rounded p-button-danger mt-2 mr-2" (click)="deletecard(dataShow.id)"></button>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>

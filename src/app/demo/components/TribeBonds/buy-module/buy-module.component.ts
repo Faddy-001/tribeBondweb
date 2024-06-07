@@ -18,22 +18,20 @@ export class BuyModuleComponent {
  entities: any;
  desiredWidth = 400; // Example width in pixels
  desiredHeight = 250;
-websiteUrl: string = "http://www.houstonpeace.org/";
-
 sortField: string = '';
 
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllRenatlDisplay();
+    this.getAllbuyDisplay();
 
 }
 navigateToAdd(){
-  this.router.navigateByUrl(`/tribe/automobileList/add-auto`);
+  this.router.navigateByUrl(`/tribe/BuyList/add-buy`);
 
 }
 navigateToDetail(id:number): void {
-  this.router.navigateByUrl(`/tribe/automobileList/detail-auto/${id}`);
+  this.router.navigateByUrl(`/tribe/BuyList/detail-buy/${id}`);
 }
 navigateToWebsite(website:any){
   window.open(website, '_blank');
@@ -41,8 +39,8 @@ navigateToWebsite(website:any){
 
 
 
-getAllRenatlDisplay() {
-    this.auth.getAllAutomobile().subscribe(
+getAllbuyDisplay() {
+    this.auth.getAllBuy().subscribe(
         (res: any) => {
             console.log(res.data);
             this.allData = res
@@ -54,10 +52,11 @@ getAllRenatlDisplay() {
                     this.entityShow.push({
                         id: data._id,
                         name: data.name,
-                        address: data.address,
-                        phone: data.phone,
+                        price: data.price,
+                        phone:data.phone,
+                        email: data.contactEmail,
                         image: data.images[0],
-                        website:data.website,
+                        category:data.category,
                     })
                 // })
 

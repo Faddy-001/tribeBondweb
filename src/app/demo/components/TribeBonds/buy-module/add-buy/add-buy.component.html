@@ -1,1 +1,92 @@
-<p>add-buy works!</p>
+<div class="grid">
+	<div class="col-12">
+		<div class="container">
+			<div class="card cardborder">
+				<div class="header">
+					<div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add
+							Buy-n-sell</span>
+					</div>
+				</div>
+				<form style="padding-left: 3%;" [formGroup]="addAutomobileForm"
+					(ngSubmit)="Submit(addAutomobileForm.value)">
+					<div class="p-fluid p-formgrid grid mt-4">
+						<div class="col-12 md:col-6">
+							<label htmlFor="productName" style="color:#1769aa;font-weight: bold;">Product Name </label>
+							<input pInputText id="productName" type="text" placeholder="Enter product Name"
+								formControlName="name" />
+						</div>
+						<div class=" col-12 md:col-6">
+							<label htmlFor="category" style="color:#1769aa;font-weight: bold;">Category</label>
+							<p-dropdown [options]="Category" optionLabel="label" placeholder="Select category"
+								formControlName="category"></p-dropdown>
+							<!-- <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select category"
+                            formControlName="category"></p-dropdown> -->
+						</div>
+						<div class="col-12 md:col-6">
+							<label htmlFor="email" style="color:#1769aa;font-weight: bold;">Email</label>
+							<input pInputText id="email" type="text" placeholder="Enter your email"
+								formControlName="contactEmail" />
+						</div>
+						<div class="col-12 md:col-6">
+							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
+							<input pInputText id="phone" type="number" placeholder="Enter your phone"
+								formControlName="phone" />
+						</div>
+
+						<div class="col-12 md:col-6">
+							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
+							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city"
+								readonly />
+						</div>
+
+
+						<div class="col-12 md:col-6">
+							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Location</label>
+							<input pInputText id="website" type="text" placeholder="Enter your location"
+								formControlName="location" />
+						</div>
+
+						<div class="col-12 md:col-6">
+							<label htmlFor="price" style="color:#1769aa;font-weight: bold;">Price</label>
+							<input pInputText id="price" type="number" placeholder="Enter your price"
+								formControlName="price" />
+						</div>
+						<div class="field col-12 ">
+							<label htmlFor="description" style="color:#1769aa;font-weight: bold;">Description</label>
+							<span class="p-float-label">
+								<textarea formControlName="description" inputId="textarea" rows="5" cols="120"
+									pInputTextarea></textarea>
+							</span>
+						</div>
+
+						<div class="col-12">
+							<div class="card">
+								<label class="file-upload-button">
+									Upload an Image
+									<input type="file" (change)="onFileSelected($event)" multiple>
+								</label>
+
+								<div class="image-container">
+									<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+								</div>
+
+								<div class="col-12 " style="display: flex;justify-content: flex-end;">
+									<div class="flex flex-wrap gap-2">
+										<button pButton pRipple label="Submit"></button>
+
+									</div>
+								</div>
+
+							</div>
+							<div class="avatar-container" id="imagePreviewContainer">
+								<img class="avatar" alt="" />
+							</div>
+
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

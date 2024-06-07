@@ -44,20 +44,21 @@ export class EditMosqueComponent implements OnInit {
 
       console.log(this.editMosqueResult.khutbah);
 
-      this.editMosque = this.fb.group({
-        name: [this.editMosqueResult.name],
-        address: [this.editMosqueResult.address],
-        city: [this.editMosqueResult.city],
-        description: [this.editMosqueResult.description],
-        phone: [this.editMosqueResult.phone],
-        website: [this.editMosqueResult.website],
-        khutbah: this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
-        // khutbah: this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
+      this.editMosque.patchValue({
+        name: this.editMosqueResult.name,
+        address: this.editMosqueResult.address,
+        city: this.editMosqueResult.city,
+        description: this.editMosqueResult.description,
+        phone: this.editMosqueResult.phone,
+        website: this.editMosqueResult.website,
       });
-      this.editMosque.setControl(
-        'khutbah',
-        this.fb.array(this.editMosqueResult.khutbah.map((time: string) => this.fb.control(new Date(time), Validators.required)))
-      );
+
+      // Set the khutbah times in the FormArray
+      const khutbahArray = this.editMosque.get('khutbah') as FormArray;
+      this.editMosqueResult.khutbah.forEach((time: string) => {
+        khutbahArray.push(this.fb.control(new Date(time)));
+      });
+
       console.log('Form controls:', this.editMosque.controls);
       this.cdr.detectChanges();
     });
@@ -105,10 +106,17 @@ export class EditMosqueComponent implements OnInit {
     this.formData.append('website', value.website);
     this.formData.append('description', value.description);
 
-    value.khutbah.forEach((time: Date, index: number) => {
-      this.formData.append(`khutbah[${index}]`, time.toISOString());
+    // value.khutbah.forEach((time: Date, index: number) => {
+    //   this.formData.append('khutbah', time.toISOString());
+    // });
+    const khutbahArray: string[] = [];
+    value.khutbah.forEach((time: Date) => {
+      khutbahArray.push(time.toISOString());
     });
-
+    this.formData.append('khutbah', JSON.stringify(khutbahArray));
+    // value.khutbah.forEach((khutbah: any) => {
+    //   this.formData.append('khutbah', khutbah.time);
+    // });
     console.log(this.formData);
 
     this.auth.editMosque(this.idParam, this.formData).subscribe(

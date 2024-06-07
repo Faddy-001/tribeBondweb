@@ -5,6 +5,8 @@ import { LandingComponent } from './demo/components/landing/landing.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
 import { RegisterComponent } from './demo/components/auth/register/register.component';
 import { EventsComponent } from './demo/components/TribeBonds/EventandDetail/events/events.component';
+import { LoggedInAuthGuard } from './loginguard.guard';
+import { AuthGuard } from './auth.guard';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled',
@@ -18,15 +20,15 @@ const routes: Routes = [
         component: LandingComponent,
 
     },
+
     {
         path: 'login',
         component: LoginComponent,
-        // loadChildren: () =>
-        //     import('./demo/components/auth/login/login.module').then(
-        //         (m) => m.LoginModule
-        //     ),
+        // canActivate: [LoggedInAuthGuard],
+
+       
     },
-    { path: 'signup', component: RegisterComponent  },
+    { path: 'signup', component: RegisterComponent },
 
     {
         path: '',
@@ -39,7 +41,7 @@ const routes: Routes = [
                         (m) => m.DashboardModule
                     ),
             },
-            
+
             {
                 path: 'uikit',
                 data: { breadcrumb: 'UI Kit' },
@@ -111,8 +113,10 @@ const routes: Routes = [
                     import('./demo/components/TribeBonds/tribe-bond.module').then(
                         (m) => m.TribeBondModule
                     ),
+                    // canActivate: [AuthGuard],
+
             },
-            
+
         ],
     },
     {

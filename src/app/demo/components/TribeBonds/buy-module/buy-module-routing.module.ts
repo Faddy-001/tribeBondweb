@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { BuyModuleComponent } from './buy-module.component';
 import { AddBuyComponent } from './add-buy/add-buy.component';
 import { EditBuyComponent } from './edit-buy/edit-buy.component';
+import { DetailBuyComponent } from './detail-buy/detail-buy.component';
 
 const routes: Routes = [
   {path:"",component:BuyModuleComponent},
   {path:"add-buy",component:AddBuyComponent},
-  {path:"edit-buy",component:EditBuyComponent},
+  {path:"edit-buy/:id",component:EditBuyComponent},
+  {path:"detail-buy/:id",component:DetailBuyComponent},
 
 
-  // { path: 'add', data: { breadcrumb: 'Add Tutor' }, loadChildren: () => import('../buy-module/buy-module.module').then(m => m.BuyModuleModule) },
 
 ];
 

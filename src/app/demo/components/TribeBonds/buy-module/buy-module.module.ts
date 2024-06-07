@@ -24,9 +24,10 @@ import { CarouselModule } from 'primeng/carousel';
 import { RippleModule } from 'primeng/ripple';
 import { AddBuyComponent } from './add-buy/add-buy.component';
 import { EditBuyComponent } from './edit-buy/edit-buy.component';
+import { DetailBuyComponent } from './detail-buy/detail-buy.component';
 
 @NgModule({
-  declarations: [BuyModuleComponent,AddBuyComponent,EditBuyComponent],
+  declarations: [BuyModuleComponent,AddBuyComponent,EditBuyComponent,DetailBuyComponent],
   imports: [
     CommonModule,
     BuyModuleRoutingModule,
