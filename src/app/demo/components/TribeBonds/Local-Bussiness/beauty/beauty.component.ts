@@ -69,6 +69,15 @@ getAllBeautyDisplay() {
             })
         })
 }
+
+deletecard(id: any) {
+  this.auth.deleteBeauty(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
 }
 
 

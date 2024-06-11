@@ -60,6 +60,14 @@ getAllGiveDisplay() {
             })
         })
 }
+deletecard(id: any) {
+  this.auth.deleteGive(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
 }
 
 

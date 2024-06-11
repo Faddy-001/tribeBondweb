@@ -51,7 +51,6 @@ import { DetailVolunterComponent } from './detail-volunter/detail-volunter.compo
 		GalleriaModule,
 		CarouselModule,
     RippleModule,
-	CalendarModule,
 
   ],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]

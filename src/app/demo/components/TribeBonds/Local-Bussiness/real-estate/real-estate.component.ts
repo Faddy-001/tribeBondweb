@@ -70,6 +70,14 @@ export class RealEstateComponent {
         })
       })
   }
+  deletecard(id: any) {
+    this.auth.deleteReal(id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.ngOnInit()
+        window.location.reload();
+      })
+  }
 }
 
 

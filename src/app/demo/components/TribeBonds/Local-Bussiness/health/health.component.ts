@@ -73,6 +73,14 @@ getAllHealthDisplay() {
             })
         })
 }
+deletecard(id: any) {
+  this.auth.deleteHealth(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
 }
 
 

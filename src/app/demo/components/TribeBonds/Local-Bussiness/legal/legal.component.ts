@@ -72,6 +72,14 @@ getAllRenatlDisplay() {
             })
         })
 }
+deletecard(id: any) {
+  this.auth.deleteLegal(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
 }
 
 

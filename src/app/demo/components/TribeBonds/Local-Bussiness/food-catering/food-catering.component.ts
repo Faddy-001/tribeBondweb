@@ -66,6 +66,14 @@ export class FoodCateringComponent {
         })
       })
   }
+  deletecard(id: any) {
+    this.auth.deleteFood(id).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.ngOnInit()
+        window.location.reload();
+      })
+  }
 }
 
 

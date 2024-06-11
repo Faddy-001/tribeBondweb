@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../demo/service/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-menu',
@@ -11,7 +12,7 @@ export class AppMenuComponent implements OnInit {
     newPPT: any = [];
     demoData: any;
     menuItems: any[] | undefined;
-    constructor(private auth: AuthenticationService) { }
+    constructor(private auth: AuthenticationService,private router: Router,) { }
     model: any[] = [];
     items: any
     getAllEductionDisplay() {
@@ -679,10 +680,20 @@ export class AppMenuComponent implements OnInit {
     }
     logout() {
         console.log('vdsvndvbsnd');
-        this.auth.logout().subscribe(
-            (res: any) => {
-
-            })
-        // this.auth.logout();
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      sessionStorage.removeItem('currentUser');
+      this.router.navigate([`/login`]);
     }
+    // logout_url = this.url + 'user/register';
+    // logout() {
+    //   localStorage.removeItem('token');
+    //   localStorage.removeItem('user');
+  
+    //   sessionStorage.removeItem('currentUser');
+    //   // };
+    //   localStorage.removeItem('currentUser');
+    //   // return this.http.post(this.logout_url, httpOptions);
+  
+    // }
 }

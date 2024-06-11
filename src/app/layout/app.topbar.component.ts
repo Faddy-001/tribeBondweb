@@ -13,13 +13,25 @@ export class AppTopbarComponent {
     config!: AppConfig;
 
     subscription: any;
-
+    user:any
+    firstName:any
+    lastName:any
+    userDataString:any
+    profilePicture:any
     constructor(public layoutService: LayoutService, public el: ElementRef) {
         this.subscription = this.layoutService.configUpdate$.subscribe(
             (config) => {
                 this.config = config;
             }
         );
+        console.log(localStorage.getItem('user'));
+        this.userDataString = localStorage.getItem('user');
+       this.user = JSON.parse(this.userDataString);
+       this.profilePicture = this.user.profilePicture
+       this.firstName = this.user.firstName
+       this.lastName = this.user.lastName
+
+       console.log(this.profilePicture);
     }
 
     onMenuButtonClick() {

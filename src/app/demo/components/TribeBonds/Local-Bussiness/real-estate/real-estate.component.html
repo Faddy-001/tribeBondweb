@@ -23,10 +23,13 @@
                     <div class="card cardborder">
                         <div class="p-3" *ngIf="entityShow">
                             <div class="cursor-pointer surface-card  border-round">
-                                <div class="flex align-items-center mb-4 font-bold" style=" border-bottom: 2px solid black;">
-                                    <span class="text-xl text-900 mr-2"> <img [src]='dataShow.createdpic' class="circular-image user-image" /></span>
+                                <div class="flex align-items-center mb-4 font-bold"
+                                    style=" border-bottom: 2px solid black;">
+                                    <span class="text-xl text-900 mr-2"> <img [src]='dataShow.createdpic'
+                                            class="circular-image user-image" /></span>
                                     <span
-                                        class="inline-flex align-items-center justify-content-center  surface-border border-round mb-2 mr-2">{{dataShow.createdFirstName}} {{dataShow.createdLastName}}</span>
+                                        class="inline-flex align-items-center justify-content-center  surface-border border-round mb-2 mr-2">{{dataShow.createdFirstName}}
+                                        {{dataShow.createdLastName}}</span>
                                 </div>
                                 <div class="card-content">
                                     <div class="image-container">
@@ -43,8 +46,9 @@
                                                 class="p-button-rounded p-button-secondary mt-2 mr-2"
                                                 (click)="navigateToDetail(dataShow.id)"></button>
                                             <button pButton pRipple type="button" label="Delete"
-                                                class="p-button-rounded p-button-danger mt-2 mr-2"   ></button>
-                                               
+                                                (click)="deletecard(dataShow.id)"
+                                                class="p-button-rounded p-button-danger mt-2 mr-2"></button>
+
                                         </div>
                                     </div>
                                     <div class="text-container">

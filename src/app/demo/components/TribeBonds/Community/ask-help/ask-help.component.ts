@@ -65,7 +65,14 @@ getAllbuyDisplay() {
             })
         })
 }
-}
+deletecard(id: any) {
+  this.auth.deleteAsk(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}}
 
 
 

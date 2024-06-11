@@ -25,7 +25,7 @@ sortField: string = '';
 ngOnInit(): void {
     console.log("f s bdn");
     console.log(this.idParam);
-    this.getAllRenatlDisplay();
+    this.getAllElectrionicDisplay();
 
 }
 navigateToAdd(){
@@ -41,7 +41,7 @@ navigateToWebsite(website:any){
 
 
 
-getAllRenatlDisplay() {
+getAllElectrionicDisplay() {
     this.auth.getAllElectronic().subscribe(
         (res: any) => {
             console.log(res.data);
@@ -73,6 +73,15 @@ getAllRenatlDisplay() {
             })
         })
 }
+deletecard(id: any) {
+  this.auth.deleteElectronic(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
+
 }
 
 

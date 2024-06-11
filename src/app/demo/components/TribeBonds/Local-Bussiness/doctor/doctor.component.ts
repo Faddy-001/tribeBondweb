@@ -70,6 +70,14 @@ getAllRenatlDisplay() {
             })
         })
 }
+deletecard(id: any) {
+  this.auth.deleteDoctor(id).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.ngOnInit()
+      window.location.reload();
+    })
+}
 }
 
 
