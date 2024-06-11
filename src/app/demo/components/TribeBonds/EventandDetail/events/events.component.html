@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="card">
-    <p-dataView [value]="totalBlogs" [paginator]="true" [rows]="1" filterBy="title" [sortField]="sortField"
+    <p-dataView [value]="allData"  [rows]="1" filterBy="title" [sortField]="sortField"
         [sortOrder]="-1" layout="grid">
         <ng-template pTemplate="header">
             <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">

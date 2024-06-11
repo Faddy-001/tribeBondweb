@@ -120,7 +120,7 @@ export class RegisterComponent {
       userdata.state = this.signUpForm.get('state')?.value.state
     }
 
-    console.log(this.signUpForm.get('city')?.value);
+    console.log(this.signUpForm.get('gender')?.value.name);
 
     const formData = new FormData();
     formData.append('firstName', userdata.firstName);
@@ -128,7 +128,7 @@ export class RegisterComponent {
     formData.append('password', userdata.password);
     formData.append('confirmPwd', userdata.confirmPwd);
     formData.append('email', userdata.email);
-    // formData.append('gender', userdata.gender.name);
+    formData.append('gender', userdata.gender.name);
     formData.append('city', userdata.city);
     formData.append('state', userdata.state);
 

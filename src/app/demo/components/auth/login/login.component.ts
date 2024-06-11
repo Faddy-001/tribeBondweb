@@ -1,6 +1,6 @@
 import { Component,  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 import { GoogleAuthService } from 'src/app/google-authentication.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
@@ -13,18 +13,23 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class LoginComponent {
     rememberMe: boolean = false;
     loginForm: FormGroup;
+    returnUrl: string = '';
     constructor(private layoutService: LayoutService, private fb: FormBuilder,
         public router: Router,
         private auth: AuthenticationService,
-        private googleAuthService: GoogleAuthService
+        private googleAuthService: GoogleAuthService,
+        private route: ActivatedRoute,
     ) {
         this.loginForm = this.fb.group({
             email: [null, [Validators.required, Validators.email]],
             password: [null, Validators.required],
         });
+       
     }
     ngOnInit() {
-       
+      this.route.queryParams.subscribe(params => {
+        this.returnUrl = params['returnUrl'] || 'tribe/home';
+      });
           
     }
   
@@ -61,10 +66,10 @@ export class LoginComponent {
 
                       // Store user data in local storage
                       localStorage.setItem('user', JSON.stringify(res.data.user));
-                        this.router.navigateByUrl('/dashboard');
+                        // this.router.navigateByUrl('/tribe/home');
+                        this.router.navigateByUrl(this.returnUrl);
                     }
-                    // this.auth.setToken(res.data.token);
-                    // this.auth.setToken(res.data.user);
+                  
 
                     console.log(res.data.user);
                     

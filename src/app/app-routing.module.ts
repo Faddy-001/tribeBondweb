@@ -15,32 +15,45 @@ const routerOptions: ExtraOptions = {
 
 const routes: Routes = [
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
-    {
+    // { path: 'landing', component: LandingComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent, },
+    { path: 'signup', component: RegisterComponent },
+      {
         path: 'landing',
-        component: LandingComponent,
-
+        loadChildren: () =>
+            import('./demo/components/landing/landing.module').then(
+                (m) => m.LandingModule
+            ),
+          
     },
+    // { path: '', redirectTo: '/landing', pathMatch: 'full' },
+    // {
+    //     path: 'landing',
+    //     component: LandingComponent,
 
-    {
-        path: 'login',
-        component: LoginComponent,
-        // canActivate: [LoggedInAuthGuard],
+    // },
+    // { path: 'landing', component: LandingComponent, canActivate: [AuthGuard] },
+
+    // {
+    //     path: 'login',
+    //     component: LoginComponent,
+    //     canActivate: [LoggedInAuthGuard],
 
        
-    },
-    { path: 'signup', component: RegisterComponent },
+    // },
+    // { path: 'signup', component: RegisterComponent },
 
     {
         path: '',
         component: AppLayoutComponent,
         children: [
-            {
-                path: 'dashboard',
-                loadChildren: () =>
-                    import('./demo/components/dashboard/dashboard.module').then(
-                        (m) => m.DashboardModule
-                    ),
-            },
+            // {
+            //     path: 'dashboard',
+            //     loadChildren: () =>
+            //         import('./demo/components/dashboard/dashboard.module').then(
+            //             (m) => m.DashboardModule
+            //         ),
+            // },
 
             {
                 path: 'uikit',
@@ -113,6 +126,7 @@ const routes: Routes = [
                     import('./demo/components/TribeBonds/tribe-bond.module').then(
                         (m) => m.TribeBondModule
                     ),
+                    canActivate: [AuthGuard]
                     // canActivate: [AuthGuard],
 
             },
@@ -134,13 +148,7 @@ const routes: Routes = [
                 (m) => m.NotfoundModule
             ),
     },
-    {
-        path: 'landing',
-        loadChildren: () =>
-            import('./demo/components/landing/landing.module').then(
-                (m) => m.LandingModule
-            ),
-    },
+  
     { path: '**', redirectTo: '/notfound' },
 ];
 

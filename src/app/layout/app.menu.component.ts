@@ -272,6 +272,12 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-comments',
                         routerLink: ['/apps//blog/edit'],
                     },
+                    {
+                        label: 'logout',
+                        icon: 'pi pi-fw pi-comments',
+                        command: () => this.logout(), // Call logout function
+                        // routerLink: ['/apps//blog/edit'],
+                    },
 
 
                     // {
@@ -670,5 +676,13 @@ export class AppMenuComponent implements OnInit {
             //     ],
             // },
         ];
+    }
+    logout() {
+        console.log('vdsvndvbsnd');
+        this.auth.logout().subscribe(
+            (res: any) => {
+
+            })
+        // this.auth.logout();
     }
 }

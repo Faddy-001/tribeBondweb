@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
@@ -21,6 +21,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         StyleClassModule,
         SidebarModule,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [LandingComponent],
 })
 export class LandingModule {}

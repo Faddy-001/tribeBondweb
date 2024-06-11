@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
@@ -19,6 +19,21 @@ export class BuyModuleComponent {
  desiredWidth = 400; // Example width in pixels
  desiredHeight = 250;
 sortField: string = '';
+page = 1;
+loadingData = false;
+  pageSize = 10; 
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body, html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight) {
+      // Fetch more data when scrolled to the bottom
+      this.page++;
+      this.getAllbuyDisplay();
+    }
+  }
 
 ngOnInit(): void {
     console.log("f s bdn");
@@ -40,6 +55,7 @@ navigateToWebsite(website:any){
 
 
 getAllbuyDisplay() {
+  this.loadingData = true; 
     this.auth.getAllBuy().subscribe(
         (res: any) => {
             console.log(res.data);
@@ -62,7 +78,14 @@ getAllbuyDisplay() {
 
                 console.log(this.entityShow.image);
 
-            })
+            },
+            (error: any) => {
+              console.error(error);
+              this.loadingData = false; // Ensure loadingData is set to false even in case of errors
+          }
+          
+          )
+           
         })
 }
 }

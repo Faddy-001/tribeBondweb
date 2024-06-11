@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="card">
-    <p-dataView [paginator]="true" [rows]="6" filterBy="title" [sortOrder]="-1" layout="grid">
+    <p-dataView [value]="allData" filterBy="title" [sortOrder]="-1" layout="grid">
         <ng-template pTemplate="header">
             <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
                 <span class="text-xl text-900 font-semibold">Electronic List</span>

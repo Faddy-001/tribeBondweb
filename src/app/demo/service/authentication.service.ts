@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, catchError, subscribeOn, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -23,36 +24,13 @@ export class AuthenticationService {
   }
   isLogin: any;
   
-  verifyTokenUrl = this.url + 'verifytoken';
+  // verifyTokenUrl = this.url + 'verifytoken';
 
-  verifyToken(token: any) {
-    return this.http.post(this.verifyTokenUrl, token);
-  }
-  isLoggedIn() {
-    const token = localStorage.getItem('token');
+  // verifyToken(token: any) {
+  //   return this.http.post(this.verifyTokenUrl, token);
+  // }
 
-    if (token) {
-      this.isLogin = true;
-
-      this.verifyToken({ token: token }).subscribe(
-        (result) => {},
-        (error) => {
-          console.log(error['error']['success']);
-          if (error['error']['success'] == false) {
-            console.log('no data');
-            localStorage.clear();
-            window.location.href = '/login';
-            this.isLogin = false;
-          }
-        }
-      );
-    } else {
-      console.log('no token is available');
-      this.isLogin = false;
-    }
-    return this.isLogin;
-  }
-  LoginUser(user: any) {
+  LoginUser(user: any): Observable<any> {
     return this.http.post(this.login_url, user).pipe(
       tap((res: any) => {
         console.log('Login API Response:', res);
@@ -62,6 +40,26 @@ export class AuthenticationService {
       })
     );
   }
+  logout_url = this.url + 'user/register';
+  logout():Observable<any> {
+    let bearerToken = localStorage.getItem('token');
+
+    // let bearerToken = localStorage.getItem('token');
+    let httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + bearerToken,
+      }),
+      
+    };
+    localStorage.removeItem('currentUser');
+    return this.http.post(this.logout_url, httpOptions);
+
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+  
   //  signup
   SignUp(user: any) {
     return this.http.post(this.signup_url, user).pipe(map((res) => res));
