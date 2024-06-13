@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class EditAhelpComponent {
     private cdr: ChangeDetectorRef,
     private auth: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService ,
   ) {
     this.editAskForm = this.fb.group({
       name: [],
@@ -105,6 +107,8 @@ export class EditAhelpComponent {
   }
 
   editresult: any;
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -118,10 +122,14 @@ export class EditAhelpComponent {
     this.auth.editAskFree(this.idParam, this.formData).subscribe(
       (result) => {
         this.editresult = result;
+        this.toastr.success(this.editresult.message);
         this.router.navigate([`/tribe/askhelp`]);
       },
       (err) => {
         console.log(err);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       }
     );
   }

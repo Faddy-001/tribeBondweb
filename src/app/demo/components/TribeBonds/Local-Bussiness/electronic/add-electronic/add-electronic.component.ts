@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class AddElectronicComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addElectronicForm = this.fb.group({
       name: [],
       address: [],
@@ -78,7 +79,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  electronicResult: any
   Submit(value: any) {
     
 
@@ -101,10 +102,10 @@ userDataString:any
 
     this.auth.addElectronic(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.electronicResult = result;
+        console.log(this.electronicResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.electronicResult.message);
 
         this.router.navigate([`/tribe/cList`]);
       },

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class AddHalalMeatComponent {
   addHalal: FormGroup;
   halalResult: any
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addHalal = this.fb.group({
       name: [],
       address: [],
@@ -97,7 +98,7 @@ export class AddHalalMeatComponent {
         this.halalResult = result;
         console.log(this.halalResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.halalResult.message);
 
         this.router.navigate([`/tribe/halalMList`]);
       },

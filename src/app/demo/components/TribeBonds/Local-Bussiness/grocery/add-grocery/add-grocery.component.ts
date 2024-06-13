@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class AddGroceryComponent {
   thumbnailBinary: string[] = [];
   addGrocery: FormGroup;
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addGrocery = this.fb.group({
       name: [],
       address: [],
@@ -58,10 +59,10 @@ export class AddGroceryComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      // this.formData.append('thumbnail', files[0]);
+      // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
 
         this.formData.append('images', files[i]);
       }
@@ -77,6 +78,9 @@ export class AddGroceryComponent {
   }
 
   groceryResult: any
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     
 
@@ -97,15 +101,16 @@ export class AddGroceryComponent {
         this.groceryResult = result;
         console.log(this.groceryResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.groceryResult.message);
 
         this.router.navigate([`/tribe/gList`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        console.log(err);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

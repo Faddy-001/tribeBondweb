@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class EditFoodComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   editFoodForm: FormGroup;
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editFoodForm = this.fb.group({
       name: [],
       address: [],
@@ -64,10 +65,9 @@ export class EditFoodComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+    
       // Append the rest of the files to the 'images' array in FormData
-      for (let i = 1; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
 
         this.formData.append('images', files[i]);
       }
@@ -83,6 +83,8 @@ export class EditFoodComponent {
   }
 
   foodResult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -106,15 +108,15 @@ export class EditFoodComponent {
         this.foodResult = result;
         console.log(this.foodResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.foodResult.message);
 
         this.router.navigate(['/tribe/foodList']);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
     
     const formData = new FormData();
 

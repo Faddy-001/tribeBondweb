@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 @Component({
   selector: 'app-edit-q-service',
@@ -16,7 +17,7 @@ export class EditQServiceComponent {
   editQurForm!: FormGroup;
   qurResult: any
   editsweet: any
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editQurForm = this.fb.group({
       name: [],
       address: [],
@@ -76,7 +77,8 @@ export class EditQServiceComponent {
       }
     }
   }
-
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -95,15 +97,15 @@ export class EditQServiceComponent {
         this.qurResult = result;
         console.log(this.qurResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.qurResult.message);
 
         this.router.navigate(['/tribe/qServiceList']);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
     
     const formData = new FormData();
 

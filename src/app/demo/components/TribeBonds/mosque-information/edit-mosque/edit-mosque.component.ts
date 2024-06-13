@@ -21,7 +21,9 @@ export class EditMosqueComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private auth: AuthenticationService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService, 
+
   ) {
     this.editMosque = this.fb.group({
       name: [],
@@ -81,14 +83,17 @@ export class EditMosqueComponent implements OnInit {
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
-      for (let i = 1; i < files.length; i++) {
+      // Append the first file as 'thumbnail'
+      
+      // Append the rest of the files to the 'images' array in FormData
+      for (let i = 0; i < files.length; i++) {
+
         this.formData.append('images', files[i]);
       }
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
+          // Push the URL of the loaded image to the images array
           this.images.push(e.target.result as string);
         };
         reader.readAsDataURL(files[i]);
@@ -96,8 +101,10 @@ export class EditMosqueComponent implements OnInit {
     }
   }
 
-  groceryResult: any;
-
+  mosqueResult: any;
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -121,13 +128,18 @@ export class EditMosqueComponent implements OnInit {
 
     this.auth.editMosque(this.idParam, this.formData).subscribe(
       (result) => {
-        this.groceryResult = result;
-        console.log(this.groceryResult.message);
+        this.mosqueResult = result;
+        console.log(this.mosqueResult.message);
 
+        this.toastr.success(this.mosqueResult.message);
         this.router.navigate(['/tribe/mosqueList']);
+    
       },
       (err) => {
         console.log(err);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       }
     );
   }

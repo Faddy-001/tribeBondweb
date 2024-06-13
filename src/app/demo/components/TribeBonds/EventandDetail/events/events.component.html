@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="text-container">
                                         <h2>{{ ppt.name }}</h2>
-                                        <p>Date: {{ppt.date}}</p>
+                                        <p>Date: {{ ppt.date | date:'MMM d, y ' }}</p>
                                         <p>Time: {{ppt.time}}</p>
                                         <p>Address: {{ppt.address}}</p>
                                         <p>Phone: {{ppt.phone}}</p>

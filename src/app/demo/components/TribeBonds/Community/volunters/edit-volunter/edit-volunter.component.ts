@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class EditVolunterComponent {
     { label: 'Free', value: 'Free' },
   ];
 
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editvolunterForm = this.fb.group({
       name: [],
       phone: [],
@@ -101,6 +102,8 @@ export class EditVolunterComponent {
     }
   }
   editresult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
    
     this.formData.append('name', value.name);
@@ -118,15 +121,16 @@ export class EditVolunterComponent {
       (result) => {
         this.editresult = result;
         console.log(this.editresult.message);
-
+        this.toastr.success(this.editresult.message);
 
         this.router.navigate([`/tribe/volunter`]);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
+
 
         const formData = new FormData();
 

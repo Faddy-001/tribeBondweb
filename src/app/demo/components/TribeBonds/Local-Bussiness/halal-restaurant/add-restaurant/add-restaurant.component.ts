@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class AddRestaurantComponent {
   addRestaurant: FormGroup;
   restaurantResult: any
 
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addRestaurant = this.fb.group({
       name: [],
       description:[],
@@ -76,7 +77,9 @@ export class AddRestaurantComponent {
       }
     }
   }
-
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     
    
@@ -98,15 +101,15 @@ export class AddRestaurantComponent {
         this.restaurantResult = result;
         console.log(this.restaurantResult);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.restaurantResult.message);
 
         this.router.navigate([`/tribe/restaurantList`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

@@ -16,13 +16,13 @@ export class EditEventComponent {
   EditEventForm!: FormGroup;
   formData = new FormData();
 
-  constructor(private formbuilder: FormBuilder, private activatedRoute: ActivatedRoute, private auth: AuthenticationService, private cdr: ChangeDetectorRef,private toastr: ToastrService, public router: Router,) {
+  constructor(private formbuilder: FormBuilder, private activatedRoute: ActivatedRoute, private auth: AuthenticationService, private cdr: ChangeDetectorRef, private toastr: ToastrService, public router: Router,) {
     this.EditEventForm = this.formbuilder.group({
       name: [],
       date: [],
       time: [,],
       address: [],
-      description:[],
+      description: [],
       city: [],
       gender: [],
       phone: [],
@@ -40,20 +40,20 @@ export class EditEventComponent {
         // this.description = this.editEvent.description;
         this.images = this.editEvent.images
 
-        
-          this.EditEventForm = this.formbuilder.group({
-            name: [this.editEvent.name],
-            date: [new Date(this.editEvent.date)],
-            time: [],
-            address: [this.editEvent.address],
-            city: [this.editEvent.city],
-            // gender: [],
-            description: [this.editEvent.description],
-            phone: [this.editEvent.phone],
-            website: [this.editEvent.website],
-            thumbnail: [],
-          })
-          console.log('Form controls:', this.EditEventForm.controls);
+
+        this.EditEventForm = this.formbuilder.group({
+          name: [this.editEvent.name],
+          date: [new Date(this.editEvent.date)],
+          time: [],
+          address: [this.editEvent.address],
+          city: [this.editEvent.city],
+          // gender: [],
+          description: [this.editEvent.description],
+          phone: [this.editEvent.phone],
+          website: [this.editEvent.website],
+          thumbnail: [],
+        })
+        console.log('Form controls:', this.EditEventForm.controls);
         const payloadDate = this.editEvent.time
         const dateObject = new Date(payloadDate);
 
@@ -117,7 +117,7 @@ export class EditEventComponent {
       (err) => {
         console.log(err);
         this.errorShow = err;
-        this.errorMsg = this.errorShow;
+        this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
       })
   }
@@ -127,13 +127,13 @@ export class EditEventComponent {
       imageUrls: [imageUrl],
       eventId: this.id,
     };
-  
+
     // Send the payload to the server
     this.auth.eventRemoveImage(payload).subscribe(
-      (response:any) => {
+      (response: any) => {
         console.log('Image removed successfully:', response);
         this.toastr.success('Image removed successfully');
-  
+
         // Remove the image from the list
         this.images.splice(index, 1);
       },

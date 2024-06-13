@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 @Component({
   selector: 'app-edit-legal',
@@ -13,11 +14,11 @@ export class EditLegalComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editElectronicForm!: FormGroup;
-  rentalResult: any
+  editLegalForm!: FormGroup;
+  legalResult: any
   editelectronic: any
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editElectronicForm = this.fb.group({
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+    this.editLegalForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -40,7 +41,7 @@ export class EditLegalComponent {
 
         console.log(this.editelectronic);
 
-        this.editElectronicForm = this.fb.group({
+        this.editLegalForm = this.fb.group({
           name: [this.editelectronic.name],
           address: [this.editelectronic.address],
           city: [this.editelectronic.city],
@@ -50,7 +51,7 @@ export class EditLegalComponent {
           services:[this.editelectronic.services],
           email:[this.editelectronic.email]
         })
-        console.log('Form controls:', this.editElectronicForm.controls);
+        console.log('Form controls:', this.editLegalForm.controls);
 
      
         this.cdr.detectChanges();
@@ -79,7 +80,8 @@ export class EditLegalComponent {
       }
     }
   }
-
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -99,18 +101,18 @@ export class EditLegalComponent {
     
     this.auth.editLegal(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.legalResult = result;
+        console.log(this.legalResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.legalResult.message);
 
         this.router.navigate([`/tribe/legalList`]);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
     
     const formData = new FormData();
 

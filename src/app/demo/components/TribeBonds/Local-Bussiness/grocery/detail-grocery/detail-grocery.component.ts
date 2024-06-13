@@ -61,7 +61,7 @@ export class DetailGroceryComponent {
         this.allData = res;
         this.name = this.allData.data.name;
         this.address = this.allData.data.address;
-        this.phone = this.allData.data.contactNumber;
+        this.phone = this.allData.data.phone;
         this.images = this.allData.data.images,
         this.description = this.allData.data.description
         console.log(this.allData.data.reviews);

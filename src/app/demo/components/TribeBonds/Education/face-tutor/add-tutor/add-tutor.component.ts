@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class AddTutorComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   addFace!: FormGroup;
   
-    constructor(private router: Router,private auth :AuthenticationService,private activatedRoute :ActivatedRoute,private fb: FormBuilder,){
+    constructor(private toastr: ToastrService ,private router: Router,private auth :AuthenticationService,private activatedRoute :ActivatedRoute,private fb: FormBuilder,){
       this.addFace = this.fb.group({
         name: [],
         address: [],
@@ -69,6 +70,8 @@ export class AddTutorComponent {
   }
   
   educationResult:any
+  errorShow: any;
+  errorMsg: any;
   Submit(value:any){
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -87,15 +90,15 @@ export class AddTutorComponent {
         this.educationResult = result;
         console.log(this.educationResult.message);
   
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.educationResult.message);
   
         this.router.navigate([`/tribe/facetutor/${this.idParam}`]);
       },
       (err) => {
-        console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
+
       })
     const formData = new FormData();
   

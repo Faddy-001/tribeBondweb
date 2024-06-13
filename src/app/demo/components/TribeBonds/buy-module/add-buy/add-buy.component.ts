@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AddBuyComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addAutomobileForm: FormGroup;
+  addBuyForm: FormGroup;
   Category = [
     { label: 'Kids', value: 'Kids' },
     { label: 'Beauty', value: 'Beauty' },
@@ -35,8 +36,8 @@ export class AddBuyComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addAutomobileForm = this.fb.group({
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+    this.addBuyForm = this.fb.group({
       name: [],
       phone: [],
       contactEmail: [],
@@ -55,7 +56,7 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addAutomobileForm = this.fb.group({
+    this.addBuyForm = this.fb.group({
       city:[this.cityData],
       name: [],
       phone: [],
@@ -92,12 +93,15 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  buyResult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
-    console.log(value.category.value);
+    if (value.category) {
+      value.category = this.addBuyForm.get('category')?.value
+    }
+    console.log(value.category);
     
-
-
     this.formData.append('name', value.name);
     this.formData.append('phone', value.phone);
     this.formData.append('contactEmail', value.contactEmail);
@@ -108,29 +112,24 @@ userDataString:any
     this.formData.append('price', value.price);
     this.formData.append('category', value.category.value);
 
-
-
-
-
-  
     
     console.log(this.formData.append);
 
 
     this.auth.addBuy(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.buyResult = result;
+        console.log(this.buyResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.buyResult.message);
 
         this.router.navigate([`/tribe/BuyList`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

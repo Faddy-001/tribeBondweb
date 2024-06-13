@@ -4,9 +4,11 @@
         <div class="col-12 alignment">
             <div class="card cardborder">
                 <div class="col-12 ">
-                    <textarea inputId="textarea" rows="3" cols="70" pInputTextarea placeholder="Type Your Status"
-                        style="border-radius: 10px;" formControlName="statusText"></textarea>
-
+                    <!-- <textarea inputId="textarea" rows="3" cols="70" pInputTextarea placeholder="Type Your Status"
+                        style="border-radius: 10px;" formControlName="statusText"></textarea> -->
+                        <textarea inputId="textarea" rows="3" pInputTextarea placeholder="Type Your Status"
+                        style="border-radius: 10px; width: 100%;" formControlName="statusText"></textarea>
+                    
                     <div class="button-container mt-2">
                         <div class="image-container">
                             <img *ngFor="let image of imagestheme" [src]="image" alt="Uploaded Image" class="image"
@@ -36,111 +38,97 @@
     </form>
 
 
-    <!-- theme container -->
+ 
+    
     <div class="row">
         <!-- theme container card -->
-        <div class="col-12 alignments" *ngFor="let blog of blogdata;let i= index">
-            <div class="card ">
+        <div class="col-12 alignments" *ngFor="let blog of blogdata; let i = index">
+            <div class="card">
                 <div class="bottom-border">
                     <img [src]="blog.profilePic" width="32" class="avatar-circle mb-2" style="vertical-align: middle" />
-                    <span class="ml-2 font-semibold text-blue-500"
-                        style="font-size: 18px; color:#1769aa;">{{blog.firstname}} {{blog.lastname}}</span>
+                    <span class="ml-2 font-semibold text-blue-500" style="font-size: 18px; color: #1769aa;">
+                        {{ blog.firstname }} {{ blog.lastname }}
+                    </span>
                 </div>
-
-                <div *ngIf="blog.backgroundImage">
-
-                    <div class="image-container">
-                        <img [src]="blog.backgroundImage" class="imageswithtext mb-2" />
-                        <div class="overlay-text">{{blog.statusText}}</div>
+    
+                <!-- Check if both backgroundImage and blogImage are not available -->
+                <div *ngIf="!blog.backgroundImage && !(blog.blogImage && blog.blogImage.length > 0)" class="mb-4">
+                    <div style="font-weight: 600; font-size: 20px; margin-top: 10px;">
+                        {{ blog.statusText }}
                     </div>
                 </div>
-                
-                <div *ngIf="blog.blogImage.length">
-                    <div style="font-weight: 600;font-size: 20px;">{{blog.statusText}}</div>
-                    <div class="image-container">
-                        <img [src]="blog.blogImage" class="imageswithouttext mb-2" />
-                        <!-- <div class="overlay-text">For Demo Text</div> -->
-                    </div>
+    
+                <!-- Check if blog has backgroundImage -->
+                <div *ngIf="blog.backgroundImage" class="image-container">
+                    <img [src]="blog.backgroundImage" class="imageswithtext mb-2" />
+                    <div class="overlay-text">{{ blog.statusText }}</div>
                 </div>
+    
+                <!-- Check if blog has blogImage -->
+                <div *ngIf="blog.blogImage && blog.blogImage.length > 0" class="image-container">
+                    <div style="font-weight: 600; font-size: 20px;">{{ blog.statusText }}</div>
+                    <img [src]="blog.blogImage" class="imageswithouttext mb-2" />
+                    <!-- <div class="overlay-text">For Demo Text</div> -->
+                </div>
+    
+                <!-- Icon container -->
                 <div class="icon-container mt-2">
                     <i class="pi pi-user-plus" style="font-size: 18px; color: #1769aa; margin-right: 10px;"></i>
                     <i class="pi pi-comments" pBadge [value]="blog.commentLength" style="font-size: 18px; color: #1769aa;"
                         (click)="clickCommentIcon(blog.id)"></i>
                 </div>
-                <!-- <div *ngIf="commentsVisible"> -->
-                <div *ngFor="let comment of blog.comment;let i = index">
-                    <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                        <img [src]="comment.userId.profilePicture" class="w-2rem h-2rem  circular-image" />
+    
+                <!-- Comments -->
+                <div *ngFor="let comment of blog.comment; let j = index" class="comment-container">
+                    <a class="cursor-pointer flex align-items-center py-2 gap-3 hover:text-primary mt-2">
+                        <img [src]="comment.userId.profilePicture" class="w-2rem h-2rem circular-image" />
                         <div>
-                            <span class="font-semibold text-blue-500">{{comment.userId.firstName}}
-                                {{comment.userId.lastName}}</span>
-                            <h6 class="m-0 text-sm ">
-                                {{comment.text}}
-                            </h6>
+                            <span class="font-semibold text-blue-500">{{ comment.userId.firstName }} {{ comment.userId.lastName }}</span>
+                            <h6 class="m-0 text-sm">{{ comment.text }}</h6>
                             <span style="font-size: 10px;" (click)="reply(comment.commentId)">Reply</span>
-                            <div style="font-size: 10px;" (click)="viewReply(comment.commentId)"
-                                *ngIf="comment.replyIds && comment.replyIds.length > 0 ">View reply</div>
+                            <div style="font-size: 10px;" (click)="viewReply(comment.commentId)" *ngIf="comment.replyIds && comment.replyIds.length > 0">
+                                View reply
+                            </div>
                         </div>
                     </a>
-                    <!-- <div *ngIf="comment.replyIds && comment.replyIds.length > 0">
-                        <div *ngIf="viewReplyCommentId === comment.commentId"> -->
-                    <!-- <div *ngIf="comment.replyIds && comment.replyIds.length > 0 && viewReplyCommentId === comment.commentId">
-                            <div *ngFor="let reply of replyData; let j = index"> -->
-                    <div *ngIf=" viewReplyCommentId === comment.commentId">
+    
+                    <!-- Replies -->
+                    <div *ngIf="viewReplyCommentId === comment.commentId" class="reply-container">
                         <div *ngFor="let reply of comment.replyIds">
-
-                            <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2"
-                                style="padding-left: 30px;">
-                                <img [src]="reply.userId.profilePicture" class="w-2rem h-2rem  circular-image" />
+                            <a class="cursor-pointer flex align-items-center py-2 gap-3 hover:text-primary mt-2" style="padding-left: 30px;">
+                                <img [src]="reply.userId.profilePicture" class="w-2rem h-2rem circular-image" />
                                 <div>
-                                    <span
-                                        class="font-semibold text-blue-500">{{reply.userId.firstName}} {{reply.userId.lastName}}
-                                    </span>
-                                    <h6 class="m-0 text-sm ">
-                                        {{reply.text}}
-                                    </h6>
-
+                                    <span class="font-semibold text-blue-500">{{ reply.userId.firstName }} {{ reply.userId.lastName }}</span>
+                                    <h6 class="m-0 text-sm">{{ reply.text }}</h6>
                                 </div>
                             </a>
-                            <!-- </div> -->
-                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
-                <!-- </div> -->
-                <div *ngIf="replycomment">
-                    <form [formGroup]="replyCommentForm" (ngSubmit)="onSubmitReply(replyCommentForm.value,blog.id)">
-                        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
-                            <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a reply"
-                                style="border-radius: 10px;" formControlName="text"></textarea>
-                            <div>
-                                <button pButton pRipple type="button" label="Reply" type="submit"
-                                    class="p-button-rounded"></button>
-                            </div>
-                        </a>
+    
+                <!-- Reply Form -->
+                <div *ngIf="replycomment" class="reply-form">
+                    <form [formGroup]="replyCommentForm" (ngSubmit)="onSubmitReply(replyCommentForm.value, blog.id)">
+                        <div class="input-container">
+                            <textarea inputId="textarea" rows="2" pInputTextarea placeholder="Add a reply"
+                                formControlName="text"></textarea>
+                            <button pButton pRipple type="button" label="Reply" type="submit" class="p-button-rounded"></button>
+                        </div>
                     </form>
                 </div>
-                <div *ngIf="!replycomment">
-                    <form [formGroup]="CommentForm" (ngSubmit)="onSubmitComment(CommentForm.value,blog.id)">
-                        <a class="cursor-pointer flex align-items-center  py-2 gap-3 hover:text-primary mt-2">
+    
+                <!-- Comment Form -->
+                <div *ngIf="!replycomment" class="comment-form">
+                    <form [formGroup]="CommentForm" (ngSubmit)="onSubmitComment(CommentForm.value, blog.id)">
+                        <div class="input-container">
                             <textarea inputId="textarea" rows="2" cols="70" pInputTextarea placeholder="Add a comment"
-                                style="border-radius: 10px;" formControlName="text"></textarea>
-                            <div>
-                                <button pButton pRipple type="button" label="Comment" type="submit"
-                                    class="p-button-rounded"></button>
-                            </div>
-                        </a>
+                                formControlName="text"></textarea>
+                            <button pButton pRipple type="button" label="Comment" type="submit" class="p-button-rounded"></button>
+                        </div>
                     </form>
                 </div>
-
+    
             </div>
-
-
-
         </div>
-
-
-        <!-- image container card -->
-
-
     </div>
+    

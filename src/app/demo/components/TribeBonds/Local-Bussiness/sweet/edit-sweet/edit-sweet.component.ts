@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -15,9 +16,9 @@ export class EditSweetComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   editSweetForm!: FormGroup;
-  rentalResult: any
+  sweetResult: any
   editsweet: any
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editSweetForm = this.fb.group({
       name: [],
       address: [],
@@ -49,7 +50,7 @@ export class EditSweetComponent {
         })
         console.log('Form controls:', this.editSweetForm.controls);
 
-     
+
         this.cdr.detectChanges();
       })
   }
@@ -60,8 +61,7 @@ export class EditSweetComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -77,7 +77,8 @@ export class EditSweetComponent {
       }
     }
   }
-
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -90,25 +91,25 @@ export class EditSweetComponent {
     console.log(this.formData.append);
 
 
-    
+
     this.auth.editSweet(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.sweetResult = result;
+        console.log(this.sweetResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.sweetResult.message);
 
         this.router.navigate(['/tribe/sweetList']);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
-    
-    const formData = new FormData();
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
+        const formData = new FormData();
 
-  })}
+      })
+  }
 }
 
 

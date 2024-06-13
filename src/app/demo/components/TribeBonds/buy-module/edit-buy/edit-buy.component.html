@@ -4,7 +4,7 @@
 			<div class="card cardborder">
                 <div class="header">
                     <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add Buy-n-sell</span>
+                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Buy-n-sell</span>
                     </div>
                 </div>
 				<form style="padding-left: 3%;" [formGroup]="editBuyForm" (ngSubmit)="Submit(editBuyForm.value)">
@@ -23,12 +23,10 @@
 						<label htmlFor="city">City</label>
 						<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly />
 					</div>
-					<div class=" col-12 md:col-6">
-                        <label htmlFor="category" style="color:#1769aa">Category</label>
-
-                        <p-dropdown [options]="Category" optionLabel="label" placeholder="Select category"
-                            formControlName="category"></p-dropdown>
-                    </div>
+					<div class="col-12 md:col-6">
+						<label htmlFor="category" style="color:#1769aa">Category</label>
+						<p-dropdown [options]="Category" optionLabel="label" placeholder="Select category" formControlName="category"></p-dropdown>
+					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="price">Price</label>
 						<input pInputText id="price" type="text" placeholder="Enter your price" formControlName="price"/>

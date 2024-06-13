@@ -28,7 +28,7 @@ import { DomHandler } from 'primeng/dom';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[app-menuitem]',
     template: `
-        <ng-container>
+        <!-- <ng-container>
             <div
                 *ngIf="root && item.visible !== false"
                 class="layout-menuitem-root-text"
@@ -110,7 +110,63 @@ import { DomHandler } from 'primeng/dom';
                     ></li>
                 </ng-template>
             </ul>
-        </ng-container>
+        </ng-container> -->
+        <ng-container>
+    <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">
+        {{ item.label }}
+    </div>
+    <a
+        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
+        [attr.href]="item.url"
+        (click)="itemClick($event)"
+        (mouseenter)="onMouseEnter()"
+        [ngClass]="item.class"
+        [attr.target]="item.target"
+        tabindex="0"
+        pRipple
+    >
+        <span class="material-icons-outlined layout-menuitem-icon">{{ item.icon }}</span>
+        <span class="layout-menuitem-text">{{ item.label }}</span>
+        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
+    </a>
+    <a
+        *ngIf="item.routerLink && !item.items && item.visible !== false"
+        (click)="itemClick($event)"
+        (mouseenter)="onMouseEnter()"
+        [ngClass]="item.class"
+        [routerLink]="item.routerLink"
+        routerLinkActive="active-route"
+        [routerLinkActiveOptions]="item.routerLinkActiveOptions || { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
+        [fragment]="item.fragment"
+        [queryParamsHandling]="item.queryParamsHandling"
+        [preserveFragment]="item.preserveFragment"
+        [skipLocationChange]="item.skipLocationChange"
+        [replaceUrl]="item.replaceUrl"
+        [state]="item.state"
+        [queryParams]="item.queryParams"
+        [attr.target]="item.target"
+        tabindex="0"
+        pRipple
+    >
+        <span class="material-icons-outlined layout-menuitem-icon">{{ item.icon }}</span>
+        <span class="layout-menuitem-text">{{ item.label }}</span>
+        <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
+    </a>
+
+    <ul #submenu *ngIf="item.items && item.visible !== false" [@children]="submenuAnimation" (@children.done)="onSubmenuAnimated($event)">
+        <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
+            <li
+                app-menuitem
+                [item]="child"
+                [index]="i"
+                [parentKey]="key"
+                class="layout-submenu-item"
+                [ngClass]="child.badgeClass"
+            ></li>
+        </ng-template>
+    </ul>
+</ng-container>
+
     `,
     animations: [
         trigger('children', [
@@ -177,7 +233,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
                     if (value.routeEvent) {
                         this.active =
                             value.key === this.key ||
-                            value.key.startsWith(this.key + '-')
+                                value.key.startsWith(this.key + '-')
                                 ? true
                                 : false;
                     } else {
@@ -291,8 +347,8 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             document.body.className = document.body.className.replace(
                 new RegExp(
                     '(^|\\b)' +
-                        'blocked-scroll'.split(' ').join('|') +
-                        '(\\b|$)',
+                    'blocked-scroll'.split(' ').join('|') +
+                    '(\\b|$)',
                     'gi'
                 ),
                 ' '
@@ -356,8 +412,8 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
             return this.root
                 ? 'expanded'
                 : this.active
-                ? 'expanded'
-                : 'collapsed';
+                    ? 'expanded'
+                    : 'collapsed';
     }
 
     get isHorizontal() {

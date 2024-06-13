@@ -14,32 +14,7 @@ import { ProductService } from 'src/app/demo/service/product.service';
 export class SchoolDetailComponent {
     images!: any[];
     products!: Product[];
-    comments = [
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Ayesha",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Fardeen",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Mahira",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Shifa",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        }
-    ];
+ 
 
     rowCount = 3;
     galleriaResponsiveOptions: any[] = [

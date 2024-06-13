@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class AddSweetComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addSForm = this.fb.group({
       name: [],
       address: [],
@@ -74,7 +75,7 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  sweetResult: any
   Submit(value: any) {
     
 
@@ -95,12 +96,12 @@ userDataString:any
 
     this.auth.addSweet(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.sweetResult = result;
+        console.log(this.sweetResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.sweetResult.message);
 
-        this.router.navigate([`/tribe/cList`]);
+        this.router.navigate([`/tribe/sweetList`]);
       },
       (err: any) => {
         console.log(err);

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 @Component({
   selector: 'app-edit-doctor',
@@ -16,7 +17,7 @@ export class EditDoctorComponent {
   editDoctorForm!: FormGroup;
   doctorResult: any
   editelectronic: any
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editDoctorForm = this.fb.group({
       name: [],
       address: [],
@@ -80,7 +81,8 @@ export class EditDoctorComponent {
       }
     }
   }
-
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -103,15 +105,15 @@ export class EditDoctorComponent {
         this.doctorResult = result;
         console.log(this.doctorResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.doctorResult.message);
 
         this.router.navigate([`/tribe/doctorList`]);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
     
     const formData = new FormData();
 

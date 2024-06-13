@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -15,9 +16,9 @@ export class EditElectronicComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   editElectronicForm!: FormGroup;
-  rentalResult: any
+  electronicResult: any
   editelectronic: any
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editElectronicForm = this.fb.group({
       name: [],
       address: [],
@@ -64,8 +65,7 @@ export class EditElectronicComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -81,7 +81,8 @@ export class EditElectronicComponent {
       }
     }
   }
-
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -101,18 +102,18 @@ export class EditElectronicComponent {
     
     this.auth.editElectronic(this.idParam, this.formData).subscribe(
       (result) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.electronicResult = result;
+        console.log(this.electronicResult.message);
 
-        // this.toastr.success(this.halalResult.message);
+        this.toastr.success(this.electronicResult.message);
 
         this.router.navigate([`/tribe/cList`]);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
     
     const formData = new FormData();
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 @Component({
   selector: 'app-add-ahelp',
@@ -33,7 +34,7 @@ export class AddAhelpComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addAskFreeForm = this.fb.group({
       name: [],
       phone: [],
@@ -93,7 +94,9 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  helpresult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     console.log(value.category.value);
     
@@ -120,18 +123,18 @@ userDataString:any
 
     this.auth.addAskFree(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.helpresult = result;
+        console.log(this.helpresult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.helpresult.message);
 
         this.router.navigate([`/tribe/askhelp`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

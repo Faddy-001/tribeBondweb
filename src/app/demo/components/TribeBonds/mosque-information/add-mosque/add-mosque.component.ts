@@ -81,12 +81,17 @@ export class AddMosqueComponent implements OnInit {
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
+      // Append the first file as 'thumbnail'
+      
+      // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
+
         this.formData.append('images', files[i]);
       }
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = (e: any) => {
+          // Push the URL of the loaded image to the images array
           this.images.push(e.target.result as string);
         };
         reader.readAsDataURL(files[i]);
@@ -124,7 +129,7 @@ export class AddMosqueComponent implements OnInit {
       (err) => {
         console.log(err);
         this.errorShow = err;
-        this.errorMsg = this.errorShow;
+        this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
       }
     );

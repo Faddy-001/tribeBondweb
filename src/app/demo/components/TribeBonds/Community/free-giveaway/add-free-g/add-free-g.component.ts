@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class AddFreeGComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addGiveForm = this.fb.group({
       name: [],
       // phone: [],
@@ -86,12 +87,11 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  freegResult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     console.log(value.category.value);
-    
-
-
     this.formData.append('name', value.name);
     this.formData.append('phone', value.phone);
     this.formData.append('contactEmail', value.contactEmail);
@@ -102,29 +102,23 @@ userDataString:any
     this.formData.append('address', value.address);
     this.formData.append('category', value.category.value);
 
-
-    
-
-
-  
-    
     console.log(this.formData.append);
 
 
     this.auth.addgive(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.freegResult = result;
+        console.log(this.freegResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.freegResult.message);
 
         this.router.navigate([`/tribe/giveawayList`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

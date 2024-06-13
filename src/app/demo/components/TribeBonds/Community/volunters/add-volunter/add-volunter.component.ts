@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class AddVolunterComponent {
 user:any
 cityData:any
 userDataString:any
-  constructor(private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addVolunteerForm = this.fb.group({
       name: [],
       phone: [],
@@ -84,7 +85,9 @@ userDataString:any
     }
   }
 
-  rentalResult: any
+  volunterResult: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
     // console.log(value.category.value);
     
@@ -111,18 +114,18 @@ userDataString:any
 
     this.auth.addVolunteer(this.formData).subscribe(
       (result: any) => {
-        this.rentalResult = result;
-        console.log(this.rentalResult.message);
+        this.volunterResult = result;
+        console.log(this.volunterResult.message);
 
-        // this.toastr.success(this.eventResult.message);
+        this.toastr.success(this.volunterResult.message);
 
         this.router.navigate([`/tribe/volunter`]);
       },
       (err: any) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // this.toastr.error(this.errorMsg);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 

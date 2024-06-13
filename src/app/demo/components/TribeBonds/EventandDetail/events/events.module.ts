@@ -26,6 +26,7 @@ import { RippleModule } from "primeng/ripple";
 import { AddEventsComponent } from "../add-events/add-events.component";
 import { EditEventComponent } from "../edit-event/edit-event.component";
 import { EventDetailComponent } from "../event-detail/event-detail.component";
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [EventsComponent, AddEventsComponent, EditEventComponent, EventDetailComponent],
 
@@ -52,6 +53,7 @@ import { EventDetailComponent } from "../event-detail/event-detail.component";
     InputTextModule,
     InputTextareaModule,
     RippleModule,
+    ToastModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA] 

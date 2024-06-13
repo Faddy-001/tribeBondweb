@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MessageService } from 'primeng/api';
+
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -16,9 +16,9 @@ export class AddEventsComponent {
   UserPreviousImage: any;
   selectedFile: any = [];
   uploadedFiles: any[] = [];
-  user:any
-cityData:any
-userDataString:any
+  user: any
+  cityData: any
+  userDataString: any
   @ViewChild('fileUpload', { static: true }) fileUpload!: ElementRef<HTMLInputElement>;
   states: any[] = [
     { name: 'Arizona', code: 'Arizona' },
@@ -52,23 +52,24 @@ userDataString:any
   ngOnInit() {
     console.log(localStorage.getItem('user'));
     this.userDataString = localStorage.getItem('user');
-   this.user = JSON.parse(this.userDataString);
-   this.cityData = this.user.city
-   console.log(this.cityData);
-   this.addEvent = this.fb.group({
-     city:[this.cityData],
-     name: [],
-     address: [],
-     phone: [],
-     website: [],
-     images: [],
-     description:[],
-
-   })
+    this.user = JSON.parse(this.userDataString);
+    this.cityData = this.user.city
+    console.log(this.cityData);
+    this.addEvent = this.fb.group({
+      city: [this.cityData],
+      name: [],
+      address: [],
+      phone: [],
+      website: [],
+      images: [],
+      description: [],
+      date: [],
+      time: []
+    })
   }
 
   images: string[] = [];
-  thumbnailBinary:string[]=[];
+  thumbnailBinary: string[] = [];
   private formData = new FormData();
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
@@ -80,12 +81,12 @@ userDataString:any
       // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
-        
+
         this.formData.append('images', files[i]);
       }
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
-        reader.onload = (e:any) => {
+        reader.onload = (e: any) => {
           // Push the URL of the loaded image to the images array
           this.images.push(e.target.result as string);
         };
@@ -93,21 +94,7 @@ userDataString:any
       }
     }
 
-  //  const input = event.target as HTMLInputElement;
-  //   const files = input.files;
-  //    console.log(files);
-  //   if (files) {
-  //     for (let i = 0; i < files.length; i++) {
-  //       const reader = new FileReader();
-  //       reader.onload = (e: any) => {
-  //         this.images.push(e.target.result);
-  //   const formData = new FormData();
 
-  //         formData.append('images[]', e.target.result);
-  //       };
-  //       reader.readAsDataURL(files[i]);
-  //     }
-  //   }
   }
 
   eventResult: any;
@@ -115,7 +102,7 @@ userDataString:any
   errorMsg: any;
   // form submit
   Submit(value: any) {
-    console.log(this.images);
+    console.log(value);
 
     this.formData.append('name', value.name);
     // for (let i = 0; i < this.images.length; i++) {
@@ -129,9 +116,9 @@ userDataString:any
     this.formData.append('city', value.city);
     this.formData.append('description', value.description);
     // this.formData.append('images', this.images);
-    for (let i = 0; i < this.images.length; i++) {
-      this.formData.append('thumbnails', this.images[i]);
-    }
+    // for (let i = 0; i < this.images.length; i++) {
+    //   this.formData.append('thumbnails', this.images[i]);
+    // }
     console.log(this.formData.append);
 
 
@@ -145,12 +132,13 @@ userDataString:any
         this.router.navigate(['/tribe/event']);
       },
       (err) => {
-        console.log(err);
+        console.log(err.error.message);
         this.errorShow = err;
-        this.errorMsg = this.errorShow;
+        this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
 
   }
+
 }

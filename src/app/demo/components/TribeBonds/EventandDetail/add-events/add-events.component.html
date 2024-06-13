@@ -32,13 +32,13 @@
 							<label htmlFor="time" style="color:#1769aa;font-weight: bold;">Time</label>
 
 							<p-calendar [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter time "
-								formControlName="time">
+								formControlName="time" >
 							</p-calendar>
 						</div>
 
 
 						<div class="col-12 md:col-6">
-							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Price</label>
+							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter Address"
 								formControlName="address" />
 						</div>
@@ -47,7 +47,7 @@
 							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly/>
 						</div>
 						<div class="col-12 md:col-6">
-							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Location</label>
+							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website</label>
 							<input pInputText id="website" type="text" placeholder="Enter your website url"
 								formControlName="website" />
 						</div>
@@ -78,7 +78,6 @@
 
 							</div>
 							<div class="avatar-container" id="imagePreviewContainer">
-								<!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
 								<img class="avatar" alt="" />
 							</div>
 

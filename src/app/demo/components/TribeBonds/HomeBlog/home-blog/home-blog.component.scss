@@ -63,6 +63,7 @@
   padding-top: 10px;
 }
 
+
 // .imageswithtext {
 //   width: 80%;
 //   height: 200px;
@@ -143,4 +144,64 @@
   object-fit: cover; /* Ensures the image covers the entire area without distortion */
   /* Optional: add border */
   border: 2px solid #fff; /* Add white border around the image */
+}
+
+// textarea {
+//   width: 100%;
+//   max-width: 100%; /* Ensures the textarea does not exceed its parent's width */
+//   min-width: 100%; /* Ensures the textarea does not shrink below its parent's width */
+//   padding: 10px; /* Adds padding inside the textarea for better readability */
+//   font-size: 16px; /* Adjust font size as needed */
+//   border: 1px solid #ccc; /* Adds a border for visual clarity */
+//   border-radius: 10px; /* Rounds the corners of the textarea */
+//   resize: vertical; /* Allows resizing vertically only */
+//   box-sizing: border-box; /* Ensures padding and border are included in width */
+// }
+
+// @media (max-width: 768px) {
+//   textarea {
+//       font-size: 14px; /* Adjust font size for smaller screens */
+//   }
+// }
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the gap between textarea and button */
+}
+
+textarea {
+  width: 100%; /* Take up full width of its container */
+  max-width: 100%; /* Ensure it does not exceed its container's width */
+  padding: 10px; /* Add padding for better readability */
+  font-size: 16px; /* Adjust font size as needed */
+  border: 1px solid #ccc; /* Add a border for visual clarity */
+  border-radius: 10px; /* Rounded corners */
+  resize: vertical; /* Allow vertical resizing */
+  box-sizing: border-box; /* Include padding and border in total width */
+}
+
+// button {
+//   /* Add styles for your button as needed */
+//   min-width: 80px; /* Example: Set a minimum width for button */
+//   padding: 8px 16px; /* Example: Padding around button text */
+//   font-size: 14px; /* Example: Font size of button text */
+// }
+button {
+  min-width: 80px; /* Example: Set a minimum width for button */
+  padding: 8px 16px; /* Example: Padding around button text */
+  font-size: 14px; /* Example: Font size of button text */
+  border: none; /* Remove default border */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Cursor style */
+  display: flex; /* Use Flexbox for centering */
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+}
+
+/* Hover effect for button */
+button:hover {
+  background-color: #0056b3; /* Darker background color on hover */
 }

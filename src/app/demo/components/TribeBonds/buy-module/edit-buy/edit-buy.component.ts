@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class EditBuyComponent {
     { label: 'Free', value: 'Free' },
   ];
 
-  constructor(private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editBuyForm = this.fb.group({
       name: [],
       phone: [],
@@ -44,7 +45,7 @@ export class EditBuyComponent {
       contactEmail: [],
       location: [],
       price: [],
-      category: []
+      category:[]
     });
   }
 
@@ -66,7 +67,10 @@ export class EditBuyComponent {
           category: [this.autoResult.category]
         })
         console.log('Form controls:', this.editBuyForm.controls);
-
+        // Set the category value if it's not already set
+        if (!this.editBuyForm.get('category')?.value) {
+          this.editBuyForm.get('category')?.setValue(this.autoResult.category);
+        }
 
         this.cdr.detectChanges();
       })
@@ -95,7 +99,9 @@ export class EditBuyComponent {
       }
     }
   }
-  editresult: any
+  editBuy: any
+  errorShow: any;
+  errorMsg: any;
   Submit(value: any) {
 
     this.formData.append('name', value.name);
@@ -110,17 +116,17 @@ export class EditBuyComponent {
 
     this.auth.editBuy(this.idParam, this.formData).subscribe(
       (result) => {
-        this.editresult = result;
-        console.log(this.editresult.message);
+        this.editBuy = result;
+        console.log(this.editBuy.message);
 
-
+        this.toastr.success(this.editBuy.message);
         this.router.navigate([`/tribe/BuyList`]);
       },
       (err) => {
         console.log(err);
-        // this.errorShow = err;
-        // this.errorMsg = this.errorShow;
-        // // this.toas
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
 
         const formData = new FormData();
 
