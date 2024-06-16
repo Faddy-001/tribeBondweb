@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,6 +19,7 @@ export class AddEventsComponent {
   user: any
   cityData: any
   userDataString: any
+  submitted: boolean = false;
   @ViewChild('fileUpload', { static: true }) fileUpload!: ElementRef<HTMLInputElement>;
   states: any[] = [
     { name: 'Arizona', code: 'Arizona' },
@@ -44,7 +45,6 @@ export class AddEventsComponent {
       gender: [],
       phone: [],
       website: [],
-      thumbnail: [],
       description: []
 
     });
@@ -57,14 +57,14 @@ export class AddEventsComponent {
     console.log(this.cityData);
     this.addEvent = this.fb.group({
       city: [this.cityData],
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
-      images: [],
+      name: ["", Validators.required],
+      address: ["", Validators.required],
+      phone: ["", Validators.required],
+      website: ["", Validators.required],
+      images: ["", Validators.required],
       description: [],
-      date: [],
-      time: []
+      date: ["", Validators.required],
+      time: ["", Validators.required]
     })
   }
 
@@ -103,42 +103,46 @@ export class AddEventsComponent {
   // form submit
   Submit(value: any) {
     console.log(value);
+    this.submitted = true
+    if(!this.addEvent.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addEvent.valid) {
+      this.formData.append('name', value.name);
+      // for (let i = 0; i < this.images.length; i++) {
+      //   this.formData.append('thumbnails[]', this.images[i]);
+      // }
+      this.formData.append('date', value.date);
+      this.formData.append('time', value.time);
+      this.formData.append('address', value.address);
+      this.formData.append('phone', value.phone);
+      this.formData.append('website', value.website);
+      this.formData.append('city', value.city);
+      this.formData.append('description', value.description);
+      // this.formData.append('images', this.images);
+      // for (let i = 0; i < this.images.length; i++) {
+      //   this.formData.append('thumbnails', this.images[i]);
+      // }
+      console.log(this.formData.append);
 
-    this.formData.append('name', value.name);
-    // for (let i = 0; i < this.images.length; i++) {
-    //   this.formData.append('thumbnails[]', this.images[i]);
-    // }
-    this.formData.append('date', value.date);
-    this.formData.append('time', value.time);
-    this.formData.append('address', value.address);
-    this.formData.append('phone', value.phone);
-    this.formData.append('website', value.website);
-    this.formData.append('city', value.city);
-    this.formData.append('description', value.description);
-    // this.formData.append('images', this.images);
-    // for (let i = 0; i < this.images.length; i++) {
-    //   this.formData.append('thumbnails', this.images[i]);
-    // }
-    console.log(this.formData.append);
 
+      this.auth.addEvent(this.formData).subscribe(
+        (result) => {
+          this.eventResult = result;
+          console.log(this.eventResult.message);
 
-    this.auth.addEvent(this.formData).subscribe(
-      (result) => {
-        this.eventResult = result;
-        console.log(this.eventResult.message);
+          this.toastr.success(this.eventResult.message);
 
-        this.toastr.success(this.eventResult.message);
+          this.router.navigate(['/tribe/event']);
+        },
+        (err) => {
+          console.log(err.error.message);
+          this.errorShow = err;
+          this.errorMsg = this.errorShow.error.message;
+          this.toastr.error(this.errorMsg);
+        })
+      const formData = new FormData();
 
-        this.router.navigate(['/tribe/event']);
-      },
-      (err) => {
-        console.log(err.error.message);
-        this.errorShow = err;
-        this.errorMsg = this.errorShow.error.message;
-        this.toastr.error(this.errorMsg);
-      })
-    const formData = new FormData();
-
+    }
   }
-
 }

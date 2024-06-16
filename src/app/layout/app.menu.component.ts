@@ -713,6 +713,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'event',
                         routerLink: ['/tribe/event'],
                     },
+                    // {
+                    //                     label: 'Invalid State',
+                    //                     icon:'event',
+                    //                     routerLink: ['/uikit/invalidstate'],
+                    //                 },
+                    //                 {
+                    //                                     label: 'Crud',
+                    //                                     icon: 'event',
+                    //                                     routerLink: ['/pages/crud'],
+                    //                                 },
                     {
                         label: 'Mosque Information',
                         icon: 'info',

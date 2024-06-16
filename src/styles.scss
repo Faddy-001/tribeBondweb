@@ -179,3 +179,16 @@ $gutter: 1rem; //for primeflex grid system
 
 
 
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin: 5px;
+    /* Adjust this margin as per your preference */
+  }
+  

@@ -4,7 +4,7 @@
 			<div class="card cardborder">
 				<div class="header">
 					<div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add
+						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit
 							Volunteer </span>
 					</div>
 				</div>
@@ -14,44 +14,57 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="name" style="color:#1769aa;font-weight: bold;">Name </label>
 							<input pInputText id="name" type="text" placeholder="Enter  Name"
-								formControlName="name" />
+								formControlName="name" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['name'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editvolunterForm.controls['name'].invalid">Name is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="date" style="color:#1769aa;font-weight: bold;">Date</label>
-							<p-calendar formControlName="date" [showIcon]="true" inputId="icon"></p-calendar>
+							<p-calendar formControlName="date" [showIcon]="true" inputId="icon" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['date'].invalid }"></p-calendar>
 							<p-calendar-timeonly [showIcon]="true" inputId="icon"
 								placeholder="Enter date"></p-calendar-timeonly>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editvolunterForm.controls['date'].invalid">date is required.</small>
 
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="time" style="color:#1769aa;font-weight: bold;">Event Time</label>
 
 							<p-calendar [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter time "
-								formControlName="time">
+								formControlName="time" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['time'].invalid }">
 							</p-calendar>
+							<small class="ng-dirty ng-invalid" style="color: red;"
+							*ngIf="submitted && editvolunterForm.controls['time'].invalid">time is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter your address"
-								formControlName="address" />
+								formControlName="address" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['address'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editvolunterForm.controls['address'].invalid">address is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="number" placeholder="Enter your phone"
-								formControlName="phone" />
-						</div>
+								formControlName="phone" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['phone'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editvolunterForm.controls['phone'].invalid">phone is required.</small>
+							</div>
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
 							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city"
 								readonly />
+								
 						</div>
 
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website</label>
 							<input pInputText id="website" type="text" placeholder="Enter your location"
-								formControlName="website" />
+								formControlName="website" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editvolunterForm.controls['website'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editvolunterForm.controls['website'].invalid">website is required.</small>
 						</div>
 
 						

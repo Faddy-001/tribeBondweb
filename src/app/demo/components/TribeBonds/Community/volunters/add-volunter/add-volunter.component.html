@@ -14,32 +14,41 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="name" style="color:#1769aa;font-weight: bold;">Name </label>
 							<input pInputText id="name" type="text" placeholder="Enter  Name"
-								formControlName="name" />
+								formControlName="name"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['name'].invalid }" />
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['name'].invalid">Name is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="calender" style="color:#1769aa;font-weight: bold;">Date</label>
 							<p-calendar formControlName="date" [showIcon]="true" inputId="icon"></p-calendar>
 							<p-calendar-timeonly [showIcon]="true" inputId="icon"
-								placeholder="Enter date"></p-calendar-timeonly>
-
+								placeholder="Enter date"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['date'].invalid }" ></p-calendar-timeonly>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['date'].invalid">date is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="time" style="color:#1769aa;font-weight: bold;">Event Time</label>
 
 							<p-calendar [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter time "
-								formControlName="time">
+								formControlName="time"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['time'].invalid }" >
 							</p-calendar>
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['time'].invalid">time is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter your address"
-								formControlName="address" />
-						</div>
+								formControlName="address"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['address'].invalid }" />
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['address'].invalid">address is required.</small>
+							</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="number" placeholder="Enter your phone"
-								formControlName="phone" />
-						</div>
+								formControlName="phone"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['phone'].invalid }" />
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['phone'].invalid">phone is required.</small>
+							</div>
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
@@ -51,8 +60,10 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website</label>
 							<input pInputText id="website" type="text" placeholder="Enter your location"
-								formControlName="website" />
-						</div>
+								formControlName="website"  [ngClass]="{ 'ng-invalid ng-dirty': submitted && addVolunteerForm.controls['website'].invalid }" />
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addVolunteerForm.controls['website'].invalid">website is required.</small>
+							</div>
 
 						
 						<div class="field col-12 ">

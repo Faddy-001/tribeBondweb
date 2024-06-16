@@ -46,7 +46,19 @@ const routes: Routes = [
     {
         path: '',
         component: AppLayoutComponent,
+        canActivate: [AuthGuard],
+
         children: [
+            {
+                path: 'tribe',
+                data: { breadcrumb: 'tribe' },
+                loadChildren: () =>
+                    import('./demo/components/TribeBonds/tribe-bond.module').then(
+                        (m) => m.TribeBondModule
+                    ),
+                    // canActivate: [AuthGuard],
+
+            },
             // {
             //     path: 'dashboard',
             //     loadChildren: () =>
@@ -119,17 +131,7 @@ const routes: Routes = [
                         (m) => m.AppsModule
                     ),
             },
-            {
-                path: 'tribe',
-                data: { breadcrumb: 'tribe' },
-                loadChildren: () =>
-                    import('./demo/components/TribeBonds/tribe-bond.module').then(
-                        (m) => m.TribeBondModule
-                    ),
-                    canActivate: [AuthGuard]
-                    // canActivate: [AuthGuard],
-
-            },
+            
 
         ],
     },

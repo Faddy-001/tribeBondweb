@@ -10,28 +10,14 @@
 
             </div>
         </div>
-        <!-- <img [src]="eventDate.data.images[3]"/> -->
-        <!-- corousel image -->
-        <!-- <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions" id="pgall"
-            [containerStyle]="{'max-width': '800px', 'margin':'auto'}" [numVisible]="6" [circular]="true">
-            <ng-template pTemplate="item" let-images>
-                <img [src]='eventDate.data.thumbnail' style="width: 100%; max-height: 300px; display: flex;" />
-            </ng-template>
-            <div></div>
-            <ng-template pTemplate="thumbnail" >
-                
-                <div class="grid nogutter justify-center" *ngFor="let image of eventDate.data.images">
-                    <img [src]="image" style="display: block;" [style.width.px]="desiredWidth" [style.height.px]="desiredHeight"/>
-                </div>
-            </ng-template>
-        </p-galleria> -->
+      
         <p-galleria [value]="images" [responsiveOptions]="galleriaResponsiveOptions" id="pgall"
             [containerStyle]="{'max-width': '800px', 'margin':'auto'}"  [circular]="true">
             <ng-template pTemplate="item" let-item>
                 <img [src]="item" style="width: 100%; max-height: 300px; display: flex;" />
             </ng-template>
             <div></div>
-            <ng-template pTemplate="thumbnail" let-item>
+            <ng-template pTemplate="images" let-item>
                 <div class="grid nogutter justify-center">
                     <img [src]="item" style="display: block;" [style.width.px]="desiredWidth"
                         [style.height.px]="desiredHeight" />

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -34,20 +34,21 @@ export class AddFreeGComponent {
   ];
 
 user:any
+submitted:boolean=false
 cityData:any
 userDataString:any
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addGiveForm = this.fb.group({
-      name: [],
+      name: ["",Validators.required],
       // phone: [],
-      contactEmail: [],
+      contactEmail: ["",Validators.required],
       images: [],
       description:[],
       city:[],
-      location:[],
-      address:[],
-      category:[],
-      phone:[]
+      location:["",Validators.required],
+      address:["",Validators.required],
+      category:["",Validators.required],
+      phone:["",Validators.required]
     });
   }
 
@@ -91,7 +92,11 @@ userDataString:any
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
-    console.log(value.category.value);
+    this.submitted= true;
+    if (!this.addGiveForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addGiveForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('phone', value.phone);
     this.formData.append('contactEmail', value.contactEmail);
@@ -121,7 +126,7 @@ userDataString:any
         this.toastr.error(this.errorMsg);
       })
     const formData = new FormData();
-
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -31,21 +31,21 @@ export class AddVolunterComponent {
     { label: 'General', value: 'General' },
     { label: 'Free', value: 'Free' },
   ];
-
+  submitted:boolean=false
 user:any
 cityData:any
 userDataString:any
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addVolunteerForm = this.fb.group({
-      name: [],
-      phone: [],
-      address: [],
+      name: ['',Validators.required],
+      phone: ['',Validators.required],
+      address: ['',Validators.required],
       images: [],
       description:[],
       city:[],
-      time:[],
-      date:[],
-      website:[]
+      time:['',Validators.required],
+      date:['',Validators.required],
+      website:['',Validators.required],
     });
   }
 
@@ -90,7 +90,12 @@ userDataString:any
   errorMsg: any;
   Submit(value: any) {
     // console.log(value.category.value);
-    
+    this.submitted = true;
+    if (!this.addVolunteerForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addVolunteerForm.valid) {
+
 
 
     this.formData.append('name', value.name);
@@ -102,15 +107,6 @@ userDataString:any
     this.formData.append('time', value.time);
     this.formData.append('date', value.date);
     this.formData.append('address', value.address);
-
-
-
-
-
-  
-    
-    console.log(this.formData.append);
-
 
     this.auth.addVolunteer(this.formData).subscribe(
       (result: any) => {
@@ -130,6 +126,7 @@ userDataString:any
     const formData = new FormData();
 
   }
+}
 }
 
 

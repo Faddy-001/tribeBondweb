@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -17,19 +17,17 @@ export class AddSchoolComponent {
   selectedFile: any = [];
   uploadedFiles: any[] = [];
 idParam = this.activatedRoute.snapshot.params['id'];
-addEducation: FormGroup;
-
+addSchoolForm: FormGroup;
+submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router,private auth :AuthenticationService,private activatedRoute :ActivatedRoute,private fb: FormBuilder,){
-    this.addEducation = this.fb.group({
-      name: [],
-      address: [],
-      contactNumber: [],
-      email: [,],
-      website: [],
-      offers:[],
-      additionalInfo:[],
-      thumbnail:[],
-      images: [],
+    this.addSchoolForm = this.fb.group({
+      name: ['',Validators.required],
+      address:  ['',Validators.required],
+      contactNumber:  ['',Validators.required],
+      email: ['',Validators.required],
+      website:  ['',Validators.required],
+      offers: ['',Validators.required],
+      images:  ['',Validators.required],
      
       
 
@@ -50,10 +48,10 @@ onFileSelected(event: any) {
   this.images = [];
   if (files && files.length > 0) {
     // Append the first file as 'thumbnail'
-    this.formData.append('thumbnail', files[0]);
-    this.images.push();
+    // this.formData.append('thumbnail', files[0]);
+    // this.images.push();
     // Append the rest of the files to the 'images' array in FormData
-    for (let i = 1; i < files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       
       this.formData.append('images', files[i]);
     }
@@ -72,6 +70,11 @@ educationResult:any
 errorShow: any;
   errorMsg: any;
 Submit(value:any){
+  this.submitted = true;
+    if(!this.addSchoolForm.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addSchoolForm.valid) {
   this.formData.append('name', value.name);
   this.formData.append('address', value.address);
   this.formData.append('email', value.email);
@@ -101,5 +104,6 @@ Submit(value:any){
     })
   const formData = new FormData();
 
+}
 }
 }

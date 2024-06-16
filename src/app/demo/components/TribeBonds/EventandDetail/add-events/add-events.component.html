@@ -14,42 +14,62 @@
 					<div class="p-fluid p-formgrid grid">
 						<div class="col-12 md:col-6">
 							<label htmlFor="name" style="color:#1769aa;font-weight: bold;">Name</label>
-							<input pInputText id="name" type="text" placeholder="Enter Name" formControlName="name" />
+							<input pInputText id="name" type="text" placeholder="Enter Name" formControlName="name"
+								required autofocus
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['name'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addEvent.controls['name'].invalid">Name is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="tel" pattern="[0-9]{10}"
-								placeholder="Enter mobile number" formControlName="phone" />
+								placeholder="Enter mobile number" formControlName="phone" required autofocus
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['phone'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addEvent.controls['phone'].invalid">phone no. is required.</small>
+
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="calender" style="color:#1769aa;font-weight: bold;">Calender</label>
-							<p-calendar formControlName="date" [showIcon]="true" inputId="icon"></p-calendar>
+							<p-calendar formControlName="date" [showIcon]="true" inputId="icon" 	[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['date'].invalid }"></p-calendar>
 							<p-calendar-timeonly [showIcon]="true" inputId="icon"
 								placeholder="Enter date"></p-calendar-timeonly>
-
+								<small *ngIf="submitted && addEvent.controls['date'].invalid" style="color:red;">
+									Date is required.
+								  </small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="time" style="color:#1769aa;font-weight: bold;">Time</label>
 
 							<p-calendar [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter time "
-								formControlName="time" >
+								formControlName="time" 	[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['time'].invalid }">
 							</p-calendar>
+							<small *ngIf="submitted && addEvent.controls['time'].invalid" style="color:red;">
+								time is required.
+							  </small>
 						</div>
 
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter Address"
-								formControlName="address" />
-						</div>
+								formControlName="address"	[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['address'].invalid }" />
+								<small *ngIf="submitted && addEvent.controls['address'].invalid" style="color:red;">
+									address is required.
+								  </small>
+							</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
-							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly/>
+							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city"
+								readonly />
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website</label>
 							<input pInputText id="website" type="text" placeholder="Enter your website url"
-								formControlName="website" />
+								formControlName="website"[ngClass]="{ 'ng-invalid ng-dirty': submitted && addEvent.controls['website'].invalid }" />
+								<small *ngIf="submitted && addEvent.controls['website'].invalid" style="color:red;">
+									website is required.
+								  </small>
 						</div>
 						<div class="field col-12 ">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
@@ -62,9 +82,11 @@
 							<div class="card">
 								<label class="file-upload-button">
 									Upload an Image
-									<input type="file"  (change)="onFileSelected($event)" multiple>
+									<input type="file" (change)="onFileSelected($event)" multiple>
 								</label>
-
+								<small *ngIf="submitted && addEvent.controls['images'].invalid" style="color:red;">
+									Image is required.
+								  </small>
 								<div class="image-container">
 									<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
 								</div>

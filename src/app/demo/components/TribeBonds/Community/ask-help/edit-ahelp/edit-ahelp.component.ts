@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -32,7 +32,7 @@ export class EditAhelpComponent {
     { label: 'General', value: 'General' },
     { label: 'Free', value: 'Free' },
   ];
-
+  submitted: boolean = false;
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
@@ -56,20 +56,88 @@ export class EditAhelpComponent {
     });
   }
 
+  // ngOnInit(): void {
+  //   this.auth.getBuyIdask(this.idParam).subscribe(
+  //     (res: any) => {
+  //       this.autoResult = res.data;
+  //       this.images = this.autoResult.images;
+
+  //       console.log(this.autoResult.category);
+  //         // Trim and convert to lowercase for comparison
+  //         const trimmedCategory = this.autoResult.category.trim().toLowerCase();
+  //         const matchedCategory = this.Category.find(cat => cat.value.trim().toLowerCase() === trimmedCategory);
+  //         const categoryValue = matchedCategory ? matchedCategory.value : null;
+  
+  //         console.log('Matched Category:', matchedCategory);
+  //         console.log('Category Value:', categoryValue);
+  
+  
+         
+  //       // Initialize the form group
+  //       this.editAskForm = this.fb.group({
+  //         name: [this.autoResult.name],
+  //         city: [this.autoResult.city],
+  //         description: [this.autoResult.description],
+  //         price: [this.autoResult.price],
+  //         phone: [this.autoResult.phone],
+  //         address: [this.autoResult.address],
+  //         contactEmail: [this.autoResult.contactEmail],
+  //         location: [this.autoResult.location],
+  //         category: [categoryValue]  // Initialize with the value
+  //       });
+
+  //       // Trigger change detection
+  //       this.cdr.detectChanges();
+        
+  //       // this.editAskForm.patchValue({
+  //       //   name: this.autoResult.name,
+  //       //   city: this.autoResult.city,
+  //       //   description: this.autoResult.description,
+  //       //   price: this.autoResult.price,
+  //       //   phone: this.autoResult.phone,
+  //       //   address: this.autoResult.address,
+  //       //   contactEmail: this.autoResult.contactEmail,
+  //       //   location: this.autoResult.location,
+  //       //   category: [categoryValue] 
+  //       //   // category: categoryValue  // directly set the category object
+  //       // });
+
+  //       console.log('Form controls:', this.editAskForm.controls);
+  //       // this.cdr.detectChanges();
+  //     }
+  //   );
+  // }
+  categoryValue:any
   ngOnInit(): void {
+    // Initialize the form group with an empty value for category
+    this.editAskForm = this.fb.group({
+      name: ['',Validators.required],
+      city: [''],
+      description: [''],
+      price:['',Validators.required],
+      phone: ['',Validators.required],
+      address: ['',Validators.required],
+      contactEmail: ['',Validators.required],
+      location: ['',Validators.required],
+      category: ['',Validators.required]  // Initialize category control here
+    });
+
     this.auth.getBuyIdask(this.idParam).subscribe(
       (res: any) => {
         this.autoResult = res.data;
         this.images = this.autoResult.images;
 
         console.log(this.autoResult.category);
-          // Trim and convert to lowercase for comparison
-          const trimmedCategory = this.autoResult.category.trim().toLowerCase();
-          const matchedCategory = this.Category.find(cat => cat.value.trim().toLowerCase() === trimmedCategory);
-          const categoryValue = matchedCategory ? matchedCategory.value : null;
-  
-          console.log('Matched Category:', matchedCategory);
-        
+
+        // Trim and convert to lowercase for comparison
+        const trimmedCategory = this.autoResult.category.trim().toLowerCase();
+        const matchedCategory = this.Category.find(cat => cat.value.trim().toLowerCase() === trimmedCategory);
+        this.categoryValue = matchedCategory ? matchedCategory.value : null;
+
+        console.log('Matched Category:', matchedCategory);
+        console.log('Category Value:', this.categoryValue);
+
+        // Patch values to the form, including category
         this.editAskForm.patchValue({
           name: this.autoResult.name,
           city: this.autoResult.city,
@@ -79,10 +147,10 @@ export class EditAhelpComponent {
           address: this.autoResult.address,
           contactEmail: this.autoResult.contactEmail,
           location: this.autoResult.location,
-          category: categoryValue  // directly set the category object
+          category: this.categoryValue  // Set the matched category value
         });
 
-        console.log('Form controls:', this.editAskForm.controls);
+        // Trigger change detection
         this.cdr.detectChanges();
       }
     );
@@ -110,6 +178,12 @@ export class EditAhelpComponent {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted = true;
+    if (!this.editAskForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editAskForm.valid) {
+
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -133,4 +207,5 @@ export class EditAhelpComponent {
       }
     );
   }
+}
 }

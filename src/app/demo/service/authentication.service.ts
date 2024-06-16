@@ -29,6 +29,11 @@ export class AuthenticationService {
   // verifyToken(token: any) {
   //   return this.http.post(this.verifyTokenUrl, token);
   // }
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    // Add your token validation logic here (e.g., checking if the token is not expired)
+    return !!token; // This example simply checks if a token exists
+  }
 
   LoginUser(user: any): Observable<any> {
     return this.http.post(this.login_url, user).pipe(

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,6 +15,7 @@ export class EditEventComponent {
   editEvent: any
   EditEventForm!: FormGroup;
   formData = new FormData();
+  submitted: boolean = false;
 
   constructor(private formbuilder: FormBuilder, private activatedRoute: ActivatedRoute, private auth: AuthenticationService, private cdr: ChangeDetectorRef, private toastr: ToastrService, public router: Router,) {
     this.EditEventForm = this.formbuilder.group({
@@ -24,10 +25,8 @@ export class EditEventComponent {
       address: [],
       description: [],
       city: [],
-      gender: [],
       phone: [],
       website: [],
-      thumbnail: []
 
     });
   }
@@ -36,22 +35,22 @@ export class EditEventComponent {
   ngOnInit() {
     this.auth.getEventById(this.id).subscribe(
       (res: any) => {
-        this.editEvent = res.data;
+        this.editEvent = res.data[0];
         // this.description = this.editEvent.description;
         this.images = this.editEvent.images
 
 
         this.EditEventForm = this.formbuilder.group({
-          name: [this.editEvent.name],
-          date: [new Date(this.editEvent.date)],
-          time: [],
-          address: [this.editEvent.address],
-          city: [this.editEvent.city],
+          name: [this.editEvent.name,Validators.required],
+          date: [new Date(this.editEvent.date),Validators.required],
+          time: ['',Validators.required],
+          address: [this.editEvent.address,Validators.required],
+          city: [this.editEvent.city,Validators.required],
           // gender: [],
-          description: [this.editEvent.description],
-          phone: [this.editEvent.phone],
-          website: [this.editEvent.website],
-          thumbnail: [],
+          description: [this.editEvent.description,Validators.required],
+          phone: [this.editEvent.phone,Validators.required],
+          website: [this.editEvent.website,Validators.required],
+        
         })
         console.log('Form controls:', this.EditEventForm.controls);
         const payloadDate = this.editEvent.time
@@ -69,7 +68,7 @@ export class EditEventComponent {
     const files = input.files;
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
+      // this.formData.append('thumbnail', files[0]);
 
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
@@ -92,7 +91,11 @@ export class EditEventComponent {
   // form submit
   Submit(value: any) {
     console.log(value);
-
+    this.submitted = true
+    if(!this.EditEventForm.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.EditEventForm.valid) {
     this.formData.append('name', value.name);
 
     this.formData.append('date', value.date);
@@ -120,6 +123,7 @@ export class EditEventComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
       })
+    }
   }
   removeImage(imageUrl: string, index: number) {
     // Prepare the payload with the image URL and event ID

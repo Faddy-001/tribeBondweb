@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -17,13 +17,13 @@ export class EditHalalMeatComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   editmeatResturant: FormGroup;
   halalResult: any
-
+  submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef,  private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editmeatResturant = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
       // thumbnail: [],
       images: [],
        description:[],
@@ -39,12 +39,12 @@ export class EditHalalMeatComponent {
         this.editmeatResult = res.data;
         this.images = this.editmeatResult.images
         this.editmeatResturant = this.fb.group({
-          name: [this.editmeatResult.name],
-          address: [this.editmeatResult.address],
+          name: [this.editmeatResult.name,Validators.required],
+          address: [this.editmeatResult.address,Validators.required],
           city: [this.editmeatResult.city],
           description: [this.editmeatResult.description],
-          phone: [this.editmeatResult.phone],
-          website: [this.editmeatResult.website],
+          phone: [this.editmeatResult.phone,Validators.required],
+          website: [this.editmeatResult.website,Validators.required],
           // thumbnail: [],
         })
         console.log('Form controls:', this.editmeatResturant.controls);
@@ -82,6 +82,11 @@ export class EditHalalMeatComponent {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted =true
+    if(!this.editmeatResturant.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.editmeatResturant.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -113,4 +118,4 @@ export class EditHalalMeatComponent {
 }
 
 
-
+}

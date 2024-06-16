@@ -27,6 +27,9 @@ export class LoginComponent {
        
     }
     ngOnInit() {
+      if(this.auth.isLoggedIn()){
+        this.router.navigate(['tribe/home']);
+      }
       this.route.queryParams.subscribe(params => {
         this.returnUrl = params['returnUrl'] || 'tribe/home';
       });

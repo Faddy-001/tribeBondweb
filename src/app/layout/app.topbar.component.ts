@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AppConfig, LayoutService } from './service/app.layout.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-topbar',
@@ -18,7 +19,7 @@ export class AppTopbarComponent {
     lastName:any
     userDataString:any
     profilePicture:any
-    constructor(public layoutService: LayoutService, public el: ElementRef) {
+    constructor(public layoutService: LayoutService, public el: ElementRef,private router: Router,) {
         this.subscription = this.layoutService.configUpdate$.subscribe(
             (config) => {
                 this.config = config;
@@ -36,5 +37,12 @@ export class AppTopbarComponent {
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();
+    }
+    logout() {
+        console.log('vdsvndvbsnd');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        sessionStorage.removeItem('currentUser');
+        this.router.navigate([`/login`]);
     }
 }

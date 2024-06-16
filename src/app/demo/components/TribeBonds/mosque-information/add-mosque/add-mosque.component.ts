@@ -19,21 +19,21 @@ export class AddMosqueComponent implements OnInit {
   cityData: any;
   userDataString: any;
 
-  addEvent: FormGroup;
-
+  addMosqueForm: FormGroup;
+  submitted:boolean=false;
   constructor(
     private fb: FormBuilder, 
     private auth: AuthenticationService, 
     private toastr: ToastrService, 
     public router: Router
   ) {
-    this.addEvent = this.fb.group({
+    this.addMosqueForm = this.fb.group({
       name: ['', Validators.required],
       khutbah: this.fb.array([]), // Initialize as a FormArray
       address: ['', Validators.required],
       city: ['', Validators.required],
       phone: ['', Validators.required],
-      website: [''],
+      website: ['',Validators.required],
       description: [''],
       images: []
     });
@@ -46,7 +46,7 @@ export class AddMosqueComponent implements OnInit {
     this.cityData = this.user.city;
     console.log(this.cityData);
 
-    this.addEvent.patchValue({
+    this.addMosqueForm.patchValue({
       city: this.cityData
     });
 
@@ -54,7 +54,7 @@ export class AddMosqueComponent implements OnInit {
   }
 
   get khutbahTimes(): FormArray {
-    return this.addEvent.get('khutbah') as FormArray;
+    return this.addMosqueForm.get('khutbah') as FormArray;
   }
 
   // initKhutbahTimes(times: string[]): void {
@@ -106,7 +106,11 @@ export class AddMosqueComponent implements OnInit {
   // Form submit
   Submit(value: any) {
     console.log(this.images);
-
+this.submitted = true;
+if(!this.addMosqueForm.valid){
+  this.toastr.error("Please fill all Mandatory field")
+}
+if (this.addMosqueForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -134,4 +138,5 @@ export class AddMosqueComponent implements OnInit {
       }
     );
   }
+}
 }

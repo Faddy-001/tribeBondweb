@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,14 +15,18 @@ export class EditGroceryComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   images: string[] = [];
   thumbnailBinary: string[] = [];
-  editGrocery: FormGroup;
-
+  editGroceryForm: FormGroup;
+  groceryResult: any
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
+  submitted:boolean= false;
   constructor(private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editGrocery = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+    this.editGroceryForm = this.fb.group({
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
       images: [],
       description: [],
       city: []
@@ -39,16 +43,16 @@ export class EditGroceryComponent {
 
         console.log(this.editGroceryResult);
 
-        this.editGrocery = this.fb.group({
-          name: [this.editGroceryResult.name],
-          address: [this.editGroceryResult.address],
+        this.editGroceryForm = this.fb.group({
+          name: [this.editGroceryResult.name,Validators.required],
+          address: [this.editGroceryResult.address,Validators.required],
           city: [this.editGroceryResult.city],
           description: [this.editGroceryResult.description],
-          phone: [this.editGroceryResult.phone],
-          website: [this.editGroceryResult.website],
+          phone: [this.editGroceryResult.phone,Validators.required],
+          website: [this.editGroceryResult.website,Validators.required],
 
         })
-        console.log('Form controls:', this.editGrocery.controls);
+        console.log('Form controls:', this.editGroceryForm.controls);
 
         // Set the parsed date object to the time FormControl
         // this.editGrocery.get('description')?.setValue(this.editGrocery.description);
@@ -81,11 +85,13 @@ export class EditGroceryComponent {
     }
   }
 
-  groceryResult: any
-  eventResult: any;
-  errorShow: any;
-  errorMsg: any;
+ 
   Submit(value: any) {
+    this.submitted =true
+    if(!this.editGroceryForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.editGroceryForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -120,5 +126,5 @@ export class EditGroceryComponent {
 
 }
 
-
+}
 

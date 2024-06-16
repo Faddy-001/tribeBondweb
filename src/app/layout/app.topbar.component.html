@@ -28,20 +28,28 @@
             leaveActiveClass="fadeout"
             [hideOnOutsideClick]="true"
         >
+        <div class="image-container">
             <img
+
                 [src]="profilePicture"
                 alt="demo"
-                class="cursor-pointer"
+                class="cursor-pointer image"
             />
+        </div>
+            
         </a>
         <div class="layout-topbar-menu shadow-2 px-3 hidden" style="top: 9rem">
             <ul class="list-none p-0 m-0">
                 <li class="mb-2">
                     <div class="flex gap-3 p-3 bg-primary-600">
-                        <img
-                            [src]="profilePicture"
-                            alt="demo"
-                        />
+                        <div class="image-container">
+                            <img
+                
+                                [src]="profilePicture"
+                                alt="demo"
+                                class="cursor-pointer image"
+                            />
+                        </div>
                         <div class="flex flex-column cursor-pointer">
                             <span class="font-semibold text-white"
                                 >{{firstName}} {{lastName}}</span
@@ -52,7 +60,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                <!-- <li class="py-3 px-4 flex gap-2 cursor-pointer">
                     <a>
                         <i class="pi pi-cog pi-star text-lg mr-3"></i>
                         <span class="font-semibold">Settings</span>
@@ -63,17 +71,17 @@
                         <i class="pi pi-file pi-lock text-lg mr-3"></i>
                         <span class="font-semibold">Terms of Usage</span>
                     </a>
-                </li>
-                <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                </li> -->
+                <!-- <li class="py-3 px-4 flex gap-2 cursor-pointer">
                     <a>
                         <i class="pi pi-compass pi-image text-lg mr-3"></i>
                         <span class="font-semibold">Support</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="py-3 px-4 flex gap-2 cursor-pointer">
                     <a>
                         <i class="pi pi-power-off pi-image text-lg mr-3"></i>
-                        <span class="font-semibold">Logout</span>
+                        <span class="font-semibold" (click)="logout()">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -476,7 +484,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="py-3 px-4 flex gap-2 cursor-pointer">
+                            <!-- <li class="py-3 px-4 flex gap-2 cursor-pointer">
                                 <a>
                                     <i class="pi pi-cog pi-star text-lg"></i>
                                     <span class="font-semibold mx-3"
@@ -501,13 +509,13 @@
                                         >Support</span
                                     >
                                 </a>
-                            </li>
+                            </li> -->
                             <li class="py-3 px-4 flex gap-2 cursor-pointer">
                                 <a>
                                     <i
                                         class="pi pi-power-off pi-image text-lg"
                                     ></i>
-                                    <span class="font-semibold mx-3"
+                                    <span class="font-semibold mx-3"  (click)="logout()"
                                         >Logout</span
                                     >
                                 </a>

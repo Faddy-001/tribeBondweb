@@ -1,45 +1,65 @@
 <div class="grid">
-    <div class="col-12">
-      <div class="container">
-        <div class="card cardborder">
-          <div class="header">
-            <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-              <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Mosque</span>
-            </div>
+  <div class="col-12">
+    <div class="container">
+      <div class="card cardborder">
+        <div class="header">
+          <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+            <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit Mosque</span>
           </div>
-          <form style="padding-left: 3%;" [formGroup]="editMosque" (ngSubmit)="Submit(editMosque.value)">
-            <div class="p-fluid p-formgrid grid">
-              <div class="col-12 md:col-6">
-                <label htmlFor="name" style="color:#1769aa;font-weight: bold;">Name</label>
-                <input pInputText id="name" type="text" placeholder="Enter Name" formControlName="name" />
-              </div>
-              <div class="col-12 md:col-6">
-                <label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
-                <input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone" />
-              </div>
-              <div class="col-12 md:col-6">
-                <label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
-                <input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
-              </div>
-              <div class="col-12 md:col-6">
-                <label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
-                <input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly />
-              </div>
-              <div class="col-12 md:col-6">
-                <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website URL</label>
-                <input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website" />
-              </div>
-              <div class="col-12 md:col-6">
-                <label for="khutbah" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
-                <div formArrayName="khutbah">
-                  <div *ngFor="let time of khutbah.controls; let i = index">
-                    <p-calendar formControlName="{{i}}" [showTime]="true" [timeOnly]="true" hourFormat="12" placeholder="Enter khutbah time"></p-calendar>
-                    <button type="button" (click)="removeKhutbahTime(i)" class="mb-2">Remove</button>
-                  </div>
+        </div>
+        <form style="padding-left: 3%;" [formGroup]="editMosque" (ngSubmit)="Submit(editMosque.value)">
+          <div class="p-fluid p-formgrid grid">
+            <div class="col-12 md:col-6">
+              <label htmlFor="name" style="color:#1769aa;font-weight: bold;">Name</label>
+              <input pInputText id="name" type="text" placeholder="Enter Name" formControlName="name" required autofocus
+                [ngClass]="{ 'ng-invalid ng-dirty': submitted && editMosque.controls['name'].invalid }" />
+              <small class="ng-dirty ng-invalid" style="color: red;"
+                *ngIf="submitted && editMosque.controls['name'].invalid">Name is required.</small>
+
+            </div>
+            <div class="col-12 md:col-6">
+              <label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
+              <input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number"
+                formControlName="phone" required autofocus
+                [ngClass]="{ 'ng-invalid ng-dirty': submitted && editMosque.controls['phone'].invalid }" />
+                <small class="ng-dirty ng-invalid" style="color: red;"
+                *ngIf="submitted && editMosque.controls['phone'].invalid">phone is required.</small>
+
+            </div>
+            <div class="col-12 md:col-6">
+              <label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
+              <input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" required
+                autofocus [ngClass]="{ 'ng-invalid ng-dirty': submitted && editMosque.controls['address'].invalid }" />
+                <small class="ng-dirty ng-invalid" style="color: red;"
+                *ngIf="submitted && editMosque.controls['address'].invalid">address is required.</small>
+            </div>
+            <div class="col-12 md:col-6">
+              <label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
+              <input pInputText id="city" type="text" placeholder="Enter City" formControlName="city" readonly />
+            </div>
+            <div class="col-12 md:col-6">
+              <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Website URL</label>
+              <input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"
+                required autofocus
+                [ngClass]="{ 'ng-invalid ng-dirty': submitted && editMosque.controls['website'].invalid }" />
+                <small class="ng-dirty ng-invalid" style="color: red;"
+                *ngIf="submitted && editMosque.controls['website'].invalid">website is required.</small>
+            </div>
+            <div class="col-12 md:col-6">
+              <label for="khutbah" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
+              <div formArrayName="khutbah">
+                <div *ngFor="let time of khutbah.controls; let i = index">
+                  <p-calendar formControlName="{{i}}" [showTime]="true" [timeOnly]="true" hourFormat="12"
+                    placeholder="Enter khutbah time" autofocus></p-calendar>
+                  <small *ngIf="submitted && time.invalid" style="color:red;">
+                    Khutbah time is required.
+                  </small>
+                  <button type="button" (click)="removeKhutbahTime(i)" class="mb-2">Remove</button>
                 </div>
-                <button type="button" (click)="addKhutbahTime()">Add Time</button>
               </div>
-              <!-- <div class="col-12 md:col-6">
+              <button type="button" (click)="addKhutbahTime()">Add Time</button>
+            </div>
+            <!-- <div class="col-12 md:col-6">
                 <label for="time" style="color:#1769aa;font-weight: bold;">Khutbah Times</label>
                 <div formArrayName="khutbah">
                   <div *ngFor="let time of khutbah.controls; let i = index" [formGroupName]="i">
@@ -49,35 +69,35 @@
                 </div>
                 <button type="button" (click)="addKhutbahTime()">Add Time</button>
               </div> -->
-              <div class="field col-12 ">
-                <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
-                <span class="p-float-label">
-                  <textarea inputId="textarea" rows="5" cols="120" pInputTextarea formControlName="description"></textarea>
-                </span>
+            <div class="field col-12 ">
+              <label htmlFor="website" style="color:#1769aa;font-weight: bold;">Description</label>
+              <span class="p-float-label">
+                <textarea inputId="textarea" rows="5" cols="120" pInputTextarea
+                  formControlName="description"></textarea>
+              </span>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <label class="file-upload-button">
+                  Upload an Image
+                  <input type="file" (change)="onFileSelected($event)" multiple>
+                </label>
+                <div class="image-container">
+                  <img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+                </div>
+                <div class="col-12 " style="display: flex;justify-content: flex-end;">
+                  <div class="flex flex-wrap gap-2">
+                    <button type="submit" pButton pRipple label="Submit"></button>
+                  </div>
+                </div>
               </div>
-              <div class="col-12">
-                <div class="card">
-                  <label class="file-upload-button">
-                    Upload an Image
-                    <input type="file" (change)="onFileSelected($event)" multiple>
-                  </label>
-                  <div class="image-container">
-                    <img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
-                  </div>
-                  <div class="col-12 " style="display: flex;justify-content: flex-end;">
-                    <div class="flex flex-wrap gap-2">
-                      <button type="submit" pButton pRipple label="Submit"></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="avatar-container" id="imagePreviewContainer">
-                  <img class="avatar" alt="" />
-                </div>
+              <div class="avatar-container" id="imagePreviewContainer">
+                <img class="avatar" alt="" />
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>

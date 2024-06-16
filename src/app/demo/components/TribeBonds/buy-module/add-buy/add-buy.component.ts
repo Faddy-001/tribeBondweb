@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -16,6 +16,10 @@ export class AddBuyComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   addBuyForm: FormGroup;
+  buyResult: any
+  errorShow: any;
+  errorMsg: any;
+  submitted:boolean=false
   Category = [
     { label: 'Kids', value: 'Kids' },
     { label: 'Beauty', value: 'Beauty' },
@@ -38,15 +42,15 @@ cityData:any
 userDataString:any
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addBuyForm = this.fb.group({
-      name: [],
-      phone: [],
-      contactEmail: [],
+      name: ["",Validators.required],
+      phone: ["",Validators.required],
+      contactEmail: ["",Validators.required],
       images: [],
       description:[],
       city:[],
-      location:[],
-      price:[],
-      category:[]
+      location:["",Validators.required],
+      price:["",Validators.required],
+      category:["",Validators.required],
     });
   }
 
@@ -58,14 +62,14 @@ userDataString:any
     console.log(this.cityData);
     this.addBuyForm = this.fb.group({
       city:[this.cityData],
-      name: [],
-      phone: [],
-      contactEmail: [],
+      name: ["",Validators.required],
+      phone: ["",Validators.required],
+      contactEmail: ["",Validators.required],
       images: [],
       description:[],
-      location:[],
-      price:[],
-      category:[]
+      location:["",Validators.required],
+      price:["",Validators.required],
+      category:["",Validators.required],
 
     })
   }
@@ -93,10 +97,13 @@ userDataString:any
     }
   }
 
-  buyResult: any
-  errorShow: any;
-  errorMsg: any;
+
   Submit(value: any) {
+    this.submitted = true;
+    if(!this.addBuyForm.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addBuyForm.valid) {
     if (value.category) {
       value.category = this.addBuyForm.get('category')?.value
     }
@@ -137,4 +144,4 @@ userDataString:any
 }
 
 
-
+}

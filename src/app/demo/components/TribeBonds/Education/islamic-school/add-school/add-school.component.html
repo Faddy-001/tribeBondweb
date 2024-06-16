@@ -3,73 +3,105 @@
 		<div class="container">
 			<div class="card cardborder">
 				<!-- <h2 style="color:#1769aa ;display: flex;justify-content: center;">Add School</h2> -->
-                <div class="header">
-                    <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-                        <span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add School</span>
-                        <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
+				<div class="header">
+					<div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
+						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add School</span>
+						<!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortField" placeholder="Sort by"
                             styleClass="w-full md:w-15rem"></p-dropdown> -->
-                        
-                    </div>
-                </div>
-				<form style="padding-left: 3%;" [formGroup]="addEducation" (ngSubmit)="Submit(addEducation.value)">
-
-				<div class="p-fluid p-formgrid grid mt-4">
-					<div class="col-12 md:col-6">
-						<label htmlFor="firstname2">Name</label>
-						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
-					</div>
-					<div class="col-12 md:col-6">
-						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="contactNumber"/>
-					</div>
-					<div class="col-12 md:col-6">
-                        <label style="justify-self: start;text-align: start;">Email</label>
-                        <input pInputText id="firstname2" type="email" placeholder="Email"
-                            formControlName="email" />
 
 					</div>
-					<div class="col-12 md:col-6">
-						<label htmlFor="Offers">Offers</label>
-						<input pInputText id="Offers" type="text" placeholder="Offers"  formControlName="offers"/>
-						<!-- <label htmlFor="address">Address</label>
-						<input pInputTextarea id="address" rows="4" /> -->
-					</div>
-
-					<div class="col-12 md:col-6">
-						<label htmlFor="website">Website URL</label>
-						<input pInputText id="website" type="text" placeholder="Enter your website url"  formControlName="website" />
-					</div>
-					<div class="col-12 md:col-6">
-						<label htmlFor="website">Address</label>
-						<input pInputText id="website" type="text" placeholder="Enter Address"  formControlName="address" />
-					</div>
-					<div class="col-12">
-						<div class="card">
-							<label class="file-upload-button">
-								Upload an Image
-								<input type="file"  (change)="onFileSelected($event)" multiple>
-							</label>
-
-							<div class="image-container">
-								<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
-							</div>
-
-							<div class="col-12 " style="display: flex;justify-content: flex-end;">
-								<div class="flex flex-wrap gap-2">
-									<button pButton pRipple label="Submit"></button>
-
-								</div>
-							</div>
-
-						</div>
-						<div class="avatar-container" id="imagePreviewContainer">
-							<!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
-							<img class="avatar" alt="" />
-						</div>
-
-					</div>
-					
 				</div>
+				<form style="padding-left: 3%;" [formGroup]="addSchoolForm" (ngSubmit)="Submit(addSchoolForm.value)">
+
+					<div class="p-fluid p-formgrid grid mt-4">
+						<div class="col-12 md:col-6">
+							<label htmlFor="firstname2">Name</label>
+							<input pInputText id="firstname2" type="text" placeholder="Enter Name"
+								formControlName="name"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['name'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['name'].invalid">phone is required.</small>
+
+						</div>
+						<div class="col-12 md:col-6">
+							<label htmlFor="phone">Phone</label>
+							<input pInputText id="phone" type="tel" pattern="[0-9]{10}"
+								placeholder="Enter mobile number" formControlName="contactNumber"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['contactNumber'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['contactNumber'].invalid">phone is
+								required.</small>
+
+						</div>
+						<div class="col-12 md:col-6">
+							<label style="justify-self: start;text-align: start;">Email</label>
+							<input pInputText id="firstname2" type="email" placeholder="Email" formControlName="email"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['email'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['email'].invalid">email is
+								required.</small>
+
+
+						</div>
+						<div class="col-12 md:col-6">
+							<label htmlFor="Offers">Offers</label>
+							<input pInputText id="Offers" type="text" placeholder="Offers" formControlName="offers"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['offers'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['offers'].invalid">offers is
+								required.</small>
+
+							<!-- <label htmlFor="address">Address</label>
+						<input pInputTextarea id="address" rows="4" /> -->
+						</div>
+
+						<div class="col-12 md:col-6">
+							<label htmlFor="website">Website URL</label>
+							<input pInputText id="website" type="text" placeholder="Enter your website url"
+								formControlName="website"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['website'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['website'].invalid">website is
+								required.</small>
+
+						</div>
+						<div class="col-12 md:col-6">
+							<label htmlFor="website">Address</label>
+							<input pInputText id="website" type="text" placeholder="Enter Address"
+								formControlName="address"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addSchoolForm.controls['address'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addSchoolForm.controls['address'].invalid">address is
+								required.</small>
+
+						</div>
+						<div class="col-12">
+							<div class="card">
+								<label class="file-upload-button">
+									Upload an Image
+									<input type="file" (change)="onFileSelected($event)" multiple>
+								</label>
+
+								<div class="image-container">
+									<img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
+								</div>
+
+								<div class="col-12 " style="display: flex;justify-content: flex-end;">
+									<div class="flex flex-wrap gap-2">
+										<button pButton pRipple label="Submit"></button>
+
+									</div>
+								</div>
+
+							</div>
+							<div class="avatar-container" id="imagePreviewContainer">
+								<!-- <img class="avatar" src='assets/demo/images/avatar/check.jpg' alt="Avatar"  #avatarImage> -->
+								<img class="avatar" alt="" />
+							</div>
+
+						</div>
+
+					</div>
 				</form>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,15 +15,15 @@ export class AddHalalMeatComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addHalal: FormGroup;
+  addHalalForm: FormGroup;
   halalResult: any
 
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addHalal = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+    this.addHalalForm = this.fb.group({
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
+      website: ['',Validators.required],
       // thumbnail: [],
       images: [],
       description: [],
@@ -36,18 +36,19 @@ export class AddHalalMeatComponent {
   user:any
   cityData:any
   userDataString:any
+  submitted:boolean=false
   ngOnInit(): void {
     console.log(localStorage.getItem('user'));
     this.userDataString = localStorage.getItem('user');
    this.user = JSON.parse(this.userDataString);
    this.cityData = this.user.city
    console.log(this.cityData);
-   this.addHalal = this.fb.group({
+   this.addHalalForm = this.fb.group({
      city:[this.cityData],
-     name: [],
-     address: [],
-     phone: [],
-     website: [],
+     name: ['',Validators.required],
+     address:['',Validators.required],
+     phone:['',Validators.required],
+     website:['',Validators.required],
      images: [],
      description:[],
 
@@ -80,8 +81,12 @@ export class AddHalalMeatComponent {
 
   Submit(value: any) {
 
-
-
+    
+    this.submitted =true
+    if(!this.addHalalForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.addHalalForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -112,6 +117,6 @@ export class AddHalalMeatComponent {
 
   }
 }
-
+}
 
 

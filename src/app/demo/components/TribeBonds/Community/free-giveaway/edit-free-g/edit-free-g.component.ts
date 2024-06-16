@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -16,6 +16,7 @@ export class EditFreeGComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   editGiveForm!: FormGroup;
+  submitted:boolean=false
   autoResult: any
   Category = [
     { label: 'Kids', value: 'Kids' },
@@ -36,17 +37,17 @@ export class EditFreeGComponent {
 
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editGiveForm = this.fb.group({
-      name: [],
-      phone: [],
+      name: ['',Validators.required],
+      phone: ['',Validators.required],
       city: [],
-      address:[],
+      address:['',Validators.required],
       // website: [],
       images: [],
       description: [],
-      contactEmail: [],
-      location: [],
+      contactEmail: ['',Validators.required],
+      location: ['',Validators.required],
       // price: [],
-      category: []
+      category: ['',Validators.required]
     });
   }
 
@@ -67,7 +68,8 @@ export class EditFreeGComponent {
 
           contactEmail: [this.autoResult.contactEmail],
           location: [this.autoResult.location],
-          // category:[this.autoResult.category]
+          category:[this.autoResult.category]
+          
         })
         console.log('Form controls:', this.editGiveForm.controls);
         this.editGiveForm.get('category')?.setValue(this.autoResult.category);
@@ -104,7 +106,11 @@ export class EditFreeGComponent {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
-
+    this.submitted= true;
+    if (!this.editGiveForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editGiveForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('price', value.price);
     this.formData.append('phone', value.phone);
@@ -134,7 +140,7 @@ export class EditFreeGComponent {
       })
   }
 }
-
+}
 
 
 

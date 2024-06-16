@@ -26,32 +26,7 @@ export class EventDetailComponent {
     newPPT: any = [];
     allData: any;
     reviewRespShow: any = [];
-    comments = [
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Ayesha",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Fardeen",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Mahira",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        },
-        {
-            image: 'assets/demo/images/avatar/circle/avatar-m-3.png',
-            name: "Shifa",
-            date: "09/May/2024",
-            description: "fbsdnfsmnbssfbfsfbdfbdfbbff s"
-        }
-    ];
+  
 
     rowCount = 3;
     galleriaResponsiveOptions: any[] = [
@@ -88,14 +63,17 @@ export class EventDetailComponent {
         this.auth.getEventById(this.idParam).subscribe(
             (res: any) => {
                 this.eventDate = res;
-                this.name =   this.eventDate.data.name ;
-                this.address = this.eventDate.data.address;
-                this.phone = this.eventDate.data.phone;
-                this.description = this.eventDate.data.description;
-                console.log(this.eventDate.data.thumbnail);
-                this.images = this.eventDate.data.images
+                console.log( this.eventDate);
+
+                this.name =   this.eventDate.data[0].name ;
+                console.log( this.name);
+                
+                this.address = this.eventDate.data[0].address;
+                this.phone = this.eventDate.data[0].phone;
+                this.description = this.eventDate.data[0].description;
+                this.images = this.eventDate.data[0].images
                 this.reviewRespShow = []
-                this.eventDate.data.reviews.forEach((reviewResp: any) => {
+                this.eventDate.data[0].reviews.forEach((reviewResp: any) => {
                     console.log(reviewResp);
                     
                     this.reviewRespShow.push({

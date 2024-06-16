@@ -4,7 +4,7 @@
 			<div class="card cardborder">
 				<div class="header">
 					<div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between gap-3">
-						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Add
+						<span class="text-xl text-900 font-semibold" style="color:#1769aa !important">Edit
 							 Give Away</span>
 					</div>
 				</div>
@@ -14,33 +14,43 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="productName" style="color:#1769aa;font-weight: bold;">Item name to Donate</label>
 							<input pInputText id="productName" type="text" placeholder="Enter product Name"
-								formControlName="name" />
-						</div>
+								formControlName="name" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['name'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editGiveForm.controls['name'].invalid">Name is required.</small>
+							</div>
 						<div class=" col-12 md:col-6">
 							<label htmlFor="category" style="color:#1769aa;font-weight: bold;">Category</label>
-							<p-dropdown [options]="Category" optionLabel="label" placeholder="Select category"
-								formControlName="category"></p-dropdown>
+							<p-dropdown [options]="Category" formControlName="category" optionLabel="label" placeholder="Select category"
+							[ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['category'].invalid }"></p-dropdown>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editGiveForm.controls['category'].invalid">Category is required.</small>
 							<!-- <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select category"
                             formControlName="category"></p-dropdown> -->
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="email" style="color:#1769aa;font-weight: bold;">Email</label>
 							<input pInputText id="email" type="text" placeholder="Enter your email"
-								formControlName="contactEmail" />
-						</div>
+								formControlName="contactEmail" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['contactEmail'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editGiveForm.controls['contactEmail'].invalid">Email is required.</small>
+							</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="number" placeholder="Enter your phone"
-								formControlName="phone" />
-						</div>
+								formControlName="phone" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['phone'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editGiveForm.controls['phone'].invalid">Phone is required.</small>
+							</div>
 
 						
 
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Location</label>
-							<input pInputText id="website" type="text" placeholder="Enter your location"
-								formControlName="location" />
+							<input pInputText id="location" type="text" placeholder="Enter your location"
+								formControlName="location" [ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['location'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && editGiveForm.controls['location'].invalid">Location is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
@@ -50,7 +60,9 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter address" formControlName="address"
-								 />
+							[ngClass]="{ 'ng-invalid ng-dirty': submitted && editGiveForm.controls['address'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+							*ngIf="submitted && editGiveForm.controls['address'].invalid">Address is required.</small>
 						</div>
 						<!-- <div class="col-12 md:col-6">
 							<label htmlFor="price" style="color:#1769aa;font-weight: bold;">Price</label>

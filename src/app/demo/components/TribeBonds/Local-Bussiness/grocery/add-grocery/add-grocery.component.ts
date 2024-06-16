@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,40 +15,45 @@ export class AddGroceryComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   images: string[] = [];
   thumbnailBinary: string[] = [];
-  addGrocery: FormGroup;
-
-  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addGrocery = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
-      thumbnail: [],
-      images: [],
-      description:[],
-      city:[]
-
-    });
-  }
+  addGroceryForm: FormGroup;
+  groceryResult: any
+  eventResult: any;
+  errorShow: any;
+  errorMsg: any;
+  submitted:boolean=false
   userDataString:any
   user:any
   cityData:any
+  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+    this.addGroceryForm = this.fb.group({
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
+   
+      images: [],
+      description:[],
+      city:[],
+      foodType:["",Validators.required],
+
+    });
+  }
+ 
   ngOnInit(): void {
     console.log(localStorage.getItem('user'));
     this.userDataString = localStorage.getItem('user');
    this.user = JSON.parse(this.userDataString);
    this.cityData = this.user.city
    console.log(this.cityData);
-   this.addGrocery = this.fb.group({
+   this.addGroceryForm = this.fb.group({
      city:[this.cityData],
-     name: [],
-      address: [],
-      phone: [],
-      website: [],
+     name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
       images: [],
-      email:[],
       description: [],
-      foodType:[]
+      foodType:["",Validators.required],
 
    })
   }
@@ -77,13 +82,15 @@ export class AddGroceryComponent {
     }
   }
 
-  groceryResult: any
-  eventResult: any;
-  errorShow: any;
-  errorMsg: any;
+
   Submit(value: any) {
     
-
+    
+    this.submitted =true
+    if(!this.addGroceryForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.addGroceryForm.valid) {
 
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
@@ -117,4 +124,4 @@ export class AddGroceryComponent {
   }
 }
 
-
+}

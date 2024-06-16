@@ -15,7 +15,7 @@ export class EditMosqueComponent implements OnInit {
   images: string[] = [];
   thumbnailBinary: string[] = [];
   editMosque: FormGroup;
-
+  submitted :boolean =false;
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
@@ -26,38 +26,38 @@ export class EditMosqueComponent implements OnInit {
 
   ) {
     this.editMosque = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
       images: [],
       description: [],
       city: [],
-      khutbah: this.fb.array([]) // Initialize FormArray
+      khutbah: this.fb.array([""]) // Initialize FormArray
     });
   }
 
   editMosqueResult: any;
-
+  initialImages: string[] = [];
   ngOnInit(): void {
     this.auth.getMosqueId(this.idParam).subscribe((res: any) => {
       this.editMosqueResult = res.data;
-      this.images = this.editMosqueResult.images;
+      this.images = this.editMosqueResult[0].images;
 
-      console.log(this.editMosqueResult.khutbah);
-
+      this.initialImages = [...this.images]; //
       this.editMosque.patchValue({
-        name: this.editMosqueResult.name,
-        address: this.editMosqueResult.address,
-        city: this.editMosqueResult.city,
-        description: this.editMosqueResult.description,
-        phone: this.editMosqueResult.phone,
-        website: this.editMosqueResult.website,
+        name: this.editMosqueResult[0].name,
+        address: this.editMosqueResult[0].address,
+        city: this.editMosqueResult[0].city,
+        description: this.editMosqueResult[0].description,
+        phone: this.editMosqueResult[0].phone,
+        website: this.editMosqueResult[0].website,
       });
 
       // Set the khutbah times in the FormArray
       const khutbahArray = this.editMosque.get('khutbah') as FormArray;
-      this.editMosqueResult.khutbah.forEach((time: string) => {
+      khutbahArray.clear(); 
+      this.editMosqueResult[0].khutbah.forEach((time: string) => {
         khutbahArray.push(this.fb.control(new Date(time)));
       });
 
@@ -71,7 +71,7 @@ export class EditMosqueComponent implements OnInit {
   }
 
   addKhutbahTime(): void {
-    this.khutbah.push(this.fb.control('', Validators.required));
+    // this.khutbah.push(this.fb.control('', Validators.required));
   }
 
   removeKhutbahTime(index: number): void {
@@ -106,6 +106,16 @@ export class EditMosqueComponent implements OnInit {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted =true;
+    if(!this.editMosque.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editMosque.valid) {
+      const payload = this.editMosque.value;
+      // Compare initial images with current images to check for changes
+      if (JSON.stringify(this.images) !== JSON.stringify(this.initialImages)) {
+        payload.images = this.formData.getAll('images');
+      }
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -142,5 +152,5 @@ export class EditMosqueComponent implements OnInit {
         this.toastr.error(this.errorMsg);
       }
     );
-  }
+  }}
 }

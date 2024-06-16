@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -33,18 +33,21 @@ export class EditVolunterComponent {
     { label: 'General', value: 'General' },
     { label: 'Free', value: 'Free' },
   ];
-
+  editresult: any
+  errorShow: any;
+  errorMsg: any;
+  submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editvolunterForm = this.fb.group({
-      name: [],
-      phone: [],
-      address: [],
+      name: ['',Validators.required],
+      phone: ['',Validators.required],
+      address: ['',Validators.required],
       images: [],
       description:[],
       city:[],
-      time:[],
-      date:[],
-      website:[]
+      time:['',Validators.required],
+      date:['',Validators.required],
+      website:['',Validators.required],
       // price: [],
       // category: []
     });
@@ -101,11 +104,13 @@ export class EditVolunterComponent {
       }
     }
   }
-  editresult: any
-  errorShow: any;
-  errorMsg: any;
+ 
   Submit(value: any) {
-   
+    this.submitted = true;
+    if (!this.editvolunterForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editvolunterForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('website', value.website);
     this.formData.append('phone', value.phone);
@@ -136,7 +141,7 @@ export class EditVolunterComponent {
 
       })
   }
-}
+}}
 
 
 

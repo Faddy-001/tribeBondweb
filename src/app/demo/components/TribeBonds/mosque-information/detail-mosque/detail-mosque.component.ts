@@ -54,21 +54,21 @@ export class DetailMosqueComponent {
     this.auth.getMosqueId(this.idParam).subscribe(
       (res: any) => {
         console.log(res.data);
-        this.allData = res.data
+        this.allData = res
         console.log(this.allData.address);
 
 
-        this.allData = res;
-        this.name = this.allData.data.name;
-        this.address = this.allData.data.address;
-        this.phone = this.allData.data.contactNumber;
-        this.images = this.allData.data.images,
-        this.description = this.allData.data.description
+        // this.allData = res;
+        this.name = this.allData.data[0].name;
+        this.address = this.allData.data[0].address;
+        this.phone = this.allData.data[0].phone;
+        this.images = this.allData.data[0].images,
+        this.description = this.allData.data[0].description
         console.log(this.allData.data.reviews);
 
 
         this.reviewRespShow = []
-        this.allData.data.reviews.forEach((reviewResp: any) => {
+        this.allData.data[0].reviews.forEach((reviewResp: any) => {
           this.reviewRespShow.push({
             id: reviewResp._id,
             reviewText: reviewResp.reviewText,
@@ -93,13 +93,13 @@ export class DetailMosqueComponent {
     // Access the value of the textarea using this.reviewText
     console.log('Review Text:', this.reviewText);
     const dataValue = {
-      "groceryId": this.idParam,
+      "mosqueRecordId": this.idParam,
       "review": this.reviewText
     }
     console.log(dataValue);
 
     // You can then perform any logic you need with the review text
-    this.auth.addGroceryReview(dataValue).subscribe(
+    this.auth.addmosqueReview(dataValue).subscribe(
       (result) => {
         this.reviewResult = result;
         console.log(this.reviewResult.success);

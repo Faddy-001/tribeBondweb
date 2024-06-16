@@ -14,24 +14,32 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="productName" style="color:#1769aa;font-weight: bold;">Item name to Donate</label>
 							<input pInputText id="productName" type="text" placeholder="Enter product Name"
-								formControlName="name" />
+								formControlName="name" [ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['name'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['address'].invalid">Name is required.</small>
 						</div>
 						<div class=" col-12 md:col-6">
 							<label htmlFor="category" style="color:#1769aa;font-weight: bold;">Category</label>
 							<p-dropdown [options]="Category" optionLabel="label" placeholder="Select category"
-								formControlName="category"></p-dropdown>
+								formControlName="category" [ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['category'].invalid }"></p-dropdown>
 							<!-- <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select category"
                             formControlName="category"></p-dropdown> -->
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['category'].invalid">Category is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="email" style="color:#1769aa;font-weight: bold;">Email</label>
 							<input pInputText id="email" type="text" placeholder="Enter your email"
-								formControlName="contactEmail" />
+								formControlName="contactEmail" [ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['contactEmail'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['contactEmail'].invalid">Email is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="number" placeholder="Enter your phone"
-								formControlName="phone" />
+								formControlName="phone" [ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['phone'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['phone'].invalid">Phone is required.</small>
 						</div>
 
 						
@@ -40,17 +48,22 @@
 						<div class="col-12 md:col-6">
 							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Location</label>
 							<input pInputText id="website" type="text" placeholder="Enter your location"
-								formControlName="location" />
+								formControlName="location" [ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['location'].invalid }"/>
+								<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['location'].invalid">Location is required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="city" style="color:#1769aa;font-weight: bold;">City</label>
 							<input pInputText id="city" type="text" placeholder="Enter City" formControlName="city"
 								readonly />
+								
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
 							<input pInputText id="address" type="text" placeholder="Enter address" formControlName="address"
-								 />
+							[ngClass]="{ 'ng-invalid ng-dirty': submitted && addGiveForm.controls['address'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addGiveForm.controls['address'].invalid">Address is required.</small>
 						</div>
 						<!-- <div class="col-12 md:col-6">
 							<label htmlFor="price" style="color:#1769aa;font-weight: bold;">Price</label>

@@ -8,30 +8,44 @@
 							Buy-n-sell</span>
 					</div>
 				</div>
-				<form style="padding-left: 3%;" [formGroup]="addBuyForm"
-					(ngSubmit)="Submit(addBuyForm.value)">
+				<form style="padding-left: 3%;" [formGroup]="addBuyForm" (ngSubmit)="Submit(addBuyForm.value)">
 					<div class="p-fluid p-formgrid grid mt-4">
 						<div class="col-12 md:col-6">
 							<label htmlFor="productName" style="color:#1769aa;font-weight: bold;">Product Name </label>
 							<input pInputText id="productName" type="text" placeholder="Enter product Name"
-								formControlName="name" />
+								formControlName="name"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['name'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['name'].invalid">Product Name is required.</small>
+
 						</div>
 						<div class=" col-12 md:col-6">
 							<label htmlFor="category" style="color:#1769aa;font-weight: bold;">Category</label>
 							<p-dropdown [options]="Category" optionLabel="label" placeholder="Select category"
-								formControlName="category"></p-dropdown>
+								formControlName="category"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['category'].invalid }"></p-dropdown>
 							<!-- <p-dropdown [options]="statesCities" optionLabel="state" placeholder="Select category"
-                            formControlName="category"></p-dropdown> -->
+                            formControlcategory="category"></p-dropdown> -->
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['category'].invalid">category is
+								required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="email" style="color:#1769aa;font-weight: bold;">Email</label>
 							<input pInputText id="email" type="text" placeholder="Enter your email"
-								formControlName="contactEmail" />
+								formControlName="contactEmail"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['contactEmail'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['contactEmail'].invalid">Email is
+								required.</small>
 						</div>
 						<div class="col-12 md:col-6">
 							<label htmlFor="phone" style="color:#1769aa;font-weight: bold;">Phone</label>
 							<input pInputText id="phone" type="number" placeholder="Enter your phone"
-								formControlName="phone" />
+								formControlName="phone"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['phone'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['phone'].invalid">phone is required.</small>
 						</div>
 
 						<div class="col-12 md:col-6">
@@ -42,15 +56,22 @@
 
 
 						<div class="col-12 md:col-6">
-							<label htmlFor="website" style="color:#1769aa;font-weight: bold;">Location</label>
-							<input pInputText id="website" type="text" placeholder="Enter your location"
-								formControlName="location" />
+							<label htmlFor="location" style="color:#1769aa;font-weight: bold;">Location</label>
+							<input pInputText id="location" type="text" placeholder="Enter your location"
+								formControlName="location"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['location'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['location'].invalid">location is
+								required.</small>
 						</div>
 
 						<div class="col-12 md:col-6">
 							<label htmlFor="price" style="color:#1769aa;font-weight: bold;">Price</label>
 							<input pInputText id="price" type="number" placeholder="Enter your price"
-								formControlName="price" />
+								formControlName="price"
+								[ngClass]="{ 'ng-invalid ng-dirty': submitted && addBuyForm.controls['price'].invalid }" />
+							<small class="ng-dirty ng-invalid" style="color: red;"
+								*ngIf="submitted && addBuyForm.controls['price'].invalid">price is required.</small>
 						</div>
 						<div class="field col-12 ">
 							<label htmlFor="description" style="color:#1769aa;font-weight: bold;">Description</label>

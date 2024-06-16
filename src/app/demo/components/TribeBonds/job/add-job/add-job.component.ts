@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -18,12 +18,13 @@ export class AddJobComponent {
 user:any
 cityData:any
 userDataString:any
+submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addjobForm = this.fb.group({
       location: [],
-      jobTitle: [],
+      jobTitle:["",Validators.required],
       jobDetails: [],
-      contactEmail: [],
+      contactEmail:["",Validators.required],
       
     });
   }
@@ -36,9 +37,9 @@ userDataString:any
     console.log(this.cityData);
     this.addjobForm = this.fb.group({
       location:[this.cityData],
-      jobTitle: [],
+      jobTitle: ["",Validators.required],
       jobDetails: [],
-      contactEmail: [],
+      contactEmail: ["",Validators.required],
     
     })
   }
@@ -70,6 +71,11 @@ userDataString:any
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted = true;
+    if(!this.addjobForm.valid){
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addjobForm.valid) {  
     this.formData.append('location', value.location);
     this.formData.append('jobTitle', value.jobTitle);
     this.formData.append('jobDetails', value.jobDetails);
@@ -100,6 +106,6 @@ userDataString:any
 
   }
 }
-
+}
 
 

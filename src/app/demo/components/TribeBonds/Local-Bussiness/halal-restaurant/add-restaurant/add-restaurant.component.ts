@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,17 +15,17 @@ export class AddRestaurantComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addRestaurant: FormGroup;
+  addRestaurantForm: FormGroup;
   restaurantResult: any
-
+submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addRestaurant = this.fb.group({
-      name: [],
+    this.addRestaurantForm = this.fb.group({
+      name: ['',Validators.required],
       description:[],
-      address: [],
+      address:  ['',Validators.required],
       city:[],
-      phone: [],
-      website: [],
+      phone:  ['',Validators.required],
+      website:  ['',Validators.required],
       // thumbnail: [],
       images: [],
 
@@ -42,7 +42,7 @@ export class AddRestaurantComponent {
    this.user = JSON.parse(this.userDataString);
    this.cityData = this.user.city
    console.log(this.cityData);
-   this.addRestaurant = this.fb.group({
+   this.addRestaurantForm = this.fb.group({
      city:[this.cityData],
      name: [],
      address: [],
@@ -82,8 +82,11 @@ export class AddRestaurantComponent {
   errorMsg: any;
   Submit(value: any) {
     
-   
-
+   this.submitted =true
+   if(!this.addRestaurantForm.valid){
+    this.toastr.error("Please fill all Mandatory field")
+  }
+  if (this.addRestaurantForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -115,5 +118,5 @@ export class AddRestaurantComponent {
 
   }
 }
-
+}
 
