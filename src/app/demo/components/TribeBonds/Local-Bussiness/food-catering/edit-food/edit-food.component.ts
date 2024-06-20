@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -16,23 +16,23 @@ export class EditFoodComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   editFoodForm: FormGroup;
-
-  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  submitted: boolean = false
+  constructor(private toastr: ToastrService, private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editFoodForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
-      thumbnail: [],
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
+      email: ["",Validators.required],
       images: [],
-       description:[],
-       foodType:[],
-       city:[]
+      description: [],
+      foodType: ["",Validators.required],
+      city: []
 
 
     });
   }
-  editFood:any
+  editFood: any
 
   ngOnInit(): void {
     this.auth.getFoodById(this.idParam).subscribe(
@@ -43,13 +43,14 @@ export class EditFoodComponent {
         console.log(this.editFood);
 
         this.editFoodForm = this.fb.group({
-          name: [this.editFood.name],
-          address: [this.editFood.address],
+          name: [this.editFood.name,Validators.required],
+          address: [this.editFood.address,Validators.required],
           city: [this.editFood.city],
-          description: [this.editFood.description],
-          phone: [this.editFood.phone],
-          website: [this.editFood.website],
-          foodType:[this.editFood.foodType]
+          description: [this.editFood.description,],
+          phone: [this.editFood.phone,Validators.required],
+          website: [this.editFood.website,Validators.required],
+          email: [this.editFood.email,Validators.required]
+          , foodType: [this.editFood.foodType,Validators.required]
         })
         console.log('Form controls:', this.editFoodForm.controls);
 
@@ -58,14 +59,14 @@ export class EditFoodComponent {
         // this.cdr.detectChanges();
       })
   }
- 
+
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-    
+
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -86,6 +87,11 @@ export class EditFoodComponent {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted =true
+    if(!this.editFoodForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.editFoodForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -117,12 +123,12 @@ export class EditFoodComponent {
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
-    
-    const formData = new FormData();
 
-  })
+        const formData = new FormData();
+
+      })
   }
 }
-
+}
 
 

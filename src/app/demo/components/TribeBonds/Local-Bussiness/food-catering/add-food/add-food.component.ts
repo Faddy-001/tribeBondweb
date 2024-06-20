@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -14,11 +14,11 @@ export class AddFoodComponent {
   idParam = this.activatedRoute.snapshot.params['id'];
   images: string[] = [];
   thumbnailBinary: string[] = [];
-  addFood: FormGroup;
+  addFoodForm: FormGroup;
   foodResult: any
 
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addFood = this.fb.group({
+    this.addFoodForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
@@ -39,16 +39,16 @@ export class AddFoodComponent {
    this.user = JSON.parse(this.userDataString);
    this.cityData = this.user.city
    console.log(this.cityData);
-   this.addFood = this.fb.group({
+   this.addFoodForm = this.fb.group({
      city:[this.cityData],
-     name: [],
-      address: [],
-      phone: [],
-      website: [],
+     name:["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
+      website: ["",Validators.required],
       images: [],
-      email:[],
+      email:["",Validators.required],
       description: [],
-      foodType:[]
+      foodType:["",Validators.required],
 
    })
   }
@@ -77,7 +77,13 @@ export class AddFoodComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted:boolean=false
   Submit(value: any) {
+    this.submitted =true
+    if(!this.addFoodForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.addFoodForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -109,5 +115,5 @@ export class AddFoodComponent {
 
   }
 }
-
+}
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -15,17 +15,17 @@ export class AddHouseholdComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  addHold: FormGroup;
+  addHoldForm: FormGroup;
 user:any
 cityData:any
+submitted:boolean=false
 userDataString:any
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.addHold = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
-      thumbnail: [],
+    this.addHoldForm = this.fb.group({
+      name: ["",Validators.required],
+      address:["",Validators.required],
+      phone:["",Validators.required],
+      website:["",Validators.required],
       images: [],
       description:[],
       city:[]
@@ -41,15 +41,9 @@ userDataString:any
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
-    this.addHold = this.fb.group({
+    this.addHoldForm.patchValue({
       city:[this.cityData],
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
-      // thumbnail: [],
-      images: [],
-      description:[],
+      
 
     })
   }
@@ -84,7 +78,11 @@ userDataString:any
   errorMsg: any;
 
   Submit(value: any) {
-    
+    this.submitted =true
+    if(!this.addHoldForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.addHoldForm.valid) {
 
 
     this.formData.append('name', value.name);
@@ -121,3 +119,4 @@ userDataString:any
   }
 }
 
+}

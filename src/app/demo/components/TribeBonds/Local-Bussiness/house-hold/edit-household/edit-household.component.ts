@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -18,13 +18,14 @@ export class EditHouseholdComponent {
   editHoldForm!: FormGroup;
   houseHoldResult: any
   editHold: any
+  submitted:boolean=false
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editHoldForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
+      name: ["",Validators.required],
+      address: ["",Validators.required],
+      phone: ["",Validators.required],
       city: [],
-      website: [],
+      website: ["",Validators.required],
       // thumbnail: [],
       images: [],
       description: []
@@ -42,12 +43,12 @@ export class EditHouseholdComponent {
         console.log(this.editHold);
 
         this.editHoldForm = this.fb.group({
-          name: [this.editHold.name],
-          address: [this.editHold.address],
+          name: [this.editHold.name,Validators.required],
+          address: [this.editHold.address,Validators.required],
           city: [this.editHold.city],
           description: [this.editHold.description],
-          phone: [this.editHold.phone],
-          website: [this.editHold.website],
+          phone: [this.editHold.phone,Validators.required],
+          website: [this.editHold.website,Validators.required],
         })
         console.log('Form controls:', this.editHoldForm.controls);
 
@@ -83,6 +84,11 @@ export class EditHouseholdComponent {
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    this.submitted =true
+    if(!this.editHoldForm.valid){
+     this.toastr.error("Please fill all Mandatory field")
+   }
+   if (this.editHoldForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -114,5 +120,5 @@ export class EditHouseholdComponent {
 
   })}
 }
-
+}
 
