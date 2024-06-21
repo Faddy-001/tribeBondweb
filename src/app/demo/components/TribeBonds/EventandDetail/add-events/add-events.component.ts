@@ -61,7 +61,7 @@ export class AddEventsComponent {
       address: ["", Validators.required],
       phone: ["", Validators.required],
       website: ["", Validators.required],
-      images: ["", Validators.required],
+      images: [""],
       description: [],
       date: ["", Validators.required],
       time: ["", Validators.required]
@@ -119,10 +119,7 @@ export class AddEventsComponent {
       this.formData.append('website', value.website);
       this.formData.append('city', value.city);
       this.formData.append('description', value.description);
-      // this.formData.append('images', this.images);
-      // for (let i = 0; i < this.images.length; i++) {
-      //   this.formData.append('thumbnails', this.images[i]);
-      // }
+      
       console.log(this.formData.append);
 
 
@@ -134,14 +131,20 @@ export class AddEventsComponent {
           this.toastr.success(this.eventResult.message);
 
           this.router.navigate(['/tribe/event']);
+          this.addEvent.reset();
+          this.formData = new FormData();
+          this.submitted = false;
         },
         (err) => {
           console.log(err.error.message);
           this.errorShow = err;
           this.errorMsg = this.errorShow.error.message;
           this.toastr.error(this.errorMsg);
+          // this.addEvent.reset();
+          this.formData = new FormData();
+          this.submitted = false;
         })
-      const formData = new FormData();
+
 
     }
   }

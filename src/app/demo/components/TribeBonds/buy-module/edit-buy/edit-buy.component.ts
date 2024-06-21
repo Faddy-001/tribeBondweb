@@ -126,14 +126,18 @@ export class EditBuyComponent {
 
           this.toastr.success(this.editBuy.message);
           this.router.navigate([`/tribe/BuyList`]);
+          this.editBuyForm.reset();
+          this.formData = new FormData();
+          this.submitted = false;
         },
         (err) => {
           console.log(err);
           this.errorShow = err;
           this.errorMsg = this.errorShow.error.message;
           this.toastr.error(this.errorMsg);
-
-          const formData = new FormData();
+          this.formData = new FormData();
+          this.submitted = false;
+          
 
         })
     }

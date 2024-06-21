@@ -198,12 +198,18 @@ export class EditAhelpComponent {
         this.editresult = result;
         this.toastr.success(this.editresult.message);
         this.router.navigate([`/tribe/askhelp`]);
+        this.editAskForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+      
+        this.formData = new FormData();
+        this.submitted = false;
       }
     );
   }

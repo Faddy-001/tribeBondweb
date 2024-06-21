@@ -131,12 +131,17 @@ userDataString:any
         this.toastr.success(this.buyResult.message);
 
         this.router.navigate([`/tribe/BuyList`]);
+        this.addBuyForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+        this.formData = new FormData();
+        this.submitted = false;
       })
     const formData = new FormData();
 

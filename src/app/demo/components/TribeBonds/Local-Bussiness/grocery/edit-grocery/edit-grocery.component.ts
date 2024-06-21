@@ -111,6 +111,9 @@ export class EditGroceryComponent {
         this.toastr.success(this.groceryResult.message);
 
         this.router.navigate(['/tribe/gList']);
+        this.editGroceryForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -118,7 +121,9 @@ export class EditGroceryComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
 
-        const formData = new FormData();
+     
+        this.formData = new FormData();
+        this.submitted = false;
 
       }
     )

@@ -107,14 +107,20 @@ submitted:boolean=false
         this.toastr.success(this.restaurantResult.message);
 
         this.router.navigate([`/tribe/restaurantList`]);
+        this.addRestaurantForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+      
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
+   
 
   }
 }

@@ -53,9 +53,9 @@
                             <label htmlFor="address" style="color:#1769aa;font-weight: bold;">Address</label>
                             <input pInputText id="address" type="text" placeholder="Enter Address"
                                 formControlName="address" autofocus
-                                [ngClass]="{ 'ng-invalid ng-dirty': submitted && EditEventForm.controls['website'].invalid }" />
-                            <small *ngIf="submitted && EditEventForm.controls['website'].invalid" style="color:red;">
-                                website is required.
+                                [ngClass]="{ 'ng-invalid ng-dirty': submitted && EditEventForm.controls['address'].invalid }" />
+                            <small *ngIf="submitted && EditEventForm.controls['address'].invalid" style="color:red;">
+                                Address is required.
                             </small>
                         </div>
                         <div class="col-12 md:col-6">

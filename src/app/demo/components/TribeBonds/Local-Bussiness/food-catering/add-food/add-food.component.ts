@@ -104,14 +104,18 @@ export class AddFoodComponent {
         this.toastr.success(this.foodResult.message);
 
         this.router.navigate([`/tribe/foodList`]);
+        this.addFoodForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
 
   }
 }

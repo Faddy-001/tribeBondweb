@@ -96,14 +96,19 @@ export class AddOnlineTutorComponent {
         this.toastr.success(this.educationResult.message);
 
         this.router.navigate([`/tribe/onlinetutor/${this.idParam}`]);
+        this.addEducationOnline.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+       
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
 
   }
 }

@@ -11,3 +11,25 @@
   font-weight: 600;
 margin-bottom: 20px;
 }
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.p-float-label {
+  position: relative;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+@media (max-width: 768px) {
+  textarea {
+    width: 100%;
+  }
+}

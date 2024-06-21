@@ -111,6 +111,9 @@ export class EditRestaurantComponent {
           this.toastr.success(this.restaurantResult.message);
 
           this.router.navigate(['/tribe/restaurantList']);
+          this.editRestaurantForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
         },
         (err) => {
           console.log(err);

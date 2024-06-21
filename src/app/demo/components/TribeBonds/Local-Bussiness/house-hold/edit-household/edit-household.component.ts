@@ -109,6 +109,9 @@ export class EditHouseholdComponent {
         this.toastr.success(this.houseHoldResult.message);
 
         this.router.navigate(['/tribe/houseHoldList']);
+        this.editHoldForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -116,7 +119,8 @@ export class EditHouseholdComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
     
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
 }

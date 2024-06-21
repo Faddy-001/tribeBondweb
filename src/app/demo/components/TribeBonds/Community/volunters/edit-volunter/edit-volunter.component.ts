@@ -129,6 +129,9 @@ export class EditVolunterComponent {
         this.toastr.success(this.editresult.message);
 
         this.router.navigate([`/tribe/volunter`]);
+        this.editvolunterForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -136,8 +139,8 @@ export class EditVolunterComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
 
-
-        const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
       })
   }

@@ -98,14 +98,18 @@ export class AddTutorComponent {
         this.toastr.success(this.educationResult.message);
 
         this.router.navigate([`/tribe/facetutor/${this.idParam}`]);
+        this.addFaceForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
-
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
+ 
 
   }
 }

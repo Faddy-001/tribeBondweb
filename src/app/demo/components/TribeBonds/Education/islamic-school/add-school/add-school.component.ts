@@ -95,14 +95,18 @@ Submit(value:any){
       this.toastr.success(this.educationResult.message);
 
       this.router.navigate([`/tribe/iSchool/${this.idParam}`]);
+      this.addSchoolForm.reset();
+      this.formData = new FormData();
+      this.submitted = false;
     },
     (err) => {
       console.log(err);
       this.errorShow = err;
       this.errorMsg = this.errorShow;
       this.toastr.error(this.errorMsg);
+      this.formData = new FormData();
+      this.submitted = false;
     })
-  const formData = new FormData();
 
 }
 }

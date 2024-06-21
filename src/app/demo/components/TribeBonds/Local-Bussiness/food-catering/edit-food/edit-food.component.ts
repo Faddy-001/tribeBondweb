@@ -117,6 +117,9 @@ export class EditFoodComponent {
         this.toastr.success(this.foodResult.message);
 
         this.router.navigate(['/tribe/foodList']);
+        this.editFoodForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -124,7 +127,8 @@ export class EditFoodComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
 
-        const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
       })
   }
