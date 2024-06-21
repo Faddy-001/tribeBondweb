@@ -16,26 +16,46 @@
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
 						<label htmlFor="firstname2">Name</label>
-						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
+						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name" required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['name'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['name'].invalid">Name  is
+						required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
+						<input pInputText id="phone" type="number" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['phone'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['phone'].invalid">Phone no. is
+						required.</small>
 					</div>
 					
                    
 					
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Website URL</label>
-						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
+						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['website'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['website'].invalid">Website  is
+						required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="service">Services Offered</label>
-						<input pInputText id="service" type="text" placeholder="Enter type of service offered" formControlName="services" />
+						<input pInputText id="service" type="text" placeholder="Enter type of service offered" formControlName="services"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['services'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['services'].invalid">Services is
+						required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>
-						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
+						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['address'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['address'].invalid">Address is
+						required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="city">City</label>
@@ -43,7 +63,11 @@
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="email">Email</label>
-						<input pInputText id="email" type="text" placeholder="Enter email"formControlName="email"  />
+						<input pInputText id="email" type="text" placeholder="Enter email"formControlName="email" required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addDoctorForm.controls['email'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addDoctorForm.controls['email'].invalid">Email  is
+						required.</small>
 					</div>
 					<div class="field col-12 ">
 						<label htmlFor="description" style="color:#1769aa;font-weight: bold;">Description</label>

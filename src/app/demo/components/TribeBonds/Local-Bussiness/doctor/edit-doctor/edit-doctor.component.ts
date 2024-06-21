@@ -64,8 +64,8 @@ export class EditDoctorComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      // this.formData.append('thumbnail', files[0]);
+      // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -83,7 +83,14 @@ export class EditDoctorComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    this.submitted = true
+    if (!this.editDoctorForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editDoctorForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -108,6 +115,9 @@ export class EditDoctorComponent {
         this.toastr.success(this.doctorResult.message);
 
         this.router.navigate([`/tribe/doctorList`]);
+        this.editDoctorForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -115,9 +125,10 @@ export class EditDoctorComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
     
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
-  })}
+  })}}
 }
 
 

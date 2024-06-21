@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -42,14 +42,14 @@ export class EditBeautyComponent {
         console.log(this.editBeauty);
 
         this.editBeautyForm = this.fb.group({
-          name: [this.editBeauty.name],
-          address: [this.editBeauty.address],
+          name: [this.editBeauty.name,Validators.required],
+          address: [this.editBeauty.address,Validators.required],
           city: [this.editBeauty.city],
           description: [this.editBeauty.description],
-          phone: [this.editBeauty.phone],
-          website: [this.editBeauty.website],
-          services:[this.editBeauty.services],
-          email:[this.editBeauty.email]
+          phone: [this.editBeauty.phone,Validators.required],
+          website: [this.editBeauty.website,Validators.required],
+          services:[this.editBeauty.services,Validators.required],
+          email:[this.editBeauty.email,Validators.required]
         })
         console.log('Form controls:', this.editBeautyForm.controls);
 
@@ -81,7 +81,14 @@ export class EditBeautyComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    this.submitted = true
+    if (!this.editBeautyForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editBeautyForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -106,19 +113,20 @@ export class EditBeautyComponent {
         this.toastr.success(this.beautyResult.message);
 
         this.router.navigate([`/tribe/beautyList`]);
+        this.editBeautyForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
-
-
-    
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
-}
+}}
 
 
 
