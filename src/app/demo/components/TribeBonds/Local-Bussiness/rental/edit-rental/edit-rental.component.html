@@ -16,21 +16,33 @@
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
 						<label htmlFor="firstname2">Name</label>
-						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
+						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && editRenatlForm.controls['name'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && editRenatlForm.controls['name'].invalid">Name is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
+						<input pInputText id="phone" type="number" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && editRenatlForm.controls['phone'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && editRenatlForm.controls['phone'].invalid">Phone is required.</small>
 					</div>
 					
 
 					<div class="col-12 md:col-6">
 						<label htmlFor="website">Website URL</label>
-						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"/>
+						<input pInputText id="website" type="text" placeholder="Enter your website url" formControlName="website"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && editRenatlForm.controls['website'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && editRenatlForm.controls['website'].invalid">Website is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>
-						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
+						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && editRenatlForm.controls['address'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && editRenatlForm.controls['address'].invalid">Address is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="city">City</label>

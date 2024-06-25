@@ -17,7 +17,7 @@ export class EditLegalComponent {
   editLegalForm!: FormGroup;
   legalResult: any
   editelectronic: any
-  constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  constructor(private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editLegalForm = this.fb.group({
       name: [],
       address: [],
@@ -26,8 +26,8 @@ export class EditLegalComponent {
       website: [],
       images: [],
       description: [],
-      services:[],
-      email:[]
+      services: [],
+      email: []
 
 
     });
@@ -48,12 +48,12 @@ export class EditLegalComponent {
           description: [this.editelectronic.description],
           phone: [this.editelectronic.phone],
           website: [this.editelectronic.website],
-          services:[this.editelectronic.services],
-          email:[this.editelectronic.email]
+          services: [this.editelectronic.services],
+          email: [this.editelectronic.email]
         })
         console.log('Form controls:', this.editLegalForm.controls);
 
-     
+
         this.cdr.detectChanges();
       })
   }
@@ -64,7 +64,7 @@ export class EditLegalComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-     
+
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -82,42 +82,43 @@ export class EditLegalComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
-    this.formData.append('name', value.name);
-    this.formData.append('address', value.address);
-    this.formData.append('phone', value.phone);
-    this.formData.append('city', value.city);
-    this.formData.append('website', value.website);
-    this.formData.append('description', value.description);
-    this.formData.append('services', value.services);
-    this.formData.append('email', value.email);
+    this.submitted = true
+    if (!this.editLegalForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editLegalForm.valid) {
+      this.formData.append('name', value.name);
+      this.formData.append('address', value.address);
+      this.formData.append('phone', value.phone);
+      this.formData.append('city', value.city);
+      this.formData.append('website', value.website);
+      this.formData.append('description', value.description);
+      this.formData.append('services', value.services);
+      this.formData.append('email', value.email);
+      console.log(this.formData.append);
+      this.auth.editLegal(this.idParam, this.formData).subscribe(
+        (result) => {
+          this.legalResult = result;
+          console.log(this.legalResult.message);
 
+          this.toastr.success(this.legalResult.message);
 
+          this.router.navigate([`/tribe/legalList`]);
+        },
+        (err) => {
+          console.log(err);
+          this.errorShow = err;
+          this.errorMsg = this.errorShow.error.message;
+          this.toastr.error(this.errorMsg);
 
+          const formData = new FormData();
 
-    console.log(this.formData.append);
+        })
+    }
+  }
 
-
-    
-    this.auth.editLegal(this.idParam, this.formData).subscribe(
-      (result) => {
-        this.legalResult = result;
-        console.log(this.legalResult.message);
-
-        this.toastr.success(this.legalResult.message);
-
-        this.router.navigate([`/tribe/legalList`]);
-      },
-      (err) => {
-        console.log(err);
-        this.errorShow = err;
-        this.errorMsg = this.errorShow.error.message;
-        this.toastr.error(this.errorMsg);
-    
-    const formData = new FormData();
-
-  })}
 }
-
-
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -20,10 +20,10 @@ cityData:any
 userDataString:any
   constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addQForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
+      website: ['',Validators.required],
       images: [],
       description:[],
       city:[]
@@ -41,10 +41,10 @@ userDataString:any
     console.log(this.cityData);
     this.addQForm = this.fb.group({
       city:[this.cityData],
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
+      website: ['',Validators.required],
       images: [],
       description:[],
 
@@ -77,8 +77,14 @@ userDataString:any
   qurResult: any
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
-    
+    this.submitted = true
+    if (!this.addQForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addQForm.valid) {
 
 
     this.formData.append('name', value.name);
@@ -103,17 +109,21 @@ userDataString:any
         this.toastr.success(this.qurResult.message);
 
         this.router.navigate([`/tribe/qServiceList`]);
+        this.addQForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
 
   }
 }
-
+}
 
 

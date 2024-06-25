@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -20,11 +20,11 @@ export class EditRentalComponent {
   editrental: any
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editRenatlForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
       city: [],
-      website: [],
+      website:['',Validators.required],
       images: [],
       description: []
 
@@ -41,12 +41,12 @@ export class EditRentalComponent {
         console.log(this.editrental);
 
         this.editRenatlForm = this.fb.group({
-          name: [this.editrental.name],
-          address: [this.editrental.address],
+          name: [this.editrental.name,Validators.required],
+          address: [this.editrental.address,Validators.required],
           city: [this.editrental.city],
           description: [this.editrental.description],
-          phone: [this.editrental.phone],
-          website: [this.editrental.website],
+          phone: [this.editrental.phone,Validators.required],
+          website: [this.editrental.website,Validators.required],
         })
         console.log('Form controls:', this.editRenatlForm.controls);
 
@@ -79,7 +79,15 @@ export class EditRentalComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    
+    this.submitted = true
+    if (!this.editRenatlForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editRenatlForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -100,6 +108,9 @@ export class EditRentalComponent {
         this.toastr.success(this.rentalResult.message);
 
         this.router.navigate(['/tribe/rentalList']);
+        this.editRenatlForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -107,9 +118,11 @@ export class EditRentalComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
     
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
 }
 
 
+}

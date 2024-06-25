@@ -16,26 +16,41 @@
 				<div class="p-fluid p-formgrid grid mt-4">
 					<div class="col-12 md:col-6">
 						<label htmlFor="firstname2">Name</label>
-						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"/>
+						<input pInputText id="firstname2" type="text" placeholder="Enter Name" formControlName="name"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addrealForm.controls['name'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addrealForm.controls['name'].invalid">Name is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="phone">Phone</label>
-						<input pInputText id="phone" type="tel" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"/>
+						<input pInputText id="phone" type="number" pattern="[0-9]{10}" placeholder="Enter mobile number" formControlName="phone"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addrealForm.controls['phone'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addrealForm.controls['phone'].invalid">Phone no. is required.</small>
 					</div>
 					
                    
 					
 					<div class="col-12 md:col-6">
 						<label htmlFor="email">Email </label>
-						<input pInputText id="email" type="text" placeholder="Enter your email" formControlName="email"/>
+						<input pInputText id="email" type="text" placeholder="Enter your email" formControlName="email"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addrealForm.controls['email'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addrealForm.controls['email'].invalid">Email is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="price">Price</label>
-						<input pInputText id="price" type="number" placeholder="Enter your price" formControlName="price"/>
+						<input pInputText id="price" type="number" placeholder="Enter your price" formControlName="price"required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addrealForm.controls['price'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addrealForm.controls['price'].invalid">Price is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="address">Address</label>
-						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" />
+						<input pInputText id="address" type="text" placeholder="Enter Address" formControlName="address" required autofocus
+						[ngClass]="{ 'ng-invalid ng-dirty': submitted && addrealForm.controls['address'].invalid }" />
+					<small class="ng-dirty ng-invalid" style="color: red;"
+						*ngIf="submitted && addrealForm.controls['address'].invalid">Address is required.</small>
 					</div>
 					<div class="col-12 md:col-6">
 						<label htmlFor="city">City</label>

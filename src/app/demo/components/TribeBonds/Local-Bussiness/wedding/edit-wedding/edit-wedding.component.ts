@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -14,16 +14,16 @@ export class EditWeddingComponent {
   thumbnailBinary: string[] = [];
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
-  editPartyForm!: FormGroup;
+  editWeddingForm!: FormGroup;
   weddingResult: any
   editwedding: any
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
-    this.editPartyForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
+    this.editWeddingForm = this.fb.group({
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
       city: [],
-      website: [],
+      website: ['',Validators.required],
       images: [],
       description: []
 
@@ -39,15 +39,15 @@ export class EditWeddingComponent {
 
         console.log(this.editwedding);
 
-        this.editPartyForm = this.fb.group({
-          name: [this.editwedding.name],
-          address: [this.editwedding.address],
+        this.editWeddingForm = this.fb.group({
+          name: [this.editwedding.name,Validators.required],
+          address: [this.editwedding.address,Validators.required],
           city: [this.editwedding.city],
           description: [this.editwedding.description],
-          phone: [this.editwedding.phone],
-          website: [this.editwedding.website],
+          phone: [this.editwedding.phone,Validators.required],
+          website: [this.editwedding.website,Validators.required],
         })
-        console.log('Form controls:', this.editPartyForm.controls);
+        console.log('Form controls:', this.editWeddingForm.controls);
 
      
         this.cdr.detectChanges();
@@ -76,10 +76,17 @@ export class EditWeddingComponent {
     }
   }
   eventResult: any;
+  submitted: boolean = false
   errorShow: any;
   errorMsg: any;
-
   Submit(value: any) {
+    
+    this.submitted = true
+    if (!this.editWeddingForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editWeddingForm.valid) {
+
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -100,6 +107,9 @@ export class EditWeddingComponent {
         this.toastr.success(this.weddingResult.message);
 
         this.router.navigate(['/tribe/weddingList']);
+        this.editWeddingForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -107,10 +117,11 @@ export class EditWeddingComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
 
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
 }
-
+}
 
 

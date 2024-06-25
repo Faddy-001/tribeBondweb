@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -20,11 +20,11 @@ export class EditSweetComponent {
   editsweet: any
   constructor(private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editSweetForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
       city: [],
-      website: [],
+      website: ['',Validators.required],
       images: [],
       description: []
 
@@ -41,12 +41,12 @@ export class EditSweetComponent {
         console.log(this.editsweet);
 
         this.editSweetForm = this.fb.group({
-          name: [this.editsweet.name],
-          address: [this.editsweet.address],
+          name: [this.editsweet.name,Validators.required],
+          address: [this.editsweet.address,Validators.required],
           city: [this.editsweet.city],
           description: [this.editsweet.description],
-          phone: [this.editsweet.phone],
-          website: [this.editsweet.website],
+          phone: [this.editsweet.phone,Validators.required],
+          website: [this.editsweet.website,Validators.required],
         })
         console.log('Form controls:', this.editSweetForm.controls);
 
@@ -77,9 +77,16 @@ export class EditSweetComponent {
       }
     }
   }
+  submitted: boolean = false
   errorShow: any;
   errorMsg: any;
   Submit(value: any) {
+    
+    this.submitted = true
+    if (!this.editSweetForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editSweetForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -100,17 +107,21 @@ export class EditSweetComponent {
         this.toastr.success(this.sweetResult.message);
 
         this.router.navigate(['/tribe/sweetList']);
+        this.editSweetForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
-        const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
       })
   }
 }
-
+}
 
 

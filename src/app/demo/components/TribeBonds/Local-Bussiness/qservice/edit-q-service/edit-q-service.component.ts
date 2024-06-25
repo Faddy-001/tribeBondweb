@@ -60,8 +60,8 @@ export class EditQServiceComponent {
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      this.formData.append('thumbnail', files[0]);
-      this.images.push();
+      // this.formData.append('thumbnail', files[0]);
+      // this.images.push();
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -79,7 +79,14 @@ export class EditQServiceComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    this.submitted = true
+    if (!this.editQurForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editQurForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -100,6 +107,9 @@ export class EditQServiceComponent {
         this.toastr.success(this.qurResult.message);
 
         this.router.navigate(['/tribe/qServiceList']);
+        this.editQurForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -107,10 +117,11 @@ export class EditQServiceComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
     
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
 }
 
-
+}
 

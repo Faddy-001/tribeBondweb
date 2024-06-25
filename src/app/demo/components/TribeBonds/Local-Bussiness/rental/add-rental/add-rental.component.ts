@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -42,10 +42,10 @@ userDataString:any
     console.log(this.cityData);
     this.addRentalForm = this.fb.group({
       city:[this.cityData],
-      name: [],
-      address: [],
-      phone: [],
-      website: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
+      website: ['',Validators.required],
       images: [],
       description:[],
 
@@ -78,7 +78,15 @@ userDataString:any
   rentalResult: any
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    
+    this.submitted = true
+    if (!this.addRentalForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addRentalForm.valid) {
     
 
 
@@ -104,16 +112,20 @@ userDataString:any
         this.toastr.success(this.rentalResult.message);
 
         this.router.navigate([`/tribe/rentalList`]);
+        this.addRentalForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err: any) => {
         console.log(err);
         this.errorShow = err;
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
+        this.formData = new FormData();
+        this.submitted = false;
       })
-    const formData = new FormData();
 
   }
 }
 
-
+  }

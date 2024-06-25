@@ -15,20 +15,20 @@ export class AddHennaComponent {
   private formData = new FormData();
   idParam = this.activatedRoute.snapshot.params['id'];
   addHennaForm: FormGroup;
-user:any
-cityData:any
-userDataString:any
-  constructor(private toastr: ToastrService ,private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
+  user: any
+  cityData: any
+  userDataString: any
+  constructor(private toastr: ToastrService, private router: Router, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.addHennaForm = this.fb.group({
       name: [],
       address: [],
       phone: [],
       website: [],
       images: [],
-      description:[],
-      city:[],
-      servingCities:[],
-      email:[]
+      description: [],
+      city: [],
+      servingCities: [],
+      email: []
 
 
 
@@ -37,31 +37,31 @@ userDataString:any
 
   ngOnInit(): void {
     console.log(localStorage.getItem('user'));
-     this.userDataString = localStorage.getItem('user');
+    this.userDataString = localStorage.getItem('user');
     this.user = JSON.parse(this.userDataString);
     this.cityData = this.user.city
     console.log(this.cityData);
     this.addHennaForm = this.fb.group({
-      city:[this.cityData],
+      city: [this.cityData],
       name: [],
       address: [],
       phone: [],
       website: [],
       images: [],
-      description:[],
-      servingCities:[],
-      email:[]
+      description: [],
+      servingCities: [],
+      email: []
 
     })
   }
- 
+
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
     const files = input.files;
     this.images = [];
     if (files && files.length > 0) {
       // Append the first file as 'thumbnail'
-      
+
       // Append the rest of the files to the 'images' array in FormData
       for (let i = 0; i < files.length; i++) {
 
@@ -81,42 +81,52 @@ userDataString:any
   hennaResult: any
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
-    
 
 
-    this.formData.append('name', value.name);
-    this.formData.append('address', value.address);
-    this.formData.append('phone', value.phone);
-    this.formData.append('city', value.city);
-    this.formData.append('website', value.website);
-    this.formData.append('description', value.description);
-    this.formData.append('servingCities', value.servingCities);
-    this.formData.append('email', value.email);
-    
-    console.log(this.formData.append);
+    this.submitted = true
+    if (!this.addHennaForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.addHennaForm.valid) {
+      this.formData.append('name', value.name);
+      this.formData.append('address', value.address);
+      this.formData.append('phone', value.phone);
+      this.formData.append('city', value.city);
+      this.formData.append('website', value.website);
+      this.formData.append('description', value.description);
+      this.formData.append('servingCities', value.servingCities);
+      this.formData.append('email', value.email);
+
+      console.log(this.formData.append);
 
 
-    this.auth.addHenna(this.formData).subscribe(
-      (result: any) => {
-        this.hennaResult = result;
-        console.log(this.hennaResult.message);
+      this.auth.addHenna(this.formData).subscribe(
+        (result: any) => {
+          this.hennaResult = result;
+          console.log(this.hennaResult.message);
 
-        this.toastr.success(this.hennaResult.message);
+          this.toastr.success(this.hennaResult.message);
 
-        this.router.navigate([`/tribe/hennaList`]);
-      },
-      (err: any) => {
-        console.log(err);
-        this.errorShow = err;
-        this.errorMsg = this.errorShow.error.message;
-        this.toastr.error(this.errorMsg);
+          this.router.navigate([`/tribe/hennaList`]);
+          this.addHennaForm.reset();
+          this.formData = new FormData();
+          this.submitted = false;
+        },
+        (err: any) => {
+          console.log(err);
+          this.errorShow = err;
+          this.errorMsg = this.errorShow.error.message;
+          this.toastr.error(this.errorMsg);
+          this.formData = new FormData();
+          this.submitted = false;
+        })
+      const formData = new FormData();
 
-      })
-    const formData = new FormData();
-
+    }
   }
+
+
 }
-
-
-

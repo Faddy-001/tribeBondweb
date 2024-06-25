@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
@@ -19,14 +19,14 @@ export class EditRealComponent {
   editReal: any
   constructor(private toastr: ToastrService ,private router: Router, private cdr: ChangeDetectorRef, private auth: AuthenticationService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,) {
     this.editRealForm = this.fb.group({
-      name: [],
-      address: [],
-      phone: [],
+      name: ['',Validators.required],
+      address: ['',Validators.required],
+      phone: ['',Validators.required],
       city: [],
-      email: [],
+      email:['',Validators.required],
       images: [],
       description: [],
-      price:[]
+      price:['',Validators.required],
 
 
     });
@@ -41,13 +41,13 @@ export class EditRealComponent {
         console.log(this.editReal);
 
         this.editRealForm = this.fb.group({
-          name: [this.editReal.name],
-          address: [this.editReal.address],
+          name: [this.editReal.name,Validators.required],
+          address: [this.editReal.address,Validators.required],
           city: [this.editReal.city],
           description: [this.editReal.description],
-          phone: [this.editReal.phone],
-          email: [this.editReal.email],
-          price:[this.editReal.price]
+          phone: [this.editReal.phone,Validators.required],
+          email: [this.editReal.email,Validators.required],
+          price:[this.editReal.price,Validators.required]
         })
         console.log('Form controls:', this.editRealForm.controls);
 
@@ -79,7 +79,15 @@ export class EditRealComponent {
   }
   errorShow: any;
   errorMsg: any;
+  submitted: boolean = false
+
   Submit(value: any) {
+    
+    this.submitted = true
+    if (!this.editRealForm.valid) {
+      this.toastr.error("Please fill all Mandatory field")
+    }
+    if (this.editRealForm.valid) {
     this.formData.append('name', value.name);
     this.formData.append('address', value.address);
     this.formData.append('phone', value.phone);
@@ -102,6 +110,9 @@ export class EditRealComponent {
         this.toastr.success(this.realResult.message);
 
         this.router.navigate(['/tribe/realEstateList']);
+        this.editRealForm.reset();
+        this.formData = new FormData();
+        this.submitted = false;
       },
       (err) => {
         console.log(err);
@@ -109,11 +120,12 @@ export class EditRealComponent {
         this.errorMsg = this.errorShow.error.message;
         this.toastr.error(this.errorMsg);
     
-    const formData = new FormData();
+        this.formData = new FormData();
+        this.submitted = false;
 
   })}
 }
-
+}
 
 
 
