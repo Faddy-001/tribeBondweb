@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-home-blog',
   // standalone: true,
@@ -15,7 +16,7 @@ export class HomeBlogComponent {
   replyCommentForm!: FormGroup;
   isUploadButtonDisabled: boolean = false;
   areImagesDisabled: boolean = false;
-  constructor(private auth: AuthenticationService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(private toastr: ToastrService ,private auth: AuthenticationService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
   }
   ngOnInit() {
     this.reviewForm = this.fb.group({
@@ -269,10 +270,19 @@ export class HomeBlogComponent {
     "assets/themeImages/theme4.jpg",
     "assets/themeImages/theme5.jpg",
   ]
-
+  selectedImage: string | null = null;
   passImage(imagePath: string): void {
+    if (this.selectedImage === imagePath) {
+      // Image already selected, do nothing or handle as needed
+      return;
+  }
+    // if (this.areImagesDisabled) return;
     this.areImagesDisabled = true;
+    this.selectedImage = imagePath;
     this.isUploadButtonDisabled = false;
+   
+    
+    this.formData.delete('backgroundImage');
     // Load the image and convert it to Blob
     this.loadImageAsBlob(imagePath).then(blob => {
       // Create a File object from the Blob
@@ -290,7 +300,13 @@ export class HomeBlogComponent {
 
     });
   }
-
+  resetSelection(): void {
+    this.selectedImage = null;
+    this.isUploadButtonDisabled = false;
+    this.areImagesDisabled = false;
+    this.images = []; 
+    this.formData.delete('backgroundImage');
+}
   private loadImageAsBlob(imagePath: string): Promise<Blob> {
     return fetch(imagePath)
       .then(response => response.blob())
@@ -338,17 +354,40 @@ export class HomeBlogComponent {
 
   }
   blogText: any
+  blogResult: any
+  errorShow: any;
+  errorMsg: any;
   onSubmit(value: any) {
     console.log(this.formData);
     this.formData.append('statusText', value.statusText)
     this.auth.addBlog(this.formData).subscribe(
       (result) => {
+        this.blogResult = result
+        this.toastr.success(this.blogResult.message);
+        this.reviewForm.reset();
+        this.resetSelection();
+        this.formData = new FormData();
         this.ngOnInit()
+      
+       
+      },
+      (err: any) => {
+        console.log(err);
+        this.errorShow = err;
+        this.errorMsg = this.errorShow.error.message;
+        this.toastr.error(this.errorMsg);
+        this.formData = new FormData();
+       
       })
-    const formData = new FormData();
+    
+    
+  
 
   }
-  fetchAllComment(){
-    
+  // Utility method to check if the form is ready for submission
+  isFormReady(): boolean {
+    const statusText = this.reviewForm.get('statusText')?.value;
+    const isStatusTextProvided = statusText && statusText.trim().length > 0;
+    return this.reviewForm.valid && (isStatusTextProvided || this.selectedImage !== null || this.images.length > 0);
   }
 }

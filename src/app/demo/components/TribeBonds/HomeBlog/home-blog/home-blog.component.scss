@@ -29,10 +29,14 @@
   box-shadow: 0px 4px 8px #1769aa;
   /* Add box shadow with horizontal and vertical offsets, blur radius, and color */
   transition: box-shadow 0.3s ease;
+  border-radius: 6%;
+  overflow: hidden;
 }
 
 .card {
   width: 50%;
+  border-radius: 6%;
+  overflow: hidden;
 }
 
 .alignment {

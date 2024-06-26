@@ -12,7 +12,8 @@
                     <div class="button-container mt-2">
                         <div class="image-container">
                             <img *ngFor="let image of imagestheme" [src]="image" alt="Uploaded Image" class="image"
-                                (click)="passImage(image)" [class.disabled]="isUploadButtonDisabled">
+                                (click)="passImage(image)" [class.selected]=" selectedImage === image"
+                                [class.disabled]="isUploadButtonDisabled || selectedImage && selectedImage !== image">
                         </div>
                         <div class="upload-container">
                             <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
@@ -24,7 +25,7 @@
                     <div class="button-container mt-2">
 
                         <button pButton pRipple type="button" label="Post" class="p-button-rounded"
-                            type="submit"></button>
+                            type="submit" [disabled]="!isFormReady()"></button>
                         <div class="image-container">
                             <img *ngFor="let image of images" [src]="image" alt="Uploaded Image" class="image">
                         </div>
@@ -61,7 +62,7 @@
                 <!-- Check if blog has backgroundImage -->
                 <div *ngIf="blog.backgroundImage" class="image-container">
                     <img [src]="blog.backgroundImage" class="imageswithtext mb-2" />
-                    <div class="overlay-text">{{ blog.statusText }}</div>
+                    <div class="overlay-text" *ngIf="blog.statusText">{{ blog.statusText }}</div>
                 </div>
     
                 <!-- Check if blog has blogImage -->
