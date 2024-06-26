@@ -54,7 +54,7 @@
     
                 <!-- Check if both backgroundImage and blogImage are not available -->
                 <div *ngIf="!blog.backgroundImage && !(blog.blogImage && blog.blogImage.length > 0)" class="mb-4">
-                    <div style="font-weight: 600; font-size: 20px; margin-top: 10px;">
+                    <div class="status-text">
                         {{ blog.statusText }}
                     </div>
                 </div>
