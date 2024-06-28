@@ -38,7 +38,7 @@ export class EditGroceryComponent {
   ngOnInit(): void {
     this.auth.getGroceryById(this.idParam).subscribe(
       (res: any) => {
-        this.editGroceryResult = res.data;
+        this.editGroceryResult = res.data[0];
         this.images = this.editGroceryResult.images
 
         console.log(this.editGroceryResult);

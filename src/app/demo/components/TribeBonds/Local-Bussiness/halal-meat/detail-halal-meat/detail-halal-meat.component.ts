@@ -58,16 +58,16 @@ export class DetailHalalMeatComponent {
 
 
         this.allData = res;
-        this.name = this.allData.data.name;
-        this.address = this.allData.data.address;
-        this.phone = this.allData.data.phone;
-        this.images = this.allData.data.images,
-        this.description = this.allData.data.description
+        this.name = this.allData.data[0].name;
+        this.address = this.allData.data[0].address;
+        this.phone = this.allData.data[0].phone;
+        this.images = this.allData.data[0].images,
+        this.description = this.allData.data[0].description
         console.log(this.allData.data.reviews);
 
 
         this.reviewRespShow = []
-        this.allData.data.reviews.forEach((reviewResp: any) => {
+        this.allData.data[0].reviews.forEach((reviewResp: any) => {
           this.reviewRespShow.push({
             id: reviewResp._id,
             reviewText: reviewResp.reviewText,

@@ -36,7 +36,7 @@ export class EditHalalMeatComponent {
   ngOnInit(): void {
     this.auth.getMeatById(this.idParam).subscribe(
       (res: any) => {
-        this.editmeatResult = res.data;
+        this.editmeatResult = res.data[0];
         this.images = this.editmeatResult.images
         this.editmeatResturant = this.fb.group({
           name: [this.editmeatResult.name,Validators.required],

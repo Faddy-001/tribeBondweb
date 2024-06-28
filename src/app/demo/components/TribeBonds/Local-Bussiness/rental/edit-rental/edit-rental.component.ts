@@ -35,7 +35,7 @@ export class EditRentalComponent {
   ngOnInit(): void {
     this.auth.getRenatlById(this.idParam).subscribe(
       (res: any) => {
-        this.editrental = res.data;
+        this.editrental = res.data[0];
         this.images = this.editrental.images
 
         console.log(this.editrental);

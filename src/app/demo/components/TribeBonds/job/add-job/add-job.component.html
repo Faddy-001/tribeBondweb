@@ -35,7 +35,7 @@
                         <div class="col-12 md:col-6">
                             <label htmlFor="location" style="color:#1769aa;font-weight: bold;">Job location</label>
                             <input pInputText id="location" type="text" placeholder="Enter Job location"
-                                formControlName="location" readonly />
+                                formControlName="location"  />
                         </div>
                         <div class="col-12 md:col-6">
                             <label htmlFor="contactEmail" style="color:#1769aa;font-weight: bold;">Email</label>
@@ -45,8 +45,13 @@
                             <small class="ng-dirty ng-invalid" style="color: red;"
                                 *ngIf="submitted && addjobForm.controls['contactEmail'].invalid">Email is
                                 required.</small>
+                            
                         </div>
-
+                        <div class="col-12 md:col-6">
+                            <label htmlFor="city">City</label>
+                            <input pInputText id="city" type="text" placeholder="Enter City" formControlName="city"
+                                readonly />
+                        </div>
                         <div class="field col-12 ">
                             <label htmlFor="jobDetails" style="color:#1769aa;font-weight: bold;">Job Description</label>
                             <span class="p-float-label">

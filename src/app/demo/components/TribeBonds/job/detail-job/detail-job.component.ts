@@ -22,12 +22,12 @@ description:any
     this.auth.getjobId(this.idParam).subscribe(
         (res: any) => {
             console.log(res.data);
-            this.allData = res.data
+            this.allData = res.data[0]
             console.log(this.allData.address);
 
 
             this.allData = res;
-            this.description = this.allData.data.jobDetails
+            this.description = this.allData.data[0].jobDetails
             console.log(this.allData.data.reviews);
 
 

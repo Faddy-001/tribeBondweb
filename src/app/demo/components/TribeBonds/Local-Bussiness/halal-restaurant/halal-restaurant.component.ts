@@ -73,6 +73,13 @@ getAllRestaurantDisplay() {
             })
         })
 }
+redirectToGoogleMaps(address: string): void {
+  // Construct the Google Maps URL with the address
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  
+  // Open the URL in a new tab/window
+  window.open(mapsUrl, '_blank');
+}
 }
 
 

@@ -37,7 +37,7 @@ export class EditFoodComponent {
   ngOnInit(): void {
     this.auth.getFoodById(this.idParam).subscribe(
       (res: any) => {
-        this.editFood = res.data;
+        this.editFood = res.data[0];
         this.images = this.editFood.images
 
         console.log(this.editFood);

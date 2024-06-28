@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Blog } from 'src/app/demo/api/blog';
 import { AuthenticationService } from 'src/app/demo/service/authentication.service';
 
@@ -17,7 +18,7 @@ export class FoodCateringComponent {
   entities: any;
   desiredWidth = 400; // Example width in pixels
   desiredHeight = 250;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private auth: AuthenticationService) { }
+  constructor(private toastr: ToastrService ,private router: Router, private activatedRoute: ActivatedRoute, private auth: AuthenticationService) { }
 
 
 
@@ -66,10 +67,13 @@ export class FoodCateringComponent {
         })
       })
   }
+  deleteResp:any;
   deletecard(id: any) {
     this.auth.deleteFood(id).subscribe(
       (res: any) => {
         console.log(res);
+        this.deleteResp= res;
+        this.toastr.success(this.deleteResp.message);
         this.ngOnInit()
         window.location.reload();
       })

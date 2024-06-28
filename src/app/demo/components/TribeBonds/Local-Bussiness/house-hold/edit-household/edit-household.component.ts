@@ -37,7 +37,7 @@ export class EditHouseholdComponent {
   ngOnInit(): void {
     this.auth.getHoldById(this.idParam).subscribe(
       (res: any) => {
-        this.editHold = res.data;
+        this.editHold = res.data[0];
         this.images = this.editHold.images
 
         console.log(this.editHold);

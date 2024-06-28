@@ -220,3 +220,33 @@ button {
 button:hover {
   background-color: #0056b3; /* Darker background color on hover */
 }
+.scrollable-comments {
+  max-height: 300px; /* Adjust height as needed */
+  overflow-y: auto;
+}
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Adjust the height as needed */
+}
+
+.loading-spinner::after {
+  content: " ";
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 6px solid #ccc;
+  border-color: #ccc transparent #ccc transparent;
+  animation: loading-spinner 1.2s linear infinite;
+}
+
+@keyframes loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
